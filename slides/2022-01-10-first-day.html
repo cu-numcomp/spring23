@@ -1,0 +1,1027 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2022-01-10 First Day &#8212; Numerical Computation</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Slides" href="../slides.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/cu-numcomp.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Numerical Computation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../slides.html">
+   Slides
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     2022-01-10 First Day
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/slides/2022-01-10-first-day.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cu-numcomp/spring22"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cu-numcomp/spring22/issues/new?title=Issue%20on%20page%20%2Fslides/2022-01-10-first-day.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cu-numcomp/spring22/main?urlpath=tree/slides/2022-01-10-first-day.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2022-01-10 First Day
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#csci-3656-numerical-computation">
+     CSCI-3656: Numerical Computation
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#instructor-jed-brown-jed-brown-colorado-edu-ecot-824">
+     Instructor: Jed Brown, jed.brown@colorado.edu, ECOT 824
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#meeting-mon-wed-fri-at-1-25-12-20-in-ecee-283-and-virtually">
+     Meeting: Mon, Wed, Fri at 1:25-12:20 in ECEE 283 (and virtually)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#who-am-i">
+   Who am I?
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#physical-prediction-inference-and-design-group">
+     Physical Prediction, Inference, and Design Group
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prerequisites">
+   Prerequisites
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculus">
+     Calculus
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-algebra">
+     Linear Algebra
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-numerical-computation">
+   What is Numerical Computation?
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#continuous-mathematics">
+     Continuous mathematics
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finite-vs-infinite-algorithms">
+     Finite vs Infinite algorithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kinds-of-problems">
+   Kinds of problems
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computer-science-runnable-abstraction-science">
+   Computer Science = Runnable Abstraction Science
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#in-the-grinder">
+     In the “grinder”
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-can-you-trust-the-solution">
+     How can you trust the solution?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#abstractions-collaboration">
+     Abstractions/collaboration
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#on-programming-languages">
+   On programming languages
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#c">
+     C
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     C++
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fortran">
+     Fortran
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#julia">
+     Julia
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#python">
+     Python
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rust">
+     Rust
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#i-won-t-grade-and-i-won-t-waste-your-time">
+   I won’t grade and I won’t waste your time
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-about-the-letter-grade">
+   What about the letter grade?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-i-need-from-you-growth-mindset">
+   What I need from you: Growth Mindset
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-will-the-semester-look">
+   How will the semester look?
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lecture-periods">
+     Lecture periods
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#in-class-and-homework-activities">
+     In-class and homework activities
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#learning-plans">
+     Learning plans
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#projects-second-half-of-semester">
+     Projects (second half of semester)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#community-contribution">
+     Community contribution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tools">
+   Tools
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#git-and-github">
+     Git and GitHub
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#zulip">
+     Zulip
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jupyter">
+     Jupyter
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jupyterhub-coding-csel-io">
+     JupyterHub: coding.csel.io
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-note-about-covid">
+   A note about COVID
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>2022-01-10 First Day</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2022-01-10 First Day
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#csci-3656-numerical-computation">
+     CSCI-3656: Numerical Computation
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#instructor-jed-brown-jed-brown-colorado-edu-ecot-824">
+     Instructor: Jed Brown, jed.brown@colorado.edu, ECOT 824
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#meeting-mon-wed-fri-at-1-25-12-20-in-ecee-283-and-virtually">
+     Meeting: Mon, Wed, Fri at 1:25-12:20 in ECEE 283 (and virtually)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#who-am-i">
+   Who am I?
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#physical-prediction-inference-and-design-group">
+     Physical Prediction, Inference, and Design Group
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prerequisites">
+   Prerequisites
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculus">
+     Calculus
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linear-algebra">
+     Linear Algebra
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-numerical-computation">
+   What is Numerical Computation?
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#continuous-mathematics">
+     Continuous mathematics
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finite-vs-infinite-algorithms">
+     Finite vs Infinite algorithms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kinds-of-problems">
+   Kinds of problems
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computer-science-runnable-abstraction-science">
+   Computer Science = Runnable Abstraction Science
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#in-the-grinder">
+     In the “grinder”
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-can-you-trust-the-solution">
+     How can you trust the solution?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#abstractions-collaboration">
+     Abstractions/collaboration
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#on-programming-languages">
+   On programming languages
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#c">
+     C
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     C++
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fortran">
+     Fortran
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#julia">
+     Julia
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#python">
+     Python
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rust">
+     Rust
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#i-won-t-grade-and-i-won-t-waste-your-time">
+   I won’t grade and I won’t waste your time
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-about-the-letter-grade">
+   What about the letter grade?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-i-need-from-you-growth-mindset">
+   What I need from you: Growth Mindset
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-will-the-semester-look">
+   How will the semester look?
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lecture-periods">
+     Lecture periods
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#in-class-and-homework-activities">
+     In-class and homework activities
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#learning-plans">
+     Learning plans
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#projects-second-half-of-semester">
+     Projects (second half of semester)
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#community-contribution">
+     Community contribution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tools">
+   Tools
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#git-and-github">
+     Git and GitHub
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#zulip">
+     Zulip
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jupyter">
+     Jupyter
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#jupyterhub-coding-csel-io">
+     JupyterHub: coding.csel.io
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-note-about-covid">
+   A note about COVID
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="first-day">
+<h1>2022-01-10 First Day<a class="headerlink" href="#first-day" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="csci-3656-numerical-computation">
+<h2>CSCI-3656: Numerical Computation<a class="headerlink" href="#csci-3656-numerical-computation" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="instructor-jed-brown-jed-brown-colorado-edu-ecot-824">
+<h2>Instructor: Jed Brown, <a class="reference external" href="mailto:jed&#46;brown&#37;&#52;&#48;colorado&#46;edu">jed<span>&#46;</span>brown<span>&#64;</span>colorado<span>&#46;</span>edu</a>, ECOT 824<a class="headerlink" href="#instructor-jed-brown-jed-brown-colorado-edu-ecot-824" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="meeting-mon-wed-fri-at-1-25-12-20-in-ecee-283-and-virtually">
+<h2>Meeting: Mon, Wed, Fri at 1:25-12:20 in ECEE 283 (and virtually)<a class="headerlink" href="#meeting-mon-wed-fri-at-1-25-12-20-in-ecee-283-and-virtually" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>Who am I?</p></li>
+<li><p>What is this course about?</p></li>
+<li><p>How will it work?</p></li>
+<li><p>Discussion</p></li>
+<li><p>(maybe) First activity</p></li>
+</ol>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="who-am-i">
+<h1>Who am I?<a class="headerlink" href="#who-am-i" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Jed Brown (he/him); you can call me Jed</p></li>
+<li><p>Math + Physics undergrad, MS Math, <a class="reference external" href="http://Dr.Sc">Dr.Sc</a>. Environmental Engineering (Computational Glaciology)</p></li>
+<li><p>Postdoc and staff at Argonne National Laboratory (DOE Office of Science)</p></li>
+<li><p>CU since 2015</p></li>
+</ul>
+<div class="section" id="physical-prediction-inference-and-design-group">
+<h2>Physical Prediction, Inference, and Design Group<a class="headerlink" href="#physical-prediction-inference-and-design-group" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Develop and maintain open source libraries</p></li>
+<li><p>Research in fast/parallel algorithms, extensible software</p></li>
+<li><p>Partner with scientists and engineers in many disciplines: geoscience, aerospace, civil engineering, fusion</p></li>
+<li><p>Listen, learn about computational bottlenecks, build technology and communities</p></li>
+</ul>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="prerequisites">
+<h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="calculus">
+<h2>Calculus<a class="headerlink" href="#calculus" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Fundamental Theorem of Calculus</p></li>
+<li><p>Differentiate and integrate polynomials</p></li>
+<li><p>Taylor series</p></li>
+<li><p>Gradients (we’ll introduce and discuss)</p></li>
+</ul>
+<p>We won’t use integral tricks (and any time you spent on that was a waste; sorry)</p>
+</div>
+<div class="section" id="linear-algebra">
+<h2>Linear Algebra<a class="headerlink" href="#linear-algebra" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>vector spaces, orthogonality</p></li>
+<li><p>QR factorization</p></li>
+<li><p>projectors, reflectors, and rotations (will teach)</p></li>
+</ul>
+<p>We’ll never compute RREF or eigenvalues by hand (and any time you spent on that was a waste; sorry)</p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="what-is-numerical-computation">
+<h1>What is Numerical Computation?<a class="headerlink" href="#what-is-numerical-computation" title="Permalink to this headline">¶</a></h1>
+<p>From <a class="reference external" href="https://people.maths.ox.ac.uk/trefethen/publication/PDF/1992_55.pdf">Trefethen (1992)</a></p>
+<blockquote>
+<div><p>Here is the wrong answer:</p>
+<blockquote>
+<div><p>Numerical analysis is the study of rounding errors.</p>
+</div></blockquote>
+</div></blockquote>
+<p>Trefethen goes on to propose</p>
+<blockquote>
+<div><blockquote>
+<div><p>Numerical analysis is the study of algorithms for the problems of continuous mathematics.</p>
+</div></blockquote>
+</div></blockquote>
+<div class="section" id="continuous-mathematics">
+<h2>Continuous mathematics<a class="headerlink" href="#continuous-mathematics" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>real and complex numbers <span class="math notranslate nohighlight">\(a \in \mathbb R\)</span></p></li>
+<li><p>vectors <span class="math notranslate nohighlight">\(\mathbf x \in \mathbb R^n\)</span></p></li>
+<li><p>matrices <span class="math notranslate nohighlight">\(A \in \mathbb R^{m\times n}\)</span></p></li>
+<li><p>functions <span class="math notranslate nohighlight">\(f: \mathbb R \to \mathbb R\)</span></p></li>
+<li><p>higher order functions: <span class="math notranslate nohighlight">\(g(f)\)</span></p></li>
+</ul>
+</div>
+<div class="section" id="finite-vs-infinite-algorithms">
+<h2>Finite vs Infinite algorithms<a class="headerlink" href="#finite-vs-infinite-algorithms" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Compute the matrix product <span class="math notranslate nohighlight">\(A B\)</span></p></li>
+<li><p>Solve <span class="math notranslate nohighlight">\(A x = b\)</span> for <span class="math notranslate nohighlight">\(x\)</span></p></li>
+<li><p>Compute the eigenvalues <span class="math notranslate nohighlight">\(\lambda\)</span> of <span class="math notranslate nohighlight">\(A \in \mathbb R^{10\times 10}\)</span></p></li>
+<li><p>Compute <span class="math notranslate nohighlight">\(\int_a^b f(x)\)</span></p></li>
+</ul>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="kinds-of-problems">
+<h1>Kinds of problems<a class="headerlink" href="#kinds-of-problems" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="computer-science-runnable-abstraction-science">
+<h1>Computer Science = Runnable Abstraction Science<a class="headerlink" href="#computer-science-runnable-abstraction-science" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="in-the-grinder">
+<h2>In the “grinder”<a class="headerlink" href="#in-the-grinder" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Mathematical language and principles for each major class of method</p>
+<ul>
+<li><p>What is covered by theory</p></li>
+<li><p>When you’re venturing off-trail</p></li>
+<li><p>Analytic tools to predict and debug</p></li>
+</ul>
+</li>
+<li><p>Realistic cost and exploitable structure</p>
+<ul>
+<li><p>Performance on modern hardware</p></li>
+</ul>
+</li>
+<li><p>Write/modify stand-alone code</p></li>
+<li><p>Select and use (parallel) libraries</p></li>
+</ul>
+</div>
+<div class="section" id="how-can-you-trust-the-solution">
+<h2>How can you trust the solution?<a class="headerlink" href="#how-can-you-trust-the-solution" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Verification: solving the problem right</p></li>
+<li><p>Validation: solving the right problem</p></li>
+</ul>
+</div>
+<div class="section" id="abstractions-collaboration">
+<h2>Abstractions/collaboration<a class="headerlink" href="#abstractions-collaboration" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Domain scientists, engineers</p></li>
+<li><p>Optimizers, statisticians</p></li>
+<li><p>Abstractions that reduce cognitive load</p></li>
+<li><p>Metrics/visualization for decisions</p></li>
+</ul>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="on-programming-languages">
+<h1>On programming languages<a class="headerlink" href="#on-programming-languages" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="c">
+<h2>C<a class="headerlink" href="#c" title="Permalink to this headline">¶</a></h2>
+<p>Reliable and popular for libraries (PETSc, etc.). “Simple”, unsafe, capable of encapsulation.</p>
+</div>
+<div class="section" id="id1">
+<h2>C++<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Popular with applications and some libraries. Powerful, but complicated and unsafe.</p>
+</div>
+<div class="section" id="fortran">
+<h2>Fortran<a class="headerlink" href="#fortran" title="Permalink to this headline">¶</a></h2>
+<p>The OG of numerical computing. Good for “array programming”, but encapsulation is hard. Unsafe depending on dialect.</p>
+</div>
+<div class="section" id="julia">
+<h2>Julia<a class="headerlink" href="#julia" title="Permalink to this headline">¶</a></h2>
+<p>For ground-up examples in class and in activities. Capable of high performance, expressive multiple dispatch, works well in a notebook. Error messages are not great.</p>
+</div>
+<div class="section" id="python">
+<h2>Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h2>
+<p>Good access to JIT, though with sharp edges. Poor native performance, but good libraries to compiled code.</p>
+</div>
+<div class="section" id="rust">
+<h2>Rust<a class="headerlink" href="#rust" title="Permalink to this headline">¶</a></h2>
+<p>New compiled language. Good performance, encapsulation, safety, static analysis. Poor libraries (so far).</p>
+<p>You don’t need to know any of these well and you can choose the language for your project.</p>
+<img src="../img/Butler1988-Table1.png" width="80%" /></div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="i-won-t-grade-and-i-won-t-waste-your-time">
+<h1>I won’t grade and I won’t waste your time<a class="headerlink" href="#i-won-t-grade-and-i-won-t-waste-your-time" title="Permalink to this headline">¶</a></h1>
+<div class="floatleft70"
+<ul class="simple">
+<li><p>I will provide feedback</p></li>
+<li><p>I will be a mentor and guide navigating this field</p></li>
+<li><p>I will help you get what you want out of the class (with a dash of wholesome context)</p></li>
+</ul>
+<blockquote>
+<div><p>My mom said, “basically, your professor is asking you to be an adult”. That was too flexible.</p>
+</div></blockquote>
+<blockquote>
+<div><p>In other classes, I didn’t feel like I could bounce back, but in this one I did.</p>
+</div></blockquote>
+</div>
+<div class="floatright30">
+<a href="https://www.wvupressonline.com/ungrading"><img src="../img/Ungrading.jpg" width="100%" /></a>
+</div></div>
+<div class="tex2jax_ignore mathjax_ignore section" id="what-about-the-letter-grade">
+<h1>What about the letter grade?<a class="headerlink" href="#what-about-the-letter-grade" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Collect a portfolio of the work and insights you’re most proud of</p></li>
+<li><p>Individual meetings during the last week of the semester (mid-term preview)</p></li>
+<li><p>We’ll have a conversation and you’ll propose a grade based on your portfolio</p>
+<ul>
+<li><p>I’ll trust you.</p></li>
+</ul>
+</li>
+</ul>
+<p><em>I can nudge upward when students are too modest – pretty common. In rare cases, I may adjust down.</em></p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="what-i-need-from-you-growth-mindset">
+<h1>What I need from you: Growth Mindset<a class="headerlink" href="#what-i-need-from-you-growth-mindset" title="Permalink to this headline">¶</a></h1>
+<img src="../img/Henry2019-Table1.png" width="90%" /></div>
+<div class="tex2jax_ignore mathjax_ignore section" id="how-will-the-semester-look">
+<h1>How will the semester look?<a class="headerlink" href="#how-will-the-semester-look" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="lecture-periods">
+<h2>Lecture periods<a class="headerlink" href="#lecture-periods" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Refresh, introduce, activity/group discussion, reflect</p></li>
+<li><p>Pointers to further resources/activities</p></li>
+</ul>
+</div>
+<div class="section" id="in-class-and-homework-activities">
+<h2>In-class and homework activities<a class="headerlink" href="#in-class-and-homework-activities" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>(Short) coding, experiments, presentation of results</p></li>
+<li><p>Use the math and programming tools of the field</p></li>
+<li><p>Open-ended, go further occasionally</p></li>
+</ul>
+</div>
+<div class="section" id="learning-plans">
+<h2>Learning plans<a class="headerlink" href="#learning-plans" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Write, track, and revise a personal learning plan.</p></li>
+<li><p>Meet/chat approx weekly to check in with partner</p></li>
+</ul>
+</div>
+<div class="section" id="projects-second-half-of-semester">
+<h2>Projects (second half of semester)<a class="headerlink" href="#projects-second-half-of-semester" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Dig into community software for solving PDEs</p></li>
+<li><p>Short presentation on how the community works</p></li>
+<li><p>Key stakeholders</p></li>
+<li><p>Strengths and weaknesses</p></li>
+<li><p>Discuss and critique</p></li>
+</ul>
+</div>
+<div class="section" id="community-contribution">
+<h2>Community contribution<a class="headerlink" href="#community-contribution" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Tutorial, documentation, performance study, comparison, new features, new application</p></li>
+<li><p>Reflect in a short presentation</p></li>
+</ul>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="tools">
+<h1>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="git-and-github">
+<h2>Git and GitHub<a class="headerlink" href="#git-and-github" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>GitHub Classroom to manage repositories</p></li>
+<li><p>Write using notebooks and markdown</p></li>
+<li><p>Review using GitHub tools and nbgrader</p></li>
+</ul>
+</div>
+<div class="section" id="zulip">
+<h2>Zulip<a class="headerlink" href="#zulip" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>math- and code-aware team chat</p></li>
+<li><p>live, informal</p></li>
+<li><p>thread managemnet so a question in class can spin off into a deeper asynchronous conversation</p></li>
+</ul>
+</div>
+<div class="section" id="jupyter">
+<h2>Jupyter<a class="headerlink" href="#jupyter" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>RISE slides available on website</p></li>
+<li><p>Activities with scaffolding</p></li>
+<li><p>Nbgrader for writing feedback</p></li>
+<li><p>Works with many languages; we’ll mostly use Julia</p></li>
+<li><p>Collaborative mode (new)</p></li>
+</ul>
+</div>
+<div class="section" id="jupyterhub-coding-csel-io">
+<h2>JupyterHub: <a class="reference external" href="https://coding.csel.io">coding.csel.io</a><a class="headerlink" href="#jupyterhub-coding-csel-io" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Nothing to install, persistent storage</p></li>
+<li><p>Select CSCI-3656 tile</p></li>
+</ul>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="a-note-about-covid">
+<h1>A note about COVID<a class="headerlink" href="#a-note-about-covid" title="Permalink to this headline">¶</a></h1>
+<p><img alt="" src="../_images/boulder-county-cases-2022-01-09.png" /></p>
+<ul class="simple">
+<li><p>Boulder County cases are high and increasing</p></li>
+<li><p>Breakthrough cases are very common with Omicron</p></li>
+<li><p>I have a 1yo and 4yo in childcare</p></li>
+<li><p>Pediatric hospitals are overwhelmed</p></li>
+<li><p>They need to stay home and be tested any time they have symptoms</p></li>
+</ul>
+<p><img alt="" src="../_images/neve-testing-2022-01-09.png" /></p>
+<ul class="simple">
+<li><p>I’d prefer to do virtual office hours until 7-day average new cases drops below 30/day or my child can be vaccinated.</p></li>
+<li><p>I’ll likely be home with a kid and need to teach remotely or otherwise make it up to you</p></li>
+</ul>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cu-numcomp/spring22",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.6"
+        },
+        kernelOptions: {
+            kernelName: "julia-1.6",
+            path: "./slides"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.6'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="../slides.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Slides</p>
+        </div>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Jed Brown<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
