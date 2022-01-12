@@ -54,6 +54,7 @@
     <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2022-01-12 Functions" href="2022-01-12-functions.html" />
     <link rel="prev" title="Slides" href="../slides.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -117,6 +118,11 @@
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      2022-01-10 First Day
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-12-functions.html">
+     2022-01-12 Functions
     </a>
    </li>
   </ul>
@@ -244,8 +250,8 @@
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#meeting-mon-wed-fri-at-1-25-12-20-in-ecee-283-and-virtually">
-     Meeting: Mon, Wed, Fri at 1:25-12:20 in ECEE 283 (and virtually)
+    <a class="reference internal nav-link" href="#meeting-mon-wed-fri-at-1-25-2-15-in-flmg-157-and-virtually">
+     Meeting: Mon, Wed, Fri at 1:25-2:15 in FLMG 157 (and virtually)
     </a>
    </li>
   </ul>
@@ -518,6 +524,11 @@
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#poll-what-is-floating-point-arithmetic">
    Poll: What is floating point arithmetic?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#machine-epsilon">
+   Machine epsilon
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -566,8 +577,8 @@
     </a>
    </li>
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#meeting-mon-wed-fri-at-1-25-12-20-in-ecee-283-and-virtually">
-     Meeting: Mon, Wed, Fri at 1:25-12:20 in ECEE 283 (and virtually)
+    <a class="reference internal nav-link" href="#meeting-mon-wed-fri-at-1-25-2-15-in-flmg-157-and-virtually">
+     Meeting: Mon, Wed, Fri at 1:25-2:15 in FLMG 157 (and virtually)
     </a>
    </li>
   </ul>
@@ -843,6 +854,11 @@
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#machine-epsilon">
+   Machine epsilon
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#beating-exp">
    Beating
    <code class="docutils literal notranslate">
@@ -869,8 +885,8 @@
 <div class="section" id="instructor-jed-brown-jed-brown-colorado-edu-ecot-824">
 <h2>Instructor: Jed Brown, <a class="reference external" href="mailto:jed&#46;brown&#37;&#52;&#48;colorado&#46;edu">jed<span>&#46;</span>brown<span>&#64;</span>colorado<span>&#46;</span>edu</a>, ECOT 824<a class="headerlink" href="#instructor-jed-brown-jed-brown-colorado-edu-ecot-824" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="meeting-mon-wed-fri-at-1-25-12-20-in-ecee-283-and-virtually">
-<h2>Meeting: Mon, Wed, Fri at 1:25-12:20 in ECEE 283 (and virtually)<a class="headerlink" href="#meeting-mon-wed-fri-at-1-25-12-20-in-ecee-283-and-virtually" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="meeting-mon-wed-fri-at-1-25-2-15-in-flmg-157-and-virtually">
+<h2>Meeting: Mon, Wed, Fri at 1:25-2:15 in FLMG 157 (and virtually)<a class="headerlink" href="#meeting-mon-wed-fri-at-1-25-2-15-in-flmg-157-and-virtually" title="Permalink to this headline">¶</a></h2>
 <ol class="simple">
 <li><p>Who am I?</p></li>
 <li><p>What is this course about?</p></li>
@@ -974,12 +990,12 @@
 <span class="n">default</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
 <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
-<span class="n">plot</span><span class="p">([</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="mi">0</span><span class="p">],</span> <span class="n">xlims</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
+<span class="n">plot</span><span class="p">([</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span> <span class="o">-&gt;</span> <span class="mi">0</span><span class="p">],</span> <span class="n">xlims</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2022-01-10-first-day_11_0.svg" src="../_images/2022-01-10-first-day_11_0.svg" /></div>
+<img alt="../_images/2022-01-10-first-day_12_0.svg" src="../_images/2022-01-10-first-day_12_0.svg" /></div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="numerical-linear-algebra">
@@ -1317,8 +1333,16 @@ and initial condition <span class="math notranslate nohighlight">\(u(0) = u_0\)<
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2022-01-10-first-day_55_0.svg" src="../_images/2022-01-10-first-day_55_0.svg" /></div>
+<img alt="../_images/2022-01-10-first-day_56_0.svg" src="../_images/2022-01-10-first-day_56_0.svg" /></div>
 </div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="machine-epsilon">
+<h1>Machine epsilon<a class="headerlink" href="#machine-epsilon" title="Permalink to this headline">¶</a></h1>
+<p>We approximate real numbers with <strong>floating point</strong> arithmetic, which can only represent discrete values. In particular, there exists a largest number, which we call <span class="math notranslate nohighlight">\(\epsilon_{\text{machine}}\)</span>, such that
+<div class="math notranslate nohighlight">
+\[ 1 \oplus x = 1 \quad \text{for all}\  \lvert x \rvert &lt; \epsilon_{\text{machine}}.\]</div>
+</p>
+<p>The notation <span class="math notranslate nohighlight">\(\oplus, \ominus, \odot, \oslash\)</span> represent the elementary operation carried out in floating point arithmetic.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">eps</span> <span class="o">=</span> <span class="mi">1</span>
@@ -1415,6 +1439,13 @@ and initial condition <span class="math notranslate nohighlight">\(u(0) = u_0\)<
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Slides</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="2022-01-12-functions.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2022-01-12 Functions</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             
