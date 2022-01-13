@@ -17,7 +17,7 @@ Welcome to **CSCI-3656: Numerical Computation**
 
 * - Name
   - Objectives
-* - [2022-01-12-taylor-series](https://classroom.github.com/a/xyz)
+* - [2022-01-12-taylor-series](https://classroom.github.com/a/VkPvGOgu)
   - Use GitHub classroom and Julia to observe numerical instability.
 :::
 ::::
