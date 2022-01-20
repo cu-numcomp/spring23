@@ -4,10 +4,10 @@ Welcome to **CSCI-3656: Numerical Computation**
 
 :::{admonition} Logistics
 * Meeting Time: MWF 1:25-2:15 in FLMG 157
-* Office hours: [Complete when2meet poll](https://www.when2meet.com/?14081593-m9NMR)
-* [Join in Zoom](https://cuboulder.zoom.us/j/95889180311)
+* Office hours: Monday 9-10am, Tuesday 2-3pm, Thursday 2-3pm (via Zoom until further notice)
+* [Join in Zoom](https://cuboulder.zoom.us/j/95889180311) (["Cloud Recordings" on Canvas](https://canvas.colorado.edu/courses/80290/external_tools/16942))
 * [Join Zulip](https://cu-numcomp.zulipchat.com/join/2hpdkyspe5pii6mep3yl76qm/)
-* [Canvas page](https://canvas.colorado.edu/courses/80290)
+* [Canvas page](https://canvas.colorado.edu/courses/80290); [subscribe to calendar](https://canvas.colorado.edu/feeds/calendars/user_4BGOOsyWtr2qrHusl0uZsJ4yvJ8hMBHf7u1Bm751.ics)
 :::
 
 ::::{admonition} Activities
