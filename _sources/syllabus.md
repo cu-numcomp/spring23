@@ -74,6 +74,7 @@ Why? TL;DR: [Evidence](https://cu-numcomp.github.io/spring22/downloads/Butler-En
 ### Expectations
 
 1. Attend class (in-person or virtual) and participate in discussions
+  * you may choose asynchronous as needed for personal reasons, but please make sure to check in with other students and to actively experiment
 2. Make an honest attempt on activities
 3. Interact with the class notebooks and read reference material
 4. Set goals and track your progress
