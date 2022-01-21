@@ -7,8 +7,18 @@ Welcome to **CSCI-3656: Numerical Computation**
 * Office hours: Monday 9-10am, Tuesday 2-3pm, Thursday 2-3pm (via Zoom until further notice)
 * [Join in Zoom](https://cuboulder.zoom.us/j/95889180311) (["Cloud Recordings" on Canvas](https://canvas.colorado.edu/courses/80290/external_tools/16942))
 * [Join Zulip](https://cu-numcomp.zulipchat.com/join/2hpdkyspe5pii6mep3yl76qm/)
-* [Canvas page](https://canvas.colorado.edu/courses/80290); [subscribe to calendar](https://canvas.colorado.edu/feeds/calendars/user_4BGOOsyWtr2qrHusl0uZsJ4yvJ8hMBHf7u1Bm751.ics)
+* [Canvas page](https://canvas.colorado.edu/courses/80290)
 :::
+
+<div style="width: 100%; min-width: 400px;">
+    <div style="position: relative; width: 100%; overflow: hidden; padding-top: 56.25%;">
+        <p><iframe style="position: absolute; top: 0; left: 0; right: 0; width: 100%; height: 100%; border: none;" src="https://canvas.colorado.edu/calendar?include_contexts=course_80290#view_name=month&view_start=2022-01-20" width="800" height="600" allowfullscreen="allowfullscreen" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe></p>
+    </div>
+</div>
+
+<iframe src="https://canvas.colorado.edu/calendar?include_contexts=course_80290#view_name=month&view_start=2022-01-20" />
+
+<iframe src="https://calendar.google.com/calendar/embed?src=vr78usr4et5sated1ns7a4m0q3k67i2o%40import.calendar.google.com&ctz=America%2FDenver" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 
 ::::{admonition} Activities
 :::{list-table}

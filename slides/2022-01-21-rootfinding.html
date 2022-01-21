@@ -1,0 +1,1131 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2022-01-21 Rootfinding &#8212; Numerical Computation</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="2022-01-19 Conditioning" href="2022-01-19-conditioning.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/cu-numcomp.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Numerical Computation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../slides.html">
+   Slides
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-10-first-day.html">
+     2022-01-10 First Day
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-12-functions.html">
+     2022-01-12 Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-14-function-errors.html">
+     2022-01-14 Function errors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-19-conditioning.html">
+     2022-01-19 Conditioning
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     2022-01-21 Rootfinding
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/slides/2022-01-21-rootfinding.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cu-numcomp/spring22"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cu-numcomp/spring22/issues/new?title=Issue%20on%20page%20%2Fslides/2022-01-21-rootfinding.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cu-numcomp/spring22/main?urlpath=tree/slides/2022-01-21-rootfinding.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2022-01-21 Rootfinding
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#last-time">
+     Last time
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#today">
+     Today
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reliable-well-conditioned-and-stable">
+   Reliable = well-conditioned and stable
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mathematical-functions-f-x-can-be-ill-conditioned-big-kappa">
+     Mathematical functions
+     <span class="math notranslate nohighlight">
+      \(f(x)\)
+     </span>
+     can be ill-conditioned (big
+     <span class="math notranslate nohighlight">
+      \(\kappa\)
+     </span>
+     )
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algorithms-f-x-can-be-unstable">
+     Algorithms
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       f(x)
+      </span>
+     </code>
+     can be unstable
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-ill-conditioned-problem-from-paul-olum">
+   An ill-conditioned problem from Paul Olum
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#forward-and-backward-error">
+   Forward and backward error
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#read-backward-error">
+     Read Backward error
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#go-find-some-functions">
+   Go find some functions…
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#further-reading-fnc-introduction">
+     Further reading: FNC Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stability-demo-volume-of-a-polygon">
+   Stability demo: Volume of a polygon
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Rootfinding
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#change-inputs-to-outputs">
+     Change inputs to outputs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-queueing">
+   Example: Queueing
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#departure-rate-given-wait">
+   Departure rate given wait
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-nonlinear-elasticity">
+   Example: Nonlinear Elasticity
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#strain-energy-formulation">
+     Strain-energy formulation
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#uniaxial-extension">
+       Uniaxial extension
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-much-does-the-volume-change">
+   How much does the volume change?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-algorithm-bisection">
+   An algorithm: Bisection
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bisection">
+   Bisection
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-fast-does-it-converge">
+   How fast does it converge?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#iterative-bisection">
+   Iterative bisection
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#let-s-plot-the-error">
+   Let’s plot the error
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#next-time">
+   Next time
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>2022-01-21 Rootfinding</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2022-01-21 Rootfinding
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#last-time">
+     Last time
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#today">
+     Today
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reliable-well-conditioned-and-stable">
+   Reliable = well-conditioned and stable
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mathematical-functions-f-x-can-be-ill-conditioned-big-kappa">
+     Mathematical functions
+     <span class="math notranslate nohighlight">
+      \(f(x)\)
+     </span>
+     can be ill-conditioned (big
+     <span class="math notranslate nohighlight">
+      \(\kappa\)
+     </span>
+     )
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#algorithms-f-x-can-be-unstable">
+     Algorithms
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       f(x)
+      </span>
+     </code>
+     can be unstable
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-ill-conditioned-problem-from-paul-olum">
+   An ill-conditioned problem from Paul Olum
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#forward-and-backward-error">
+   Forward and backward error
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#read-backward-error">
+     Read Backward error
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#go-find-some-functions">
+   Go find some functions…
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#further-reading-fnc-introduction">
+     Further reading: FNC Introduction
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stability-demo-volume-of-a-polygon">
+   Stability demo: Volume of a polygon
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Rootfinding
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#change-inputs-to-outputs">
+     Change inputs to outputs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-queueing">
+   Example: Queueing
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#departure-rate-given-wait">
+   Departure rate given wait
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-nonlinear-elasticity">
+   Example: Nonlinear Elasticity
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#strain-energy-formulation">
+     Strain-energy formulation
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#uniaxial-extension">
+       Uniaxial extension
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-much-does-the-volume-change">
+   How much does the volume change?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-algorithm-bisection">
+   An algorithm: Bisection
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bisection">
+   Bisection
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-fast-does-it-converge">
+   How fast does it converge?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#iterative-bisection">
+   Iterative bisection
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#let-s-plot-the-error">
+   Let’s plot the error
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#next-time">
+   Next time
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="rootfinding">
+<h1>2022-01-21 Rootfinding<a class="headerlink" href="#rootfinding" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Office hours: Monday 9-10pm, Tuesday 2-3pm, Thursday 2-3pm</p></li>
+<li><p>Next week will stay virtual. Plan is to start in-person the following Monday (Jan 31)</p></li>
+</ul>
+<div class="section" id="last-time">
+<h2>Last time<a class="headerlink" href="#last-time" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>More on floating point</p></li>
+<li><p>Discuss Taylor Series activity</p></li>
+<li><p>Condition numbers</p></li>
+</ul>
+</div>
+<div class="section" id="today">
+<h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Forward and backward error</p></li>
+<li><p>Computing volume of a polygon</p></li>
+<li><p>Rootfinding examples</p></li>
+<li><p>Use <a class="reference external" href="https://juliapackages.com/p/roots">Roots.jl</a> to solve</p></li>
+<li><p>Introduce Bisection</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Plots</span>
+<span class="n">default</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="reliable-well-conditioned-and-stable">
+<h1>Reliable = well-conditioned and stable<a class="headerlink" href="#reliable-well-conditioned-and-stable" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="mathematical-functions-f-x-can-be-ill-conditioned-big-kappa">
+<h2>Mathematical functions <span class="math notranslate nohighlight">\(f(x)\)</span> can be ill-conditioned (big <span class="math notranslate nohighlight">\(\kappa\)</span>)<a class="headerlink" href="#mathematical-functions-f-x-can-be-ill-conditioned-big-kappa" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Modeling is how we turn an abstract question into a mathematical function</p></li>
+<li><p>We want well-conditioned models (small <span class="math notranslate nohighlight">\(\kappa\)</span>)</p></li>
+<li><p>Some systems are intrinsically sensitive: fracture, chaotic systems, combustion</p></li>
+</ul>
+</div>
+<div class="section" id="algorithms-f-x-can-be-unstable">
+<h2>Algorithms <code class="docutils literal notranslate"><span class="pre">f(x)</span></code> can be unstable<a class="headerlink" href="#algorithms-f-x-can-be-unstable" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Unreliable, though sometimes practical</p></li>
+<li><p>Unstable algorithms are constructed from ill-conditioned parts</p></li>
+</ul>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="an-ill-conditioned-problem-from-paul-olum">
+<h1>An ill-conditioned problem from Paul Olum<a class="headerlink" href="#an-ill-conditioned-problem-from-paul-olum" title="Permalink to this headline">¶</a></h1>
+<p>From <a class="reference external" href="https://sistemas.fciencias.unam.mx/%7Ecompcuantica/RICHARD%20P.%20FEYNMAN-SURELY%20YOU%27RE%20JOKING%20MR.%20FEYNMAN.PDF">Surely You’re Joking, Mr. Feynman</a> (page 113)</p>
+<blockquote>
+<div><p>So Paul is walking past the lunch place and these guys are all excited. “Hey,
+Paul!” they call out. “Feynman’s terrific! We give him a problem that can be stated in ten
+seconds, and in a minute he gets the answer to 10 percent. Why don’t you give him one?”
+Without hardly stopping, he says, “The tangent of 10 to the 100th.”
+I was sunk: you have to divide by pi to 100 decimal places! It was hopeless.</p>
+</div></blockquote>
+<p>What’s the condition number?</p>
+<div class="math notranslate nohighlight">
+\[ \kappa = |f'(x)| \frac{|x|}{|f|} \]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x) = \tan x\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f'(x) = 1 + \tan^2 x\)</span></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \kappa = \lvert x \rvert \Bigl( \lvert \tan x \rvert + \bigl\lvert \frac{1}{\tan x} \bigr\rvert \Bigr) &gt; \lvert x \rvert\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">tan</span><span class="p">(</span><span class="mf">1e100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.4116229628832498
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">tan</span><span class="p">(</span><span class="kt">BigFloat</span><span class="p">(</span><span class="s">&quot;1e100&quot;</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">500</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.4012319619908143541857543436532949583238702611292440683194415381168718098221194
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="forward-and-backward-error">
+<h1>Forward and backward error<a class="headerlink" href="#forward-and-backward-error" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">tan</span><span class="p">,</span> <span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">x</span><span class="o">=</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1000</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-01-21-rootfinding_8_0.svg" src="../_images/2022-01-21-rootfinding_8_0.svg" /></div>
+</div>
+<div class="section" id="read-backward-error">
+<h2>Read <a class="reference external" href="https://fncbook.github.io/fnc/intro/stability.html">Backward error</a><a class="headerlink" href="#read-backward-error" title="Permalink to this headline">¶</a></h2>
+<p><img alt="" src="https://fncbook.github.io/fnc/_images/backwarderror.svg" /></p>
+<ul class="simple">
+<li><p>For ill-conditioned functions, the best we can hope for is small backward error.</p></li>
+</ul>
+<ul class="simple">
+<li><p>Feynman could have answered with any real number and it would have a (relative) backward error less than <span class="math notranslate nohighlight">\(10^{-100}\)</span>. All the numbers we saw on the previous slide had tiny backward error because</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \texttt{tan} \big( \operatorname{fl}(\underbrace{10^{100}}_x) \big) = \tan \big( \underbrace{10^{100} (1 + \epsilon)}_{\tilde x} \big) \]</div>
+<p>for some <span class="math notranslate nohighlight">\(\epsilon &lt; 10^{-100}\)</span>. (All real numbers can be written this way for some small <span class="math notranslate nohighlight">\(\epsilon\)</span>.)</p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="go-find-some-functions">
+<h1>Go find some functions…<a class="headerlink" href="#go-find-some-functions" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Find a function <span class="math notranslate nohighlight">\(f(x)\)</span> that models something you’re interested in</p></li>
+<li><p>Plot its condition number <span class="math notranslate nohighlight">\(\kappa\)</span> as a function of <span class="math notranslate nohighlight">\(x\)</span></p></li>
+<li><p>Plot the relative error (using single or double precision; compare using Julia’s <code class="docutils literal notranslate"><span class="pre">big</span></code>)</p></li>
+<li><p>Is the relative error ever much bigger than <span class="math notranslate nohighlight">\(\kappa \epsilon_{\text{machine}}\)</span>?</p></li>
+<li><p>Can you find what caused the instability?</p></li>
+<li><p>Share on Zulip</p></li>
+</ul>
+<div class="section" id="further-reading-fnc-introduction">
+<h2>Further reading: <a class="reference external" href="https://fncbook.github.io/fnc/intro/overview.html">FNC Introduction</a><a class="headerlink" href="#further-reading-fnc-introduction" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="stability-demo-volume-of-a-polygon">
+<h1>Stability demo: Volume of a polygon<a class="headerlink" href="#stability-demo-volume-of-a-polygon" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">0</span><span class="p">;</span> <span class="mi">2</span> <span class="mi">1</span><span class="p">;</span> <span class="mi">1</span> <span class="mi">3</span><span class="p">;</span> <span class="mi">0</span> <span class="mi">1</span><span class="p">;</span> <span class="o">-</span><span class="mi">1</span> <span class="mf">1.5</span><span class="p">;</span> <span class="o">-</span><span class="mi">2</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="mf">.5</span> <span class="o">-</span><span class="mi">2</span><span class="p">;</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">R</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span> <span class="o">=</span> <span class="p">[</span><span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span> <span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">θ</span><span class="p">);</span> <span class="n">sin</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span> <span class="n">cos</span><span class="p">(</span><span class="n">θ</span><span class="p">)]</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">X</span> <span class="o">*</span> <span class="n">R</span><span class="p">(</span><span class="n">deg2rad</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="o">&#39;</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">Y</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">seriestype</span><span class="o">=</span><span class="ss">:shape</span><span class="p">,</span> <span class="n">aspect_ratio</span><span class="o">=</span><span class="ss">:equal</span><span class="p">,</span> <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-01-21-rootfinding_13_0.svg" src="../_images/2022-01-21-rootfinding_13_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">LinearAlgebra</span>
+<span class="k">function</span> <span class="n">pvolume</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">vol</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">det</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="o">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="o">:</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="n">ref</span> <span class="o">=</span> <span class="n">pvolume</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.25
+</pre></div>
+</div>
+</div>
+</div>
+<p>What happens if this polygon is translated, perhaps far away?</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id1">
+<h1>Rootfinding<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>Given <span class="math notranslate nohighlight">\(f(x)\)</span>, find <span class="math notranslate nohighlight">\(x\)</span> such that <span class="math notranslate nohighlight">\(f(x) = 0\)</span>.</p>
+</div></blockquote>
+<p>We’ll work with scalars (<span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(x\)</span> are just numbers) for now, and revisit later when they vector-valued.</p>
+<div class="section" id="change-inputs-to-outputs">
+<h2>Change inputs to outputs<a class="headerlink" href="#change-inputs-to-outputs" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x; b) = x^2 - b\)</span></p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(x(b) = \sqrt{b}\)</span></p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(f(x; b) = \tan x - b\)</span></p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(x(b) = \arctan b\)</span></p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(f(x) = \cos x + x - b\)</span></p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(x(b) = ?\)</span></p></li>
+</ul>
+</li>
+</ul>
+<p>We aren’t given <span class="math notranslate nohighlight">\(f(x)\)</span>, but rather an algorithm <code class="docutils literal notranslate"><span class="pre">f(x)</span></code> that approximates it.</p>
+<ul class="simple">
+<li><p>Sometimes we get extra information, like <code class="docutils literal notranslate"><span class="pre">fp(x)</span></code> that approximates <span class="math notranslate nohighlight">\(f'(x)\)</span></p></li>
+<li><p>If we have source code for <code class="docutils literal notranslate"><span class="pre">f(x)</span></code>, maybe it can be transformed “automatically”</p></li>
+</ul>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="example-queueing">
+<h1>Example: Queueing<a class="headerlink" href="#example-queueing" title="Permalink to this headline">¶</a></h1>
+<p>In a <a class="reference external" href="https://en.wikipedia.org/wiki/Queueing_theory#Simple_two-equation_queue">simple queueing model</a>, there is an arrival rate and a departure (serving) rate.  While waiting in the queue, there is a probability of “dropping out”. The length of the queue in this model is</p>
+<div class="math notranslate nohighlight">
+\[ \text{length} = \frac{\text{arrival} - \text{drop}}{\text{departure}} \]</div>
+<p>One model for the waiting time (where these rates are taken from exponential distributions) is</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">wait</span><span class="p">(</span><span class="n">arrival</span><span class="p">,</span> <span class="n">departure</span><span class="p">)</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="n">arrival</span> <span class="o">/</span> <span class="n">departure</span><span class="p">)</span> <span class="o">/</span> <span class="n">departure</span>
+
+<span class="n">plot</span><span class="p">(</span><span class="n">d</span> <span class="o">-&gt;</span> <span class="n">wait</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="p">),</span> <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="mf">.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;departure&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s">&quot;wait&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-01-21-rootfinding_20_0.svg" src="../_images/2022-01-21-rootfinding_20_0.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="departure-rate-given-wait">
+<h1>Departure rate given wait<a class="headerlink" href="#departure-rate-given-wait" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Easy to measure wait</p></li>
+<li><p>I have a limited tolerance for waiting</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">my_wait</span> <span class="o">=</span> <span class="mf">0.8</span>
+<span class="n">plot</span><span class="p">([</span><span class="n">d</span> <span class="o">-&gt;</span> <span class="n">wait</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="p">),</span> <span class="n">d</span> <span class="o">-&gt;</span> <span class="n">my_wait</span><span class="p">],</span> <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="mf">.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;departure&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s">&quot;wait&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-01-21-rootfinding_22_0.svg" src="../_images/2022-01-21-rootfinding_22_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Roots</span>
+<span class="n">d0</span> <span class="o">=</span> <span class="n">find_zero</span><span class="p">(</span><span class="n">d</span> <span class="o">-&gt;</span> <span class="n">wait</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span> <span class="o">-</span> <span class="n">my_wait</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">scatter!</span><span class="p">([</span><span class="n">d0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="p">(</span><span class="ss">:circle</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s">&quot;d0 = </span><span class="si">$d0</span><span class="s">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-01-21-rootfinding_23_0.svg" src="../_images/2022-01-21-rootfinding_23_0.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="example-nonlinear-elasticity">
+<h1>Example: Nonlinear Elasticity<a class="headerlink" href="#example-nonlinear-elasticity" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="strain-energy-formulation">
+<h2>Strain-energy formulation<a class="headerlink" href="#strain-energy-formulation" title="Permalink to this headline">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[ W = C_1 (I_1 - 3 - 2 \log J) + D_1 (J - 1)^2 \]</div>
+<p>where <span class="math notranslate nohighlight">\(I_1 = \lambda_1^2 + \lambda_2^2 + \lambda_3^3\)</span> and <span class="math notranslate nohighlight">\(J = \lambda_1 \lambda_2 \lambda_3\)</span> are <em>invariants</em> defined in terms of the principle stretches <span class="math notranslate nohighlight">\(\lambda_i\)</span>.</p>
+<div class="section" id="uniaxial-extension">
+<h3><a class="reference external" href="https://en.wikipedia.org/wiki/Neo-Hookean_solid#Compressible_neo-Hookean_material_3">Uniaxial extension</a><a class="headerlink" href="#uniaxial-extension" title="Permalink to this headline">¶</a></h3>
+<p>In the experiment, we would like to know the stress as a function of the stretch <span class="math notranslate nohighlight">\(\lambda_1\)</span>. We don’t know <span class="math notranslate nohighlight">\(J\)</span>, and will have to determine it by solving an equation.</p>
+<p><a class="reference external" href="https://www.youtube.com/watch?v=9N5SS8f1auI&amp;t=60">https://www.youtube.com/watch?v=9N5SS8f1auI&amp;t=60</a></p>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="how-much-does-the-volume-change">
+<h1>How much does the volume change?<a class="headerlink" href="#how-much-does-the-volume-change" title="Permalink to this headline">¶</a></h1>
+<p>Using symmetries of uniaxial extension, we can write an equation <span class="math notranslate nohighlight">\(f(\lambda, J) = 0\)</span> that must be satisfied. We’ll need to solve a rootfinding problem to compute <span class="math notranslate nohighlight">\(J(\lambda)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">f</span><span class="p">(</span><span class="n">lambda</span><span class="p">,</span> <span class="n">J</span><span class="p">)</span>
+    <span class="n">C_1</span> <span class="o">=</span> <span class="mf">1.5e6</span>
+    <span class="n">D_1</span> <span class="o">=</span> <span class="mf">1e8</span>
+    <span class="n">D_1</span> <span class="o">*</span> <span class="n">J</span><span class="o">^</span><span class="p">(</span><span class="mi">8</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span> <span class="o">-</span> <span class="n">D_1</span> <span class="o">*</span> <span class="n">J</span><span class="o">^</span><span class="p">(</span><span class="mi">5</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="n">C_1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">lambda</span><span class="p">)</span> <span class="o">*</span> <span class="n">J</span> <span class="o">-</span> <span class="n">C_1</span> <span class="o">*</span> <span class="n">lambda</span><span class="o">^</span><span class="mi">2</span><span class="o">/</span><span class="mi">3</span>
+<span class="k">end</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">J</span> <span class="o">-&gt;</span> <span class="n">f</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">J</span><span class="p">),</span> <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;J&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s">&quot;f(J)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-01-21-rootfinding_26_0.svg" src="../_images/2022-01-21-rootfinding_26_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">find_J</span><span class="p">(</span><span class="n">lambda</span><span class="p">)</span> <span class="o">=</span> <span class="n">find_zero</span><span class="p">(</span><span class="n">J</span> <span class="o">-&gt;</span> <span class="n">f</span><span class="p">(</span><span class="n">lambda</span><span class="p">,</span> <span class="n">J</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">find_J</span><span class="p">,</span> <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;lambda&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s">&quot;J&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-01-21-rootfinding_27_0.svg" src="../_images/2022-01-21-rootfinding_27_0.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="an-algorithm-bisection">
+<h1>An algorithm: Bisection<a class="headerlink" href="#an-algorithm-bisection" title="Permalink to this headline">¶</a></h1>
+<p>Bisection is a rootfinding technique that starts with an interval <span class="math notranslate nohighlight">\([a,b]\)</span> containing a root and does not require derivatives. Suppose <span class="math notranslate nohighlight">\(f\)</span> is continuous. What is a <strong>sufficient</strong> condition for <span class="math notranslate nohighlight">\(f\)</span> to have a root on <span class="math notranslate nohighlight">\([a,b]\)</span>?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">hasroot</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span>
+
+<span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-01-21-rootfinding_29_0.svg" src="../_images/2022-01-21-rootfinding_29_0.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="bisection">
+<h1>Bisection<a class="headerlink" href="#bisection" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">bisect</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="p">)</span>
+    <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="k">if</span> <span class="n">abs</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span>
+        <span class="k">return</span> <span class="n">mid</span>
+    <span class="k">elseif</span> <span class="n">hasroot</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">bisect</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">tol</span><span class="p">)</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="n">bisect</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="p">)</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+
+<span class="n">x0</span> <span class="o">=</span> <span class="n">bisect</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">1e-5</span><span class="p">)</span>
+<span class="n">x0</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.7390861511230469, -1.7035832658995886e-6)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="how-fast-does-it-converge">
+<h1>How fast does it converge?<a class="headerlink" href="#how-fast-does-it-converge" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">bisect_hist</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="p">)</span>
+    <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="k">if</span> <span class="n">abs</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">mid</span><span class="p">]</span>
+    <span class="k">elseif</span> <span class="n">hasroot</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">prepend!</span><span class="p">(</span><span class="n">bisect_hist</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">tol</span><span class="p">),</span> <span class="p">[</span><span class="n">mid</span><span class="p">])</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="n">prepend!</span><span class="p">(</span><span class="n">bisect_hist</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">mid</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="p">),</span> <span class="p">[</span><span class="n">mid</span><span class="p">])</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bisect_hist (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">bisect_hist</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17-element Vector{Float64}:
+ 1.0
+ 0.0
+ 0.5
+ 0.75
+ 0.625
+ 0.6875
+ 0.71875
+ 0.734375
+ 0.7421875
+ 0.73828125
+ 0.740234375
+ 0.7392578125
+ 0.73876953125
+ 0.739013671875
+ 0.7391357421875
+ 0.73907470703125
+ 0.739105224609375
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="iterative-bisection">
+<h1>Iterative bisection<a class="headerlink" href="#iterative-bisection" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Data structures often optimized for appending rather than prepending.</p></li>
+<li><p>Bounds stack space</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">bisect_iter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="p">)</span>
+    <span class="n">hist</span> <span class="o">=</span> <span class="kt">Float64</span><span class="p">[]</span>
+    <span class="k">while</span> <span class="n">abs</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">tol</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">push!</span><span class="p">(</span><span class="n">hist</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">hasroot</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">mid</span>
+        <span class="k">else</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">mid</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="n">hist</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bisect_iter (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">bisect_iter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">1e-4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16-element Vector{Float64}:
+ 1.0
+ 0.0
+ 0.5
+ 0.75
+ 0.625
+ 0.6875
+ 0.71875
+ 0.734375
+ 0.7421875
+ 0.73828125
+ 0.740234375
+ 0.7392578125
+ 0.73876953125
+ 0.739013671875
+ 0.7391357421875
+ 0.73907470703125
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="let-s-plot-the-error">
+<h1>Let’s plot the error<a class="headerlink" href="#let-s-plot-the-error" title="Permalink to this headline">¶</a></h1>
+<div class="math notranslate nohighlight">
+\[ \lvert \texttt{bisect}^k(f, a, b) - r \rvert, \quad k = 1, 2, \dotsc \]</div>
+<p>where <span class="math notranslate nohighlight">\(r\)</span> is the true root, <span class="math notranslate nohighlight">\(f(r) = 0\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="n">bisect</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">1e-14</span><span class="p">)</span> <span class="c"># what are we trusting?</span>
+<span class="n">hist</span> <span class="o">=</span> <span class="n">bisect_hist</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">)</span>
+<span class="n">scatter</span><span class="p">(</span> <span class="n">abs</span><span class="o">.</span><span class="p">(</span><span class="n">hist</span> <span class="o">.-</span> <span class="n">r</span><span class="p">),</span> <span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">)</span>
+<span class="n">ks</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span>
+<span class="n">scatter!</span><span class="p">(</span><span class="n">ks</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="mf">0.5</span> <span class="o">.^</span> <span class="n">ks</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-01-21-rootfinding_39_0.svg" src="../_images/2022-01-21-rootfinding_39_0.svg" /></div>
+</div>
+<p>Evidently the error <span class="math notranslate nohighlight">\(e_k = x_k - x_*\)</span> after <span class="math notranslate nohighlight">\(k\)</span> bisections satisfies the bound
+<div class="math notranslate nohighlight">
+\[ |e^k| \le c 2^{-k} . \]</div>
+</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="next-time">
+<h1>Next time<a class="headerlink" href="#next-time" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Discuss rootfinding examples</p></li>
+<li><p>Limitations of bisection</p></li>
+<li><p>Convergence classes</p></li>
+<li><p>Newton methods</p>
+<ul>
+<li><p>convergence theory</p></li>
+<li><p>derivation via convergence theory</p></li>
+<li><p>reliability</p></li>
+</ul>
+</li>
+</ul>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cu-numcomp/spring22",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.7"
+        },
+        kernelOptions: {
+            kernelName: "julia-1.7",
+            path: "./slides"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.7'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="2022-01-19-conditioning.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">2022-01-19 Conditioning</p>
+        </div>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Jed Brown<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
