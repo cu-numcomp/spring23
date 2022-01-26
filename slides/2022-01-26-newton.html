@@ -1,0 +1,1187 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2022-01-26 Newton methods &#8212; Numerical Computation</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="2022-01-24 Convergence classes" href="2022-01-24-convergence-classes.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/cu-numcomp.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Numerical Computation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../slides.html">
+   Slides
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-10-first-day.html">
+     2022-01-10 First Day
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-12-functions.html">
+     2022-01-12 Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-14-function-errors.html">
+     2022-01-14 Function errors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-19-conditioning.html">
+     2022-01-19 Conditioning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-21-rootfinding.html">
+     2022-01-21 Rootfinding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-24-convergence-classes.html">
+     2022-01-24 Convergence classes
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     2022-01-26 Newton methods
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/slides/2022-01-26-newton.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cu-numcomp/spring22"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cu-numcomp/spring22/issues/new?title=Issue%20on%20page%20%2Fslides/2022-01-26-newton.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cu-numcomp/spring22/main?urlpath=tree/slides/2022-01-26-newton.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2022-01-26 Newton methods
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#last-time">
+     Last time
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#today">
+     Today
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convergence-classes">
+   Convergence classes
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#newton-raphson-method">
+   Newton-Raphson Method
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-implementation">
+   An implementation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#that-s-really-fast">
+   That’s really fast!
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convergence-of-fixed-point-by-mean-value-theorem">
+   Convergence of fixed-point (by mean value theorem)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convergence-of-fixed-point-by-taylor-series">
+   Convergence of fixed-point (by Taylor series)
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#poll-is-this-convergence-a-q-linear-b-r-linear-c-neither">
+     Poll: Is this convergence A=q-linear, B=r-linear, C=neither?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aside-big-o-big-oh-notation">
+   Aside: Big
+   <span class="math notranslate nohighlight">
+    \(O\)
+   </span>
+   (“big oh”) notation
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#limit-n-to-infty">
+     Limit
+     <span class="math notranslate nohighlight">
+      \(n\to\infty\)
+     </span>
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#limit-h-to-0">
+     Limit
+     <span class="math notranslate nohighlight">
+      \(h \to 0\)
+     </span>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-of-a-fixed-point-iteration">
+   Example of a fixed point iteration
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#verifying-fixed-point-convergence-theory">
+   Verifying fixed point convergence theory
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plotting-newton-convergence">
+   Plotting Newton convergence
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Poll: Is this convergence A=q-linear, B=r-linear, C=neither?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#formulations-are-not-unique-constants">
+   Formulations are not unique (constants)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#formulations-are-not-unique-functions">
+   Formulations are not unique (functions)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-fresh-derivation-of-newton-s-method">
+   A fresh derivation of Newton’s method
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quadratic-convergence">
+   Quadratic convergence!
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#culture-fast-inverse-square-root">
+   Culture: fast inverse square root
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-does-it-work">
+   How does it work?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rootfinding-outlook">
+   Rootfinding outlook
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>2022-01-26 Newton methods</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2022-01-26 Newton methods
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#last-time">
+     Last time
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#today">
+     Today
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convergence-classes">
+   Convergence classes
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#newton-raphson-method">
+   Newton-Raphson Method
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-implementation">
+   An implementation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#that-s-really-fast">
+   That’s really fast!
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convergence-of-fixed-point-by-mean-value-theorem">
+   Convergence of fixed-point (by mean value theorem)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convergence-of-fixed-point-by-taylor-series">
+   Convergence of fixed-point (by Taylor series)
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#poll-is-this-convergence-a-q-linear-b-r-linear-c-neither">
+     Poll: Is this convergence A=q-linear, B=r-linear, C=neither?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aside-big-o-big-oh-notation">
+   Aside: Big
+   <span class="math notranslate nohighlight">
+    \(O\)
+   </span>
+   (“big oh”) notation
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#limit-n-to-infty">
+     Limit
+     <span class="math notranslate nohighlight">
+      \(n\to\infty\)
+     </span>
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#limit-h-to-0">
+     Limit
+     <span class="math notranslate nohighlight">
+      \(h \to 0\)
+     </span>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-of-a-fixed-point-iteration">
+   Example of a fixed point iteration
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#verifying-fixed-point-convergence-theory">
+   Verifying fixed point convergence theory
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plotting-newton-convergence">
+   Plotting Newton convergence
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Poll: Is this convergence A=q-linear, B=r-linear, C=neither?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#formulations-are-not-unique-constants">
+   Formulations are not unique (constants)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#formulations-are-not-unique-functions">
+   Formulations are not unique (functions)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-fresh-derivation-of-newton-s-method">
+   A fresh derivation of Newton’s method
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quadratic-convergence">
+   Quadratic convergence!
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#culture-fast-inverse-square-root">
+   Culture: fast inverse square root
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-does-it-work">
+   How does it work?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rootfinding-outlook">
+   Rootfinding outlook
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="newton-methods">
+<h1>2022-01-26 Newton methods<a class="headerlink" href="#newton-methods" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Office hours: Monday 9-10pm, Tuesday 2-3pm, Thursday 2-3pm</p></li>
+<li><p>This week will stay virtual. Plan is to start in-person the following Monday (Jan 31)</p></li>
+</ul>
+<div class="section" id="last-time">
+<h2>Last time<a class="headerlink" href="#last-time" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Discuss rootfinding as a modeling tool</p></li>
+<li><p>Limitations of bisection</p></li>
+<li><p>Convergence classes</p></li>
+<li><p>Intro to Newton methods</p></li>
+</ul>
+</div>
+<div class="section" id="today">
+<h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Newton’s method via Taylor series</p></li>
+<li><p>Convergence theory for fixed point methods</p></li>
+<li><p>Derive Newton’s method via convergence theory</p></li>
+<li><p>Breaking Newton’s method</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Plots</span>
+<span class="n">default</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">legendfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span>
+<span class="n">hasroot</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span>
+<span class="k">function</span> <span class="n">bisect_iter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="p">)</span>
+    <span class="n">hist</span> <span class="o">=</span> <span class="kt">Float64</span><span class="p">[]</span>
+    <span class="k">while</span> <span class="n">abs</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">tol</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">push!</span><span class="p">(</span><span class="n">hist</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">hasroot</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
+            <span class="n">b</span> <span class="o">=</span> <span class="n">mid</span>
+        <span class="k">else</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="n">mid</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="n">hist</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bisect_iter (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="convergence-classes">
+<h1>Convergence classes<a class="headerlink" href="#convergence-classes" title="Permalink to this headline">¶</a></h1>
+<p>A convergent rootfinding algorithm produces a sequence of approximations <span class="math notranslate nohighlight">\(x_k\)</span> such that <div class="math notranslate nohighlight">
+\[\lim_{k \to \infty} x_k \to x_*\]</div>
+ where <span class="math notranslate nohighlight">\(f(x_*) = 0\)</span>.  For analysis, it is convenient to define the errors <span class="math notranslate nohighlight">\(e_k = x_k - x_*\)</span>. We say that an iterative algorithm is <strong><span class="math notranslate nohighlight">\(q\)</span>-linearly convergent</strong> if <div class="math notranslate nohighlight">
+\[\lim_{k \to \infty} |e_{k+1}| / |e_k| = \rho &lt; 1.\]</div>
+  (The <span class="math notranslate nohighlight">\(q\)</span> is for “quotient”.)  A smaller convergence factor <span class="math notranslate nohighlight">\(\rho\)</span> represents faster convergence.  A slightly weaker condition (<span class="math notranslate nohighlight">\(r\)</span>-linear convergence or just <strong>linear convergence</strong>) is that
+<div class="math notranslate nohighlight">
+\[ |e_k| \le \epsilon_k \]</div>
+
+for all sufficiently large <span class="math notranslate nohighlight">\(k\)</span> when the sequence <span class="math notranslate nohighlight">\(\{\epsilon_k\}\)</span> converges <span class="math notranslate nohighlight">\(q\)</span>-linearly to 0.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span> <span class="o">=</span> <span class="n">bisect_iter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">hist</span><span class="p">[</span><span class="k">end</span><span class="p">]</span> <span class="c"># What are we trusting?</span>
+<span class="n">hist</span> <span class="o">=</span> <span class="n">hist</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">scatter</span><span class="p">(</span> <span class="n">abs</span><span class="o">.</span><span class="p">(</span><span class="n">hist</span> <span class="o">.-</span> <span class="n">r</span><span class="p">),</span> <span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">)</span>
+<span class="n">ks</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span>
+<span class="n">ρ</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">ks</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="n">ρ</span> <span class="o">.^</span> <span class="n">ks</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-01-26-newton_4_0.svg" src="../_images/2022-01-26-newton_4_0.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="newton-raphson-method">
+<h1>Newton-Raphson Method<a class="headerlink" href="#newton-raphson-method" title="Permalink to this headline">¶</a></h1>
+<p>Much of numerical analysis reduces to <a class="reference external" href="https://en.wikipedia.org/wiki/Taylor_series">Taylor series</a>, the approximation
+<div class="math notranslate nohighlight">
+\[ f(x) = f(x_0) + f'(x_0) (x-x_0) + f''(x_0) (x - x_0)^2 / 2 + \underbrace{\dotsb}_{O((x-x_0)^3)} \]</div>
+
+centered on some reference point <span class="math notranslate nohighlight">\(x_0\)</span>.</p>
+<p>In numerical computation, it is exceedingly rare to look beyond the first-order approximation
+<div class="math notranslate nohighlight">
+\[ \tilde f_{x_0}(x) = f(x_0) + f'(x_0)(x - x_0) . \]</div>
+
+Since <span class="math notranslate nohighlight">\(\tilde f_{x_0}(x)\)</span> is a linear function, we can explicitly compute the unique solution of <span class="math notranslate nohighlight">\(\tilde f_{x_0}(x) = 0\)</span> as
+<div class="math notranslate nohighlight">
+\[ x = x_0 - \frac{f(x_0)}{f'(x_0)} . \]</div>
+
+This is Newton’s Method (aka Newton-Raphson or Newton-Raphson-Simpson) for finding the roots of differentiable functions.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="an-implementation">
+<h1>An implementation<a class="headerlink" href="#an-implementation" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">x0</span><span class="p">;</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">100</span> <span class="c"># max number of iterations</span>
+        <span class="n">fx</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">fpx</span> <span class="o">=</span> <span class="n">fp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">verbose</span>
+            <span class="n">println</span><span class="p">(</span><span class="s">&quot;[</span><span class="si">$k</span><span class="s">] x=</span><span class="si">$x</span><span class="s">  f(x)=</span><span class="si">$fx</span><span class="s">  f&#39;(x)=</span><span class="si">$fpx</span><span class="s">&quot;</span><span class="p">)</span>
+        <span class="k">end</span>
+        <span class="k">if</span> <span class="n">abs</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span>
+            <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="p">,</span> <span class="n">k</span>
+        <span class="k">end</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">fx</span> <span class="o">/</span> <span class="n">fpx</span>
+    <span class="k">end</span>  
+<span class="k">end</span>
+
+<span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span>
+<span class="n">fp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="mi">1</span><span class="p">;</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-15</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="nb">true</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] x=1  f(x)=-0.45969769413186023  f&#39;(x)=-1.8414709848078965
+[2] x=0.7503638678402439  f(x)=-0.018923073822117442  f&#39;(x)=-1.6819049529414878
+[3] x=0.7391128909113617  f(x)=-4.6455898990771516e-5  f&#39;(x)=-1.6736325442243012
+[4] x=0.739085133385284  f(x)=-2.847205804457076e-10  f&#39;(x)=-1.6736120293089505
+[5] x=0.7390851332151607  f(x)=0.0  f&#39;(x)=-1.6736120291832148
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.7390851332151607, 0.0, 5)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="that-s-really-fast">
+<h1>That’s really fast!<a class="headerlink" href="#that-s-really-fast" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>10 digits of accuracy in 4 iterations.</p></li>
+<li><p>How is this convergence test different from the one we used for bisection?</p></li>
+<li><p>How can this break down?</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ x_{k+1} = x_k - \frac{f(x_k)}{f'(x_k)} \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="nb">pi</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mf">0.1</span><span class="p">;</span> <span class="n">verbose</span><span class="o">=</span><span class="nb">true</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] x=4.812388980384689  f(x)=-4.712555563737862  f&#39;(x)=-0.0049958347219741794
+[2] x=-938.4845425633443  f(x)=937.8258080987292  f&#39;(x)=-0.24762449194016167
+[3] x=2848.805643277216  f(x)=-2849.6201641342545  f&#39;(x)=-1.5801342719142093
+[4] x=1045.4018346362186  f(x)=-1046.134532203049  f&#39;(x)=-1.6805543883928888
+[5] x=422.90812694761144  f(x)=-423.2640625450803  f&#39;(x)=-1.9345104870756957
+[6] x=204.11165860439363  f(x)=-205.10744208477567  f&#39;(x)=-1.091734727329395
+[7] x=16.238691893414142  f(x)=-17.1011303904656  f&#39;(x)=-0.4938381298402409
+[8] x=-18.390327935406894  f(x)=19.28672289996763  f&#39;(x)=-1.4432562097818384
+[9] x=-5.026988308492699  f(x)=5.3364237974778055  f&#39;(x)=-1.9509204373429716
+[10] x=-2.2916518512327237  f(x)=1.631624232475013  f&#39;(x)=-0.24875866562267357
+[11] x=4.267413049645629  f(x)=-4.69784920465022  f&#39;(x)=-0.09737897406227891
+[12] x=-43.97553929082267  f(x)=44.9755164565775  f&#39;(x)=-1.0067578079974873
+[13] x=0.6980814144758583  f(x)=0.06799535109918953  f&#39;(x)=-1.6427490873164063
+[14] x=0.7394726114786012  f(x)=-0.000648543759110165  f&#39;(x)=-1.6738983580321478
+[15] x=0.7390851663532756  f(x)=-5.54603482028071e-8  f&#39;(x)=-1.6736120536751025
+[16] x=0.7390851332151609  f(x)=-4.440892098500626e-16  f&#39;(x)=-1.673612029183215
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.7390851332151609, -4.440892098500626e-16, 16)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="convergence-of-fixed-point-by-mean-value-theorem">
+<h1>Convergence of fixed-point (by mean value theorem)<a class="headerlink" href="#convergence-of-fixed-point-by-mean-value-theorem" title="Permalink to this headline">¶</a></h1>
+<p>Consider the iteration
+<div class="math notranslate nohighlight">
+\[x_{k+1} = g(x_k)\]</div>
+
+where <span class="math notranslate nohighlight">\(g\)</span> is a continuously differentiable function.
+Suppose that there exists a fixed point <span class="math notranslate nohighlight">\(x_* = g(x_*)\)</span>.  By the <a class="reference external" href="https://en.wikipedia.org/wiki/Mean_value_theorem">mean value theorem</a>, we have that
+<div class="math notranslate nohighlight">
+\[ x_{k+1} - x_* = g(x_k) - g(x_*) = g'(c_k) (x_k - x_*) \]</div>
+
+for some <span class="math notranslate nohighlight">\(c_i\)</span> between <span class="math notranslate nohighlight">\(x_k\)</span> and <span class="math notranslate nohighlight">\(x_*\)</span>.</p>
+<p>Taking absolute values, <div class="math notranslate nohighlight">
+\[|e_{k+1}| = |g'(c_k)| |e_k|,\]</div>
+ which converges to zero if <span class="math notranslate nohighlight">\(|g'(c_k)| &lt; 1\)</span>.</p>
+<p><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/e/ee/Mvt2.svg" /></p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="convergence-of-fixed-point-by-taylor-series">
+<h1>Convergence of fixed-point (by Taylor series)<a class="headerlink" href="#convergence-of-fixed-point-by-taylor-series" title="Permalink to this headline">¶</a></h1>
+<p>Consider the iteration
+<div class="math notranslate nohighlight">
+\[x_{k+1} = g(x_k)\]</div>
+
+where <span class="math notranslate nohighlight">\(g\)</span> is a continuously differentiable function.
+Suppose that there exists a fixed point <span class="math notranslate nohighlight">\(x_* = g(x_*)\)</span>. There exists a Taylor series at <span class="math notranslate nohighlight">\(x_*\)</span>,
+<div class="math notranslate nohighlight">
+\[ g(x_k) = g(x_*) + g'(x_*)(x_k - x_*) + O((x_k-x_*)^2) \]</div>
+
+and thus</p>
+<div class="amsmath math notranslate nohighlight" id="equation-46dd262c-3e9e-4c75-8bb4-18e36aba3ee6">
+<span class="eqno">(1)<a class="headerlink" href="#equation-46dd262c-3e9e-4c75-8bb4-18e36aba3ee6" title="Permalink to this equation">¶</a></span>\[\begin{align}
+x_{k+1} - x_* &amp;= g(x_k) - g(x_*) \\
+&amp;= g'(x_*) (x_k - x_*) + O((x_k - x_*)^2).
+\end{align}\]</div>
+<p>In terms of the error <span class="math notranslate nohighlight">\(e_k = x_k - x_*\)</span>,
+<div class="math notranslate nohighlight">
+\[ \left\lvert \frac{e_{k+1}}{e_k} \right\rvert = \lvert g'(x_*) \rvert + O(e_k).\]</div>
+</p>
+<div class="section" id="poll-is-this-convergence-a-q-linear-b-r-linear-c-neither">
+<h2>Poll: Is this convergence A=q-linear, B=r-linear, C=neither?<a class="headerlink" href="#poll-is-this-convergence-a-q-linear-b-r-linear-c-neither" title="Permalink to this headline">¶</a></h2>
+<p>Recall the definition of q-linear convergence
+<div class="math notranslate nohighlight">
+\[ \lim_{k\to\infty} \left\lvert \frac{e_{k+1}}{e_k} \right\rvert = \rho &lt; 1. \]</div>
+</p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="aside-big-o-big-oh-notation">
+<h1>Aside: <a class="reference external" href="https://en.wikipedia.org/wiki/Big_O_notation">Big <span class="math notranslate nohighlight">\(O\)</span> (“big oh”) notation</a><a class="headerlink" href="#aside-big-o-big-oh-notation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="limit-n-to-infty">
+<h2>Limit <span class="math notranslate nohighlight">\(n\to\infty\)</span><a class="headerlink" href="#limit-n-to-infty" title="Permalink to this headline">¶</a></h2>
+<p>We’d say an algorithm costs <span class="math notranslate nohighlight">\(O(n^2)\)</span> if its running time on input of size <span class="math notranslate nohighlight">\(n\)</span> is less than <span class="math notranslate nohighlight">\(c n^2\)</span> for some constant <span class="math notranslate nohighlight">\(c\)</span> and sufficiently large <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>Sometimes we write <span class="math notranslate nohighlight">\(\operatorname{cost}(\texttt{algorithm}, n) = O(n^2)\)</span> or (preferably) <span class="math notranslate nohighlight">\(\operatorname{cost}(\texttt{algorithm}) \in O(n^2)\)</span>.</p>
+<p>Note that <span class="math notranslate nohighlight">\(O(\log n) \subset O(n) \subset O(n\log n) \subset O(n^2) \subset \dotsb\)</span> so it’s correct to say “binary search is in <span class="math notranslate nohighlight">\(O(n^2)\)</span>”, even though a sharper statement is also true.</p>
+<p>We say the algorithm is in <span class="math notranslate nohighlight">\(\Theta(n^2)\)</span> (“big theta”) if
+<div class="math notranslate nohighlight">
+\[ c_1 n^2 &lt; \operatorname{cost}(\texttt{algorithm}) &lt; c_2 n^2 \]</div>
+
+for some positive constants <span class="math notranslate nohighlight">\(c_1,c_2\)</span> and sufficiently large <span class="math notranslate nohighlight">\(n\)</span>.</p>
+</div>
+<div class="section" id="limit-h-to-0">
+<h2>Limit <span class="math notranslate nohighlight">\(h \to 0\)</span><a class="headerlink" href="#limit-h-to-0" title="Permalink to this headline">¶</a></h2>
+<p>In numerical analysis, we often have a small real number, and now the definitions take the limit as the small number goes to zero. So we say a term in an expression is in <span class="math notranslate nohighlight">\(O(h^2)\)</span> if</p>
+<div class="math notranslate nohighlight">
+\[ \lim_{h\to 0} \frac{\operatorname{term}(h)}{h^2} &lt; \infty . \]</div>
+<p>Big <span class="math notranslate nohighlight">\(O\)</span> terms can be manipulated as</p>
+<div class="amsmath math notranslate nohighlight" id="equation-3177dfee-fc40-4b4d-95cb-679f9d6ed841">
+<span class="eqno">(2)<a class="headerlink" href="#equation-3177dfee-fc40-4b4d-95cb-679f9d6ed841" title="Permalink to this equation">¶</a></span>\[\begin{align}
+h O(h^k) &amp;= O(h^{k+1}) \\
+O(h^k)/h &amp;= O(h^{k-1}) \\
+c O(h^k) &amp;= O(h^k) \\
+O(h^k) - O(h^k) &amp;= ?
+\end{align}\]</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="example-of-a-fixed-point-iteration">
+<h1>Example of a fixed point iteration<a class="headerlink" href="#example-of-a-fixed-point-iteration" title="Permalink to this headline">¶</a></h1>
+<p>We wanted to solve <span class="math notranslate nohighlight">\(\cos x - x = 0\)</span>, which occurs when <span class="math notranslate nohighlight">\(g(x) = \cos x\)</span> is a fixed point.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">xstar</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
+<span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">gp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nd">@show</span> <span class="n">xstar</span>
+<span class="nd">@show</span> <span class="n">gp</span><span class="p">(</span><span class="n">xstar</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">x</span><span class="p">,</span> <span class="n">g</span><span class="p">],</span> <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">scatter!</span><span class="p">([</span><span class="n">xstar</span><span class="p">],</span> <span class="p">[</span><span class="n">xstar</span><span class="p">],</span>
+    <span class="n">label</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\$</span><span class="s">x_*</span><span class="se">\$</span><span class="s">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>xstar = 0.739085133385284
+gp(xstar) = -0.6736120293089505
+</pre></div>
+</div>
+<img alt="../_images/2022-01-26-newton_22_1.svg" src="../_images/2022-01-26-newton_22_1.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">fixed_point</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">append!</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">end</span>
+    <span class="n">xs</span>
+<span class="k">end</span>
+
+<span class="n">xs</span> <span class="o">=</span> <span class="n">fixed_point</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="n">seriestype</span><span class="o">=</span><span class="ss">:path</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="ss">:auto</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-01-26-newton_23_0.svg" src="../_images/2022-01-26-newton_23_0.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="verifying-fixed-point-convergence-theory">
+<h1>Verifying fixed point convergence theory<a class="headerlink" href="#verifying-fixed-point-convergence-theory" title="Permalink to this headline">¶</a></h1>
+<div class="math notranslate nohighlight">
+\[ \left\lvert \frac{e_{k+1}}{e_k} \right\rvert \to \lvert g'(x_*) \rvert \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span> <span class="n">gp</span><span class="p">(</span><span class="n">xstar</span><span class="p">)</span>
+<span class="n">es</span> <span class="o">=</span> <span class="n">xs</span> <span class="o">.-</span> <span class="n">xstar</span>
+<span class="n">es</span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="k">end</span><span class="p">]</span> <span class="o">./</span> <span class="n">es</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>gp(xstar) = -0.6736120293089505
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15-element Vector{Float64}:
+ -0.9161855415615605
+ -0.15197657010596488
+ -0.734870205299266
+ -0.624132525531327
+ -0.7026257933893496
+ -0.6523498121376077
+ -0.6870971782336925
+ -0.664168570025122
+ -0.6798044680427148
+ -0.6693659427636027
+ -0.6764378047956165
+ -0.6716930541785153
+ -0.6748976495459512
+ -0.6727427617641084
+ -0.6741962236114177
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">scatter</span><span class="p">(</span><span class="n">abs</span><span class="o">.</span><span class="p">(</span><span class="n">es</span><span class="p">),</span> <span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&quot;fixed point&quot;</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">k</span> <span class="o">-&gt;</span> <span class="n">abs</span><span class="p">(</span><span class="n">gp</span><span class="p">(</span><span class="n">xstar</span><span class="p">))</span><span class="o">^</span><span class="n">k</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\$</span><span class="s">|g&#39;|^k</span><span class="se">\$</span><span class="s">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-01-26-newton_26_0.svg" src="../_images/2022-01-26-newton_26_0.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="plotting-newton-convergence">
+<h1>Plotting Newton convergence<a class="headerlink" href="#plotting-newton-convergence" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">newton_hist</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">x0</span><span class="p">;</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>
+    <span class="n">hist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">100</span> <span class="c"># max number of iterations</span>
+        <span class="n">fx</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">fpx</span> <span class="o">=</span> <span class="n">fp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">push!</span><span class="p">(</span><span class="n">hist</span><span class="p">,</span> <span class="p">[</span><span class="n">x</span> <span class="n">fx</span> <span class="n">fpx</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">abs</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span>
+            <span class="k">return</span> <span class="n">vcat</span><span class="p">(</span><span class="n">hist</span><span class="o">...</span><span class="p">)</span>
+        <span class="k">end</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">fx</span> <span class="o">/</span> <span class="n">fpx</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>newton_hist (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">xs</span> <span class="o">=</span> <span class="n">newton_hist</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="mf">1.97</span><span class="p">)</span>
+<span class="nd">@show</span> <span class="n">x_star</span> <span class="o">=</span> <span class="n">xs</span><span class="p">[</span><span class="k">end</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">.-</span> <span class="n">x_star</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="ss">:auto</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x_star = xs[end, 1] = 0.7390851332151607
+</pre></div>
+</div>
+<img alt="../_images/2022-01-26-newton_29_1.svg" src="../_images/2022-01-26-newton_29_1.svg" /></div>
+</div>
+<div class="section" id="id1">
+<h2>Poll: Is this convergence A=q-linear, B=r-linear, C=neither?<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="formulations-are-not-unique-constants">
+<h1>Formulations are not unique (constants)<a class="headerlink" href="#formulations-are-not-unique-constants" title="Permalink to this headline">¶</a></h1>
+<p>If <span class="math notranslate nohighlight">\(x = g(x)\)</span> then
+<div class="math notranslate nohighlight">
+\[x = \underbrace{x + c(g(x) - x)}_{g_2}\]</div>
+
+for any constant <span class="math notranslate nohighlight">\(c \ne 0\)</span>. Can we choose <span class="math notranslate nohighlight">\(c\)</span> to make <span class="math notranslate nohighlight">\(\lvert g_2'(x_*) \rvert\)</span> small?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="mf">.5</span>
+<span class="n">g2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">g2p</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="nd">@show</span> <span class="n">g2p</span><span class="p">(</span><span class="n">xstar</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">x</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">g2</span><span class="p">],</span> <span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;x&quot;</span> <span class="s">&quot;g&quot;</span> <span class="s">&quot;g2&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g2p(xstar) = 0.16319398534552476
+</pre></div>
+</div>
+<img alt="../_images/2022-01-26-newton_32_1.svg" src="../_images/2022-01-26-newton_32_1.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">xs</span> <span class="o">=</span> <span class="n">fixed_point</span><span class="p">(</span><span class="n">g2</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="n">xs</span> <span class="o">.-</span> <span class="n">xstar</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16-element Vector{Float64}:
+  0.26091486661471597
+  0.03106601954878585
+  0.004893162344945079
+  0.0007941171212053622
+  0.00012947850276123773
+  2.112687301181193e-5
+  3.4475537732392425e-6
+  5.62475483634195e-7
+  9.16501970982253e-8
+  1.4814399151852342e-8
+  2.2752605355336186e-9
+  2.2894852680366284e-10
+ -1.0499723313017739e-10
+ -1.594951948291623e-10
+ -1.683889694348295e-10
+ -1.6984036399492197e-10
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="formulations-are-not-unique-functions">
+<h1>Formulations are not unique (functions)<a class="headerlink" href="#formulations-are-not-unique-functions" title="Permalink to this headline">¶</a></h1>
+<p>If <span class="math notranslate nohighlight">\(x = g(x)\)</span> then
+<div class="math notranslate nohighlight">
+\[x = \underbrace{x + h(x) \big(g(x) - x\big)}_{g_3(x)}\]</div>
+
+for any smooth <span class="math notranslate nohighlight">\(h(x) \ne 0\)</span>. Can we choose <span class="math notranslate nohighlight">\(h(x)\)</span> to make <span class="math notranslate nohighlight">\(\lvert g_3'(x) \rvert\)</span> small?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">h</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">gp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">g3</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">h</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="o">-&gt;</span> <span class="n">x</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">g2</span><span class="p">,</span> <span class="n">g3</span><span class="p">],</span> <span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-01-26-newton_35_0.svg" src="../_images/2022-01-26-newton_35_0.svg" /></div>
+</div>
+<ul class="simple">
+<li><p>We don’t know <span class="math notranslate nohighlight">\(g'(x_*)\)</span> in advance because we don’t know <span class="math notranslate nohighlight">\(x_*\)</span> yet.</p></li>
+<li><p>This method converges very fast</p></li>
+<li><p>We actually just derived Newton’s method.</p></li>
+</ul>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="a-fresh-derivation-of-newton-s-method">
+<h1>A fresh derivation of Newton’s method<a class="headerlink" href="#a-fresh-derivation-of-newton-s-method" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>A rootfinding problem <span class="math notranslate nohighlight">\(f(x) = 0\)</span> can be converted to a fixed point problem <div class="math notranslate nohighlight">
+\[x = x + f(x) =: g(x)\]</div>
+ but there is no guarantee that <span class="math notranslate nohighlight">\(g'(x_*) = 1 + f'(x_*)\)</span> will have magnitude less than 1.</p></li>
+<li><p>Problem-specific algebraic manipulation can be used to make <span class="math notranslate nohighlight">\(|g'(x_*)|\)</span> small.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x = x + h(x) f(x)\)</span> is also a valid formulation for any <span class="math notranslate nohighlight">\(h(x)\)</span> bounded away from <span class="math notranslate nohighlight">\(0\)</span>.</p></li>
+<li><p>Can we choose <span class="math notranslate nohighlight">\(h(x)\)</span> such that <div class="math notranslate nohighlight">
+\[ g'(x) = 1 + h'(x) f(x) + h(x) f'(x) = 0\]</div>
+ when <span class="math notranslate nohighlight">\(f(x) = 0\)</span>?</p></li>
+</ul>
+<p>In other words,
+<div class="math notranslate nohighlight">
+\[ x_{k+1} = x_k + \underbrace{\frac{-1}{f'(x_k)}}_{h(x_k)} f(x_k)  . \]</div>
+</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="quadratic-convergence">
+<h1>Quadratic convergence!<a class="headerlink" href="#quadratic-convergence" title="Permalink to this headline">¶</a></h1>
+<div class="math notranslate nohighlight">
+\[ \left\lvert \frac{e_{k+1}}{e_k} \right\rvert \to \lvert g'(x_*) \rvert \]</div>
+<ul class="simple">
+<li><p>What does it mean that <span class="math notranslate nohighlight">\(g'(x_*) = 0\)</span>?</p></li>
+<li><p>It turns out that Newton’s method has <em>locally quadratic</em> convergence to simple roots,
+<div class="math notranslate nohighlight">
+\[\lim_{k \to \infty} \frac{|e_{k+1}|}{|e_k|^2} &lt; \infty.\]</div>
+</p></li>
+<li><p>“The number of correct digits doubles each iteration.”</p></li>
+<li><p>Now that we know how to make a good guess accurate, the effort lies in getting a good guess.</p></li>
+</ul>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="culture-fast-inverse-square-root">
+<h1>Culture: fast inverse square root<a class="headerlink" href="#culture-fast-inverse-square-root" title="Permalink to this headline">¶</a></h1>
+<p>The following code appeared literally (including comments) in the Quake III Arena source code (late 1990s).</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span><span class="w"> </span><span class="nf">Q_rsqrt</span><span class="p">(</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="p">)</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">	</span><span class="kt">long</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="kt">float</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">threehalfs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5F</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">	</span><span class="n">x2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">0.5F</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="n">y</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">number</span><span class="p">;</span><span class="w"></span>
+<span class="w">	</span><span class="n">i</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="n">y</span><span class="p">;</span><span class="w">                       </span><span class="c1">// evil floating point bit level hacking</span>
+<span class="w">	</span><span class="n">i</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mh">0x5f3759df</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">);</span><span class="w">               </span><span class="c1">// what the fuck? </span>
+<span class="w">	</span><span class="n">y</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="n">i</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="n">y</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">threehalfs</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">);</span><span class="w">   </span><span class="c1">// 1st iteration</span>
+<span class="c1">//  y  = y * ( threehalfs - ( x2 * y * y ) );   // 2nd iteration, this can be removed</span>
+
+<span class="w">	</span><span class="k">return</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+<p>We now have <a class="reference external" href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/#text=rsqrt&amp;expand=2989,1224,4470">vector instructions</a> for approximate inverse square root.
+More at <a class="reference external" href="https://en.wikipedia.org/wiki/Fast_inverse_square_root">https://en.wikipedia.org/wiki/Fast_inverse_square_root</a></p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="how-does-it-work">
+<h1>How does it work?<a class="headerlink" href="#how-does-it-work" title="Permalink to this headline">¶</a></h1>
+<p>Let’s look at the last line</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">threehalfs</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">x2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">);</span><span class="w">   </span><span class="c1">// 1st iteration</span>
+</pre></div>
+</div>
+<p>We want a function <span class="math notranslate nohighlight">\(f(y)\)</span> such that <span class="math notranslate nohighlight">\(f(1/\sqrt{x}) = 0\)</span>. One such function is
+<div class="math notranslate nohighlight">
+\[ f(y) = 1/y^2 - x, \quad f'(y) = -2/y^3.\]</div>
+</p>
+<p>There are others, e.g.,
+<div class="math notranslate nohighlight">
+\[f_1(y) = y^2 - 1/x,\quad f'(y) = 2 y,\]</div>
+
+but this would require a division.</p>
+<p>Newton’s method is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-a3723ede-eed1-4b11-a70e-e79e8bb9fa04">
+<span class="eqno">(3)<a class="headerlink" href="#equation-a3723ede-eed1-4b11-a70e-e79e8bb9fa04" title="Permalink to this equation">¶</a></span>\[\begin{align}
+y_{k+1} &amp;= y_k - \frac{f(y_k)}{f'(y_k)} \\
+&amp;= y_k - \frac{1/y_k^2 - x}{-2/y_k^3} \\
+&amp;= y_k + \frac 1 2 (y_k - x y_k^3) \\
+&amp;= y_k \left(\frac 3 2 - \frac 1 2 x y_k^2\right)
+\end{align}\]</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="rootfinding-outlook">
+<h1>Rootfinding outlook<a class="headerlink" href="#rootfinding-outlook" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Newton methods are immensely successful</p>
+<ul>
+<li><p>Convergence theory is local; we need good initial guesses (activity)</p></li>
+<li><p>Computing the derivative <span class="math notranslate nohighlight">\(f'(x)\)</span> is <em>intrusive</em></p>
+<ul>
+<li><p>Avoided by secant methods (approximate the derivative; activity)</p></li>
+<li><p>Algorithmic or numerical differentiation (future topics)</p></li>
+</ul>
+</li>
+<li><p>Bisection is robust when conditions are met</p></li>
+<li><p>Line search (activity)</p></li>
+<li><p>When does Newton diverge?</p></li>
+</ul>
+</li>
+<li><p>More topics</p>
+<ul>
+<li><p>Find <em>all</em> the roots</p></li>
+<li><p>Use Newton-type methods with bounds</p></li>
+<li><p>Times when Newton converges slowly</p></li>
+</ul>
+</li>
+</ul>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cu-numcomp/spring22",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.7"
+        },
+        kernelOptions: {
+            kernelName: "julia-1.7",
+            path: "./slides"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.7'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="2022-01-24-convergence-classes.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">2022-01-24 Convergence classes</p>
+        </div>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Jed Brown<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
