@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2022-01-26 Newton methods &#8212; Numerical Computation</title>
+    <title>2022-01-28 More Newton &#8212; Numerical Computation</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -54,8 +54,7 @@
     <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2022-01-28 More Newton" href="2022-01-28-more-newton.html" />
-    <link rel="prev" title="2022-01-24 Convergence classes" href="2022-01-24-convergence-classes.html" />
+    <link rel="prev" title="2022-01-26 Newton methods" href="2022-01-26-newton.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -145,13 +144,13 @@
      2022-01-24 Convergence classes
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-26-newton.html">
      2022-01-26 Newton methods
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="2022-01-28-more-newton.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      2022-01-28 More Newton
     </a>
    </li>
@@ -198,7 +197,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/slides/2022-01-26-newton.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/slides/2022-01-28-more-newton.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -218,7 +217,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cu-numcomp/spring22/issues/new?title=Issue%20on%20page%20%2Fslides/2022-01-26-newton.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cu-numcomp/spring22/issues/new?title=Issue%20on%20page%20%2Fslides/2022-01-28-more-newton.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -239,7 +238,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/cu-numcomp/spring22/main?urlpath=tree/slides/2022-01-26-newton.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cu-numcomp/spring22/main?urlpath=tree/slides/2022-01-28-more-newton.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -266,7 +265,7 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   2022-01-26 Newton methods
+   2022-01-28 More Newton
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -282,68 +281,14 @@
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#convergence-classes">
-   Convergence classes
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#newton-raphson-method">
-   Newton-Raphson Method
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#an-implementation">
-   An implementation
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#that-s-really-fast">
-   That’s really fast!
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#convergence-of-fixed-point-by-mean-value-theorem">
-   Convergence of fixed-point (by mean value theorem)
+  <a class="reference internal nav-link" href="#newton-raphson-method-by-taylor-series">
+   Newton-Raphson Method (by Taylor Series)
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#convergence-of-fixed-point-by-taylor-series">
-   Convergence of fixed-point (by Taylor series)
+   Convergence of fixed-point (by Taylor Series)
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#poll-is-this-convergence-a-q-linear-b-r-linear-c-neither">
-     Poll: Is this convergence A=q-linear, B=r-linear, C=neither?
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#aside-big-o-big-oh-notation">
-   Aside: Big
-   <span class="math notranslate nohighlight">
-    \(O\)
-   </span>
-   (“big oh”) notation
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#limit-n-to-infty">
-     Limit
-     <span class="math notranslate nohighlight">
-      \(n\to\infty\)
-     </span>
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#limit-h-to-0">
-     Limit
-     <span class="math notranslate nohighlight">
-      \(h \to 0\)
-     </span>
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#example-of-a-fixed-point-iteration">
@@ -361,7 +306,7 @@
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
+    <a class="reference internal nav-link" href="#poll-is-this-convergence-a-q-linear-b-r-linear-c-neither">
      Poll: Is this convergence A=q-linear, B=r-linear, C=neither?
     </a>
    </li>
@@ -400,6 +345,16 @@
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#rootfinding-outlook">
    Rootfinding outlook
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploratory-rootfinding">
+   Exploratory rootfinding
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#equation-of-state-example">
+   Equation of state example
   </a>
  </li>
 </ul>
@@ -412,7 +367,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>2022-01-26 Newton methods</h1>
+                <h1>2022-01-28 More Newton</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -424,7 +379,7 @@
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   2022-01-26 Newton methods
+   2022-01-28 More Newton
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -440,68 +395,14 @@
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#convergence-classes">
-   Convergence classes
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#newton-raphson-method">
-   Newton-Raphson Method
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#an-implementation">
-   An implementation
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#that-s-really-fast">
-   That’s really fast!
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#convergence-of-fixed-point-by-mean-value-theorem">
-   Convergence of fixed-point (by mean value theorem)
+  <a class="reference internal nav-link" href="#newton-raphson-method-by-taylor-series">
+   Newton-Raphson Method (by Taylor Series)
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#convergence-of-fixed-point-by-taylor-series">
-   Convergence of fixed-point (by Taylor series)
+   Convergence of fixed-point (by Taylor Series)
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#poll-is-this-convergence-a-q-linear-b-r-linear-c-neither">
-     Poll: Is this convergence A=q-linear, B=r-linear, C=neither?
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#aside-big-o-big-oh-notation">
-   Aside: Big
-   <span class="math notranslate nohighlight">
-    \(O\)
-   </span>
-   (“big oh”) notation
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#limit-n-to-infty">
-     Limit
-     <span class="math notranslate nohighlight">
-      \(n\to\infty\)
-     </span>
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#limit-h-to-0">
-     Limit
-     <span class="math notranslate nohighlight">
-      \(h \to 0\)
-     </span>
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#example-of-a-fixed-point-iteration">
@@ -519,7 +420,7 @@
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
+    <a class="reference internal nav-link" href="#poll-is-this-convergence-a-q-linear-b-r-linear-c-neither">
      Poll: Is this convergence A=q-linear, B=r-linear, C=neither?
     </a>
    </li>
@@ -560,6 +461,16 @@
    Rootfinding outlook
   </a>
  </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploratory-rootfinding">
+   Exploratory rootfinding
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#equation-of-state-example">
+   Equation of state example
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -569,27 +480,19 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="newton-methods">
-<h1>2022-01-26 Newton methods<a class="headerlink" href="#newton-methods" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p>Office hours: Monday 9-10pm, Tuesday 2-3pm, Thursday 2-3pm</p></li>
-<li><p>This week will stay virtual. Plan is to start in-person the following Monday (Jan 31)</p></li>
-</ul>
+  <div class="tex2jax_ignore mathjax_ignore section" id="more-newton">
+<h1>2022-01-28 More Newton<a class="headerlink" href="#more-newton" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="last-time">
 <h2>Last time<a class="headerlink" href="#last-time" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Discuss rootfinding as a modeling tool</p></li>
-<li><p>Limitations of bisection</p></li>
-<li><p>Convergence classes</p></li>
-<li><p>Intro to Newton methods</p></li>
+<li><p>Newton’s method via Taylor series</p></li>
+<li><p>Convergence theory for fixed point methods</p></li>
 </ul>
 </div>
 <div class="section" id="today">
 <h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Newton’s method via Taylor series</p></li>
-<li><p>Convergence theory for fixed point methods</p></li>
-<li><p>Derive Newton’s method via convergence theory</p></li>
+<li><p>Derive Newton’s method via fixed point convergence theory</p></li>
 <li><p>Newton methods in computing culture</p></li>
 <li><p>Breaking Newton’s method</p></li>
 </ul>
@@ -598,81 +501,7 @@
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Plots</span>
 <span class="n">default</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">legendfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 
-<span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span>
-<span class="n">hasroot</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">f</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span>
-<span class="k">function</span> <span class="n">bisect_iter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">tol</span><span class="p">)</span>
-    <span class="n">hist</span> <span class="o">=</span> <span class="kt">Float64</span><span class="p">[]</span>
-    <span class="k">while</span> <span class="n">abs</span><span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">tol</span>
-        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
-        <span class="n">push!</span><span class="p">(</span><span class="n">hist</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">hasroot</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">mid</span><span class="p">)</span>
-            <span class="n">b</span> <span class="o">=</span> <span class="n">mid</span>
-        <span class="k">else</span>
-            <span class="n">a</span> <span class="o">=</span> <span class="n">mid</span>
-        <span class="k">end</span>
-    <span class="k">end</span>
-    <span class="n">hist</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bisect_iter (generic function with 1 method)
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="convergence-classes">
-<h1>Convergence classes<a class="headerlink" href="#convergence-classes" title="Permalink to this headline">¶</a></h1>
-<p>A convergent rootfinding algorithm produces a sequence of approximations <span class="math notranslate nohighlight">\(x_k\)</span> such that <div class="math notranslate nohighlight">
-\[\lim_{k \to \infty} x_k \to x_*\]</div>
- where <span class="math notranslate nohighlight">\(f(x_*) = 0\)</span>.  For analysis, it is convenient to define the errors <span class="math notranslate nohighlight">\(e_k = x_k - x_*\)</span>. We say that an iterative algorithm is <strong><span class="math notranslate nohighlight">\(q\)</span>-linearly convergent</strong> if <div class="math notranslate nohighlight">
-\[\lim_{k \to \infty} |e_{k+1}| / |e_k| = \rho &lt; 1.\]</div>
-  (The <span class="math notranslate nohighlight">\(q\)</span> is for “quotient”.)  A smaller convergence factor <span class="math notranslate nohighlight">\(\rho\)</span> represents faster convergence.  A slightly weaker condition (<span class="math notranslate nohighlight">\(r\)</span>-linear convergence or just <strong>linear convergence</strong>) is that
-<div class="math notranslate nohighlight">
-\[ |e_k| \le \epsilon_k \]</div>
-
-for all sufficiently large <span class="math notranslate nohighlight">\(k\)</span> when the sequence <span class="math notranslate nohighlight">\(\{\epsilon_k\}\)</span> converges <span class="math notranslate nohighlight">\(q\)</span>-linearly to 0.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span> <span class="o">=</span> <span class="n">bisect_iter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">)</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">hist</span><span class="p">[</span><span class="k">end</span><span class="p">]</span> <span class="c"># What are we trusting?</span>
-<span class="n">hist</span> <span class="o">=</span> <span class="n">hist</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">scatter</span><span class="p">(</span> <span class="n">abs</span><span class="o">.</span><span class="p">(</span><span class="n">hist</span> <span class="o">.-</span> <span class="n">r</span><span class="p">),</span> <span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">)</span>
-<span class="n">ks</span> <span class="o">=</span> <span class="mi">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span>
-<span class="n">ρ</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="n">plot!</span><span class="p">(</span><span class="n">ks</span><span class="p">,</span> <span class="mi">4</span> <span class="o">*</span> <span class="p">(</span><span class="n">ρ</span> <span class="o">.^</span> <span class="n">ks</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/2022-01-26-newton_4_0.svg" src="../_images/2022-01-26-newton_4_0.svg" /></div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="newton-raphson-method">
-<h1>Newton-Raphson Method<a class="headerlink" href="#newton-raphson-method" title="Permalink to this headline">¶</a></h1>
-<p>Much of numerical analysis reduces to <a class="reference external" href="https://en.wikipedia.org/wiki/Taylor_series">Taylor series</a>, the approximation
-<div class="math notranslate nohighlight">
-\[ f(x) = f(x_0) + f'(x_0) (x-x_0) + f''(x_0) (x - x_0)^2 / 2 + \underbrace{\dotsb}_{O((x-x_0)^3)} \]</div>
-
-centered on some reference point <span class="math notranslate nohighlight">\(x_0\)</span>.</p>
-<p>In numerical computation, it is exceedingly rare to look beyond the first-order approximation
-<div class="math notranslate nohighlight">
-\[ \tilde f_{x_0}(x) = f(x_0) + f'(x_0)(x - x_0) . \]</div>
-
-Since <span class="math notranslate nohighlight">\(\tilde f_{x_0}(x)\)</span> is a linear function, we can explicitly compute the unique solution of <span class="math notranslate nohighlight">\(\tilde f_{x_0}(x) = 0\)</span> as
-<div class="math notranslate nohighlight">
-\[ x = x_0 - \frac{f(x_0)}{f'(x_0)} . \]</div>
-
-This is Newton’s Method (aka Newton-Raphson or Newton-Raphson-Simpson) for finding the roots of differentiable functions.</p>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="an-implementation">
-<h1>An implementation<a class="headerlink" href="#an-implementation" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">x0</span><span class="p">;</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>
+<span class="k">function</span> <span class="n">newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">x0</span><span class="p">;</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span>
     <span class="k">for</span> <span class="n">k</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">100</span> <span class="c"># max number of iterations</span>
         <span class="n">fx</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -689,91 +518,36 @@ This is Newton’s Method (aka Newton-Raphson or Newton-Raphson-Simpson) for fin
 
 <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span>
 <span class="n">fp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-<span class="n">newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="mi">1</span><span class="p">;</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-15</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="nb">true</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] x=1  f(x)=-0.45969769413186023  f&#39;(x)=-1.8414709848078965
-[2] x=0.7503638678402439  f(x)=-0.018923073822117442  f&#39;(x)=-1.6819049529414878
-[3] x=0.7391128909113617  f(x)=-4.6455898990771516e-5  f&#39;(x)=-1.6736325442243012
-[4] x=0.739085133385284  f(x)=-2.847205804457076e-10  f&#39;(x)=-1.6736120293089505
-[5] x=0.7390851332151607  f(x)=0.0  f&#39;(x)=-1.6736120291832148
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.7390851332151607, 0.0, 5)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fp (generic function with 1 method)
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="that-s-really-fast">
-<h1>That’s really fast!<a class="headerlink" href="#that-s-really-fast" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p>10 digits of accuracy in 4 iterations.</p></li>
-<li><p>How is this convergence test different from the one we used for bisection?</p></li>
-<li><p>How can this break down?</p></li>
-</ul>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="newton-raphson-method-by-taylor-series">
+<h1>Newton-Raphson Method (by Taylor Series)<a class="headerlink" href="#newton-raphson-method-by-taylor-series" title="Permalink to this headline">¶</a></h1>
+<p>Much of numerical analysis reduces to <a class="reference external" href="https://en.wikipedia.org/wiki/Taylor_series">Taylor series</a>, the approximation
 <div class="math notranslate nohighlight">
-\[ x_{k+1} = x_k - \frac{f(x_k)}{f'(x_k)} \]</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="o">-</span><span class="nb">pi</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mf">.1</span><span class="p">;</span> <span class="n">verbose</span><span class="o">=</span><span class="nb">true</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1] x=-1.4707963267948965  f(x)=1.5706297434417247  f&#39;(x)=-0.0049958347219742905
-[2] x=312.9170549232224  f(x)=-312.59435002533314  f&#39;(x)=-0.05350037037604283
-[3] x=-5529.927542752894  f(x)=5530.676391917825  f&#39;(x)=-0.33725953180603474
-[4] x=10868.945936970244  f(x)=-10868.376227850798  f&#39;(x)=-0.17815359146505727
-[5] x=-50136.70732252356  f(x)=50135.70777741902  f&#39;(x)=-1.0301593101044748
-[6] x=-1468.7903453577164  f(x)=1468.8859787856973  f&#39;(x)=-1.9954166200403913
-[7] x=-732.6603742863299  f(x)=731.8761094362295  f&#39;(x)=-1.6204261800544972
-[8] x=-281.0038172368656  f(x)=280.8358913898124  f&#39;(x)=-1.9857996296872256
-[9] x=-139.58174866993488  f(x)=139.79912372811944  f&#39;(x)=-0.02391184615360531
-[10] x=5706.856156210999  f(x)=-5707.008659764705  f&#39;(x)=-1.9883029222393844
-[11] x=2836.5648158265976  f(x)=-2837.5220962814674  f&#39;(x)=-1.2891610809292957
-[12] x=635.503879177757  f(x)=-634.8839651181479  f&#39;(x)=-1.784669713127157
-[13] x=279.7607629875442  f(x)=-280.7481464325292  f&#39;(x)=-0.8416524942745961
-[14] x=-53.80700796583557  f(x)=52.88592082634005  f&#39;(x)=-1.3893564966145653
-[15] x=-15.74196061822768  f(x)=14.742538472479499  f&#39;(x)=-1.0339908015219368
-[16] x=-1.4840596284124175  f(x)=1.5706876106501757  f&#39;(x)=-0.0037592697076601622
-[17] x=416.333158287511  f(x)=-416.4052274406877  f&#39;(x)=-1.99739963763799
-[18] x=207.8594910282616  f(x)=-206.9888910802111  f&#39;(x)=-1.4919915959184906
-[19] x=69.12620885264326  f(x)=-68.1262712417355  f&#39;(x)=-1.0111702413616044
-[20] x=1.7525179991632598  f(x)=-1.933241162917233  f&#39;(x)=-1.9835340045381016
-[21] x=0.7778731690296721  f(x)=-0.0654654835715871  f&#39;(x)=-1.7017658368004631
-[22] x=0.7394040200105153  f(x)=-0.0005337303513481828  f&#39;(x)=-1.6738476794194503
-[23] x=0.7390851556610822  f(x)=-3.756576461011463e-8  f&#39;(x)=-1.6736120457726615
-[24] x=0.7390851332151608  f(x)=-2.220446049250313e-16  f&#39;(x)=-1.6736120291832148
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.7390851332151608, -2.220446049250313e-16, 24)
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="convergence-of-fixed-point-by-mean-value-theorem">
-<h1>Convergence of fixed-point (by mean value theorem)<a class="headerlink" href="#convergence-of-fixed-point-by-mean-value-theorem" title="Permalink to this headline">¶</a></h1>
-<p>Consider the iteration
-<div class="math notranslate nohighlight">
-\[x_{k+1} = g(x_k)\]</div>
+\[ f(x) = f(x_0) + f'(x_0) (x-x_0) + f''(x_0) (x - x_0)^2 / 2 + \underbrace{\dotsb}_{O((x-x_0)^3)} \]</div>
 
-where <span class="math notranslate nohighlight">\(g\)</span> is a continuously differentiable function.
-Suppose that there exists a fixed point <span class="math notranslate nohighlight">\(x_* = g(x_*)\)</span>.  By the <a class="reference external" href="https://en.wikipedia.org/wiki/Mean_value_theorem">mean value theorem</a>, we have that
+centered on some reference point <span class="math notranslate nohighlight">\(x_0\)</span>.</p>
+<p>In numerical computation, it is exceedingly rare to look beyond the first-order approximation
 <div class="math notranslate nohighlight">
-\[ x_{k+1} - x_* = g(x_k) - g(x_*) = g'(c_k) (x_k - x_*) \]</div>
+\[ \tilde f_{x_0}(x) = f(x_0) + f'(x_0)(x - x_0) . \]</div>
 
-for some <span class="math notranslate nohighlight">\(c_i\)</span> between <span class="math notranslate nohighlight">\(x_k\)</span> and <span class="math notranslate nohighlight">\(x_*\)</span>.</p>
-<p>Taking absolute values, <div class="math notranslate nohighlight">
-\[|e_{k+1}| = |g'(c_k)| |e_k|,\]</div>
- which converges to zero if <span class="math notranslate nohighlight">\(|g'(c_k)| &lt; 1\)</span>.</p>
-<p><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/e/ee/Mvt2.svg" /></p>
+Since <span class="math notranslate nohighlight">\(\tilde f_{x_0}(x)\)</span> is a linear function, we can explicitly compute the unique solution of <span class="math notranslate nohighlight">\(\tilde f_{x_0}(x) = 0\)</span> as
+<div class="math notranslate nohighlight">
+\[ x = x_0 - \frac{f(x_0)}{f'(x_0)} . \]</div>
+
+This is Newton’s Method (aka Newton-Raphson or Newton-Raphson-Simpson) for finding the roots of differentiable functions.</p>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="convergence-of-fixed-point-by-taylor-series">
-<h1>Convergence of fixed-point (by Taylor series)<a class="headerlink" href="#convergence-of-fixed-point-by-taylor-series" title="Permalink to this headline">¶</a></h1>
+<h1>Convergence of fixed-point (by Taylor Series)<a class="headerlink" href="#convergence-of-fixed-point-by-taylor-series" title="Permalink to this headline">¶</a></h1>
 <p>Consider the iteration
 <div class="math notranslate nohighlight">
 \[x_{k+1} = g(x_k)\]</div>
@@ -784,8 +558,8 @@ Suppose that there exists a fixed point <span class="math notranslate nohighligh
 \[ g(x_k) = g(x_*) + g'(x_*)(x_k - x_*) + O((x_k-x_*)^2) \]</div>
 
 and thus</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e133497a-6bd4-4cf2-ab88-0db5a75d5d9c">
-<span class="eqno">(1)<a class="headerlink" href="#equation-e133497a-6bd4-4cf2-ab88-0db5a75d5d9c" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-bbda09c0-0e5b-4ca5-938b-f129a07b2dfb">
+<span class="eqno">(4)<a class="headerlink" href="#equation-bbda09c0-0e5b-4ca5-938b-f129a07b2dfb" title="Permalink to this equation">¶</a></span>\[\begin{align}
 x_{k+1} - x_* &amp;= g(x_k) - g(x_*) \\
 &amp;= g'(x_*) (x_k - x_*) + O((x_k - x_*)^2).
 \end{align}\]</div>
@@ -793,41 +567,10 @@ x_{k+1} - x_* &amp;= g(x_k) - g(x_*) \\
 <div class="math notranslate nohighlight">
 \[ \left\lvert \frac{e_{k+1}}{e_k} \right\rvert = \lvert g'(x_*) \rvert + O(e_k).\]</div>
 </p>
-<div class="section" id="poll-is-this-convergence-a-q-linear-b-r-linear-c-neither">
-<h2>Poll: Is this convergence A=q-linear, B=r-linear, C=neither?<a class="headerlink" href="#poll-is-this-convergence-a-q-linear-b-r-linear-c-neither" title="Permalink to this headline">¶</a></h2>
 <p>Recall the definition of q-linear convergence
 <div class="math notranslate nohighlight">
 \[ \lim_{k\to\infty} \left\lvert \frac{e_{k+1}}{e_k} \right\rvert = \rho &lt; 1. \]</div>
 </p>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="aside-big-o-big-oh-notation">
-<h1>Aside: <a class="reference external" href="https://en.wikipedia.org/wiki/Big_O_notation">Big <span class="math notranslate nohighlight">\(O\)</span> (“big oh”) notation</a><a class="headerlink" href="#aside-big-o-big-oh-notation" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="limit-n-to-infty">
-<h2>Limit <span class="math notranslate nohighlight">\(n\to\infty\)</span><a class="headerlink" href="#limit-n-to-infty" title="Permalink to this headline">¶</a></h2>
-<p>We’d say an algorithm costs <span class="math notranslate nohighlight">\(O(n^2)\)</span> if its running time on input of size <span class="math notranslate nohighlight">\(n\)</span> is less than <span class="math notranslate nohighlight">\(c n^2\)</span> for some constant <span class="math notranslate nohighlight">\(c\)</span> and sufficiently large <span class="math notranslate nohighlight">\(n\)</span>.</p>
-<p>Sometimes we write <span class="math notranslate nohighlight">\(\operatorname{cost}(\texttt{algorithm}, n) = O(n^2)\)</span> or (preferably) <span class="math notranslate nohighlight">\(\operatorname{cost}(\texttt{algorithm}) \in O(n^2)\)</span>.</p>
-<p>Note that <span class="math notranslate nohighlight">\(O(\log n) \subset O(n) \subset O(n\log n) \subset O(n^2) \subset \dotsb\)</span> so it’s correct to say “binary search is in <span class="math notranslate nohighlight">\(O(n^2)\)</span>”, even though a sharper statement is also true.</p>
-<p>We say the algorithm is in <span class="math notranslate nohighlight">\(\Theta(n^2)\)</span> (“big theta”) if
-<div class="math notranslate nohighlight">
-\[ c_1 n^2 &lt; \operatorname{cost}(\texttt{algorithm}) &lt; c_2 n^2 \]</div>
-
-for some positive constants <span class="math notranslate nohighlight">\(c_1,c_2\)</span> and sufficiently large <span class="math notranslate nohighlight">\(n\)</span>.</p>
-</div>
-<div class="section" id="limit-h-to-0">
-<h2>Limit <span class="math notranslate nohighlight">\(h \to 0\)</span><a class="headerlink" href="#limit-h-to-0" title="Permalink to this headline">¶</a></h2>
-<p>In numerical analysis, we often have a small real number, and now the definitions take the limit as the small number goes to zero. So we say a term in an expression is in <span class="math notranslate nohighlight">\(O(h^2)\)</span> if</p>
-<div class="math notranslate nohighlight">
-\[ \lim_{h\to 0} \frac{\operatorname{term}(h)}{h^2} &lt; \infty . \]</div>
-<p>Big <span class="math notranslate nohighlight">\(O\)</span> terms can be manipulated as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-01b4e58a-e024-42e4-aff3-659cfef63f2f">
-<span class="eqno">(2)<a class="headerlink" href="#equation-01b4e58a-e024-42e4-aff3-659cfef63f2f" title="Permalink to this equation">¶</a></span>\[\begin{align}
-h O(h^k) &amp;= O(h^{k+1}) \\
-O(h^k)/h &amp;= O(h^{k-1}) \\
-c O(h^k) &amp;= O(h^k) \\
-O(h^k) - O(h^k) &amp;= ?
-\end{align}\]</div>
-</div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="example-of-a-fixed-point-iteration">
 <h1>Example of a fixed point iteration<a class="headerlink" href="#example-of-a-fixed-point-iteration" title="Permalink to this headline">¶</a></h1>
@@ -850,7 +593,7 @@ O(h^k) - O(h^k) &amp;= ?
 gp(xstar) = -0.6736120293089505
 </pre></div>
 </div>
-<img alt="../_images/2022-01-26-newton_22_1.svg" src="../_images/2022-01-26-newton_22_1.svg" /></div>
+<img alt="../_images/2022-01-28-more-newton_7_1.svg" src="../_images/2022-01-28-more-newton_7_1.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -869,7 +612,7 @@ gp(xstar) = -0.6736120293089505
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2022-01-26-newton_23_0.svg" src="../_images/2022-01-26-newton_23_0.svg" /></div>
+<img alt="../_images/2022-01-28-more-newton_8_0.svg" src="../_images/2022-01-28-more-newton_8_0.svg" /></div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="verifying-fixed-point-convergence-theory">
@@ -916,7 +659,7 @@ gp(xstar) = -0.6736120293089505
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2022-01-26-newton_26_0.svg" src="../_images/2022-01-26-newton_26_0.svg" /></div>
+<img alt="../_images/2022-01-28-more-newton_11_0.svg" src="../_images/2022-01-28-more-newton_11_0.svg" /></div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="plotting-newton-convergence">
@@ -957,10 +700,10 @@ gp(xstar) = -0.6736120293089505
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x_star = xs[end, 1] = 0.7390851332151607
 </pre></div>
 </div>
-<img alt="../_images/2022-01-26-newton_29_1.svg" src="../_images/2022-01-26-newton_29_1.svg" /></div>
+<img alt="../_images/2022-01-28-more-newton_14_1.svg" src="../_images/2022-01-28-more-newton_14_1.svg" /></div>
 </div>
-<div class="section" id="id1">
-<h2>Poll: Is this convergence A=q-linear, B=r-linear, C=neither?<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="poll-is-this-convergence-a-q-linear-b-r-linear-c-neither">
+<h2>Poll: Is this convergence A=q-linear, B=r-linear, C=neither?<a class="headerlink" href="#poll-is-this-convergence-a-q-linear-b-r-linear-c-neither" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="formulations-are-not-unique-constants">
@@ -984,7 +727,7 @@ for any constant <span class="math notranslate nohighlight">\(c \ne 0\)</span>. 
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g2p(xstar) = 0.16319398534552476
 </pre></div>
 </div>
-<img alt="../_images/2022-01-26-newton_32_1.svg" src="../_images/2022-01-26-newton_32_1.svg" /></div>
+<img alt="../_images/2022-01-28-more-newton_17_1.svg" src="../_images/2022-01-28-more-newton_17_1.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1032,7 +775,7 @@ for any smooth <span class="math notranslate nohighlight">\(h(x) \ne 0\)</span>.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2022-01-26-newton_35_0.svg" src="../_images/2022-01-26-newton_35_0.svg" /></div>
+<img alt="../_images/2022-01-28-more-newton_20_0.svg" src="../_images/2022-01-28-more-newton_20_0.svg" /></div>
 </div>
 <ul class="simple">
 <li><p>We don’t know <span class="math notranslate nohighlight">\(g'(x_*)\)</span> in advance because we don’t know <span class="math notranslate nohighlight">\(x_*\)</span> yet.</p></li>
@@ -1111,8 +854,8 @@ More at <a class="reference external" href="https://en.wikipedia.org/wiki/Fast_i
 
 but this would require a division.</p>
 <p>Newton’s method is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5bddff82-35af-4488-940d-50d408f3037a">
-<span class="eqno">(3)<a class="headerlink" href="#equation-5bddff82-35af-4488-940d-50d408f3037a" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-7e2d7968-3752-44cb-9128-fc0c1aa88fe6">
+<span class="eqno">(5)<a class="headerlink" href="#equation-7e2d7968-3752-44cb-9128-fc0c1aa88fe6" title="Permalink to this equation">¶</a></span>\[\begin{align}
 y_{k+1} &amp;= y_k - \frac{f(y_k)}{f'(y_k)} \\
 &amp;= y_k - \frac{1/y_k^2 - x}{-2/y_k^3} \\
 &amp;= y_k + \frac 1 2 (y_k - x y_k^3) \\
@@ -1145,6 +888,26 @@ y_{k+1} &amp;= y_k - \frac{f(y_k)}{f'(y_k)} \\
 </li>
 </ul>
 </div>
+<div class="tex2jax_ignore mathjax_ignore section" id="exploratory-rootfinding">
+<h1>Exploratory rootfinding<a class="headerlink" href="#exploratory-rootfinding" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Find a function <span class="math notranslate nohighlight">\(f(x)\)</span> that models something you’re interested in. You could consider nonlinear physical models (aerodynamic drag, nonlinear elasticity), behavioral models, probability distributions, or anything else that that catches your interest. Implement the function in Julia or another language.</p></li>
+<li><p>Consider how you might know the output of such functions, but not an input. Think from the position of different stakeholders: is the equation used differently by an experimentalist collecting data versus by someone making predictions through simulation? How about a company or government reasoning about people versus the individuals they may be reasoning about?</p></li>
+<li><p>Formulate the map from known to desired data as a rootfinding problem and try one or more methods (Newton, bisection, etc., or use a rootfinding library).</p></li>
+<li><p>Plot the inverse function (output versus input) from the standpoint of one or more stakeholder. Are there interesting inflection points? Are the methods reliable?</p></li>
+<li><p>If there are a hierarchy of models for the application you’re interested in, consider using a simpler model to provide an initial guess to a more complicated model.</p></li>
+</ul>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="equation-of-state-example">
+<h1>Equation of state example<a class="headerlink" href="#equation-of-state-example" title="Permalink to this headline">¶</a></h1>
+<p>Consider an <a class="reference external" href="https://en.wikipedia.org/wiki/Real_gas#Beattie%E2%80%93Bridgeman_model">equation of state</a> for a real gas, which might provide pressure <span class="math notranslate nohighlight">\(p(T, \rho)\)</span> as a function of temperature <span class="math notranslate nohighlight">\(T\)</span> and density <span class="math notranslate nohighlight">\(\rho = 1/v\)</span>.</p>
+<ul class="simple">
+<li><p>An experimentalist can measure temperature and pressure, and will need to solve for density (which is difficult to measure directly).</p></li>
+<li><p>A simulation might know (at each cell or mesh point, at each time step) the density and internal energy, and need to compute pressure (and maybe temperature).</p></li>
+<li><p>An analyst might have access to simulation output and wish to compute entropy (a thermodynamic property whose change reflects irreversible processes, and can be used to assess accuracy/stability of a simulation or efficiency of a machine).</p></li>
+</ul>
+<p>The above highlights how many equations are incomplete, failing to model how related quantities (internal energy and entropy in this case) depend on the other quantities. Standardization bodies (such as NIST, here in Boulder) and practitioners often prefer models that intrinsically provide a complete set of consistent relations. An elegent methodology for equations of state for gasses and fluids is by way of the <a class="reference external" href="http://www.coolprop.org/fluid_properties/PurePseudoPure.html#pure-and-pseudo-pure-fluid-properties">Helmholtz free energy</a>, which is not observable, but whose partial derivatives define a complete set of thermodynamic properties. The <a class="reference external" href="http://www.coolprop.org">CoolProp</a> has highly accurate models for many gasses, and practitioners often build less expensive models for narrower ranges of theromdynamic conditions.</p>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -1171,19 +934,12 @@ y_{k+1} &amp;= y_k - \frac{f(y_k)}{f'(y_k)} \\
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="2022-01-24-convergence-classes.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022-01-26-newton.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">2022-01-24 Convergence classes</p>
+            <p class="prev-next-title">2022-01-26 Newton methods</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="2022-01-28-more-newton.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">2022-01-28 More Newton</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             
