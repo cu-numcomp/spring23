@@ -482,6 +482,7 @@
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="more-newton">
 <h1>2022-01-28 More Newton<a class="headerlink" href="#more-newton" title="Permalink to this headline">¶</a></h1>
+<p>Monday (Jan 31) is virtual.</p>
 <div class="section" id="last-time">
 <h2>Last time<a class="headerlink" href="#last-time" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -495,6 +496,7 @@
 <li><p>Derive Newton’s method via fixed point convergence theory</p></li>
 <li><p>Newton methods in computing culture</p></li>
 <li><p>Breaking Newton’s method</p></li>
+<li><p>Exploration</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -558,8 +560,8 @@ Suppose that there exists a fixed point <span class="math notranslate nohighligh
 \[ g(x_k) = g(x_*) + g'(x_*)(x_k - x_*) + O((x_k-x_*)^2) \]</div>
 
 and thus</p>
-<div class="amsmath math notranslate nohighlight" id="equation-bbda09c0-0e5b-4ca5-938b-f129a07b2dfb">
-<span class="eqno">(4)<a class="headerlink" href="#equation-bbda09c0-0e5b-4ca5-938b-f129a07b2dfb" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-5aad23f6-5442-41f7-9a4f-6d69099a4b97">
+<span class="eqno">(4)<a class="headerlink" href="#equation-5aad23f6-5442-41f7-9a4f-6d69099a4b97" title="Permalink to this equation">¶</a></span>\[\begin{align}
 x_{k+1} - x_* &amp;= g(x_k) - g(x_*) \\
 &amp;= g'(x_*) (x_k - x_*) + O((x_k - x_*)^2).
 \end{align}\]</div>
@@ -606,7 +608,7 @@ gp(xstar) = -0.6736120293089505
     <span class="n">xs</span>
 <span class="k">end</span>
 
-<span class="n">xs</span> <span class="o">=</span> <span class="n">fixed_point</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="n">xs</span> <span class="o">=</span> <span class="n">fixed_point</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="n">seriestype</span><span class="o">=</span><span class="ss">:path</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="ss">:auto</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -632,21 +634,21 @@ gp(xstar) = -0.6736120293089505
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15-element Vector{Float64}:
- -0.9161855415615605
- -0.15197657010596488
- -0.734870205299266
- -0.624132525531327
- -0.7026257933893496
- -0.6523498121376077
- -0.6870971782336925
- -0.664168570025122
- -0.6798044680427148
- -0.6693659427636027
- -0.6764378047956165
- -0.6716930541785153
- -0.6748976495459512
- -0.6727427617641084
- -0.6741962236114177
+ -0.3530241034880909
+ -0.7618685362635164
+ -0.5959673878312852
+ -0.7157653025686597
+ -0.6414883589709152
+ -0.6933762938713267
+ -0.6595161800339986
+ -0.6827343083372247
+ -0.667303950535869
+ -0.677785479788835
+ -0.670766892391035
+ -0.6755130653097281
+ -0.6723244355324894
+ -0.6744762481989985
+ -0.6730283414604459
 </pre></div>
 </div>
 </div>
@@ -715,7 +717,7 @@ gp(xstar) = -0.6736120293089505
 for any constant <span class="math notranslate nohighlight">\(c \ne 0\)</span>. Can we choose <span class="math notranslate nohighlight">\(c\)</span> to make <span class="math notranslate nohighlight">\(\lvert g_2'(x_*) \rvert\)</span> small?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="mf">.5</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">gp</span><span class="p">(</span><span class="n">xstar</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 <span class="n">g2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
 <span class="n">g2p</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 <span class="nd">@show</span> <span class="n">g2p</span><span class="p">(</span><span class="n">xstar</span><span class="p">)</span>
@@ -724,7 +726,7 @@ for any constant <span class="math notranslate nohighlight">\(c \ne 0\)</span>. 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g2p(xstar) = 0.16319398534552476
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g2p(xstar) = 0.0
 </pre></div>
 </div>
 <img alt="../_images/2022-01-28-more-newton_17_1.svg" src="../_images/2022-01-28-more-newton_17_1.svg" /></div>
@@ -739,21 +741,21 @@ for any constant <span class="math notranslate nohighlight">\(c \ne 0\)</span>. 
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16-element Vector{Float64}:
   0.26091486661471597
-  0.03106601954878585
-  0.004893162344945079
-  0.0007941171212053622
-  0.00012947850276123773
-  2.112687301181193e-5
-  3.4475537732392425e-6
-  5.62475483634195e-7
-  9.16501970982253e-8
-  1.4814399151852342e-8
-  2.2752605355336186e-9
-  2.2894852680366284e-10
- -1.0499723313017739e-10
- -1.594951948291623e-10
- -1.683889694348295e-10
- -1.6984036399492197e-10
+ -0.013759123582207766
+ -4.1975680750594435e-5
+ -5.591781482294778e-10
+ -1.7012335984389892e-10
+ -1.7012335984389892e-10
+ -1.7012335984389892e-10
+ -1.7012335984389892e-10
+ -1.7012335984389892e-10
+ -1.7012335984389892e-10
+ -1.7012335984389892e-10
+ -1.7012335984389892e-10
+ -1.7012335984389892e-10
+ -1.7012335984389892e-10
+ -1.7012335984389892e-10
+ -1.7012335984389892e-10
 </pre></div>
 </div>
 </div>
@@ -854,8 +856,8 @@ More at <a class="reference external" href="https://en.wikipedia.org/wiki/Fast_i
 
 but this would require a division.</p>
 <p>Newton’s method is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-7e2d7968-3752-44cb-9128-fc0c1aa88fe6">
-<span class="eqno">(5)<a class="headerlink" href="#equation-7e2d7968-3752-44cb-9128-fc0c1aa88fe6" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-1968d120-3e15-4015-94de-619b0a9472d1">
+<span class="eqno">(5)<a class="headerlink" href="#equation-1968d120-3e15-4015-94de-619b0a9472d1" title="Permalink to this equation">¶</a></span>\[\begin{align}
 y_{k+1} &amp;= y_k - \frac{f(y_k)}{f'(y_k)} \\
 &amp;= y_k - \frac{1/y_k^2 - x}{-2/y_k^3} \\
 &amp;= y_k + \frac 1 2 (y_k - x y_k^3) \\
@@ -892,7 +894,7 @@ y_{k+1} &amp;= y_k - \frac{f(y_k)}{f'(y_k)} \\
 <h1>Exploratory rootfinding<a class="headerlink" href="#exploratory-rootfinding" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p>Find a function <span class="math notranslate nohighlight">\(f(x)\)</span> that models something you’re interested in. You could consider nonlinear physical models (aerodynamic drag, nonlinear elasticity), behavioral models, probability distributions, or anything else that that catches your interest. Implement the function in Julia or another language.</p></li>
-<li><p>Consider how you might know the output of such functions, but not an input. Think from the position of different stakeholders: is the equation used differently by an experimentalist collecting data versus by someone making predictions through simulation? How about a company or government reasoning about people versus the individuals they may be reasoning about?</p></li>
+<li><p>Consider how you might know the output of such functions, but not an input. Think from the position of different stakeholders: is the equation used differently by an experimentalist collecting data versus by someone making predictions through simulation? How about a company or government reasoning about people versus the people their decisions may impact?</p></li>
 <li><p>Formulate the map from known to desired data as a rootfinding problem and try one or more methods (Newton, bisection, etc., or use a rootfinding library).</p></li>
 <li><p>Plot the inverse function (output versus input) from the standpoint of one or more stakeholder. Are there interesting inflection points? Are the methods reliable?</p></li>
 <li><p>If there are a hierarchy of models for the application you’re interested in, consider using a simpler model to provide an initial guess to a more complicated model.</p></li>
@@ -906,7 +908,7 @@ y_{k+1} &amp;= y_k - \frac{f(y_k)}{f'(y_k)} \\
 <li><p>A simulation might know (at each cell or mesh point, at each time step) the density and internal energy, and need to compute pressure (and maybe temperature).</p></li>
 <li><p>An analyst might have access to simulation output and wish to compute entropy (a thermodynamic property whose change reflects irreversible processes, and can be used to assess accuracy/stability of a simulation or efficiency of a machine).</p></li>
 </ul>
-<p>The above highlights how many equations are incomplete, failing to model how related quantities (internal energy and entropy in this case) depend on the other quantities. Standardization bodies (such as NIST, here in Boulder) and practitioners often prefer models that intrinsically provide a complete set of consistent relations. An elegent methodology for equations of state for gasses and fluids is by way of the <a class="reference external" href="http://www.coolprop.org/fluid_properties/PurePseudoPure.html#pure-and-pseudo-pure-fluid-properties">Helmholtz free energy</a>, which is not observable, but whose partial derivatives define a complete set of thermodynamic properties. The <a class="reference external" href="http://www.coolprop.org">CoolProp</a> has highly accurate models for many gasses, and practitioners often build less expensive models for narrower ranges of theromdynamic conditions.</p>
+<p>The above highlights how many equations are incomplete, failing to model how related quantities (internal energy and entropy in this case) depend on the other quantities. Standardization bodies (such as NIST, here in Boulder) and practitioners often prefer models that intrinsically provide a complete set of consistent relations. An elegent methodology for equations of state for gasses and fluids is by way of the <a class="reference external" href="http://www.coolprop.org/fluid_properties/PurePseudoPure.html#pure-and-pseudo-pure-fluid-properties">Helmholtz free energy</a>, which is not observable, but whose partial derivatives define a complete set of thermodynamic properties. The <a class="reference external" href="http://www.coolprop.org">CoolProp</a> software has highly accurate models for many gasses, and practitioners often build less expensive models for narrower ranges of theromdynamic conditions.</p>
 </div>
 
     <script type="text/x-thebe-config">
