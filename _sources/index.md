@@ -19,6 +19,8 @@ Welcome to **CSCI-3656: Numerical Computation**
   - Objectives
 * - [2022-01-12-taylor-series](https://classroom.github.com/a/VkPvGOgu)
   - Use GitHub classroom and Julia to observe numerical instability.
+* - [2022-01-28-rootfinding](https://classroom.github.com/a/ZVZ8AQYM)
+  - Experiment with and compare methods for rootfinding at small and large scales.
 :::
 ::::
 
