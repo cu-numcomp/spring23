@@ -74,22 +74,22 @@ Why? TL;DR: [Evidence](https://cu-numcomp.github.io/spring22/downloads/Butler-En
 ### Expectations
 
 1. Attend class (in-person or virtual) and participate in discussions
-  * you may choose asynchronous as needed for personal reasons, but please make sure to check in with other students and to actively experiment
+    * you may choose asynchronous as needed for personal reasons, but please make sure to check in with other students and to actively experiment
 2. Make an honest attempt on activities
 3. Interact with the class notebooks and read reference material
 4. Set goals and track your progress
-  * revise these goals as you learn more
+    * revise these goals as you learn more
 5. Meet/chat with your partner weekly for at least a few minutes
-  * share how lecture and activities are going
-  * share your goals and how you're progressing
-  * identify questions
+    * share how lecture and activities are going
+    * share your goals and how you're progressing
+    * identify questions
 6. Ask or answer at least one question per week (mostly Zulip)
-  * ask a question that you don't know the answer to
-  * ask a question that you do know the answer to, but you think will be a good exercise/seed for discussion 
-  * ask me during office hours, write up your best understanding
-  * make a meme relevant to the class
-  * raise a concern or suggestion that you and/or peers have
-  * contribute an answer or relevant discussion to any of the above
+    * ask a question that you don't know the answer to
+    * ask a question that you do know the answer to, but you think will be a good exercise/seed for discussion
+    * ask me during office hours, write up your best understanding
+    * make a meme relevant to the class
+    * raise a concern or suggestion that you and/or peers have
+    * contribute an answer or relevant discussion to any of the above
 7. Individual and group projects
 
 ## GitHub

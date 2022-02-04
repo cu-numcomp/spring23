@@ -54,6 +54,7 @@
     <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2022-01-31 Formulation" href="2022-01-31-formulation.html" />
     <link rel="prev" title="2022-01-26 Newton methods" href="2022-01-26-newton.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -152,6 +153,16 @@
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      2022-01-28 More Newton
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-31-formulation.html">
+     2022-01-31 Formulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-02-04-linear-algebra.html">
+     2022-02-04 Linear Algebra
     </a>
    </li>
   </ul>
@@ -560,8 +571,8 @@ Suppose that there exists a fixed point <span class="math notranslate nohighligh
 \[ g(x_k) = g(x_*) + g'(x_*)(x_k - x_*) + O((x_k-x_*)^2) \]</div>
 
 and thus</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5aad23f6-5442-41f7-9a4f-6d69099a4b97">
-<span class="eqno">(4)<a class="headerlink" href="#equation-5aad23f6-5442-41f7-9a4f-6d69099a4b97" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-181a0ffa-0b19-4580-91b5-ae28a9379679">
+<span class="eqno">(4)<a class="headerlink" href="#equation-181a0ffa-0b19-4580-91b5-ae28a9379679" title="Permalink to this equation">¶</a></span>\[\begin{align}
 x_{k+1} - x_* &amp;= g(x_k) - g(x_*) \\
 &amp;= g'(x_*) (x_k - x_*) + O((x_k - x_*)^2).
 \end{align}\]</div>
@@ -856,8 +867,8 @@ More at <a class="reference external" href="https://en.wikipedia.org/wiki/Fast_i
 
 but this would require a division.</p>
 <p>Newton’s method is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1968d120-3e15-4015-94de-619b0a9472d1">
-<span class="eqno">(5)<a class="headerlink" href="#equation-1968d120-3e15-4015-94de-619b0a9472d1" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d013916b-e68e-4a56-b29d-cd01bea6e7a2">
+<span class="eqno">(5)<a class="headerlink" href="#equation-d013916b-e68e-4a56-b29d-cd01bea6e7a2" title="Permalink to this equation">¶</a></span>\[\begin{align}
 y_{k+1} &amp;= y_k - \frac{f(y_k)}{f'(y_k)} \\
 &amp;= y_k - \frac{1/y_k^2 - x}{-2/y_k^3} \\
 &amp;= y_k + \frac 1 2 (y_k - x y_k^3) \\
@@ -942,6 +953,13 @@ y_{k+1} &amp;= y_k - \frac{f(y_k)}{f'(y_k)} \\
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">2022-01-26 Newton methods</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="2022-01-31-formulation.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2022-01-31 Formulation</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             

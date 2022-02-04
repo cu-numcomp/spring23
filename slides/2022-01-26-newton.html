@@ -155,6 +155,16 @@
      2022-01-28 More Newton
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-31-formulation.html">
+     2022-01-31 Formulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-02-04-linear-algebra.html">
+     2022-02-04 Linear Algebra
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -784,8 +794,8 @@ Suppose that there exists a fixed point <span class="math notranslate nohighligh
 \[ g(x_k) = g(x_*) + g'(x_*)(x_k - x_*) + O((x_k-x_*)^2) \]</div>
 
 and thus</p>
-<div class="amsmath math notranslate nohighlight" id="equation-e133497a-6bd4-4cf2-ab88-0db5a75d5d9c">
-<span class="eqno">(1)<a class="headerlink" href="#equation-e133497a-6bd4-4cf2-ab88-0db5a75d5d9c" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-b1e35e1e-839c-4088-8897-d2b34e38b53a">
+<span class="eqno">(1)<a class="headerlink" href="#equation-b1e35e1e-839c-4088-8897-d2b34e38b53a" title="Permalink to this equation">¶</a></span>\[\begin{align}
 x_{k+1} - x_* &amp;= g(x_k) - g(x_*) \\
 &amp;= g'(x_*) (x_k - x_*) + O((x_k - x_*)^2).
 \end{align}\]</div>
@@ -820,8 +830,8 @@ for some positive constants <span class="math notranslate nohighlight">\(c_1,c_2
 <div class="math notranslate nohighlight">
 \[ \lim_{h\to 0} \frac{\operatorname{term}(h)}{h^2} &lt; \infty . \]</div>
 <p>Big <span class="math notranslate nohighlight">\(O\)</span> terms can be manipulated as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-01b4e58a-e024-42e4-aff3-659cfef63f2f">
-<span class="eqno">(2)<a class="headerlink" href="#equation-01b4e58a-e024-42e4-aff3-659cfef63f2f" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-06ac74d3-7378-4370-af46-e6e23506d283">
+<span class="eqno">(2)<a class="headerlink" href="#equation-06ac74d3-7378-4370-af46-e6e23506d283" title="Permalink to this equation">¶</a></span>\[\begin{align}
 h O(h^k) &amp;= O(h^{k+1}) \\
 O(h^k)/h &amp;= O(h^{k-1}) \\
 c O(h^k) &amp;= O(h^k) \\
@@ -1111,8 +1121,8 @@ More at <a class="reference external" href="https://en.wikipedia.org/wiki/Fast_i
 
 but this would require a division.</p>
 <p>Newton’s method is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-5bddff82-35af-4488-940d-50d408f3037a">
-<span class="eqno">(3)<a class="headerlink" href="#equation-5bddff82-35af-4488-940d-50d408f3037a" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-271f072c-86c6-416b-a1b3-e5746ba4f9a1">
+<span class="eqno">(3)<a class="headerlink" href="#equation-271f072c-86c6-416b-a1b3-e5746ba4f9a1" title="Permalink to this equation">¶</a></span>\[\begin{align}
 y_{k+1} &amp;= y_k - \frac{f(y_k)}{f'(y_k)} \\
 &amp;= y_k - \frac{1/y_k^2 - x}{-2/y_k^3} \\
 &amp;= y_k + \frac 1 2 (y_k - x y_k^3) \\
