@@ -54,6 +54,7 @@
     <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2022-02-04 Linear Algebra" href="2022-02-04-linear-algebra.html" />
     <link rel="prev" title="2022-01-28 More Newton" href="2022-01-28-more-newton.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -157,6 +158,11 @@
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      2022-01-31 Formulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-02-04-linear-algebra.html">
+     2022-02-04 Linear Algebra
     </a>
    </li>
   </ul>
@@ -721,8 +727,8 @@ for any smooth <span class="math notranslate nohighlight">\(h(x) \ne 0\)</span>.
 <div class="tex2jax_ignore mathjax_ignore section" id="roots-with-multiplicity">
 <h1>Roots with multiplicity<a class="headerlink" href="#roots-with-multiplicity" title="Permalink to this headline">¶</a></h1>
 <p>There are multiple ways to represent (monic) polynomials</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3c12e659-eb20-4636-b204-2ff0a855f1de">
-<span class="eqno">(6)<a class="headerlink" href="#equation-3c12e659-eb20-4636-b204-2ff0a855f1de" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d29fe625-46dd-4862-b392-0c2c9cc139a1">
+<span class="eqno">(6)<a class="headerlink" href="#equation-d29fe625-46dd-4862-b392-0c2c9cc139a1" title="Permalink to this equation">¶</a></span>\[\begin{align}
 f(x) &amp;= (x - a_1) (x - a_2) &amp; g(x) &amp;= x^2 \underbrace{- (a_1 + a_2)}_{b_1} x + \underbrace{a_1 a_2}_{b_2}
 \end{align}\]</div>
 <div class="cell docutils container">
@@ -737,9 +743,9 @@ f(x) &amp;= (x - a_1) (x - a_2) &amp; g(x) &amp;= x^2 \underbrace{- (a_1 + a_2)}
     <span class="n">sum</span>
 <span class="k">end</span>
 
-<span class="n">eps</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">eps</span> <span class="o">=</span> <span class="mf">1e-10</span>
 <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1e5</span><span class="p">,</span> <span class="mf">1e5</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span> <span class="c"># tiny perturbation to root</span>
-<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">eps</span><span class="p">),</span> <span class="c"># tiny perturbation to monomial coefficent</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="c"># tiny perturbation to monomial coefficent</span>
     <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
 <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">poly_eval_prod</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
 <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">poly_eval_sum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
@@ -770,13 +776,13 @@ f(x) &amp;= (x - a_1) (x - a_2) &amp; g(x) &amp;= x^2 \underbrace{- (a_1 + a_2)}
 <div class="tex2jax_ignore mathjax_ignore section" id="how-did-the-roots-move">
 <h1>How did the roots move?<a class="headerlink" href="#how-did-the-roots-move" title="Permalink to this headline">¶</a></h1>
 <p>Take two roots at <span class="math notranslate nohighlight">\(x=a\)</span> and perturb the middle coefficient.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-24d3f3d6-6e05-40a1-aba7-e3a53462e80e">
-<span class="eqno">(7)<a class="headerlink" href="#equation-24d3f3d6-6e05-40a1-aba7-e3a53462e80e" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-975bfa8b-e7ad-4690-9721-80197b14e3ee">
+<span class="eqno">(7)<a class="headerlink" href="#equation-975bfa8b-e7ad-4690-9721-80197b14e3ee" title="Permalink to this equation">¶</a></span>\[\begin{align}
 x^2 \underbrace{- 2a(1 + \epsilon)}_{b_1} x + \underbrace{a^2}_{b_2} = 0
 \end{align}\]</div>
 <p>Analytically, we know the roots are at</p>
-<div class="amsmath math notranslate nohighlight" id="equation-c558f1fa-b326-41c6-86a3-15924d3d2d94">
-<span class="eqno">(8)<a class="headerlink" href="#equation-c558f1fa-b326-41c6-86a3-15924d3d2d94" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-af42f23b-9260-4616-b283-8637d0486126">
+<span class="eqno">(8)<a class="headerlink" href="#equation-af42f23b-9260-4616-b283-8637d0486126" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \frac{b_1}{2} \pm \sqrt{\frac{b_1^2}{4} - b_2} 
 &amp;= a(1+\epsilon) \pm \sqrt{a^2(1+\epsilon)^2 - a^2} \\
 &amp;= a(1+\epsilon) \pm a \sqrt{2 \epsilon + \epsilon^2} \\
@@ -858,17 +864,17 @@ x^2 \underbrace{- 2a(1 + \epsilon)}_{b_1} x + \underbrace{a^2}_{b_2} = 0
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Polynomials</span>
 <span class="nd">@show</span> <span class="n">fpoly</span> <span class="o">=</span> <span class="n">Polynomial</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-<span class="nd">@show</span> <span class="n">gpoly</span> <span class="o">=</span> <span class="n">fromroots</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="nd">@show</span> <span class="n">gpoly</span> <span class="o">=</span> <span class="n">fromroots</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">.+</span> <span class="mf">1e5</span><span class="p">)</span>
 <span class="n">derivative</span><span class="p">(</span><span class="n">gpoly</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fpoly = Polynomial([2, -3, 1]) = Polynomial(2 - 3*x + x^2)
-gpoly = fromroots([1, 2]) = Polynomial(2 - 3*x + x^2)
+gpoly = fromroots([1, 2] .+ 100000.0) = Polynomial(1.0000300002e10 - 200003.0*x + 1.0*x^2)
 </pre></div>
 </div>
-<div class="output text_html">&#45;3 &#43; 2&#8729;x</div></div>
+<div class="output text_html">&#45;200003.0 &#43; 2.0&#8729;x</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -877,14 +883,30 @@ gpoly = fromroots([1, 2]) = Polynomial(2 - 3*x + x^2)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7×3 Matrix{Float64}:
- 3.0      2.0          3.0
- 2.33333  0.444444     1.66667
- 2.06667  0.0711111    1.13333
- 2.00392  0.00393695   1.00784
- 2.00002  1.52593e-5   1.00003
- 2.0      2.32831e-10  1.0
- 2.0      0.0          1.0
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23×3 Matrix{Float64}:
+      3.0            9.9997e9     -199997.0
+  50002.2            2.49993e9     -99998.5
+  75001.9            6.24981e8     -49999.3
+  87501.7            1.56245e8     -24999.6
+  93751.6            3.90613e7     -12499.8
+  96876.5            9.76533e6      -6249.91
+  98439.0            2.44133e6      -3124.95
+  99220.3            6.10333e5      -1562.48
+  99610.9            1.52583e5       -781.239
+  99806.2        38145.7             -390.62
+  99903.8         9536.37            -195.311
+  99952.7         2384.03             -97.6582
+  99977.1          595.945            -48.8342
+  99989.3          148.924            -24.4273
+  99995.4           37.1686           -12.2341
+  99998.4            9.23006           -6.15794
+  99999.9            2.24666           -3.16017
+      1.00001e5      0.505424          -1.7383
+      1.00001e5      0.0845398         -1.15679
+ 100001.0            0.0053409         -1.01063
+ 100001.0            2.79285e-5        -1.00006
+ 100001.0            7.85803e-10       -1.0
+ 100001.0            0.0               -1.0
 </pre></div>
 </div>
 </div>
@@ -908,7 +930,7 @@ gpoly = fromroots([1, 2]) = Polynomial(2 - 3*x + x^2)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">fromroots</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]</span> <span class="o">.+</span> <span class="mf">1e5</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">fromroots</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">.+</span> <span class="mf">1e3</span><span class="p">)</span>
 <span class="n">xs</span> <span class="o">=</span> <span class="n">roots</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 <span class="n">scatter</span><span class="p">(</span><span class="n">real</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="n">imag</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="ss">:red</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">100</span>
@@ -941,7 +963,7 @@ gpoly = fromroots([1, 2]) = Polynomial(2 - 3*x + x^2)
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">a</span> <span class="o">=</span> <span class="n">collect</span><span class="p">(</span><span class="mf">1.</span><span class="o">:</span><span class="n">n</span><span class="p">)</span>
 <span class="n">w</span> <span class="o">=</span> <span class="n">fromroots</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="c">#w[10] *= 1 + 1e-12</span>
+<span class="n">w</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">*=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mf">1e-12</span>
 <span class="n">plot</span><span class="p">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">abs</span><span class="p">(</span><span class="n">w</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1083,6 +1105,13 @@ Backward stability is generally the best we can hope for.</p>
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">2022-01-28 More Newton</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="2022-02-04-linear-algebra.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2022-02-04 Linear Algebra</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             
