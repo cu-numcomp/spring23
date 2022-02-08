@@ -1,0 +1,719 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2022-02-04 Stability &#8212; Numerical Computation</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2022-02-07 Linear Algebra" href="2022-02-07-linear-algebra.html" />
+    <link rel="prev" title="2022-01-31 Formulation" href="2022-01-31-formulation.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/cu-numcomp.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Numerical Computation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../slides.html">
+   Slides
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-10-first-day.html">
+     2022-01-10 First Day
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-12-functions.html">
+     2022-01-12 Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-14-function-errors.html">
+     2022-01-14 Function errors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-19-conditioning.html">
+     2022-01-19 Conditioning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-21-rootfinding.html">
+     2022-01-21 Rootfinding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-24-convergence-classes.html">
+     2022-01-24 Convergence classes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-26-newton.html">
+     2022-01-26 Newton methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-28-more-newton.html">
+     2022-01-28 More Newton
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-31-formulation.html">
+     2022-01-31 Formulation
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     2022-02-04 Stability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-02-07-linear-algebra.html">
+     2022-02-07 Linear Algebra
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/slides/2022-02-04-stability.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cu-numcomp/spring22"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cu-numcomp/spring22/issues/new?title=Issue%20on%20page%20%2Fslides/2022-02-04-stability.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cu-numcomp/spring22/main?urlpath=tree/slides/2022-02-04-stability.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2022-02-04 Stability
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#last-time">
+     Last time
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#today">
+     Today
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#which-is-better-to-model-inputs-to-a-rootfinder">
+   Which is better to model inputs to a rootfinder?
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#figure-from-trefethen-and-bau-1999">
+     Figure from Trefethen and Bau (1999)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#forward-vs-backward-error-and-stability">
+   Forward vs backward error and stability
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Stability
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#backward-stability">
+     Backward Stability
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#map-angle-to-the-unit-circle">
+   Map angle to the unit circle
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#are-we-observing-a-stability-b-backward-stability-or-c-neither">
+     Are we observing A=stability, B=backward stability, or C=neither?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#accuracy-of-backward-stable-algorithms-theorem">
+   Accuracy of backward stable algorithms (Theorem)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#beyond-ieee-754-double-precision">
+   Beyond IEEE-754 double precision
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lower-precision-ieee-754-and-relatives">
+     Lower precision IEEE-754 and relatives
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#posits">
+   Posits
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mixed-precision-algorithms">
+   Mixed-precision algorithms
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>2022-02-04 Stability</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2022-02-04 Stability
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#last-time">
+     Last time
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#today">
+     Today
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#which-is-better-to-model-inputs-to-a-rootfinder">
+   Which is better to model inputs to a rootfinder?
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#figure-from-trefethen-and-bau-1999">
+     Figure from Trefethen and Bau (1999)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#forward-vs-backward-error-and-stability">
+   Forward vs backward error and stability
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Stability
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#backward-stability">
+     Backward Stability
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#map-angle-to-the-unit-circle">
+   Map angle to the unit circle
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#are-we-observing-a-stability-b-backward-stability-or-c-neither">
+     Are we observing A=stability, B=backward stability, or C=neither?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#accuracy-of-backward-stable-algorithms-theorem">
+   Accuracy of backward stable algorithms (Theorem)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#beyond-ieee-754-double-precision">
+   Beyond IEEE-754 double precision
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lower-precision-ieee-754-and-relatives">
+     Lower precision IEEE-754 and relatives
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#posits">
+   Posits
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mixed-precision-algorithms">
+   Mixed-precision algorithms
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="stability">
+<h1>2022-02-04 Stability<a class="headerlink" href="#stability" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="last-time">
+<h2>Last time<a class="headerlink" href="#last-time" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Breaking Newton’s method</p></li>
+<li><p>Exploration</p></li>
+<li><p>Multiple roots</p></li>
+<li><p>Conditioning of the rootfinding problem</p></li>
+</ul>
+</div>
+<div class="section" id="today">
+<h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Forward and backward stability</p></li>
+<li><p>Beyond IEEE double precision</p></li>
+<li><p><a class="reference external" href="https://classroom.github.com/a/strHwkaV">Discuss portfolios</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Plots</span>
+<span class="n">default</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">legendfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="which-is-better-to-model-inputs-to-a-rootfinder">
+<h1>Which is better to model inputs to a rootfinder?<a class="headerlink" href="#which-is-better-to-model-inputs-to-a-rootfinder" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>A: coefficients <span class="math notranslate nohighlight">\(a_k\)</span> in <div class="math notranslate nohighlight">
+\[p(x) = \prod_k (x - a_k)\]</div>
+</p></li>
+</ul>
+<ul class="simple">
+<li><p>B: coefficients <span class="math notranslate nohighlight">\(b_k\)</span> in <div class="math notranslate nohighlight">
+\[p(x) = \sum_k b_k x^k\]</div>
+</p></li>
+</ul>
+<div class="section" id="figure-from-trefethen-and-bau-1999">
+<h2>Figure from Trefethen and Bau (1999)<a class="headerlink" href="#figure-from-trefethen-and-bau-1999" title="Permalink to this headline">¶</a></h2>
+<img alt="Ill conditioning of roots of Wilkinson's polynomial" src="../img/TB-Wilkinson.png" width="90%" /></div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="forward-vs-backward-error-and-stability">
+<h1><a class="reference external" href="https://fncbook.github.io/fnc/intro/stability.html#backward-error">Forward vs backward error and stability</a><a class="headerlink" href="#forward-vs-backward-error-and-stability" title="Permalink to this headline">¶</a></h1>
+<img src="https://fncbook.github.io/fnc/_images/backwarderror.svg" width="90%" /><div class="section" id="id1">
+<h2>Stability<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p><strong>“nearly the right answer to nearly the right question”</strong>
+<div class="math notranslate nohighlight">
+\[ \frac{\lvert \tilde f(x) - f(\tilde x) \rvert}{| f(\tilde x) |} \in O(\epsilon_{\text{machine}}) \]</div>
+
+for some <span class="math notranslate nohighlight">\(\tilde x\)</span> that is close to <span class="math notranslate nohighlight">\(x\)</span></p>
+</div>
+<div class="section" id="backward-stability">
+<h2>Backward Stability<a class="headerlink" href="#backward-stability" title="Permalink to this headline">¶</a></h2>
+<p><strong>“exactly the right answer to nearly the right question”</strong>
+<div class="math notranslate nohighlight">
+\[ \tilde f(x) = f(\tilde x) \]</div>
+
+for some <span class="math notranslate nohighlight">\(\tilde x\)</span> that is close to <span class="math notranslate nohighlight">\(x\)</span></p>
+<ul class="simple">
+<li><p>Every backward stable algorithm is stable.</p></li>
+<li><p>Not every stable algorithm is backward stable.</p></li>
+</ul>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="map-angle-to-the-unit-circle">
+<h1>Map angle to the unit circle<a class="headerlink" href="#map-angle-to-the-unit-circle" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">.+</span> <span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">3e-15</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">scatter</span><span class="p">(</span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">legend</span><span class="o">=</span><span class="ss">:none</span><span class="p">,</span> <span class="n">aspect_ratio</span><span class="o">=</span><span class="ss">:equal</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-02-04-stability_10_0.svg" src="../_images/2022-02-04-stability_10_0.svg" /><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GKS: Possible loss of precision in routine SET_WINDOW
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="mf">2e-5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">mysin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="p">(</span><span class="mf">1e10</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="nb">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">aspect_ratio</span><span class="o">=</span><span class="ss">:equal</span><span class="p">)</span>
+<span class="n">scatter!</span><span class="p">(</span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">mysin</span><span class="o">.</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-02-04-stability_11_0.svg" src="../_images/2022-02-04-stability_11_0.svg" /></div>
+</div>
+<div class="section" id="are-we-observing-a-stability-b-backward-stability-or-c-neither">
+<h2>Are we observing A=stability, B=backward stability, or C=neither?<a class="headerlink" href="#are-we-observing-a-stability-b-backward-stability-or-c-neither" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>The numbers <span class="math notranslate nohighlight">\((\widetilde\cos \theta, \widetilde\sin \theta = (\operatorname{fl}(\cos \theta), \operatorname{fl}(\sin\theta))\)</span> do not lie exactly on the unit circles.</p>
+<ul>
+<li><p>There does not exist a <span class="math notranslate nohighlight">\(\tilde\theta\)</span> such that <span class="math notranslate nohighlight">\((\widetilde\cos \theta, \widetilde \sin\theta) = (\cos\tilde\theta, \sin\tilde\theta)\)</span></p></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="accuracy-of-backward-stable-algorithms-theorem">
+<h1>Accuracy of backward stable algorithms (Theorem)<a class="headerlink" href="#accuracy-of-backward-stable-algorithms-theorem" title="Permalink to this headline">¶</a></h1>
+<p>A backward stable algorithm for computing <span class="math notranslate nohighlight">\(f(x)\)</span> has relative accuracy
+<div class="math notranslate nohighlight">
+\[ \left\lvert \frac{\tilde f(x) - f(x)}{f(x)} \right\rvert \lesssim \kappa(f) \epsilon_{\text{machine}} . \]</div>
+
+Backward stability is generally the best we can hope for.</p>
+<p>In practice, it is rarely possible for a function to be backward stable when the output space is higher dimensional than the input space.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="beyond-ieee-754-double-precision">
+<h1>Beyond IEEE-754 double precision<a class="headerlink" href="#beyond-ieee-754-double-precision" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="lower-precision-ieee-754-and-relatives">
+<h2>Lower precision IEEE-754 and relatives<a class="headerlink" href="#lower-precision-ieee-754-and-relatives" title="Permalink to this headline">¶</a></h2>
+<p>The default floating point type in Python is <code class="docutils literal notranslate"><span class="pre">double</span></code> precision, which requires 8 bytes (64 bits) to store and offers <span class="math notranslate nohighlight">\(\epsilon_{\text{machine}} \approx 10^{-16}\)</span>.</p>
+<ul class="simple">
+<li><p>IEEE-754 <strong>single precision</strong> (<code class="docutils literal notranslate"><span class="pre">float</span></code> in C and related languages) is half the size (4 bytes = 32 bits) and has long been popular when adequate.</p></li>
+<li><p>IEEE-754 <strong>half precision</strong> reduces both range (exponent bits) and precision (mantissa) bits.</p></li>
+<li><p><strong>bfloat16</strong> is a relatively new non-IEEE type that is popular in machine learning because it’s easy to convert to/from single precision (just truncate/round the mantissa).</p></li>
+</ul>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\epsilon_{\text{machine}}\)</span></p></th>
+<th class="head"><p>exponent bits</p></th>
+<th class="head"><p>mantissa bits</p></th>
+<th class="head"><p>diagram</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>double</p></td>
+<td><p>1.11e-16</p></td>
+<td><p>11</p></td>
+<td><p>52</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>single</p></td>
+<td><p>5.96e-8</p></td>
+<td><p>8</p></td>
+<td><p>23</p></td>
+<td><p><img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Float_example.svg" width="120%" /></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://en.wikipedia.org/wiki/Half-precision_floating-point_format">half</a></p></td>
+<td><p>4.88e-4</p></td>
+<td><p>5</p></td>
+<td><p>10</p></td>
+<td><p><img src="https://upload.wikimedia.org/wikipedia/commons/2/21/IEEE_754r_Half_Floating_Point_Format.svg" width="100%" /></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://en.wikipedia.org/wiki/Bfloat16_floating-point_format">bfloat16</a></p></td>
+<td><p>3.91e-3</p></td>
+<td><p>8</p></td>
+<td><p>7</p></td>
+<td><p><img alt="" src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Bfloat16_format.svg" /></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="posits">
+<h1>Posits<a class="headerlink" href="#posits" title="Permalink to this headline">¶</a></h1>
+<img src="../img/GustafsonPosits.png" width="90%" />
+<ul class="simple">
+<li><p><a class="reference external" href="http://www.johngustafson.net/pdfs/BeatingFloatingPoint.pdf">Gustafson and Yonemoto: <strong>Beating Floating Point at its Own Game: Posit Arithmetic</strong></a></p></li>
+<li><p><a class="reference external" href="https://cse512-19s.github.io/FP-Well-Rounded/">Interactive visualization</a></p></li>
+<li><p><a class="reference external" href="https://github.com/milankl/SoftPosit.jl">SoftPosit.jl</a> Julia package</p></li>
+</ul>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="mixed-precision-algorithms">
+<h1>Mixed-precision algorithms<a class="headerlink" href="#mixed-precision-algorithms" title="Permalink to this headline">¶</a></h1>
+<p>Sometimes reducing the precision (from double to single, or from single to half) compromises the quality of results (due to ill-conditioning or poor stability), but one can recover accurate results by using higher precision in a small fraction of the computation.  These are <em>mixed-precision algorithms</em>, and can be a useful optimization technique.</p>
+<p>Such techniques can give up to 2x improvement if memory bandwidth (for floating point data) or pure vectorizable flops are the bottleneck.  In case of single to half precision, the benefit can be greater than 2x when using special hardware, such as GPUs with “tensor cores”.</p>
+<p>Warning: Premature use of mixed-precision techniques can often obscure better algorithms that can provide greater speedups and/or reliability improvements.</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cu-numcomp/spring22",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.7"
+        },
+        kernelOptions: {
+            kernelName: "julia-1.7",
+            path: "./slides"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.7'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="2022-01-31-formulation.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">2022-01-31 Formulation</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="2022-02-07-linear-algebra.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2022-02-07 Linear Algebra</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Jed Brown<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
