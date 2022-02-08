@@ -8,6 +8,7 @@ Welcome to **CSCI-3656: Numerical Computation**
 * [Join in Zoom](https://cuboulder.zoom.us/j/95889180311) (["Cloud Recordings" on Canvas](https://canvas.colorado.edu/courses/80290/external_tools/16942))
 * [Join Zulip](https://cu-numcomp.zulipchat.com/join/2hpdkyspe5pii6mep3yl76qm/)
 * [Canvas page](https://canvas.colorado.edu/courses/80290)
+* Grader office hours: Friday 11:00 am - 12:30 am via Zoom (https://cuboulder.zoom.us/j/99647042373, Passcode: 906126)
 :::
 
 ::::{admonition} Activities
