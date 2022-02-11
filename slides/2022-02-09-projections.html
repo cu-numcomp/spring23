@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2022-02-09 Projections, rotations, and reflections, oh my! &#8212; Numerical Computation</title>
+    <title>2022-02-09 Projections, rotations, and reflections &#8212; Numerical Computation</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -54,6 +54,7 @@
     <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2022-02-11 Gram-Schmidt" href="2022-02-11-gram-schmidt.html" />
     <link rel="prev" title="2022-02-07 Linear Algebra" href="2022-02-07-linear-algebra.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -171,7 +172,12 @@
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     2022-02-09 Projections, rotations, and reflections, oh my!
+     2022-02-09 Projections, rotations, and reflections
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-02-11-gram-schmidt.html">
+     2022-02-11 Gram-Schmidt
     </a>
    </li>
   </ul>
@@ -285,7 +291,7 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   2022-02-09 Projections, rotations, and reflections, oh my!
+   2022-02-09 Projections, rotations, and reflections
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -370,7 +376,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>2022-02-09 Projections, rotations, and reflections, oh my!</h1>
+                <h1>2022-02-09 Projections, rotations, and reflections</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -382,7 +388,7 @@
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   2022-02-09 Projections, rotations, and reflections, oh my!
+   2022-02-09 Projections, rotations, and reflections
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -466,8 +472,8 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="projections-rotations-and-reflections-oh-my">
-<h1>2022-02-09 Projections, rotations, and reflections, oh my!<a class="headerlink" href="#projections-rotations-and-reflections-oh-my" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="projections-rotations-and-reflections">
+<h1>2022-02-09 Projections, rotations, and reflections<a class="headerlink" href="#projections-rotations-and-reflections" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="last-time">
 <h2>Last time<a class="headerlink" href="#last-time" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
@@ -552,15 +558,15 @@ x^T (y + z) &amp;= x^T y + x^T z \\
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 <span class="nd">@show</span> <span class="n">x</span><span class="o">&#39;</span> <span class="o">*</span> <span class="n">y</span>
 <span class="nd">@show</span> <span class="n">y</span><span class="o">&#39;</span> <span class="o">*</span> <span class="n">x</span><span class="p">;</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x&#39; * y = 1
-y&#39; * x = 1
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x&#39; * y = 2
+y&#39; * x = 2
 </pre></div>
 </div>
 </div>
@@ -572,12 +578,16 @@ y&#39; * x = 1
 <span class="n">cos_θ</span> <span class="o">=</span> <span class="n">x</span><span class="o">&#39;*</span><span class="n">y</span> <span class="o">/</span> <span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">norm</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
 <span class="nd">@show</span> <span class="n">cos_θ</span>
 <span class="nd">@show</span> <span class="n">cos</span><span class="p">(</span><span class="n">ϕ</span><span class="o">-</span><span class="nb">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">acos</span><span class="p">(</span><span class="n">cos_θ</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cos_θ = 0.49999999999999994
 cos(ϕ - pi / 2) = 0.4999999999999999
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0471975511965979
 </pre></div>
 </div>
 </div>
@@ -675,14 +685,11 @@ cos(ϕ - pi / 2) = 0.4999999999999999
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="n">y</span><span class="p">]</span><span class="o">&#39;</span>
-<span class="nd">@show</span> <span class="n">size</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">size</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>size(X) = (2, 50)
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 50)
 </pre></div>
 </div>
@@ -701,7 +708,7 @@ cos(ϕ - pi / 2) = 0.4999999999999999
 <span class="k">end</span>
 
 <span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-<span class="n">tplot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">v</span> <span class="o">*</span> <span class="p">(</span><span class="n">v</span><span class="o">&#39;</span> <span class="o">*</span> <span class="n">X</span><span class="p">))</span>
+<span class="n">tplot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">v</span> <span class="o">*</span> <span class="n">v</span><span class="o">&#39;</span> <span class="o">*</span>  <span class="n">v</span> <span class="o">*</span> <span class="n">v</span><span class="o">&#39;</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -721,17 +728,12 @@ cos(ϕ - pi / 2) = 0.4999999999999999
 
 <span class="c"># What happens if v is not normalized?</span>
 <span class="c"># Discuss with your group and make a prediction before uncommenting and running the line below.</span>
-<span class="c">#tplot(X, v * v&#39; * X)</span>
+<span class="n">tplot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">v</span> <span class="o">*</span> <span class="n">v</span><span class="o">&#39;</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element Vector{Int64}:
- 2
- 0
-</pre></div>
-</div>
-</div>
+<img alt="../_images/2022-02-09-projections_22_0.svg" src="../_images/2022-02-09-projections_22_0.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -904,6 +906,13 @@ cos(ϕ - pi / 2) = 0.4999999999999999
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">2022-02-07 Linear Algebra</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="2022-02-11-gram-schmidt.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2022-02-11 Gram-Schmidt</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             
