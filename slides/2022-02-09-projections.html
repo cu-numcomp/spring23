@@ -180,6 +180,11 @@
      2022-02-11 Gram-Schmidt
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-02-14-qr-factorization.html">
+     2022-02-14 QR Factorization
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -819,7 +824,7 @@ cos(ϕ - pi / 2) = 0.4999999999999999
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">tplot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">givens</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">tplot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">givens</span><span class="p">(</span><span class="mf">.8</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -838,9 +843,7 @@ cos(ϕ - pi / 2) = 0.4999999999999999
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">reflect</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
     <span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)]</span>
-    <span class="c">## BEGIN SOLUTION</span>
-    
-    <span class="c">## END SOLUTION</span>
+    <span class="n">I</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">v</span> <span class="o">*</span> <span class="n">v</span><span class="o">&#39;</span>
 <span class="k">end</span>
 
 <span class="n">tplot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">reflect</span><span class="p">(</span><span class="nb">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">X</span><span class="p">)</span>

@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2022-02-11 Gram-Schmidt &#8212; Numerical Computation</title>
+    <title>2022-02-14 QR Factorization &#8212; Numerical Computation</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -54,8 +54,7 @@
     <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2022-02-14 QR Factorization" href="2022-02-14-qr-factorization.html" />
-    <link rel="prev" title="2022-02-09 Projections, rotations, and reflections" href="2022-02-09-projections.html" />
+    <link rel="prev" title="2022-02-11 Gram-Schmidt" href="2022-02-11-gram-schmidt.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -175,13 +174,13 @@
      2022-02-09 Projections, rotations, and reflections
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-02-11-gram-schmidt.html">
      2022-02-11 Gram-Schmidt
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="2022-02-14-qr-factorization.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      2022-02-14 QR Factorization
     </a>
    </li>
@@ -228,7 +227,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/slides/2022-02-11-gram-schmidt.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/slides/2022-02-14-qr-factorization.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -248,7 +247,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cu-numcomp/spring22/issues/new?title=Issue%20on%20page%20%2Fslides/2022-02-11-gram-schmidt.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cu-numcomp/spring22/issues/new?title=Issue%20on%20page%20%2Fslides/2022-02-14-qr-factorization.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -269,7 +268,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/cu-numcomp/spring22/main?urlpath=tree/slides/2022-02-11-gram-schmidt.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cu-numcomp/spring22/main?urlpath=tree/slides/2022-02-14-qr-factorization.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -296,7 +295,7 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   2022-02-11 Gram-Schmidt
+   2022-02-14 QR Factorization
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -310,28 +309,6 @@
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#polynomials-can-be-orthogonal-too">
-   Polynomials can be orthogonal too!
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#pairwise-inner-product">
-     Pairwise inner product
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#normalization-and-orthogonalization">
-   Normalization and orthogonalization
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#orthogonal-matrices">
-   Orthogonal matrices
-  </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#gram-schmidt-orthogonalization">
@@ -392,6 +369,23 @@
   <a class="reference internal nav-link" href="#a-variant-with-more-parallelism">
    A variant with more parallelism
   </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cost-of-gram-schmidt">
+   Cost of Gram-Schmidt?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#counting-flops-is-a-bad-model">
+   Counting flops is a bad model
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dense-matrix-matrix-mulitply">
+     Dense matrix-matrix mulitply
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -403,7 +397,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>2022-02-11 Gram-Schmidt</h1>
+                <h1>2022-02-14 QR Factorization</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -415,7 +409,7 @@
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   2022-02-11 Gram-Schmidt
+   2022-02-14 QR Factorization
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -429,28 +423,6 @@
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#polynomials-can-be-orthogonal-too">
-   Polynomials can be orthogonal too!
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#pairwise-inner-product">
-     Pairwise inner product
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#normalization-and-orthogonalization">
-   Normalization and orthogonalization
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#orthogonal-matrices">
-   Orthogonal matrices
-  </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#gram-schmidt-orthogonalization">
@@ -512,6 +484,23 @@
    A variant with more parallelism
   </a>
  </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cost-of-gram-schmidt">
+   Cost of Gram-Schmidt?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#counting-flops-is-a-bad-model">
+   Counting flops is a bad model
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dense-matrix-matrix-mulitply">
+     Dense matrix-matrix mulitply
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
                         </nav>
@@ -521,22 +510,22 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="gram-schmidt">
-<h1>2022-02-11 Gram-Schmidt<a class="headerlink" href="#gram-schmidt" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="qr-factorization">
+<h1>2022-02-14 QR Factorization<a class="headerlink" href="#qr-factorization" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="last-time">
 <h2>Last time<a class="headerlink" href="#last-time" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Projections</p></li>
-<li><p>Rotations</p></li>
-<li><p>Reflections</p></li>
+<li><p>Revisit projections, rotations, and reflections</p></li>
+<li><p>Constructing orthogonal bases</p></li>
 </ul>
 </div>
 <div class="section" id="today">
 <h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Revisit projections, rotations, and reflections</p></li>
-<li><p>Constructing orthogonal bases</p></li>
+<li><p>Gram-Schmidt process</p></li>
 <li><p>QR factorization</p></li>
+<li><p>Stability and ill conditioning</p></li>
+<li><p>Intro to performance modeling</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -560,108 +549,12 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌ Info: Precompiling Polynomials [f27b6e38-b328-58d1-80ce-0feddd5e7a45]
-└ @ Base loading.jl:1423
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>vander (generic function with 2 methods)
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="polynomials-can-be-orthogonal-too">
-<h1>Polynomials can be orthogonal too!<a class="headerlink" href="#polynomials-can-be-orthogonal-too" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="n">M</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="p">[</span><span class="mf">.5</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span> <span class="c"># 0.5</span>
-         <span class="mi">0</span>  <span class="mi">1</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span>  <span class="c"># x</span>
-         <span class="mi">0</span>  <span class="mi">0</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">]</span><span class="o">&#39;</span> <span class="c"># x^2</span>
-<span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">M</span><span class="p">)</span>
-<span class="n">plot!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="ss">:none</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="ss">:black</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/2022-02-11-gram-schmidt_3_0.svg" src="../_images/2022-02-11-gram-schmidt_3_0.svg" /></div>
-</div>
-<ul class="simple">
-<li><p>Which inner product will be zero?</p>
-<ul>
-<li><p>Which functions are even and odd?</p></li>
-</ul>
-</li>
-</ul>
-<div class="section" id="pairwise-inner-product">
-<h2>Pairwise inner product<a class="headerlink" href="#pairwise-inner-product" title="Permalink to this headline">¶</a></h2>
-<p>The pairwise inner products between two sets of vectors can be expressed by collecting the sets as columns in matrices and writing <span class="math notranslate nohighlight">\(A = X^T Y\)</span> where <span class="math notranslate nohighlight">\(A_{i,j} = x_i^T y_j\)</span>.
-It follows from this definition that
-<div class="math notranslate nohighlight">
-\[ (X^T Y)^T = Y^T X .\]</div>
-</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">M</span><span class="o">&#39;</span> <span class="o">*</span> <span class="n">M</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×3 Matrix{Float64}:
- 12.5          -1.11022e-15   8.67347
- -1.11022e-15  17.3469       -2.22045e-16
-  8.67347      -2.22045e-16  10.8272
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="normalization-and-orthogonalization">
-<h1>Normalization and orthogonalization<a class="headerlink" href="#normalization-and-orthogonalization" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">q1</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">q1</span> <span class="o">/=</span> <span class="n">norm</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span> <span class="c"># normalize q1</span>
-<span class="n">Q</span> <span class="o">=</span> <span class="p">[</span><span class="n">q1</span> <span class="n">M</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="mi">2</span><span class="o">:</span><span class="k">end</span><span class="p">]]</span>
-<span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Q</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/2022-02-11-gram-schmidt_7_0.svg" src="../_images/2022-02-11-gram-schmidt_7_0.svg" /></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Q</span><span class="o">&#39;</span> <span class="o">*</span> <span class="n">Q</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×3 Matrix{Float64}:
-  1.0          -1.94289e-16   2.45323
- -1.94289e-16  17.3469       -2.22045e-16
-  2.45323      -2.22045e-16  10.8272
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="orthogonal-matrices">
-<h1>Orthogonal matrices<a class="headerlink" href="#orthogonal-matrices" title="Permalink to this headline">¶</a></h1>
-<p>If <span class="math notranslate nohighlight">\(x^T y = 0\)</span> then we say <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are <strong>orthogonal</strong> (or “<span class="math notranslate nohighlight">\(x\)</span> is orthogonal to <span class="math notranslate nohighlight">\(y\)</span>”).
-A vector is said to be <strong>normalized</strong> if <span class="math notranslate nohighlight">\(\lVert x \rVert = 1\)</span>.
-If <span class="math notranslate nohighlight">\(x\)</span> is orthogonal to <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(\lVert x \rVert = \lVert y \rVert = 1\)</span> then we say <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are <strong>orthonormal</strong>.
-A square matrix with orthonormal columns is said to be an <strong>orthogonal matrix</strong>.
-We typically use <span class="math notranslate nohighlight">\(Q\)</span> or <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> for matrices that are known/constructed to be orthogonal.
-Orthogonal matrices are always full rank – the columns are linearly independent.
-The inverse of a orthogonal matrix is its transpose:
-<div class="math notranslate nohighlight">
-\[ Q^T Q = Q Q^T = I . \]</div>
-
-Orthogonal matrices are a powerful building block for robust numerical algorithms.</p>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="gram-schmidt-orthogonalization">
 <h1>Gram-Schmidt orthogonalization<a class="headerlink" href="#gram-schmidt-orthogonalization" title="Permalink to this headline">¶</a></h1>
@@ -726,7 +619,7 @@ norm(Q * R - A) = 2.500206551829073e-16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2022-02-11-gram-schmidt_15_0.svg" src="../_images/2022-02-11-gram-schmidt_15_0.svg" /></div>
+<img alt="../_images/2022-02-14-qr-factorization_7_0.svg" src="../_images/2022-02-14-qr-factorization_7_0.svg" /></div>
 </div>
 <p>What happens if we use more than 50 values of <span class="math notranslate nohighlight">\(x\)</span>? Is there a continuous limit?</p>
 </div>
@@ -755,7 +648,7 @@ norm(Q * R - A) = 2.500206551829073e-16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2022-02-11-gram-schmidt_19_0.svg" src="../_images/2022-02-11-gram-schmidt_19_0.svg" /></div>
+<img alt="../_images/2022-02-14-qr-factorization_11_0.svg" src="../_images/2022-02-14-qr-factorization_11_0.svg" /></div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="how-accurate-is-it">
@@ -784,8 +677,11 @@ norm(Q * R - A) = 8.268821431611631e-16
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="a-variant-with-more-parallelism">
 <h1>A variant with more parallelism<a class="headerlink" href="#a-variant-with-more-parallelism" title="Permalink to this headline">¶</a></h1>
-<div class="math notranslate nohighlight">
-\[ q_2 q_2^T (q_1 q_1^T v) = q_2 (q_2^T q_1) q_1^T v = 0 \]</div>
+<div class="amsmath math notranslate nohighlight" id="equation-9d975863-e027-4077-95c9-089dd66dc86c">
+<span class="eqno">(9)<a class="headerlink" href="#equation-9d975863-e027-4077-95c9-089dd66dc86c" title="Permalink to this equation">¶</a></span>\[\begin{align}
+(I - q_2 q_2^T) (I - q_1 q_1^T) v &amp;= (I - q_1 q_1^T - q_2 q_2^T + q_2 q_2^T q_1 q_1^T) v \\
+&amp;= \Bigg( I - \Big[ q_1 \Big| q_2 \Big] \begin{bmatrix} q_1^T \\ q_2^T \end{bmatrix} \Bigg) v
+\end{align}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">gram_schmidt_classical</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
@@ -832,6 +728,37 @@ norm(Q * R - A) = 1.217027619812654e-16
 </div>
 </div>
 </div>
+<div class="tex2jax_ignore mathjax_ignore section" id="cost-of-gram-schmidt">
+<h1>Cost of Gram-Schmidt?<a class="headerlink" href="#cost-of-gram-schmidt" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>We’ll count flops (addition, multiplication, division*)</p></li>
+<li><p>Inner product <span class="math notranslate nohighlight">\(\sum_{i=1}^m x_i y_i\)</span>?</p></li>
+<li><p>Vector “axpy”: <span class="math notranslate nohighlight">\(y_i = a x_i + y_i\)</span>, <span class="math notranslate nohighlight">\(i \in [1, 2, \dotsc, m]\)</span>.</p></li>
+<li><p>Look at the inner loop:</p></li>
+</ul>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">Q</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">k</span><span class="p">]</span><span class="o">&#39;</span> <span class="o">*</span> <span class="n">v</span>
+    <span class="n">v</span> <span class="o">-=</span> <span class="n">Q</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">r</span>
+    <span class="n">R</span><span class="p">[</span><span class="n">k</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<img src="../img/flop-per-byte-dp.png" width="90%" /></div>
+<div class="tex2jax_ignore mathjax_ignore section" id="counting-flops-is-a-bad-model">
+<h1>Counting flops is a bad model<a class="headerlink" href="#counting-flops-is-a-bad-model" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>We load a single entry (8 bytes) and do 2 flops (add + multiply). That’s an <strong>arithmetic intensity</strong> of 0.25 flops/byte.</p></li>
+<li><p>Current hardware can do about 10 flops per byte, so our best algorithms will run at about 2% efficiency.</p></li>
+<li><p>Need to focus on memory bandwidth, not flops.</p></li>
+</ul>
+<div class="section" id="dense-matrix-matrix-mulitply">
+<h2>Dense matrix-matrix mulitply<a class="headerlink" href="#dense-matrix-matrix-mulitply" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/flame/blis/">BLIS project</a></p></li>
+<li><p><a class="reference external" href="https://www.cs.utexas.edu/users/flame/pubs/TOMS-BLIS-Analytical.pdf">Analytic modeling</a></p></li>
+</ul>
+<img src="../img/blis-microkernel-stack.png" width="70%" /></div>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -858,19 +785,12 @@ norm(Q * R - A) = 1.217027619812654e-16
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="2022-02-09-projections.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022-02-11-gram-schmidt.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">2022-02-09 Projections, rotations, and reflections</p>
+            <p class="prev-next-title">2022-02-11 Gram-Schmidt</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="2022-02-14-qr-factorization.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">2022-02-14 QR Factorization</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             
