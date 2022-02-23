@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2022-02-21 QR Retrospective &#8212; Numerical Computation</title>
+    <title>2022-02-23 Singular Value Decomposition &#8212; Numerical Computation</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -54,7 +54,7 @@
     <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="2022-02-18 Householder QR" href="2022-02-18-householder.html" />
+    <link rel="prev" title="2022-02-21 QR Retrospective" href="2022-02-21-qr-retrospective.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -194,9 +194,14 @@
      2022-02-18 Householder QR
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-02-21-qr-retrospective.html">
+     2022-02-21 QR Retrospective
+    </a>
+   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     2022-02-21 QR Retrospective
+     2022-02-23 Singular Value Decomposition
     </a>
    </li>
   </ul>
@@ -242,7 +247,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/slides/2022-02-21-qr-retrospective.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/slides/2022-02-23-svd.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -262,7 +267,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cu-numcomp/spring22/issues/new?title=Issue%20on%20page%20%2Fslides/2022-02-21-qr-retrospective.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cu-numcomp/spring22/issues/new?title=Issue%20on%20page%20%2Fslides/2022-02-23-svd.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -283,7 +288,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/cu-numcomp/spring22/main?urlpath=tree/slides/2022-02-21-qr-retrospective.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cu-numcomp/spring22/main?urlpath=tree/slides/2022-02-23-svd.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -310,7 +315,7 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   2022-02-21 QR Retrospective
+   2022-02-23 Singular Value Decomposition
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -324,62 +329,6 @@
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#householder-qr">
-   Householder QR
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#constructing-the-q-j">
-   Constructing the
-   <span class="math notranslate nohighlight">
-    \(Q_j\)
-   </span>
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#adventures-in-reflection">
-   Adventures in reflection
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#an-algorithm">
-   An algorithm
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#how-to-interpret-v-as-q">
-   How to interpret
-   <span class="math notranslate nohighlight">
-    \(V\)
-   </span>
-   as
-   <span class="math notranslate nohighlight">
-    \(Q\)
-   </span>
-   ?
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#great-but-we-can-still-break-it">
-   Great, but we can still break it
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#an-improved-algorithm">
-   An improved algorithm
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#householder-is-backward-stable">
-   Householder is backward stable
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#orthogonality-is-preserved">
-   Orthogonality is preserved
-  </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#composition-of-reflectors">
@@ -419,6 +368,96 @@
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#profiling">
    Profiling
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#condition-number-of-a-matrix">
+     Condition number of a matrix
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#matrix-norms-induced-by-vector-norms">
+     Matrix norms induced by vector norms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-formula-makes-sense-but-still-depends-on-x">
+   The formula makes sense, but still depends on
+   <span class="math notranslate nohighlight">
+    \(x\)
+   </span>
+   .
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#condition-number-of-the-matrix">
+     Condition number of the matrix
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#least-squares-and-the-normal-equations">
+     Least squares and the normal equations
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#solution-by-qr-householder">
+       Solution by QR (Householder)
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#solution-by-cholesky">
+       Solution by Cholesky
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#solution-by-singular-value-decomposition">
+       Solution by Singular Value Decomposition
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#activity-geometry-of-the-singular-value-decomposition">
+   Activity: Geometry of the Singular Value Decomposition
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#diagonal-matrices">
+   Diagonal matrices
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#givens-rotation-as-example-of-orthogonal-matrix">
+   Givens Rotation (as example of orthogonal matrix)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reflection">
+   Reflection
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Singular Value Decomposition
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parts-of-the-svd">
+   Parts of the SVD
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#putting-it-together">
+   Putting it together
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
   </a>
  </li>
 </ul>
@@ -431,7 +470,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>2022-02-21 QR Retrospective</h1>
+                <h1>2022-02-23 Singular Value Decomposition</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -443,7 +482,7 @@
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   2022-02-21 QR Retrospective
+   2022-02-23 Singular Value Decomposition
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -457,62 +496,6 @@
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#householder-qr">
-   Householder QR
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#constructing-the-q-j">
-   Constructing the
-   <span class="math notranslate nohighlight">
-    \(Q_j\)
-   </span>
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#adventures-in-reflection">
-   Adventures in reflection
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#an-algorithm">
-   An algorithm
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#how-to-interpret-v-as-q">
-   How to interpret
-   <span class="math notranslate nohighlight">
-    \(V\)
-   </span>
-   as
-   <span class="math notranslate nohighlight">
-    \(Q\)
-   </span>
-   ?
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#great-but-we-can-still-break-it">
-   Great, but we can still break it
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#an-improved-algorithm">
-   An improved algorithm
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#householder-is-backward-stable">
-   Householder is backward stable
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#orthogonality-is-preserved">
-   Orthogonality is preserved
-  </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#composition-of-reflectors">
@@ -553,6 +536,96 @@
   <a class="reference internal nav-link" href="#profiling">
    Profiling
   </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#condition-number-of-a-matrix">
+     Condition number of a matrix
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#matrix-norms-induced-by-vector-norms">
+     Matrix norms induced by vector norms
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-formula-makes-sense-but-still-depends-on-x">
+   The formula makes sense, but still depends on
+   <span class="math notranslate nohighlight">
+    \(x\)
+   </span>
+   .
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#condition-number-of-the-matrix">
+     Condition number of the matrix
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#least-squares-and-the-normal-equations">
+     Least squares and the normal equations
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#solution-by-qr-householder">
+       Solution by QR (Householder)
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#solution-by-cholesky">
+       Solution by Cholesky
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#solution-by-singular-value-decomposition">
+       Solution by Singular Value Decomposition
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#activity-geometry-of-the-singular-value-decomposition">
+   Activity: Geometry of the Singular Value Decomposition
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#diagonal-matrices">
+   Diagonal matrices
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#givens-rotation-as-example-of-orthogonal-matrix">
+   Givens Rotation (as example of orthogonal matrix)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reflection">
+   Reflection
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Singular Value Decomposition
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parts-of-the-svd">
+   Parts of the SVD
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#putting-it-together">
+   Putting it together
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#observations">
+   Observations
+  </a>
  </li>
 </ul>
 
@@ -563,23 +636,22 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="qr-retrospective">
-<h1>2022-02-21 QR Retrospective<a class="headerlink" href="#qr-retrospective" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="singular-value-decomposition">
+<h1>2022-02-23 Singular Value Decomposition<a class="headerlink" href="#singular-value-decomposition" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="last-time">
 <h2>Last time<a class="headerlink" href="#last-time" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Performance strategies</p></li>
-<li><p>Right vs left-looking algorithms</p></li>
-<li><p>Elementary reflectors</p></li>
+<li><p>Householder QR</p></li>
+<li><p>Composition of reflectors</p></li>
 </ul>
 </div>
 <div class="section" id="today">
 <h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Householder QR</p></li>
 <li><p>Comparison of interfaces</p></li>
 <li><p>Profiling</p></li>
 <li><p>Cholesky QR</p></li>
+<li><p>Matrix norms and conditioning</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -612,221 +684,8 @@
     <span class="k">end</span>
     <span class="n">Q</span><span class="p">,</span> <span class="n">R</span>
 <span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>gram_schmidt_classical (generic function with 1 method)
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="householder-qr">
-<h1>Householder QR<a class="headerlink" href="#householder-qr" title="Permalink to this headline">¶</a></h1>
-<p>Gram-Schmidt constructed a triangular matrix <span class="math notranslate nohighlight">\(R\)</span> to orthogonalize <span class="math notranslate nohighlight">\(A\)</span> into <span class="math notranslate nohighlight">\(Q\)</span>. Each step was a projector, which is a rank-deficient operation. Householder uses orthogonal transformations (reflectors) to triangularize.</p>
-<div class="math notranslate nohighlight">
-\[ \underbrace{Q_{n} \dotsb Q_1}_{Q^T} A = R \]</div>
-<p>The structure of the algorithm is</p>
-<div class="math notranslate nohighlight">
-\[\begin{split} \underbrace{\begin{bmatrix} * &amp; * &amp; * \\ * &amp; * &amp; * \\ * &amp; * &amp; * \\ * &amp; * &amp; * \\ * &amp; * &amp; * \\ \end{bmatrix}}_{A} \to
-\underbrace{\begin{bmatrix} * &amp; * &amp; * \\ 0 &amp; * &amp; * \\ 0 &amp; * &amp; * \\ 0 &amp; * &amp; * \\ 0 &amp; * &amp; * \\ \end{bmatrix}}_{Q_1 A} \to
-\underbrace{\begin{bmatrix} * &amp; * &amp; * \\ 0 &amp; * &amp; * \\ 0 &amp; 0 &amp; * \\ 0 &amp; 0 &amp; * \\ 0 &amp; 0 &amp; * \\ \end{bmatrix}}_{Q_2 Q_1 A} \to
-\underbrace{\begin{bmatrix} * &amp; * &amp; * \\ 0 &amp; * &amp; * \\ 0 &amp; 0 &amp; * \\ 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 0 \\ \end{bmatrix}}_{Q_3 Q_2 Q_1 A}
-\end{split}\]</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="constructing-the-q-j">
-<h1>Constructing the <span class="math notranslate nohighlight">\(Q_j\)</span><a class="headerlink" href="#constructing-the-q-j" title="Permalink to this headline">¶</a></h1>
-<div class="math notranslate nohighlight">
-\[ \underbrace{Q_{n} \dotsb Q_1}_{Q^T} A = R \]</div>
-<p>Each of our <span class="math notranslate nohighlight">\(Q_j\)</span> will have the form
-<div class="math notranslate nohighlight">
-\[\begin{split}Q_j = \begin{bmatrix} I_i &amp; 0 \\ 0 &amp; F \end{bmatrix}\end{split}\]</div>
 
-where <span class="math notranslate nohighlight">\(F\)</span> is a “reflection” that achieves
-<div class="math notranslate nohighlight">
-\[\begin{split} F x = \begin{bmatrix} \lVert x \rVert \\ 0 \\ 0 \\ \vdots \end{bmatrix} \end{split}\]</div>
-
-where <span class="math notranslate nohighlight">\(x\)</span> is the column of <span class="math notranslate nohighlight">\(R\)</span> from the diagonal down.
-This transformation is a reflection across a plane with normal <span class="math notranslate nohighlight">\(v = Fx - x = \lVert x \rVert e_1 - x\)</span>.</p>
-<p><img alt="Householder Reflector (Trefethen and Bau, 1999)" src="../_images/TB-Householder.png" /></p>
-<p>The reflection, as depicted above by Trefethen and Bau (1999) can be written <span class="math notranslate nohighlight">\(F = I - 2 \frac{v v^T}{v^T v}\)</span>.</p>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="adventures-in-reflection">
-<h1>Adventures in reflection<a class="headerlink" href="#adventures-in-reflection" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="n">A</span> <span class="o">+=</span> <span class="n">A</span><span class="o">&#39;</span>
-<span class="n">v</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-<span class="n">v</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-<span class="n">F</span> <span class="o">=</span> <span class="n">I</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">v</span> <span class="o">*</span> <span class="n">v</span><span class="o">&#39;</span>
-<span class="n">B</span> <span class="o">=</span> <span class="n">F</span> <span class="o">*</span> <span class="n">A</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4×4 Matrix{Float64}:
- 2.60433      2.36089   1.70012    2.01843
- 1.10168e-16  1.17304   0.970666   0.181717
- 2.13887e-16  0.56295   0.0443916  0.84314
- 1.51129e-16  0.334055  1.30142    0.615434
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">B</span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="k">end</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-<span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">);</span> <span class="n">v</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-<span class="n">F</span> <span class="o">=</span> <span class="n">I</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">v</span> <span class="o">*</span> <span class="n">v</span><span class="o">&#39;</span>
-<span class="n">B</span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="k">end</span><span class="p">,</span> <span class="mi">2</span><span class="o">:</span><span class="k">end</span><span class="p">]</span> <span class="o">=</span> <span class="n">F</span> <span class="o">*</span> <span class="n">B</span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="k">end</span><span class="p">,</span> <span class="mi">2</span><span class="o">:</span><span class="k">end</span><span class="p">]</span>
-<span class="n">B</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4×4 Matrix{Float64}:
-  1.57236       1.30985       1.71012    1.94193
- -2.12968e-16   0.862657      0.432445   1.07707
- -8.25206e-17  -5.55112e-17  -0.227314  -0.0211876
- -8.76049e-17   2.77556e-17  -0.270377  -0.369496
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="an-algorithm">
-<h1>An algorithm<a class="headerlink" href="#an-algorithm" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">qr_householder_naive</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-    <span class="n">R</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-    <span class="n">V</span> <span class="o">=</span> <span class="p">[]</span> <span class="c"># list of reflectors</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">n</span>
-        <span class="n">v</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="o">:</span><span class="n">end</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span>
-        <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-        <span class="n">v</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-        <span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="o">:</span><span class="n">end</span><span class="p">,</span><span class="n">j</span><span class="o">:</span><span class="n">end</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">v</span> <span class="o">*</span> <span class="p">(</span><span class="n">v</span><span class="o">&#39;</span> <span class="o">*</span> <span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="o">:</span><span class="n">end</span><span class="p">,</span><span class="n">j</span><span class="o">:</span><span class="n">end</span><span class="p">])</span>
-        <span class="n">push!</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
-    <span class="k">end</span>
-    <span class="n">V</span><span class="p">,</span> <span class="n">R</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>qr_householder_naive (generic function with 1 method)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
-<span class="n">V</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">qr_householder_naive</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="n">_</span><span class="p">,</span> <span class="n">R_</span> <span class="o">=</span> <span class="n">qr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="n">R_</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4×4 Matrix{Float64}:
- -2.0  0.0      -1.11111      0.0
-  0.0  1.49071   1.38778e-17  1.3582
-  0.0  0.0       0.888889     9.71445e-17
-  0.0  0.0       0.0          0.397523
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="how-to-interpret-v-as-q">
-<h1>How to interpret <span class="math notranslate nohighlight">\(V\)</span> as <span class="math notranslate nohighlight">\(Q\)</span>?<a class="headerlink" href="#how-to-interpret-v-as-q" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">reflectors_mult</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">v</span> <span class="k">in</span> <span class="n">reverse</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
-        <span class="n">y</span><span class="p">[</span><span class="k">end</span><span class="o">-</span><span class="n">n</span><span class="o">:</span><span class="n">end</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">v</span> <span class="o">*</span> <span class="p">(</span><span class="n">v</span><span class="o">&#39;</span> <span class="o">*</span> <span class="n">y</span><span class="p">[</span><span class="k">end</span><span class="o">-</span><span class="n">n</span><span class="o">:</span><span class="n">end</span><span class="p">])</span>
-    <span class="k">end</span>
-    <span class="n">y</span>
-<span class="k">end</span>
-
-<span class="k">function</span> <span class="n">reflectors_to_dense</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
-    <span class="n">m</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">V</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-    <span class="n">Q</span> <span class="o">=</span> <span class="n">diagm</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
-    <span class="k">for</span> <span class="n">j</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">m</span>
-        <span class="n">Q</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">reflectors_mult</span><span class="p">(</span><span class="n">V</span><span class="p">,</span> <span class="n">Q</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">j</span><span class="p">])</span>
-    <span class="k">end</span>
-    <span class="n">Q</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>reflectors_to_dense (generic function with 1 method)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
-<span class="n">V</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">qr_householder_naive</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="n">Q</span> <span class="o">=</span> <span class="n">reflectors_to_dense</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
-<span class="nd">@show</span> <span class="n">norm</span><span class="p">(</span><span class="n">Q</span><span class="o">&#39;</span> <span class="o">*</span> <span class="n">Q</span> <span class="o">-</span> <span class="n">I</span><span class="p">)</span>
-<span class="nd">@show</span> <span class="n">norm</span><span class="p">(</span><span class="n">Q</span> <span class="o">*</span> <span class="n">R</span> <span class="o">-</span> <span class="n">A</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(Q&#39; * Q - I) = 3.7994490775439526e-15
-norm(Q * R - A) = 7.562760794606217e-15
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="great-but-we-can-still-break-it">
-<h1>Great, but we can still break it<a class="headerlink" href="#great-but-we-can-still-break-it" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">0</span><span class="p">;</span> <span class="mf">1e-4</span> <span class="mf">1.</span><span class="p">]</span>
-<span class="n">V</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">qr_householder_naive</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="n">R</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 Matrix{Float64}:
-  1.0          0.0001
- -3.57747e-13  1.0
-</pre></div>
-</div>
-</div>
-</div>
-<p>We had the lines</p>
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span>    <span class="n">v</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">R</span><span class="p">[</span><span class="n">j</span><span class="o">:</span><span class="n">end</span><span class="p">,</span> <span class="n">j</span><span class="p">])</span>
-    <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-    <span class="n">v</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>What happens when <code class="docutils literal notranslate"><span class="pre">R</span></code> is already upper triangular?</p>
-<p><img alt="Choosing the better of two Householder reflectors (Trefethen and Bau, 1999)." src="../_images/TB-Householder2.png" /></p>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="an-improved-algorithm">
-<h1>An improved algorithm<a class="headerlink" href="#an-improved-algorithm" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">qr_householder</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="k">function</span> <span class="n">qr_householder</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
     <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
     <span class="n">R</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
     <span class="n">V</span> <span class="o">=</span> <span class="p">[]</span> <span class="c"># list of reflectors</span>
@@ -848,165 +707,34 @@ norm(Q * R - A) = 7.562760794606217e-15
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="o">-</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="mf">1e-10</span>
-<span class="n">V</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">qr_householder</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="n">tau</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span> <span class="k">for</span> <span class="n">v</span> <span class="k">in</span> <span class="n">V</span><span class="p">]</span>
-<span class="nd">@show</span> <span class="n">tau</span>
-<span class="n">V1</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="o">./</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="k">in</span> <span class="n">V</span><span class="p">]</span>
-<span class="nd">@show</span> <span class="n">V1</span>
-<span class="n">R</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tau = [1.894427190999916, 2.0]
-V1 = [[1.0, -0.2360679774997897], [1.0]]
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 Matrix{Float64}:
- -2.23607e-10   1.78885e-10
- -1.29247e-26  -1.34164e-10
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="householder-is-backward-stable">
-<h1>Householder is backward stable<a class="headerlink" href="#householder-is-backward-stable" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="mi">40</span>
-<span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
-<span class="n">V</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">qr_householder</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="n">Q</span> <span class="o">=</span> <span class="n">reflectors_to_dense</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
-<span class="nd">@show</span> <span class="n">norm</span><span class="p">(</span><span class="n">Q</span><span class="o">&#39;</span> <span class="o">*</span> <span class="n">Q</span> <span class="o">-</span> <span class="n">I</span><span class="p">)</span>
-<span class="nd">@show</span> <span class="n">norm</span><span class="p">(</span><span class="n">Q</span> <span class="o">*</span> <span class="n">R</span> <span class="o">-</span> <span class="n">A</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(Q&#39; * Q - I) = 5.949301496893686e-15
-norm(Q * R - A) = 1.2090264267288813e-14
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">0</span><span class="p">;</span> <span class="mi">0</span> <span class="mf">1.</span><span class="p">]</span>
-<span class="n">V</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">qr_householder</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="n">qr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LinearAlgebra.QRCompactWY{Float64, Matrix{Float64}}
-Q factor:
-2×2 LinearAlgebra.QRCompactWYQ{Float64, Matrix{Float64}}:
- 1.0  0.0
- 0.0  1.0
-R factor:
-2×2 Matrix{Float64}:
- 1.0  0.0
- 0.0  1.0
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="orthogonality-is-preserved">
-<h1>Orthogonality is preserved<a class="headerlink" href="#orthogonality-is-preserved" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-<span class="n">A</span> <span class="o">=</span> <span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">Q</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">gram_schmidt_classical</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="n">v</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="k">end</span><span class="p">]</span>
-<span class="nd">@show</span> <span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-<span class="n">scatter</span><span class="p">(</span><span class="n">abs</span><span class="o">.</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">&#39;</span> <span class="o">*</span> <span class="n">v</span><span class="p">),</span> <span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&quot;Classical Gram-Schmidt&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(v) = 1.4245900685395503
-</pre></div>
-</div>
-<img alt="../_images/2022-02-21-qr-retrospective_25_1.svg" src="../_images/2022-02-21-qr-retrospective_25_1.svg" /></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Q</span> <span class="o">=</span> <span class="n">reflectors_to_dense</span><span class="p">(</span><span class="n">qr_householder</span><span class="p">(</span><span class="n">A</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">scatter</span><span class="p">(</span><span class="n">abs</span><span class="o">.</span><span class="p">(</span><span class="n">Q</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">&#39;</span> <span class="o">*</span> <span class="n">v</span><span class="p">),</span> <span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">&quot;Householder QR&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/2022-02-21-qr-retrospective_26_0.svg" src="../_images/2022-02-21-qr-retrospective_26_0.svg" /></div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="composition-of-reflectors">
 <h1>Composition of reflectors<a class="headerlink" href="#composition-of-reflectors" title="Permalink to this headline">¶</a></h1>
-<div class="amsmath math notranslate nohighlight" id="equation-d71ef3fc-77d7-4570-8169-ce20e030b003">
-<span class="eqno">(14)<a class="headerlink" href="#equation-d71ef3fc-77d7-4570-8169-ce20e030b003" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-1a9fefaa-a467-4fd5-8a84-a380b2fd78ec">
+<span class="eqno">(15)<a class="headerlink" href="#equation-1a9fefaa-a467-4fd5-8a84-a380b2fd78ec" title="Permalink to this equation">¶</a></span>\[\begin{align}
 (I - 2 v v^T) (I - 2 w w^T) &amp;= I - 2 v v^T - 2 w w^T + 4 v (v^T w) w^T \\
 &amp;= I - \Bigg[v \Bigg| w \Bigg] \begin{bmatrix} 2 &amp; -4 v^T w \\ 0 &amp; 2 \end{bmatrix} \begin{bmatrix} v^T \\ w^T \end{bmatrix}
 \end{align}\]</div>
 <p>This turns applying reflectors from a sequence of vector operations to a sequence of (smallish) matrix operations. It’s the key to high performance and the native format (<code class="docutils literal notranslate"><span class="pre">QRCompactWY</span></code>) returned by Julia <code class="docutils literal notranslate"><span class="pre">qr()</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Q</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">qr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">Q</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">qr</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LinearAlgebra.QRCompactWY{Float64, Matrix{Float64}}
-Q factor:
-20×20 LinearAlgebra.QRCompactWYQ{Float64, Matrix{Float64}}:
- -0.223607  -0.368394   -0.430192    0.437609   …  -3.23545e-5   -5.31905e-6
- -0.223607  -0.329616   -0.294342    0.161225       0.000550027   0.000101062
- -0.223607  -0.290838   -0.173586   -0.0383868     -0.00436786   -0.000909558
- -0.223607  -0.252059   -0.067925   -0.170257       0.0214511     0.00515416
- -0.223607  -0.213281    0.0226417  -0.243417      -0.0726036    -0.0206167
- -0.223607  -0.174503    0.0981139  -0.266901   …   0.178209      0.06185
- -0.223607  -0.135724    0.158492   -0.24974       -0.323416     -0.144317
- -0.223607  -0.0969458   0.203775   -0.200966       0.429021      0.268016
- -0.223607  -0.0581675   0.233964   -0.129612      -0.386119     -0.402025
- -0.223607  -0.0193892   0.249058   -0.0447093      0.157308      0.491364
- -0.223607   0.0193892   0.249058    0.0447093  …   0.157308     -0.491364
- -0.223607   0.0581675   0.233964    0.129612      -0.386119      0.402025
- -0.223607   0.0969458   0.203775    0.200966       0.429021     -0.268016
- -0.223607   0.135724    0.158492    0.24974       -0.323416      0.144317
- -0.223607   0.174503    0.0981139   0.266901       0.178209     -0.06185
- -0.223607   0.213281    0.0226417   0.243417   …  -0.0726036     0.0206167
- -0.223607   0.252059   -0.067925    0.170257       0.0214511    -0.00515416
- -0.223607   0.290838   -0.173586    0.0383868     -0.00436786    0.000909558
- -0.223607   0.329616   -0.294342   -0.161225       0.000550027  -0.000101062
- -0.223607   0.368394   -0.430192   -0.437609      -3.23545e-5    5.31905e-6
-R factor:
-20×20 Matrix{Float64}:
- -4.47214  0.0      -1.64763       0.0          …  -0.514468      2.22045e-16
-  0.0      2.71448   1.11022e-16   1.79412         -2.498e-16     0.823354
-  0.0      0.0      -1.46813       5.55112e-17     -0.944961     -2.23779e-16
-  0.0      0.0       0.0          -0.774796         3.83808e-17  -0.913056
-  0.0      0.0       0.0           0.0              0.797217     -4.06264e-16
-  0.0      0.0       0.0           0.0          …  -3.59496e-16   0.637796
-  0.0      0.0       0.0           0.0             -0.455484     -1.3936e-15
-  0.0      0.0       0.0           0.0              4.40958e-16  -0.313652
-  0.0      0.0       0.0           0.0             -0.183132      1.64685e-15
-  0.0      0.0       0.0           0.0              4.82253e-16   0.109523
-  0.0      0.0       0.0           0.0          …   0.0510878     5.9848e-16
-  0.0      0.0       0.0           0.0             -2.68709e-15   0.0264553
-  0.0      0.0       0.0           0.0             -0.0094344    -2.94383e-15
-  0.0      0.0       0.0           0.0              2.08514e-15   0.00417208
-  0.0      0.0       0.0           0.0              0.0010525    -2.24994e-15
-  0.0      0.0       0.0           0.0          …  -1.64363e-15  -0.000385264
-  0.0      0.0       0.0           0.0             -5.9057e-5     7.69025e-16
-  0.0      0.0       0.0           0.0              1.76642e-16  -1.66202e-5
-  0.0      0.0       0.0           0.0             -1.04299e-6   -1.68771e-16
-  0.0      0.0       0.0           0.0              0.0           1.71467e-7
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">UndefVarError</span>: vander not defined
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span><span class="mi">2</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="nb">eval</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">373</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">include_string</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">REPL</span><span class="o">.</span><span class="n">softscope</span><span class="p">),</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">code</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">filename</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1196</span>
 </pre></div>
 </div>
 </div>
@@ -1684,6 +1412,320 @@ if (typeof require === 'function' && define.amd) {
 </html>
 </div></div>
 </div>
+<div class="section" id="condition-number-of-a-matrix">
+<h2>Condition number of a matrix<a class="headerlink" href="#condition-number-of-a-matrix" title="Permalink to this headline">¶</a></h2>
+<p>We may have informally referred to a matrix as “ill-conditioned” when the columns are nearly linearly dependent, but let’s make this concept for precise.  Recall the definition of (relative) condition number:</p>
+<div class="math notranslate nohighlight">
+\[ \kappa = \max_{\delta x} \frac{|\delta f|/|f|}{|\delta x|/|x|} . \]</div>
+<p>We understood this definition for scalar problems, but it also makes sense when the inputs and/or outputs are vectors (or matrices, etc.) and absolute value is replaced by vector (or matrix) norms.  Consider matrix-vector multiplication, for which <span class="math notranslate nohighlight">\(f(x) = A x\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[ \kappa(A) = \max_{\delta x} \frac{\lVert A (x+\delta x) - A x \rVert/\lVert A x \rVert}{\lVert \delta x\rVert/\lVert x \rVert}
+= \max_{\delta x} \frac{\lVert A \delta x \rVert}{\lVert \delta x \rVert} \, \frac{\lVert x \rVert}{\lVert A x \rVert} = \lVert A \rVert \frac{\lVert x \rVert}{\lVert A x \rVert} . \]</div>
+<p>There are two problems here:</p>
+<ul class="simple">
+<li><p>I wrote <span class="math notranslate nohighlight">\(\kappa(A)\)</span> but my formula depends on <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+<li><p>What is that <span class="math notranslate nohighlight">\(\lVert A \rVert\)</span> beastie?</p></li>
+</ul>
+</div>
+<div class="section" id="matrix-norms-induced-by-vector-norms">
+<h2>Matrix norms induced by vector norms<a class="headerlink" href="#matrix-norms-induced-by-vector-norms" title="Permalink to this headline">¶</a></h2>
+<p>Vector norms are built into the linear space (and defined in term of the inner product).  Matrix norms are <em>induced</em> by vector norms, according to</p>
+<div class="math notranslate nohighlight">
+\[ \lVert A \rVert = \max_{x \ne 0} \frac{\lVert A x \rVert}{\lVert x \rVert} . \]</div>
+<ul class="simple">
+<li><p>This equation makes sense for non-square matrices – the vector norms of the input and output spaces may differ.</p></li>
+<li><p>Due to linearity, all that matters is direction of <span class="math notranslate nohighlight">\(x\)</span>, so it could equivalently be written</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[ \lVert A \rVert = \max_{\lVert x \rVert = 1} \lVert A x \rVert . \]</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="the-formula-makes-sense-but-still-depends-on-x">
+<h1>The formula makes sense, but still depends on <span class="math notranslate nohighlight">\(x\)</span>.<a class="headerlink" href="#the-formula-makes-sense-but-still-depends-on-x" title="Permalink to this headline">¶</a></h1>
+<div class="math notranslate nohighlight">
+\[\kappa(A) = \lVert A \rVert \frac{\lVert x \rVert}{\lVert Ax \rVert}\]</div>
+<p>Consider the matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} A = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 0 \end{bmatrix} . \end{split}\]</div>
+<ul class="simple">
+<li><p>What is the norm of this matrix?</p></li>
+<li><p>What is the condition number when <span class="math notranslate nohighlight">\(x = [1,0]^T\)</span>?</p></li>
+<li><p>What is the condition number when <span class="math notranslate nohighlight">\(x = [0,1]^T\)</span>?</p></li>
+</ul>
+<div class="section" id="condition-number-of-the-matrix">
+<h2>Condition number of the matrix<a class="headerlink" href="#condition-number-of-the-matrix" title="Permalink to this headline">¶</a></h2>
+<p>The condition number of matrix-vector multiplication depends on the vector.  The condition number of the matrix is the worst case (maximum) of the condition number for any vector, i.e.,</p>
+<div class="math notranslate nohighlight">
+\[ \kappa(A) = \max_{x \ne 0} \lVert A \rVert \frac{\lVert x \rVert}{\lVert A x \rVert} .\]</div>
+<p>If <span class="math notranslate nohighlight">\(A\)</span> is invertible, then we can rephrase as</p>
+<div class="math notranslate nohighlight">
+\[ \kappa(A) = \max_{x \ne 0} \lVert A \rVert \frac{\lVert A^{-1} (A x) \rVert}{\lVert A x \rVert} =
+\max_{A x \ne 0} \lVert A \rVert \frac{\lVert A^{-1} (A x) \rVert}{\lVert A x \rVert} = \lVert A \rVert \lVert A^{-1} \rVert . \]</div>
+<p>Evidently multiplying by a matrix is just as ill-conditioned of an operation as solving a linear system using that matrix.</p>
+</div>
+<div class="section" id="least-squares-and-the-normal-equations">
+<h2>Least squares and the normal equations<a class="headerlink" href="#least-squares-and-the-normal-equations" title="Permalink to this headline">¶</a></h2>
+<p>A <strong>least squares problem</strong> takes the form: given an <span class="math notranslate nohighlight">\(m\times n\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span> (<span class="math notranslate nohighlight">\(m \ge n\)</span>), find <span class="math notranslate nohighlight">\(x\)</span> such that
+<div class="math notranslate nohighlight">
+\[ \lVert Ax - b \rVert \]</div>
+
+is minimized.  If <span class="math notranslate nohighlight">\(A\)</span> is square and full rank, then this minimizer will satisfy <span class="math notranslate nohighlight">\(A x - b = 0\)</span>, but that is not the case in general because <span class="math notranslate nohighlight">\(b\)</span> is not in the range of <span class="math notranslate nohighlight">\(A\)</span>.
+The residual <span class="math notranslate nohighlight">\(A x - b\)</span> must be orthogonal to the range of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<ul class="simple">
+<li><p>Is this the same as saying <span class="math notranslate nohighlight">\(A^T (A x - b) = 0\)</span>?</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(QR = A\)</span>, is it the same as <span class="math notranslate nohighlight">\(Q^T (A x - b) = 0\)</span>?</p></li>
+</ul>
+<p>In the quiz, we showed that <span class="math notranslate nohighlight">\(QQ^T\)</span> is an orthogonal projector onto the range of <span class="math notranslate nohighlight">\(Q\)</span>.  If <span class="math notranslate nohighlight">\(QR = A\)</span>,
+<div class="math notranslate nohighlight">
+\[ QQ^T (A x - b) = QQ^T(Q R x - b) = Q (Q^T Q) R x - QQ^T b = QR x - QQ^T b = A x - QQ^T b . \]</div>
+
+So if <span class="math notranslate nohighlight">\(b\)</span> is in the range of <span class="math notranslate nohighlight">\(A\)</span>, we can solve <span class="math notranslate nohighlight">\(A x = b\)</span>.  If not, we need only <em>orthogonally</em> project <span class="math notranslate nohighlight">\(b\)</span> into the range of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<div class="section" id="solution-by-qr-householder">
+<h3>Solution by QR (Householder)<a class="headerlink" href="#solution-by-qr-householder" title="Permalink to this headline">¶</a></h3>
+<p>Solve <span class="math notranslate nohighlight">\(R x = Q^T b\)</span>.</p>
+<ul class="simple">
+<li><p>QR factorization costs <span class="math notranslate nohighlight">\(2 m n^2 - \frac 2 3 n^3\)</span> operations and is done once per matrix <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+<li><p>Computing <span class="math notranslate nohighlight">\(Q^T b\)</span> costs <span class="math notranslate nohighlight">\(4 (m-n)n + 2 n^2 = 4 mn - 2n^2\)</span> (using the elementary reflectors, which are stable and lower storage than naive storage of <span class="math notranslate nohighlight">\(Q\)</span>).</p></li>
+<li><p>Solving with <span class="math notranslate nohighlight">\(R\)</span> costs <span class="math notranslate nohighlight">\(n^2\)</span> operations.  Total cost per right hand side is thus <span class="math notranslate nohighlight">\(4 m n - n^2\)</span>.</p></li>
+</ul>
+<p>This method is stable and accurate.</p>
+</div>
+<div class="section" id="solution-by-cholesky">
+<h3>Solution by Cholesky<a class="headerlink" href="#solution-by-cholesky" title="Permalink to this headline">¶</a></h3>
+<p>The mathematically equivalent form <span class="math notranslate nohighlight">\((A^T A) x = A^T b\)</span> are called the <strong>normal equations</strong>.  The solution process involves factoring the symmetric and positive definite <span class="math notranslate nohighlight">\(n\times n\)</span> matrix <span class="math notranslate nohighlight">\(A^T A\)</span>.</p>
+<ul class="simple">
+<li><p>Computing <span class="math notranslate nohighlight">\(A^T A\)</span> costs <span class="math notranslate nohighlight">\(m n^2\)</span> flops, exploiting symmetry.</p></li>
+<li><p>Factoring <span class="math notranslate nohighlight">\(A^T A = R^T R\)</span> costs <span class="math notranslate nohighlight">\(\frac 1 3 n^3\)</span> flops.  The total factorization cost is thus <span class="math notranslate nohighlight">\(m n^2 + \frac 1 3 n^3\)</span>.</p></li>
+<li><p>Computing <span class="math notranslate nohighlight">\(A^T b\)</span> costs <span class="math notranslate nohighlight">\(2 m n\)</span>.</p></li>
+<li><p>Solving with <span class="math notranslate nohighlight">\(R^T\)</span> costs <span class="math notranslate nohighlight">\(n^2\)</span>.</p></li>
+<li><p>Solving with <span class="math notranslate nohighlight">\(R\)</span> costs <span class="math notranslate nohighlight">\(n^2\)</span>.  Total cost per right hand side is thus <span class="math notranslate nohighlight">\(2 m n + 2 n^2\)</span>.</p></li>
+</ul>
+<p>The product <span class="math notranslate nohighlight">\(A^T A\)</span> is ill-conditioned: <span class="math notranslate nohighlight">\(\kappa(A^T A) = \kappa(A)^2\)</span> and can reduce the accuracy of a least squares solution.</p>
+</div>
+<div class="section" id="solution-by-singular-value-decomposition">
+<h3>Solution by Singular Value Decomposition<a class="headerlink" href="#solution-by-singular-value-decomposition" title="Permalink to this headline">¶</a></h3>
+<p>Next, we will discuss a factorization
+<div class="math notranslate nohighlight">
+\[ U \Sigma V^T = A \]</div>
+
+where <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> have orthonormal columns and <span class="math notranslate nohighlight">\(\Sigma\)</span> is diagonal with nonnegative entries.
+The entries of <span class="math notranslate nohighlight">\(\Sigma\)</span> are called <strong>singular values</strong> and this decomposition is the <strong>singular value decomposition</strong> (SVD).
+It may remind you of an eigenvalue decomposition <span class="math notranslate nohighlight">\(X \Lambda X^{-1} = A\)</span>, but</p>
+<ul class="simple">
+<li><p>the SVD exists for all matrices (including non-square and deficient matrices)</p></li>
+<li><p><span class="math notranslate nohighlight">\(U,V\)</span> have orthogonal columns (while <span class="math notranslate nohighlight">\(X\)</span> can be arbitrarily ill-conditioned).
+Indeed, if a matrix is symmetric and positive definite (all positive eigenvalues), then <span class="math notranslate nohighlight">\(U=V\)</span> and <span class="math notranslate nohighlight">\(\Sigma = \Lambda\)</span>.
+Computing an SVD requires a somewhat complicated iterative algorithm, but a crude estimate of the cost is <span class="math notranslate nohighlight">\(2 m n^2 + 11 n^3\)</span>.  Note that this is similar to the cost of <span class="math notranslate nohighlight">\(QR\)</span> when <span class="math notranslate nohighlight">\(m \gg n\)</span>, but much more expensive for square matrices.
+Solving with the SVD involves</p></li>
+<li><p>Compute <span class="math notranslate nohighlight">\(U^T b\)</span> at a cost of <span class="math notranslate nohighlight">\(2 m n\)</span>.</p></li>
+<li><p>Solve with the diagonal <span class="math notranslate nohighlight">\(n\times n\)</span> matrix <span class="math notranslate nohighlight">\(\Sigma\)</span> at a cost of <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p>Apply <span class="math notranslate nohighlight">\(V\)</span> at a cost of <span class="math notranslate nohighlight">\(2 n^2\)</span>.  The total cost per right hand side is thus <span class="math notranslate nohighlight">\(2 m n + 2n^2\)</span>.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="activity-geometry-of-the-singular-value-decomposition">
+<h1>Activity: Geometry of the Singular Value Decomposition<a class="headerlink" href="#activity-geometry-of-the-singular-value-decomposition" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">default</span><span class="p">(</span><span class="n">aspect_ratio</span><span class="o">=</span><span class="ss">:equal</span><span class="p">)</span>
+
+<span class="k">function</span> <span class="n">peanut</span><span class="p">()</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">.+</span> <span class="mf">.4</span><span class="o">*</span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">theta</span><span class="p">)</span> <span class="o">+</span> <span class="mf">.6</span><span class="o">*</span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">&#39;</span> <span class="o">.*</span> <span class="p">[</span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">theta</span><span class="p">)]</span><span class="o">&#39;</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="n">circle</span><span class="p">()</span>
+    <span class="n">theta</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="p">[</span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span> <span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">theta</span><span class="p">)]</span><span class="o">&#39;</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="n">Aplot</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="s">&quot;Plot a transformation from X to Y&quot;</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">peanut</span><span class="p">()</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="n">X</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">:</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="o">:</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s">&quot;in&quot;</span><span class="p">)</span>
+    <span class="n">scatter!</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">Y</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">:</span><span class="p">],</span> <span class="n">Y</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="o">:</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s">&quot;out&quot;</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">circle</span><span class="p">()</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="n">X</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">:</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="o">:</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s">&quot;in&quot;</span><span class="p">)</span>
+    <span class="n">scatter!</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">Y</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">:</span><span class="p">],</span> <span class="n">Y</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="o">:</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s">&quot;out&quot;</span><span class="p">)</span>
+    <span class="n">plot</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">layout</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aplot (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Aplot</span><span class="p">(</span><span class="mf">1.1</span><span class="o">*</span><span class="n">I</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-02-23-svd_29_0.svg" src="../_images/2022-02-23-svd_29_0.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="diagonal-matrices">
+<h1>Diagonal matrices<a class="headerlink" href="#diagonal-matrices" title="Permalink to this headline">¶</a></h1>
+<p>Perhaps the simplest transformation is a scalar multiple of the identity.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Aplot</span><span class="p">([</span><span class="mi">2</span> <span class="mi">0</span><span class="p">;</span> <span class="mi">0</span> <span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-02-23-svd_31_0.svg" src="../_images/2022-02-23-svd_31_0.svg" /></div>
+</div>
+<p>The diagonal entries can be different sizes.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} A = \begin{bmatrix} 2 &amp; 0 \\ 0 &amp; .5 \end{bmatrix}\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Aplot</span><span class="p">([</span><span class="mi">2</span> <span class="mi">0</span><span class="p">;</span> <span class="mi">0</span> <span class="mf">.5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-02-23-svd_33_0.svg" src="../_images/2022-02-23-svd_33_0.svg" /></div>
+</div>
+<p>The circles becomes an <strong>ellipse</strong> that is <strong>aligned with the coordinate axes</strong></p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="givens-rotation-as-example-of-orthogonal-matrix">
+<h1>Givens Rotation (as example of orthogonal matrix)<a class="headerlink" href="#givens-rotation-as-example-of-orthogonal-matrix" title="Permalink to this headline">¶</a></h1>
+<p>We can rotate the input using a <span class="math notranslate nohighlight">\(2\times 2\)</span> matrix, parametrized by <span class="math notranslate nohighlight">\(\theta\)</span>. Its transpose rotates in the opposite direction.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">givens</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="p">[</span><span class="n">c</span> <span class="o">-</span><span class="n">s</span><span class="p">;</span> <span class="n">s</span> <span class="n">c</span><span class="p">]</span>
+<span class="k">end</span>
+
+<span class="n">G</span> <span class="o">=</span> <span class="n">givens</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">Aplot</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-02-23-svd_36_0.svg" src="../_images/2022-02-23-svd_36_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Aplot</span><span class="p">(</span><span class="n">G</span><span class="o">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-02-23-svd_37_0.svg" src="../_images/2022-02-23-svd_37_0.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="reflection">
+<h1>Reflection<a class="headerlink" href="#reflection" title="Permalink to this headline">¶</a></h1>
+<p>We’ve previously seen that reflectors have the form <span class="math notranslate nohighlight">\(F = I - 2 v v^T\)</span> where <span class="math notranslate nohighlight">\(v\)</span> is a normalized vector. Reflectors satisfy <span class="math notranslate nohighlight">\(F^T F = I\)</span> and <span class="math notranslate nohighlight">\(F = F^T\)</span>, thus <span class="math notranslate nohighlight">\(F^2 = I\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">reflect</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="n">cos</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span> <span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">)]</span>
+    <span class="n">I</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">v</span> <span class="o">*</span> <span class="n">v</span><span class="o">&#39;</span>
+<span class="k">end</span>
+
+<span class="n">Aplot</span><span class="p">(</span><span class="n">reflect</span><span class="p">(</span><span class="mf">0.3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-02-23-svd_39_0.svg" src="../_images/2022-02-23-svd_39_0.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id1">
+<h1>Singular Value Decomposition<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>The SVD is <span class="math notranslate nohighlight">\(A = U \Sigma V^T\)</span> where <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> have orthonormal columns and <span class="math notranslate nohighlight">\(\Sigma\)</span> is diagonal with nonnegative entries. It exists for any matrix (non-square, singular, etc.). If we think of orthogonal matrices as reflections/rotations, this says any matrix can be represented as reflect/rotate, diagonally scale, and reflect/rotate again.</p>
+<p>Let’s try a random symmetric matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">+=</span> <span class="n">A</span><span class="o">&#39;</span> <span class="c"># make symmetric</span>
+<span class="nd">@show</span> <span class="n">det</span><span class="p">(</span><span class="n">A</span><span class="p">)</span> <span class="c"># Positive means orientation is preserved</span>
+<span class="n">Aplot</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>det(A) = -1.6820338013412035
+</pre></div>
+</div>
+<img alt="../_images/2022-02-23-svd_41_1.svg" src="../_images/2022-02-23-svd_41_1.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nd">@show</span> <span class="n">norm</span><span class="p">(</span><span class="n">U</span> <span class="o">*</span> <span class="n">diagm</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="o">*</span> <span class="n">V</span><span class="o">&#39;</span> <span class="o">-</span> <span class="n">A</span><span class="p">)</span> <span class="c"># Should be zero</span>
+<span class="n">Aplot</span><span class="p">(</span><span class="n">V</span><span class="o">&#39;</span><span class="p">)</span> <span class="c"># Rotate/reflect in preparation for scaling</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(U * diagm(S) * V&#39; - A) = 4.002966042486721e-16
+</pre></div>
+</div>
+<img alt="../_images/2022-02-23-svd_42_1.svg" src="../_images/2022-02-23-svd_42_1.svg" /></div>
+</div>
+<ul class="simple">
+<li><p>What visual features indicate that this is a symmetric matrix?</p></li>
+<li><p>Is the orthogonal matrix a reflection or rotation?</p>
+<ul>
+<li><p>Does this change when the determinant is positive versus negative (rerun the cell above as needed).</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="parts-of-the-svd">
+<h1>Parts of the SVD<a class="headerlink" href="#parts-of-the-svd" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Aplot</span><span class="p">(</span><span class="n">diagm</span><span class="p">(</span><span class="n">S</span><span class="p">))</span> <span class="c"># scale along axes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-02-23-svd_45_0.svg" src="../_images/2022-02-23-svd_45_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Aplot</span><span class="p">(</span><span class="n">U</span><span class="p">)</span> <span class="c"># rotate/reflect back</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-02-23-svd_46_0.svg" src="../_images/2022-02-23-svd_46_0.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="putting-it-together">
+<h1>Putting it together<a class="headerlink" href="#putting-it-together" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Aplot</span><span class="p">(</span><span class="n">U</span> <span class="o">*</span> <span class="n">diagm</span><span class="p">(</span><span class="n">S</span><span class="p">)</span> <span class="o">*</span> <span class="n">V</span><span class="o">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-02-23-svd_48_0.svg" src="../_images/2022-02-23-svd_48_0.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="observations">
+<h1>Observations<a class="headerlink" href="#observations" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>The circle always maps to an ellipse</p></li>
+<li><p>The <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> factors may reflect even when <span class="math notranslate nohighlight">\(\det A &gt; 0\)</span></p></li>
+</ul>
 </div>
 
     <script type="text/x-thebe-config">
@@ -1711,11 +1753,11 @@ if (typeof require === 'function' && define.amd) {
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="2022-02-18-householder.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022-02-21-qr-retrospective.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">2022-02-18 Householder QR</p>
+            <p class="prev-next-title">2022-02-21 QR Retrospective</p>
         </div>
     </a>
 </div>
