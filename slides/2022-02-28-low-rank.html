@@ -54,6 +54,7 @@
     <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2022-03-02 Polynomial Interpolation" href="2022-03-02-interpolation.html" />
     <link rel="prev" title="2022-02-25 SVD Geometry" href="2022-02-25-svd-geometry.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -212,6 +213,11 @@
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      2022-02-28 Low Rank
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-03-02-interpolation.html">
+     2022-03-02 Polynomial Interpolation
     </a>
    </li>
   </ul>
@@ -630,21 +636,22 @@
 <h1>Condition number via SVD<a class="headerlink" href="#condition-number-via-svd" title="Permalink to this headline">¶</a></h1>
 <div class="math notranslate nohighlight">
 \[\begin{split} U \overbrace{\begin{bmatrix} \sigma_{\max} &amp;&amp; \\ &amp; \ddots &amp; \\ &amp;&amp; \sigma_{\min} \end{bmatrix}}^{\Sigma} V^T = A \end{split}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-c030ff82-5ddd-4d65-a57a-7f49dc469574">
-<span class="eqno">(16)<a class="headerlink" href="#equation-c030ff82-5ddd-4d65-a57a-7f49dc469574" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-8c58bd8f-6021-40a9-b543-cfa6f5e2084e">
+<span class="eqno">(16)<a class="headerlink" href="#equation-8c58bd8f-6021-40a9-b543-cfa6f5e2084e" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \lVert A \rVert &amp;= \sigma_{\max} &amp;
 \kappa(A) &amp;= \frac{\sigma_{\max}}{\sigma_{\min}} = \texttt{cond}(A)
 \end{align}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="c"># nonsymmetric</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">A</span> <span class="o">+</span> <span class="n">A</span><span class="o">&#39;</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 Matrix{Float64}:
- -0.151791  -0.369815
-  1.11513   -0.132808
+  1.13519   -0.257307
+ -0.257307   0.753558
 </pre></div>
 </div>
 </div>
@@ -652,12 +659,15 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span> <span class="n">svdvals</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nd">@show</span> <span class="n">norm</span><span class="p">(</span><span class="n">U</span> <span class="o">-</span> <span class="n">U</span><span class="o">&#39;</span><span class="p">)</span>
 <span class="n">Aplot</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>svdvals(A) = [1.128764648699058, 0.38320750246394597]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>svdvals(A) = [1.2647127088905932, 0.624033667117622]
+norm(U - U&#39;) = 7.850462293418876e-17
 </pre></div>
 </div>
 <img alt="../_images/2022-02-28-low-rank_4_1.svg" src="../_images/2022-02-28-low-rank_4_1.svg" /></div>
@@ -693,7 +703,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">V</span> <span class="o">=</span> <span class="n">vander</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">V</span> <span class="o">=</span> <span class="n">vander</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
 <span class="n">Q</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">qr</span><span class="p">(</span><span class="kt">Float32</span><span class="o">.</span><span class="p">(</span><span class="n">V</span><span class="p">))</span>
 <span class="nd">@show</span> <span class="n">norm</span><span class="p">(</span><span class="n">Q</span><span class="o">&#39;</span> <span class="o">*</span> <span class="n">Q</span> <span class="o">-</span> <span class="n">I</span><span class="p">)</span>
 <span class="n">Q</span><span class="p">,</span> <span class="n">R</span> <span class="o">=</span> <span class="n">qr_chol</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
@@ -702,11 +712,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(Q&#39; * Q - I) = 8.506273f-7
-norm(Q&#39; * Q - I) = 2.888636801393009e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(Q&#39; * Q - I) = 1.422574f-6
+norm(Q&#39; * Q - I) = 0.7929497451834747
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.888636801393009e-10
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7929497451834747
 </pre></div>
 </div>
 </div>
@@ -734,13 +744,14 @@ norm(Q&#39; * Q - I) = 2.888636801393009e-10
 <span class="n">Shat</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="n">k</span><span class="p">]</span>
 <span class="n">Vhat</span> <span class="o">=</span> <span class="n">V</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="mi">1</span><span class="o">:</span><span class="n">k</span><span class="p">]</span>
 <span class="n">Ahat</span> <span class="o">=</span> <span class="n">Uhat</span> <span class="o">*</span> <span class="n">diagm</span><span class="p">(</span><span class="n">Shat</span><span class="p">)</span> <span class="o">*</span> <span class="n">Vhat</span><span class="o">&#39;</span>
-<span class="n">norm</span><span class="p">(</span><span class="n">Ahat</span> <span class="o">-</span> <span class="n">A</span><span class="p">)</span>
-<span class="n">Aplot</span><span class="p">(</span><span class="n">Ahat</span><span class="p">)</span>
+<span class="nd">@show</span> <span class="n">norm</span><span class="p">(</span><span class="n">Ahat</span><span class="p">)</span>
+<span class="n">Aplot</span><span class="p">(</span><span class="n">Ahat</span> <span class="o">-</span> <span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>S[1:k + 1] = [0.9917723908330812, 0.13729661140177168]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>S[1:k + 1] = [1.5595652883771995, 0.8263763919470137]
+norm(Ahat) = 1.559565288377199
 </pre></div>
 </div>
 <img alt="../_images/2022-02-28-low-rank_11_1.svg" src="../_images/2022-02-28-low-rank_11_1.svg" /></div>
@@ -753,7 +764,7 @@ norm(Q&#39; * Q - I) = 2.888636801393009e-10
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">galaxy</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">.+</span> <span class="n">sigma</span><span class="o">*</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="n">g1</span> <span class="o">=</span> <span class="n">galaxy</span><span class="p">([</span><span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">g2</span> <span class="o">=</span> <span class="n">galaxy</span><span class="p">([</span><span class="mi">10</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">g2</span> <span class="o">=</span> <span class="n">galaxy</span><span class="p">([</span><span class="mi">10</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 
 <span class="n">scatter</span><span class="p">(</span><span class="n">g1</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">g1</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">aspect_ratio</span><span class="o">=</span><span class="ss">:equal</span><span class="p">)</span>
 <span class="n">scatter!</span><span class="p">(</span><span class="n">g2</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">g2</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
@@ -826,11 +837,11 @@ where <span class="math notranslate nohighlight">\(m_1\)</span> and <span class=
 <h1>Spectrum<a class="headerlink" href="#spectrum" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">g1</span> <span class="o">=</span> <span class="n">galaxy</span><span class="p">([</span><span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="n">g2</span> <span class="o">=</span> <span class="n">galaxy</span><span class="p">([</span><span class="mi">40</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">g1</span> <span class="o">=</span> <span class="n">galaxy</span><span class="p">([</span><span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">g2</span> <span class="o">=</span> <span class="n">galaxy</span><span class="p">([</span><span class="mi">10</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
 <span class="n">F</span> <span class="o">=</span> <span class="n">gravity</span><span class="p">(</span><span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">)</span>
 <span class="n">U</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">svd</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
-<span class="n">scatter</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">,</span> <span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+<span class="n">scatter</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">,</span> <span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -839,7 +850,7 @@ where <span class="math notranslate nohighlight">\(m_1\)</span> and <span class=
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">5</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">Uhat</span> <span class="o">=</span> <span class="n">U</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="o">:</span><span class="n">k</span><span class="p">]</span>
 <span class="n">Shat</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="n">k</span><span class="p">]</span>
 <span class="n">Vhat</span> <span class="o">=</span> <span class="n">V</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="o">:</span><span class="n">k</span><span class="p">]</span>
@@ -851,8 +862,8 @@ where <span class="math notranslate nohighlight">\(m_1\)</span> and <span class=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(F) = 0.1542985859886685
-norm(F - Fhat) = 1.7527093780592833e-5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(F) = 2.5194440056980536
+norm(F - Fhat) = 6.79544216333678e-5
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(600, 300)
@@ -968,6 +979,13 @@ norm(F - Fhat) = 1.7527093780592833e-5
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">2022-02-25 SVD Geometry</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="2022-03-02-interpolation.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2022-03-02 Polynomial Interpolation</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             
