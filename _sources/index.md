@@ -24,6 +24,8 @@ Welcome to **CSCI-3656: Numerical Computation**
   - Use GitHub classroom and Julia to observe numerical instability.
 * - [2022-01-28-rootfinding](https://classroom.github.com/a/ZVZ8AQYM)
   - Experiment with and compare methods for rootfinding at small and large scales.
+* - [2022-03-07-interpolation](https://classroom.github.com/a/GmgNP4Jp)
+  - Learn and apply knowledge of conditioning and stability to explain the Runge effect.
 :::
 ::::
 
