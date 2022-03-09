@@ -1,0 +1,1081 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2022-03-09 Higher dimensions &#8212; Numerical Computation</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script>
+        const thebe_selector = ".thebe,.cell"
+        const thebe_selector_input = "pre,.cell_input div.highlight"
+        const thebe_selector_output = ".output,.cell_output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="2022-03-07 Spline interpolation" href="2022-03-07-splines.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/cu-numcomp.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Numerical Computation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Welcome
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../slides.html">
+   Slides
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-10-first-day.html">
+     2022-01-10 First Day
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-12-functions.html">
+     2022-01-12 Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-14-function-errors.html">
+     2022-01-14 Function errors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-19-conditioning.html">
+     2022-01-19 Conditioning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-21-rootfinding.html">
+     2022-01-21 Rootfinding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-24-convergence-classes.html">
+     2022-01-24 Convergence classes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-26-newton.html">
+     2022-01-26 Newton methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-28-more-newton.html">
+     2022-01-28 More Newton
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-01-31-formulation.html">
+     2022-01-31 Formulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-02-04-stability.html">
+     2022-02-04 Stability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-02-07-linear-algebra.html">
+     2022-02-07 Linear Algebra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-02-09-projections.html">
+     2022-02-09 Projections, rotations, and reflections
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-02-11-gram-schmidt.html">
+     2022-02-11 Gram-Schmidt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-02-14-qr-factorization.html">
+     2022-02-14 QR Factorization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-02-16-qr-stability.html">
+     2022-02-16 QR Stability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-02-18-householder.html">
+     2022-02-18 Householder QR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-02-21-qr-retrospective.html">
+     2022-02-21 QR Retrospective
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-02-23-svd.html">
+     2022-02-23 Singular Value Decomposition
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-02-25-svd-geometry.html">
+     2022-02-25 SVD Geometry
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-02-28-low-rank.html">
+     2022-02-28 Low Rank
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-03-02-interpolation.html">
+     2022-03-02 Polynomial Interpolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-03-04-interpolation2.html">
+     2022-03-04 Global and Piecewise Interpolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-03-07-splines.html">
+     2022-03-07 Spline interpolation
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     2022-03-09 Higher dimensions
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/slides/2022-03-09-higher-dimensions.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/cu-numcomp/spring22"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        <a class="issues-button"
+            href="https://github.com/cu-numcomp/spring22/issues/new?title=Issue%20on%20page%20%2Fslides/2022-03-09-higher-dimensions.html&body=Your%20issue%20content%20here."><button
+                type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
+                title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cu-numcomp/spring22/main?urlpath=tree/slides/2022-03-09-higher-dimensions.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        <button type="button" class="btn btn-secondary topbarbtn"
+            onclick="initThebeSBT()" title="Launch Thebe" data-toggle="tooltip" data-placement="left"><i
+                class="fas fa-play"></i><span style="margin-left: .4em;">Live Code</span></button>
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2022-03-09 Higher dimensions
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#last-time">
+     Last time
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#today">
+     Today
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spline-bases">
+   Spline bases
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spline-conditioning">
+   Spline conditioning
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#accuracy">
+   Accuracy
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generalizations-of-interpolation">
+   Generalizations of interpolation
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#integrals">
+     Integrals?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#derivatives">
+     Derivatives?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#we-need-boundary-conditions">
+     We need boundary conditions!
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#first-a-stable-basis">
+   First, a stable basis!
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solving-a-bvp-with-chebyshev-collocation">
+   Solving a BVP with Chebyshev collocation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spectral-exponential-convergence">
+   “spectral” (exponential) convergence¶
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#curse-of-dimensionality">
+   Curse of Dimensionality
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fourier-series-and-tensor-product-structure">
+   Fourier series and tensor product structure
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#partial-differential-equations">
+   Partial differential equations
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lower-degree-polynomials-to-fit-noise-free-data">
+   Lower-degree polynomials to fit noise-free data
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>2022-03-09 Higher dimensions</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2022-03-09 Higher dimensions
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#last-time">
+     Last time
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#today">
+     Today
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spline-bases">
+   Spline bases
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spline-conditioning">
+   Spline conditioning
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#accuracy">
+   Accuracy
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generalizations-of-interpolation">
+   Generalizations of interpolation
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#integrals">
+     Integrals?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#derivatives">
+     Derivatives?
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#we-need-boundary-conditions">
+     We need boundary conditions!
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#first-a-stable-basis">
+   First, a stable basis!
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#solving-a-bvp-with-chebyshev-collocation">
+   Solving a BVP with Chebyshev collocation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spectral-exponential-convergence">
+   “spectral” (exponential) convergence¶
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#curse-of-dimensionality">
+   Curse of Dimensionality
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fourier-series-and-tensor-product-structure">
+   Fourier series and tensor product structure
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#partial-differential-equations">
+   Partial differential equations
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lower-degree-polynomials-to-fit-noise-free-data">
+   Lower-degree polynomials to fit noise-free data
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="higher-dimensions">
+<h1>2022-03-09 Higher dimensions<a class="headerlink" href="#higher-dimensions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="last-time">
+<h2>Last time<a class="headerlink" href="#last-time" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Accuracy of piecewise constant (nearest neighbor) interpolation</p></li>
+<li><p>Piecewise polynomial methods</p></li>
+<li><p>Splines</p></li>
+<li><p>Libraries</p></li>
+</ul>
+</div>
+<div class="section" id="today">
+<h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Discussion</p></li>
+<li><p>Compare accuracy and conditioning of splines</p></li>
+<li><p>Generalization: boundary value problems</p></li>
+<li><p>Cost for interpolation in higher dimensions</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">LinearAlgebra</span>
+<span class="k">using</span> <span class="n">Plots</span>
+<span class="n">default</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">legendfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="k">function</span> <span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="nb">nothing</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">isnothing</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">end</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="k">in</span> <span class="mi">2</span><span class="o">:</span><span class="n">k</span>
+        <span class="n">V</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">V</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">.*</span> <span class="n">x</span>
+    <span class="k">end</span>
+    <span class="n">V</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="nb">nothing</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">isnothing</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c"># Square by default</span>
+    <span class="k">end</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span>
+        <span class="n">T</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="k">end</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="k">in</span> <span class="mi">3</span><span class="o">:</span><span class="n">n</span>
+        <span class="c">#T[:, k] = x .* T[:, k-1]</span>
+        <span class="n">T</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">.*</span> <span class="n">T</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">T</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="n">k</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">end</span>
+    <span class="n">T</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="n">interp_nearest</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="k">in</span> <span class="n">enumerate</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="n">loc</span> <span class="o">=</span> <span class="nb">nothing</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="nb">Inf</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span> <span class="k">in</span> <span class="n">enumerate</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">abs</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">u</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">dist</span>
+                <span class="n">loc</span> <span class="o">=</span> <span class="n">j</span>
+                <span class="n">dist</span> <span class="o">=</span> <span class="n">abs</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">u</span><span class="p">)</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">loc</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">end</span>
+    <span class="n">A</span>
+<span class="k">end</span>
+
+<span class="n">runge</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">CosRange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">.+</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="nb">pi</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+
+<span class="n">vcond</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">nmax</span><span class="p">)</span> <span class="o">=</span> <span class="p">[</span><span class="n">cond</span><span class="p">(</span><span class="n">mat</span><span class="p">(</span><span class="n">points</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)))</span> <span class="k">for</span> <span class="n">n</span> <span class="k">in</span> <span class="mi">2</span><span class="o">:</span><span class="n">nmax</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>vcond (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="spline-bases">
+<h1>Spline bases<a class="headerlink" href="#spline-bases" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Interpolations</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">flin</span> <span class="o">=</span> <span class="n">LinearInterpolation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">fspline</span> <span class="o">=</span> <span class="n">CubicSplineInterpolation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">([</span><span class="n">runge</span><span class="p">,</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">fspline</span><span class="p">(</span><span class="n">t</span><span class="p">)],</span> <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">scatter!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-03-09-higher-dimensions_3_0.svg" src="../_images/2022-03-09-higher-dimensions_3_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">interp_spline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">diagm</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+        <span class="n">fspline</span> <span class="o">=</span> <span class="n">CubicSplineInterpolation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="n">n</span><span class="p">,</span><span class="n">j</span><span class="p">])</span>
+        <span class="n">A</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">fspline</span><span class="o">.</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">end</span>
+    <span class="n">A</span>
+<span class="k">end</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">interp_spline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="ss">:none</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-03-09-higher-dimensions_4_0.svg" src="../_images/2022-03-09-higher-dimensions_4_0.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="spline-conditioning">
+<h1>Spline conditioning<a class="headerlink" href="#spline-conditioning" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">my_spy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="n">cmax</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">vec</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="nb">Inf</span><span class="p">)</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ceil</span><span class="p">(</span><span class="mi">120</span> <span class="o">/</span> <span class="n">size</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
+    <span class="n">spy</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="p">(</span><span class="ss">:square</span><span class="p">,</span> <span class="n">s</span><span class="p">),</span> <span class="n">c</span><span class="o">=</span><span class="ss">:diverging_rainbow_bgymr_45_85_c67_n256</span><span class="p">,</span> <span class="n">clims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="n">cmax</span><span class="p">,</span> <span class="n">cmax</span><span class="p">))</span>
+<span class="k">end</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">interp_spline</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span> <span class="n">s</span><span class="p">)</span>
+<span class="n">cond</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.5075717485062632
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">my_spy</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-03-09-higher-dimensions_7_0.svg" src="../_images/2022-03-09-higher-dimensions_7_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">interp_chebyshev</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xx</span><span class="p">)</span>
+    <span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="n">inv</span><span class="p">(</span><span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="n">interp_monomial</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xx</span><span class="p">)</span>
+    <span class="n">vander</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="n">inv</span><span class="p">(</span><span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="n">interp_error</span><span class="p">(</span><span class="n">ieval</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">xx</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span>
+    <span class="s">&quot;&quot;&quot;Compute norm of interpolation error for function test</span>
+<span class="s">    using method interp_and_eval from points x to points xx.</span>
+<span class="s">    &quot;&quot;&quot;</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">ieval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xx</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">yy</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span>
+    <span class="n">norm</span><span class="p">(</span><span class="n">A</span> <span class="o">*</span> <span class="n">y</span> <span class="o">-</span> <span class="n">yy</span><span class="p">,</span> <span class="nb">Inf</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="n">plot_convergence</span><span class="p">(</span><span class="n">ievals</span><span class="p">,</span> <span class="n">ptspaces</span><span class="p">;</span> <span class="n">xscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">,</span> <span class="n">maxpts</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+    <span class="s">&quot;&quot;&quot;Plot convergence rates for an interpolation scheme applied</span>
+<span class="s">    to a set of tests.</span>
+<span class="s">    &quot;&quot;&quot;</span>
+    <span class="n">xx</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">ns</span> <span class="o">=</span> <span class="mi">2</span><span class="o">:</span><span class="n">maxpts</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Convergence&quot;</span><span class="p">,</span>
+        <span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;Number of points&quot;</span><span class="p">,</span>
+        <span class="n">ylabel</span><span class="o">=</span><span class="s">&quot;Interpolation error&quot;</span><span class="p">,</span>
+        <span class="n">xscale</span><span class="o">=</span><span class="n">xscale</span><span class="p">,</span>
+        <span class="n">yscale</span><span class="o">=</span><span class="n">yscale</span><span class="p">,</span>
+        <span class="n">legend</span><span class="o">=</span><span class="ss">:bottomleft</span><span class="p">,</span>
+        <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1200</span><span class="p">,</span> <span class="mi">800</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">ieval</span> <span class="k">in</span> <span class="n">ievals</span>
+        <span class="k">for</span> <span class="n">ptspace</span> <span class="k">in</span> <span class="n">ptspaces</span>
+            <span class="k">for</span> <span class="n">test</span> <span class="k">in</span> <span class="p">[</span><span class="n">runge</span><span class="p">]</span>
+                <span class="k">try</span>
+                    <span class="n">errors</span> <span class="o">=</span> <span class="p">[</span><span class="n">interp_error</span><span class="p">(</span><span class="n">ieval</span><span class="p">,</span> <span class="n">ptspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">xx</span><span class="p">,</span> <span class="n">test</span><span class="p">)</span>
+                             <span class="k">for</span> <span class="n">n</span> <span class="k">in</span> <span class="n">ns</span><span class="p">]</span>
+                    <span class="n">plot!</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">errors</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="ss">:circle</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&quot;</span><span class="si">$ieval</span><span class="s">/</span><span class="si">$ptspace</span><span class="s">&quot;</span><span class="p">)</span>
+                <span class="k">catch</span>
+                    <span class="k">continue</span>
+                <span class="k">end</span>
+            <span class="k">end</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="k">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+        <span class="n">plot!</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">ns</span> <span class="o">.^</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="o">*</span><span class="n">k</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="ss">:black</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\$</span><span class="s">n^{-</span><span class="si">$k</span><span class="s">}</span><span class="se">\$</span><span class="s">&quot;</span><span class="p">)</span>
+    <span class="k">end</span>
+    <span class="n">fig</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>plot_convergence (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="accuracy">
+<h1>Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot_convergence</span><span class="p">([</span><span class="n">interp_monomial</span><span class="p">,</span> <span class="n">interp_chebyshev</span><span class="p">,</span> <span class="n">interp_nearest</span><span class="p">,</span> <span class="n">interp_spline</span><span class="p">],</span> <span class="p">[</span><span class="kt">LinRange</span><span class="p">,</span> <span class="n">CosRange</span><span class="p">],</span> <span class="n">maxpts</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-03-09-higher-dimensions_10_0.svg" src="../_images/2022-03-09-higher-dimensions_10_0.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="generalizations-of-interpolation">
+<h1>Generalizations of interpolation<a class="headerlink" href="#generalizations-of-interpolation" title="Permalink to this headline">¶</a></h1>
+<p>To create a Vandermonde matrix, we choose a family of functions <span class="math notranslate nohighlight">\(\phi_j(x)\)</span> and a set of points <span class="math notranslate nohighlight">\(x_i\)</span>, then create the matrix
+<div class="math notranslate nohighlight">
+\[ V_{ij} = \phi_j(x_i) .\]</div>
+</p>
+<div class="section" id="integrals">
+<h2>Integrals?<a class="headerlink" href="#integrals" title="Permalink to this headline">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[ B_{ij} = \int_{(x_{i-1} + x_i)/2}^{(x_i + x_{i+1})/2} \phi_j(s) ds\]</div>
+<p>This leads to conservative reconstruction, which is an important part of finite volume methods, which are industry standard for shock dynamics.</p>
+</div>
+<div class="section" id="derivatives">
+<h2>Derivatives?<a class="headerlink" href="#derivatives" title="Permalink to this headline">¶</a></h2>
+<p>What if we instead computed derivatives?</p>
+<div class="math notranslate nohighlight">
+\[ A_{ij} = \phi_j'(x_i) \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">diff_monomial</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">A</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">one</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="k">in</span> <span class="mi">3</span><span class="o">:</span><span class="n">n</span>
+        <span class="n">A</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">.*</span> <span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">end</span>
+    <span class="n">A</span>
+<span class="k">end</span>
+
+<span class="n">diff_monomial</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4×4 Matrix{Float64}:
+ 0.0  1.0  -2.0       3.0
+ 0.0  1.0  -0.666667  0.333333
+ 0.0  1.0   0.666667  0.333333
+ 0.0  1.0   2.0       3.0
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="we-need-boundary-conditions">
+<h2>We need boundary conditions!<a class="headerlink" href="#we-need-boundary-conditions" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="first-a-stable-basis">
+<h1>First, a stable basis!<a class="headerlink" href="#first-a-stable-basis" title="Permalink to this headline">¶</a></h1>
+<p>Derivatives of Chebyshev polynomials also satisfy a recurrence.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">chebdiff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="nb">nothing</span><span class="p">)</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">dT</span> <span class="o">=</span> <span class="n">zero</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">dT</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">2</span><span class="o">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">one</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="mi">4</span><span class="o">*</span><span class="n">x</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="k">in</span> <span class="mi">3</span><span class="o">:</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span>
+        <span class="n">dT</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">T</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">dT</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span>
+    <span class="k">end</span>
+    <span class="n">ddT</span> <span class="o">=</span> <span class="n">zero</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">ddT</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">.=</span> <span class="mi">4</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="k">in</span> <span class="mi">3</span><span class="o">:</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span>
+        <span class="n">ddT</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">dT</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">ddT</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span>
+    <span class="k">end</span>
+    <span class="n">T</span><span class="p">,</span> <span class="n">dT</span><span class="p">,</span> <span class="n">ddT</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>chebdiff (generic function with 2 methods)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">CosRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">T</span><span class="p">,</span> <span class="n">dT</span><span class="p">,</span> <span class="n">ddT</span> <span class="o">=</span> <span class="n">chebdiff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">T</span> <span class="o">\</span> <span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="mi">3</span><span class="n">x</span><span class="p">)</span>
+<span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dT</span> <span class="o">*</span> <span class="n">c</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="o">-</span><span class="mi">3</span><span class="n">sin</span><span class="p">(</span><span class="mi">3</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-03-09-higher-dimensions_18_0.svg" src="../_images/2022-03-09-higher-dimensions_18_0.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="solving-a-bvp-with-chebyshev-collocation">
+<h1>Solving a BVP with Chebyshev collocation<a class="headerlink" href="#solving-a-bvp-with-chebyshev-collocation" title="Permalink to this headline">¶</a></h1>
+<p>A boundary value problem (BVP) asks to find a function <span class="math notranslate nohighlight">\(u(x)\)</span> satisfying an equation like
+<div class="math notranslate nohighlight">
+\[ -u_{xx}(x) = f(x) \]</div>
+
+subject to <strong>boundary conditions</strong> <span class="math notranslate nohighlight">\(u(-1) = a\)</span> and <span class="math notranslate nohighlight">\(u'(1) = b\)</span>.</p>
+<p>We’ll use the “method of manufactured solutions”: choose <span class="math notranslate nohighlight">\(u(x) = \tanh(2x)\)</span> and solve with the corresponding <span class="math notranslate nohighlight">\(f(x)\)</span>. In practice, <span class="math notranslate nohighlight">\(f(x)\)</span> comes from the physics and you need to solve for <span class="math notranslate nohighlight">\(u(x)\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">poisson_cheb</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">rhsfunc</span><span class="p">,</span> <span class="n">leftbc</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">zero</span><span class="p">),</span> <span class="n">rightbc</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">zero</span><span class="p">))</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">CosRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">T</span><span class="p">,</span> <span class="n">dT</span><span class="p">,</span> <span class="n">ddT</span> <span class="o">=</span> <span class="n">chebdiff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="o">-</span><span class="n">ddT</span>
+    <span class="n">rhs</span> <span class="o">=</span> <span class="n">rhsfunc</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">deriv</span><span class="p">,</span> <span class="n">func</span><span class="p">)</span> <span class="k">in</span>
+            <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="n">leftbc</span><span class="o">...</span><span class="p">),</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">rightbc</span><span class="o">...</span><span class="p">)]</span>
+        <span class="n">L</span><span class="p">[</span><span class="n">index</span><span class="p">,</span><span class="o">:</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">dT</span><span class="p">)[</span><span class="n">deriv</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="n">index</span><span class="p">,</span><span class="o">:</span><span class="p">]</span>
+        <span class="n">rhs</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+    <span class="k">end</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">L</span> <span class="o">/</span> <span class="n">T</span><span class="p">,</span> <span class="n">rhs</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>poisson_cheb (generic function with 3 methods)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">manufactured</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">tanh</span><span class="p">(</span><span class="mi">2</span><span class="n">x</span><span class="p">)</span>
+<span class="n">d_manufactured</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">cosh</span><span class="p">(</span><span class="mi">2</span><span class="n">x</span><span class="p">)</span><span class="o">^-</span><span class="mi">2</span>
+<span class="n">mdd_manufactured</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">tanh</span><span class="p">(</span><span class="mi">2</span><span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">cosh</span><span class="p">(</span><span class="mi">2</span><span class="n">x</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">rhs</span> <span class="o">=</span> <span class="n">poisson_cheb</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="n">mdd_manufactured</span><span class="p">,</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">manufactured</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">d_manufactured</span><span class="p">))</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">A</span> <span class="o">\</span> <span class="n">rhs</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="ss">:auto</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">manufactured</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="ss">:bottomright</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-03-09-higher-dimensions_21_0.svg" src="../_images/2022-03-09-higher-dimensions_21_0.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="spectral-exponential-convergence">
+<h1>“spectral” (exponential) convergence¶<a class="headerlink" href="#spectral-exponential-convergence" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">poisson_error</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">rhs</span> <span class="o">=</span> <span class="n">poisson_cheb</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">mdd_manufactured</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">manufactured</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">d_manufactured</span><span class="p">))</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">A</span> <span class="o">\</span> <span class="n">rhs</span>
+    <span class="n">norm</span><span class="p">(</span><span class="n">u</span> <span class="o">-</span> <span class="n">manufactured</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">Inf</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="n">ns</span> <span class="o">=</span> <span class="mi">3</span><span class="o">:</span><span class="mi">20</span>
+<span class="n">ps</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">ns</span><span class="p">,</span> <span class="n">abs</span><span class="o">.</span><span class="p">(</span><span class="n">poisson_error</span><span class="o">.</span><span class="p">(</span><span class="n">ns</span><span class="p">)),</span> <span class="n">marker</span><span class="o">=</span><span class="ss">:auto</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;# points&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s">&quot;error&quot;</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">([</span><span class="n">n</span> <span class="o">-&gt;</span> <span class="n">n</span><span class="o">^-</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="k">in</span> <span class="n">ps</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">map</span><span class="p">(</span><span class="n">p</span> <span class="o">-&gt;</span> <span class="s">&quot;</span><span class="se">\$</span><span class="s">n^{-</span><span class="si">$p</span><span class="s">}</span><span class="se">\$</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">ps</span><span class="p">),</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">600</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-03-09-higher-dimensions_23_0.svg" src="../_images/2022-03-09-higher-dimensions_23_0.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="curse-of-dimensionality">
+<h1>Curse of Dimensionality<a class="headerlink" href="#curse-of-dimensionality" title="Permalink to this headline">¶</a></h1>
+<p>Suppose we use a naive Vandermonde matrix to interpolate <span class="math notranslate nohighlight">\(n\)</span> data points in an <span class="math notranslate nohighlight">\(n\)</span>-dimensional space of functions, e.g., predicting <span class="math notranslate nohighlight">\(z(x, y)\)</span> from data <span class="math notranslate nohighlight">\((x_i, y_i, z_i)\)</span></p>
+<div class="math notranslate nohighlight">
+\[ \underbrace{\Bigg[ 1 \Bigg| x \Bigg| y \Bigg| xy \Bigg| x^2 \Big| y^2 \Big| x^2 y \Big| xy^2 \Big| x^2y^2 \Big| \dotsb \Bigg]}_{V} \Bigg[ \mathbf c \Bigg] = \Bigg[ \mathbf z \Bigg] \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># A grid with 10 data points in each of d dimensions.</span>
+<span class="n">points</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">=</span> <span class="mf">10.</span> <span class="o">^</span> <span class="n">d</span>
+<span class="n">flops</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">=</span> <span class="n">n</span> <span class="o">^</span> <span class="mi">3</span>
+<span class="n">joules</span><span class="p">(</span><span class="n">flops</span><span class="p">)</span> <span class="o">=</span> <span class="n">flops</span> <span class="o">/</span> <span class="mf">20e9</span> <span class="c"># 20 GF/joule for best hardware today</span>
+<span class="n">scatter</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">,</span> <span class="n">d</span> <span class="o">-&gt;</span> <span class="n">joules</span><span class="p">(</span><span class="n">flops</span><span class="p">(</span><span class="n">points</span><span class="p">(</span><span class="n">d</span><span class="p">))),</span> <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="ss">:none</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-03-09-higher-dimensions_25_0.svg" src="../_images/2022-03-09-higher-dimensions_25_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">barrels_of_oil</span><span class="p">(</span><span class="n">flops</span><span class="p">)</span> <span class="o">=</span> <span class="n">joules</span><span class="p">(</span><span class="n">flops</span><span class="p">)</span> <span class="o">/</span> <span class="mf">6e9</span>
+<span class="n">scatter</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">,</span> <span class="n">d</span> <span class="o">-&gt;</span> <span class="n">barrels_of_oil</span><span class="p">(</span><span class="n">flops</span><span class="p">(</span><span class="n">points</span><span class="p">(</span><span class="n">d</span><span class="p">))),</span> <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-03-09-higher-dimensions_26_0.svg" src="../_images/2022-03-09-higher-dimensions_26_0.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="fourier-series-and-tensor-product-structure">
+<h1>Fourier series and tensor product structure<a class="headerlink" href="#fourier-series-and-tensor-product-structure" title="Permalink to this headline">¶</a></h1>
+<p>For periodic data on the interval <span class="math notranslate nohighlight">\([-\pi, \pi)\)</span>, we can use a basis <span class="math notranslate nohighlight">\(\{ 1, \sin x, \cos x, \sin 2x, \cos 2x, \dotsc\}\)</span>, which is equivalent to <span class="math notranslate nohighlight">\(\{ 1, e^{ix}, e^{i2x}, \dotsc \}\)</span> with suitable complex coefficients. If we’re given equally spaced points on the interval, the Vandermonde matrix <span class="math notranslate nohighlight">\(V\)</span> (with suitable scaling) is unitary (like orthogonal for complex matrices) and can be applied in <span class="math notranslate nohighlight">\(O(n \log n)\)</span> (with small constants) using the Fast Fourier Transform. This also works for Chebyshev polynomials sampled on <code class="docutils literal notranslate"><span class="pre">CosRange</span></code> points.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">points</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">=</span> <span class="mf">10.</span> <span class="o">^</span> <span class="n">d</span>
+<span class="n">flops</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">=</span> <span class="mi">5</span><span class="n">n</span> <span class="o">*</span> <span class="n">log2</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">joules</span><span class="p">(</span><span class="n">flops</span><span class="p">)</span> <span class="o">=</span> <span class="n">flops</span> <span class="o">/</span> <span class="mf">20e9</span> <span class="c"># 20 GF/joule for best hardware today</span>
+<span class="n">scatter</span><span class="p">(</span><span class="mi">1</span><span class="o">:</span><span class="mi">10</span><span class="p">,</span> <span class="n">d</span> <span class="o">-&gt;</span> <span class="n">joules</span><span class="p">(</span><span class="n">flops</span><span class="p">(</span><span class="n">points</span><span class="p">(</span><span class="n">d</span><span class="p">))),</span> <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-03-09-higher-dimensions_28_0.svg" src="../_images/2022-03-09-higher-dimensions_28_0.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="partial-differential-equations">
+<h1>Partial differential equations<a class="headerlink" href="#partial-differential-equations" title="Permalink to this headline">¶</a></h1>
+<p>Boundary value problems in multiple dimensions.</p>
+<video src="../img/schwarz-6x6x6.ogv" width="80%" controls /><p>Nonlinear (Newton), exploiting structure in linear algebra (matrix-free p-multigrid).</p>
+<img src="../img/p-refinement.svg" /></div>
+<div class="tex2jax_ignore mathjax_ignore section" id="lower-degree-polynomials-to-fit-noise-free-data">
+<h1>Lower-degree polynomials to fit noise-free data<a class="headerlink" href="#lower-degree-polynomials-to-fit-noise-free-data" title="Permalink to this headline">¶</a></h1>
+<p>We can fit <span class="math notranslate nohighlight">\(m\)</span> data points using an <span class="math notranslate nohighlight">\(n &lt; m\)</span> dimensional space of functions. This involves solving a least squares problem for the coefficients
+<span class="math notranslate nohighlight">\( \min_c \lVert V c - y \rVert \)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">chebyshev_regress_eval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xx</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="nd">@show</span> <span class="n">cond</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+    <span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">V</span>
+<span class="k">end</span>
+<span class="n">ndata</span><span class="p">,</span> <span class="n">nbasis</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span>
+<span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ndata</span><span class="p">)</span>
+<span class="n">xx</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">chebyshev_regress_eval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xx</span><span class="p">,</span> <span class="n">nbasis</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="p">[</span><span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">xx</span><span class="p">),</span> <span class="n">C</span> <span class="o">*</span> <span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)])</span>
+<span class="n">scatter!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">runge</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cond(V) = 30.08350663794034
+</pre></div>
+</div>
+<img alt="../_images/2022-03-09-higher-dimensions_33_1.svg" src="../_images/2022-03-09-higher-dimensions_33_1.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">S</span> <span class="o">=</span> <span class="n">svdvals</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+<span class="n">scatter</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-03-09-higher-dimensions_34_0.svg" src="../_images/2022-03-09-higher-dimensions_34_0.svg" /></div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cu-numcomp/spring22",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.7"
+        },
+        kernelOptions: {
+            kernelName: "julia-1.7",
+            path: "./slides"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.7'</script>
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="2022-03-07-splines.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">2022-03-07 Spline interpolation</p>
+        </div>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Jed Brown<br/>
+    
+        &copy; Copyright 2021.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

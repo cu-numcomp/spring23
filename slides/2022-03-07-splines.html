@@ -54,6 +54,7 @@
     <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2022-03-09 Higher dimensions" href="2022-03-09-higher-dimensions.html" />
     <link rel="prev" title="2022-03-04 Global and Piecewise Interpolation" href="2022-03-04-interpolation2.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -227,6 +228,11 @@
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      2022-03-07 Spline interpolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-03-09-higher-dimensions.html">
+     2022-03-09 Higher dimensions
     </a>
    </li>
   </ul>
@@ -557,6 +563,7 @@ T_{n+1}(x) &amp;= 2 x T_n(x) - T_{n-1}(x)
         <span class="n">T</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span>
     <span class="k">end</span>
     <span class="k">for</span> <span class="n">k</span> <span class="k">in</span> <span class="mi">3</span><span class="o">:</span><span class="n">n</span>
+        <span class="c">#T[:, k] = x .* T[:, k-1]</span>
         <span class="n">T</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">.*</span> <span class="n">T</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">T</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="n">k</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
     <span class="k">end</span>
     <span class="n">T</span>
@@ -610,6 +617,7 @@ T_{n+1}(x) &amp;= 2 x T_n(x) - T_{n-1}(x)
 <span class="n">s</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 <span class="n">A</span> <span class="o">=</span> <span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">/</span>
     <span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nd">@show</span> <span class="n">cond</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 <span class="n">plot</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">A</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">600</span><span class="p">))</span>
 <span class="n">scatter!</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">],</span> <span class="n">ones</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="ss">:black</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">nothing</span><span class="p">)</span>
 <span class="n">scatter!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">zero</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="ss">:black</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="nb">nothing</span><span class="p">)</span>
@@ -617,7 +625,10 @@ T_{n+1}(x) &amp;= 2 x T_n(x) - T_{n-1}(x)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2022-03-07-splines_8_0.svg" src="../_images/2022-03-07-splines_8_0.svg" /></div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cond(A) = 3.388221057514254
+</pre></div>
+</div>
+<img alt="../_images/2022-03-07-splines_8_1.svg" src="../_images/2022-03-07-splines_8_1.svg" /></div>
 </div>
 <ul class="simple">
 <li><p>Are there artifacts?</p></li>
@@ -776,19 +787,116 @@ T_{n+1}(x) &amp;= 2 x T_n(x) - T_{n-1}(x)
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">spline_interp_and_eval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">function</span> <span class="n">s_interp</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">delta</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="k">end</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="c"># diff(x)</span>
+        <span class="n">Delta</span> <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">T</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">2</span><span class="o">:</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span>
+            <span class="n">T</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">delta</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">delta</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">delta</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span> <span class="n">delta</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+        <span class="k">end</span>
+        <span class="n">T</span><span class="p">[</span><span class="k">end</span><span class="p">,</span><span class="k">end</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">rhs</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">rhs</span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="k">end</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="n">Delta</span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="k">end</span><span class="p">]</span> <span class="o">./</span> <span class="n">delta</span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="k">end</span><span class="p">]</span> <span class="o">-</span> <span class="n">Delta</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">./</span> <span class="n">delta</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">T</span> <span class="o">\</span> <span class="n">rhs</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="n">S</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">S</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">S</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">S</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">./</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">delta</span><span class="p">)</span>
+        <span class="n">S</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">Delta</span> <span class="o">./</span> <span class="n">delta</span> <span class="o">-</span> <span class="n">delta</span><span class="o">/</span><span class="mi">3</span> <span class="o">.*</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="k">end</span><span class="p">])</span>
+        <span class="n">S</span>
+    <span class="k">end</span>
+    
+    <span class="k">function</span> <span class="n">polyval</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">c</span> <span class="k">in</span> <span class="n">p</span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="k">end</span><span class="p">]</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="n">f</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">c</span>
+        <span class="k">end</span>
+        <span class="n">f</span>
+    <span class="k">end</span>
+
+    <span class="k">function</span> <span class="n">s_eval</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">zero</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="k">in</span> <span class="n">s</span>
+            <span class="n">left</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">searchsortedfirst</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">polyval</span><span class="p">(</span><span class="n">S</span><span class="p">[</span><span class="n">left</span><span class="p">,</span> <span class="mi">2</span><span class="o">:</span><span class="k">end</span><span class="p">],</span> <span class="n">t</span> <span class="o">-</span> <span class="n">S</span><span class="p">[</span><span class="n">left</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="k">end</span>
+        <span class="n">f</span>
+    <span class="k">end</span>
+    
+    <span class="n">A</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="n">aye</span> <span class="o">=</span> <span class="n">diagm</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+    <span class="nd">@show</span> <span class="n">size</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">size</span><span class="p">(</span><span class="n">aye</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">aye</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="n">s_interp</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="n">A</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">s_eval</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+    <span class="k">end</span>
+    <span class="n">A</span>
+<span class="k">end</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">spline_interp_and_eval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(size(A), size(aye)) = ((100, 30), (30, 30))
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>DimensionMismatch(&quot;tried to assign 28 elements to 30 destinations&quot;)
+
+Stacktrace:
+ [1] throw_setindex_mismatch(X::Vector{Float64}, I::Tuple{Int64})
+   @ Base ./indices.jl:191
+ [2] setindex_shape_check
+   @ ./indices.jl:245 [inlined]
+ [3] setindex!
+   @ ./array.jl:928 [inlined]
+ [4] (::var&quot;#s_interp#27&quot;{LinRange{Float64, Int64}, Int64})(y::Vector{Float64})
+   @ Main ./In[24]:13
+ [5] spline_interp_and_eval(x::LinRange{Float64, Int64}, s::LinRange{Float64, Int64})
+   @ Main ./In[24]:46
+ [6] top-level scope
+   @ In[24]:52
+ [7] eval
+   @ ./boot.jl:373 [inlined]
+ [8] include_string(mapexpr::typeof(REPL.softscope), mod::Module, code::String, filename::String)
+   @ Base ./loading.jl:1196
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Interpolations</span>
 
-<span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">flin</span> <span class="o">=</span> <span class="n">LinearInterpolation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 <span class="n">fspline</span> <span class="o">=</span> <span class="n">CubicSplineInterpolation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">([</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="n">fspline</span><span class="p">(</span><span class="n">t</span><span class="p">)],</span> <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">plot</span><span class="p">([</span><span class="n">runge</span><span class="p">,</span> <span class="n">t</span> <span class="o">-&gt;</span> <span class="n">fspline</span><span class="p">(</span><span class="n">t</span><span class="p">)],</span> <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 <span class="n">scatter!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2022-03-07-splines_21_0.svg" src="../_images/2022-03-07-splines_21_0.svg" /></div>
+<img alt="../_images/2022-03-07-splines_22_0.svg" src="../_images/2022-03-07-splines_22_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">xx</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">norm</span><span class="p">(</span><span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span> <span class="o">-</span> <span class="n">fspline</span><span class="o">.</span><span class="p">(</span><span class="n">xx</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.01376551862282631
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 
@@ -823,6 +931,13 @@ T_{n+1}(x) &amp;= 2 x T_n(x) - T_{n-1}(x)
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">2022-03-04 Global and Piecewise Interpolation</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="2022-03-09-higher-dimensions.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2022-03-09 Higher dimensions</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             
