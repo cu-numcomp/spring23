@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2022-03-11 Noisy data &#8212; Numerical Computation</title>
+    <title>2022-03-14 Regression &#8212; Numerical Computation</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -54,8 +54,7 @@
     <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2022-03-14 Regression" href="2022-03-14-regression.html" />
-    <link rel="prev" title="2022-03-09 Higher dimensions" href="2022-03-09-higher-dimensions.html" />
+    <link rel="prev" title="2022-03-11 Noisy data" href="2022-03-11-noisy-data.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -235,13 +234,13 @@
      2022-03-09 Higher dimensions
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-03-11-noisy-data.html">
      2022-03-11 Noisy data
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="2022-03-14-regression.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      2022-03-14 Regression
     </a>
    </li>
@@ -288,7 +287,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/slides/2022-03-11-noisy-data.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/slides/2022-03-14-regression.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -308,7 +307,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cu-numcomp/spring22/issues/new?title=Issue%20on%20page%20%2Fslides/2022-03-11-noisy-data.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cu-numcomp/spring22/issues/new?title=Issue%20on%20page%20%2Fslides/2022-03-14-regression.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -329,7 +328,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/cu-numcomp/spring22/main?urlpath=tree/slides/2022-03-11-noisy-data.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cu-numcomp/spring22/main?urlpath=tree/slides/2022-03-14-regression.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -356,7 +355,7 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   2022-03-11 Noisy data
+   2022-03-14 Regression
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -370,26 +369,6 @@
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#lower-degree-polynomials-to-fit-noise-free-data">
-   Lower-degree polynomials to fit noise-free data
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
-   Noisy data
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#probability-distributions-and-simulation">
-   Probability distributions and simulation
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#regression-with-noisy-data">
-   Regression with noisy data
-  </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#bias-variance-tradeoff">
@@ -446,6 +425,68 @@
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#another-take-on-the-runge-phenomenon">
    Another take on the Runge phenomenon
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Bias-variance tradeoff
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-do-we-call-it-a-linear-model">
+   Why do we call it a linear model?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#standard-assumptions-for-regression">
+   Standard assumptions for regression
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-way-we-ve-been-doing-it-so-far">
+     (the way we’ve been doing it so far)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#anscombe-s-quartet">
+   Anscombe’s quartet
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loss-functions">
+   Loss functions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-of-scalar-valued-function">
+   Gradient of scalar-valued function
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-of-vector-valued-functions">
+   Gradient of vector-valued functions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#geometry-of-partial-derivatives">
+   Geometry of partial derivatives
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#derivative-of-a-dot-product">
+   Derivative of a dot product
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variational-notation">
+   Variational notation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#practice">
+   Practice
   </a>
  </li>
 </ul>
@@ -458,7 +499,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>2022-03-11 Noisy data</h1>
+                <h1>2022-03-14 Regression</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -470,7 +511,7 @@
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   2022-03-11 Noisy data
+   2022-03-14 Regression
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -484,26 +525,6 @@
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#lower-degree-polynomials-to-fit-noise-free-data">
-   Lower-degree polynomials to fit noise-free data
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id1">
-   Noisy data
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#probability-distributions-and-simulation">
-   Probability distributions and simulation
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#regression-with-noisy-data">
-   Regression with noisy data
-  </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#bias-variance-tradeoff">
@@ -562,6 +583,68 @@
    Another take on the Runge phenomenon
   </a>
  </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Bias-variance tradeoff
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-do-we-call-it-a-linear-model">
+   Why do we call it a linear model?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#standard-assumptions-for-regression">
+   Standard assumptions for regression
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-way-we-ve-been-doing-it-so-far">
+     (the way we’ve been doing it so far)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#anscombe-s-quartet">
+   Anscombe’s quartet
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loss-functions">
+   Loss functions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-of-scalar-valued-function">
+   Gradient of scalar-valued function
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-of-vector-valued-functions">
+   Gradient of vector-valued functions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#geometry-of-partial-derivatives">
+   Geometry of partial derivatives
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#derivative-of-a-dot-product">
+   Derivative of a dot product
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variational-notation">
+   Variational notation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#practice">
+   Practice
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -571,23 +654,23 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="noisy-data">
-<h1>2022-03-11 Noisy data<a class="headerlink" href="#noisy-data" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="regression">
+<h1>2022-03-14 Regression<a class="headerlink" href="#regression" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="last-time">
 <h2>Last time<a class="headerlink" href="#last-time" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Discussion</p></li>
-<li><p>Compare accuracy and conditioning of splines</p></li>
-<li><p>Generalization: boundary value problems</p></li>
-<li><p>Cost for interpolation in higher dimensions</p></li>
+<li><p>Noisy data</p></li>
+<li><p>Bias-variance tradeoff</p></li>
+<li><p>Experiments with <a class="reference external" href="https://github.com/cu-numcomp/spring22/blob/main/slides/2022-03-11-noisy-data.ipynb">class notebook</a></p></li>
 </ul>
 </div>
 <div class="section" id="today">
 <h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Noisy data</p></li>
+<li><p>Discussion</p></li>
 <li><p>Bias-variance tradeoff</p></li>
-<li><p>Experiments with this notebook (<a class="reference external" href="https://github.com/cu-numcomp/spring22/blob/main/slides/2022-03-11-noisy-data.ipynb">https://github.com/cu-numcomp/spring22/blob/main/slides/2022-03-11-noisy-data.ipynb</a>)</p></li>
+<li><p>Linear models</p></li>
+<li><p>Loss functions and partial derivatives</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -623,22 +706,6 @@
     <span class="n">T</span>
 <span class="k">end</span>
 
-<span class="k">function</span> <span class="n">interp_nearest</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span>
-    <span class="n">A</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">s</span><span class="p">),</span> <span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span> <span class="k">in</span> <span class="n">enumerate</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-        <span class="n">loc</span> <span class="o">=</span> <span class="nb">nothing</span>
-        <span class="n">dist</span> <span class="o">=</span> <span class="nb">Inf</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span> <span class="k">in</span> <span class="n">enumerate</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">abs</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">u</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">dist</span>
-                <span class="n">loc</span> <span class="o">=</span> <span class="n">j</span>
-                <span class="n">dist</span> <span class="o">=</span> <span class="n">abs</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">u</span><span class="p">)</span>
-            <span class="k">end</span>
-        <span class="k">end</span>
-        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">loc</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">end</span>
-    <span class="n">A</span>
-<span class="k">end</span>
-
 <span class="n">runge</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="n">CosRange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">.+</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="nb">pi</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
@@ -653,109 +720,6 @@
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="lower-degree-polynomials-to-fit-noise-free-data">
-<h1>Lower-degree polynomials to fit noise-free data<a class="headerlink" href="#lower-degree-polynomials-to-fit-noise-free-data" title="Permalink to this headline">¶</a></h1>
-<p>We can fit <span class="math notranslate nohighlight">\(m\)</span> data points using an <span class="math notranslate nohighlight">\(n &lt; m\)</span> dimensional space of functions. This involves solving a least squares problem for the coefficients
-<span class="math notranslate nohighlight">\( \min_c \lVert V c - y \rVert \)</span></p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">chebyshev_regress_eval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xx</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-    <span class="n">V</span> <span class="o">=</span> <span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-    <span class="nd">@show</span> <span class="n">cond</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
-    <span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">V</span>
-<span class="k">end</span>
-<span class="n">ndata</span><span class="p">,</span> <span class="n">nbasis</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">20</span>
-<span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">ndata</span><span class="p">)</span>
-<span class="n">xx</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">C</span> <span class="o">=</span> <span class="n">chebyshev_regress_eval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xx</span><span class="p">,</span> <span class="n">nbasis</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="p">[</span><span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">xx</span><span class="p">),</span> <span class="n">C</span> <span class="o">*</span> <span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)])</span>
-<span class="n">scatter!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">runge</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cond(V) = 4.540300267483983
-</pre></div>
-</div>
-<img alt="../_images/2022-03-11-noisy-data_3_1.svg" src="../_images/2022-03-11-noisy-data_3_1.svg" /></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">S</span> <span class="o">=</span> <span class="n">svdvals</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
-<span class="n">scatter</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/2022-03-11-noisy-data_4_0.svg" src="../_images/2022-03-11-noisy-data_4_0.svg" /></div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="id1">
-<h1>Noisy data<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">=</span> <span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="n">sigma</span>
-
-<span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
-<span class="n">C</span> <span class="o">=</span> <span class="n">chebyshev_regress_eval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">C</span> <span class="o">*</span> <span class="n">y</span><span class="p">])</span>
-<span class="n">scatter!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">500</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cond(V) = 3.473045048110253
-</pre></div>
-</div>
-<img alt="../_images/2022-03-11-noisy-data_6_1.svg" src="../_images/2022-03-11-noisy-data_6_1.svg" /></div>
-</div>
-<ul class="simple">
-<li><p>What do you like?</p></li>
-<li><p>What do you not like?</p></li>
-</ul>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="probability-distributions-and-simulation">
-<h1>Probability distributions and simulation<a class="headerlink" href="#probability-distributions-and-simulation" title="Permalink to this headline">¶</a></h1>
-<p>To interpret real data, we need a model for noise. We’ve used the most common and convenient choice when creating the data above; the <code class="docutils literal notranslate"><span class="pre">randn</span></code> function draws from the “standard normal” or “Gaussian” distribution,
-<div class="math notranslate nohighlight">
-\[ p(t) = \frac{1}{\sqrt{2 \pi}} e^{-t^2/2} \]</div>
-</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">stdnormal</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="o">^</span><span class="mi">2</span><span class="o">/</span><span class="mf">2.</span><span class="p">)</span> <span class="o">/</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="p">)</span>
-<span class="n">n</span> <span class="o">=</span> <span class="mi">10000</span>
-<span class="n">w</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-<span class="n">histogram</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="ss">:density</span><span class="p">,</span> <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">plot!</span><span class="p">(</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="n">n</span><span class="o">*</span><span class="n">stdnormal</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/2022-03-11-noisy-data_9_0.svg" src="../_images/2022-03-11-noisy-data_9_0.svg" /></div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="regression-with-noisy-data">
-<h1>Regression with noisy data<a class="headerlink" href="#regression-with-noisy-data" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">=</span> <span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="n">sigma</span>
-
-<span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.5</span>
-<span class="n">C</span> <span class="o">=</span> <span class="n">chebyshev_regress_eval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="ss">:black</span><span class="p">)</span>
-<span class="n">plot!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="p">[</span><span class="n">C</span> <span class="o">*</span> <span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">20</span><span class="p">],</span> <span class="n">legend</span><span class="o">=</span><span class="nb">nothing</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cond(V) = 3.473045048110253
-</pre></div>
-</div>
-<img alt="../_images/2022-03-11-noisy-data_11_1.svg" src="../_images/2022-03-11-noisy-data_11_1.svg" /></div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="bias-variance-tradeoff">
@@ -801,7 +765,7 @@ More complex models are more capable of expressing the underlying function <span
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2022-03-11-noisy-data_15_0.svg" src="../_images/2022-03-11-noisy-data_15_0.svg" /></div>
+<img alt="../_images/2022-03-14-regression_5_0.svg" src="../_images/2022-03-14-regression_5_0.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -812,8 +776,8 @@ More complex models are more capable of expressing the underlying function <span
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(yfit - ytrain) = 5.778851168038822
-norm(yfit - ytest) = 5.549990380953337
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(yfit - ytrain) = 5.554954915220693
+norm(yfit - ytest) = 6.100784485480803
 </pre></div>
 </div>
 </div>
@@ -838,7 +802,7 @@ norm(yfit - ytest) = 5.549990380953337
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2022-03-11-noisy-data_18_0.svg" src="../_images/2022-03-11-noisy-data_18_0.svg" /></div>
+<img alt="../_images/2022-03-14-regression_8_0.svg" src="../_images/2022-03-14-regression_8_0.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -855,13 +819,13 @@ norm(yfit - ytest) = 5.549990380953337
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>size(res) = (13, 2)
 </pre></div>
 </div>
-<img alt="../_images/2022-03-11-noisy-data_19_1.svg" src="../_images/2022-03-11-noisy-data_19_1.svg" /></div>
+<img alt="../_images/2022-03-14-regression_9_1.svg" src="../_images/2022-03-14-regression_9_1.svg" /></div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="interpretation-questions">
 <h1>Interpretation questions<a class="headerlink" href="#interpretation-questions" title="Permalink to this headline">¶</a></h1>
 <p>Think about these questions, re-run the notebook, and try to formulate an answer.
-Please discuss online (Piazza or with a friend).</p>
+Please discuss online (Zulip or with a friend).</p>
 <ul class="simple">
 <li><p>Is “perfect train” (residual for the noisy sample of the zero-noise function) always greater than (or less than) “perfect test”?</p></li>
 <li><p>Can you identify when we begin “overfitting” by comparing “train” with “perfect train”?  Does it happen at about the same degree each time?</p></li>
@@ -911,7 +875,7 @@ Please discuss online (Piazza or with a friend).</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>size(Y) = (500, 50)
 </pre></div>
 </div>
-<img alt="../_images/2022-03-11-noisy-data_23_1.svg" src="../_images/2022-03-11-noisy-data_23_1.svg" /></div>
+<img alt="../_images/2022-03-14-regression_13_1.svg" src="../_images/2022-03-14-regression_13_1.svg" /></div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="interpretation">
@@ -934,7 +898,7 @@ Please discuss online (Piazza or with a friend).</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2022-03-11-noisy-data_26_0.svg" src="../_images/2022-03-11-noisy-data_26_0.svg" /></div>
+<img alt="../_images/2022-03-14-regression_16_0.svg" src="../_images/2022-03-14-regression_16_0.svg" /></div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="variance-over-the-realizations">
@@ -944,7 +908,8 @@ Please discuss online (Piazza or with a friend).</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">variance</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
     <span class="s">&quot;&quot;&quot;Compute the Variance as defined at the top of this activity&quot;&quot;&quot;</span>
     <span class="c">## BEGIN SOLUTION</span>
-    
+    <span class="n">n</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">sum</span><span class="p">(</span><span class="n">Y</span> <span class="o">.^</span> <span class="mi">2</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span> <span class="o">-</span> <span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span> <span class="o">.^</span> <span class="mi">2</span>
     <span class="c">## END SOLUTION</span>
 <span class="k">end</span>
 
@@ -955,45 +920,14 @@ Please discuss online (Piazza or with a friend).</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">MethodError</span>: no method matching size(::String)
-<span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
-  <span class="n">size</span><span class="p">(::</span><span class="n">Union</span><span class="p">{</span><span class="n">QR</span><span class="p">,</span> <span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">QRCompactWY</span><span class="p">,</span> <span class="n">QRPivoted</span><span class="p">})</span> <span class="n">at</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.7</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">qr</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">567</span>
-  <span class="n">size</span><span class="p">(::</span><span class="n">Union</span><span class="p">{</span><span class="n">QR</span><span class="p">,</span> <span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">QRCompactWY</span><span class="p">,</span> <span class="n">QRPivoted</span><span class="p">},</span> <span class="p">::</span><span class="n">Integer</span><span class="p">)</span> <span class="n">at</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.7</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">qr</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">566</span>
-  <span class="n">size</span><span class="p">(::</span><span class="n">Union</span><span class="p">{</span><span class="n">Cholesky</span><span class="p">,</span> <span class="n">CholeskyPivoted</span><span class="p">})</span> <span class="n">at</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.7</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">cholesky</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">494</span>
-  <span class="o">...</span>
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">show</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1047</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="nb">eval</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">373</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">include_string</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">REPL</span><span class="o">.</span><span class="n">softscope</span><span class="p">),</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">code</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">filename</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1196</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>size(Yvar) = (500, 1)
 </pre></div>
 </div>
-</div>
+<img alt="../_images/2022-03-14-regression_18_1.svg" src="../_images/2022-03-14-regression_18_1.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@assert</span> <span class="n">size</span><span class="p">(</span><span class="n">variance</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span> <span class="o">==</span> <span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">MethodError</span>: no method matching size(::String)
-<span class="n">Closest</span> <span class="n">candidates</span> <span class="n">are</span><span class="p">:</span>
-  <span class="n">size</span><span class="p">(::</span><span class="n">Union</span><span class="p">{</span><span class="n">QR</span><span class="p">,</span> <span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">QRCompactWY</span><span class="p">,</span> <span class="n">QRPivoted</span><span class="p">})</span> <span class="n">at</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.7</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">qr</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">567</span>
-  <span class="n">size</span><span class="p">(::</span><span class="n">Union</span><span class="p">{</span><span class="n">QR</span><span class="p">,</span> <span class="n">LinearAlgebra</span><span class="o">.</span><span class="n">QRCompactWY</span><span class="p">,</span> <span class="n">QRPivoted</span><span class="p">},</span> <span class="p">::</span><span class="n">Integer</span><span class="p">)</span> <span class="n">at</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.7</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">qr</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">566</span>
-  <span class="n">size</span><span class="p">(::</span><span class="n">Union</span><span class="p">{</span><span class="n">Cholesky</span><span class="p">,</span> <span class="n">CholeskyPivoted</span><span class="p">})</span> <span class="n">at</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">share</span><span class="o">/</span><span class="n">julia</span><span class="o">/</span><span class="n">stdlib</span><span class="o">/</span><span class="n">v1</span><span class="mf">.7</span><span class="o">/</span><span class="n">LinearAlgebra</span><span class="o">/</span><span class="n">src</span><span class="o">/</span><span class="n">cholesky</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">494</span>
-  <span class="o">...</span>
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">48</span><span class="p">]:</span><span class="mi">1</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="nb">eval</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">373</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">include_string</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">REPL</span><span class="o">.</span><span class="n">softscope</span><span class="p">),</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">code</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">filename</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1196</span>
 </pre></div>
 </div>
 </div>
@@ -1007,6 +941,129 @@ If we could choose an approximation space such that variance was flat across the
 Finding spaces of functions have flat variance and are rich enough to approximate interesting functions is “hard” (math speak for has no general solution).
 It is possible in special circumstances, such as for periodic functions, in which the Fourier basis (sine and cosine functions) can be used.</p>
 <p>In practice, we often use <strong>regularization</strong> to modify the least squares objective such that we can reduce variance while using function spaces rich enough to keep bias low.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="id1">
+<h1>Bias-variance tradeoff<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>The expected error in our approximation <span class="math notranslate nohighlight">\(\hat f(x)\)</span> of noisy data <span class="math notranslate nohighlight">\(y = f(x) + \epsilon\)</span> (with <span class="math notranslate nohighlight">\(\epsilon \sim \mathcal N(0, \sigma)\)</span>), can be decomposed as
+<div class="math notranslate nohighlight">
+\[ E[(\hat f(x) - y)^2] = \sigma^2 + \big(\underbrace{E[\hat f(x)] - f(x)}_{\text{Bias}}\big)^2 + \underbrace{E[\hat f(x)^2] - E[\hat f(x)]^2}_{\text{Variance}} . \]</div>
+
+The <span class="math notranslate nohighlight">\(\sigma^2\)</span> term is irreducible error (purely due to observation noise), but bias and variance can be controlled by model selection.
+More complex models are more capable of expressing the underlying function <span class="math notranslate nohighlight">\(f(x)\)</span>, thus are capable of reducing bias.  However, they are also more affected by noise, thereby increasing variance.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="why-do-we-call-it-a-linear-model">
+<h1>Why do we call it a linear model?<a class="headerlink" href="#why-do-we-call-it-a-linear-model" title="Permalink to this headline">¶</a></h1>
+<p>We are currently working with algorithms that express the regression as a linear function of the model parameters.  That is, we search for coefficients <span class="math notranslate nohighlight">\(c = [c_1, c_2, \dotsc]^T\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[ V(x) c \approx y \]</div>
+<p>where the left hand side is linear in <span class="math notranslate nohighlight">\(c\)</span>.  In different notation, we are searching for a predictive model</p>
+<div class="math notranslate nohighlight">
+\[ f(x_i, c) \approx y_i \text{ for all $(x_i, y_i)$} \]</div>
+<p>that is linear in <span class="math notranslate nohighlight">\(c\)</span>.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="standard-assumptions-for-regression">
+<h1>Standard assumptions for regression<a class="headerlink" href="#standard-assumptions-for-regression" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-way-we-ve-been-doing-it-so-far">
+<h2>(the way we’ve been doing it so far)<a class="headerlink" href="#the-way-we-ve-been-doing-it-so-far" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>The independent variables <span class="math notranslate nohighlight">\(x\)</span> are error-free</p></li>
+<li><p>The prediction (or “response”) <span class="math notranslate nohighlight">\(f(x,c)\)</span> is linear in <span class="math notranslate nohighlight">\(c\)</span></p></li>
+<li><p>The noise in the measurements <span class="math notranslate nohighlight">\(y\)</span> is independent (uncorrelated)</p></li>
+<li><p>The noise in the measurements <span class="math notranslate nohighlight">\(y\)</span> has constant variance</p></li>
+</ol>
+<p>There are reasons why all of these assumptions may be undesirable in practice, thus leading to more complicated methods.</p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="anscombe-s-quartet">
+<h1><a class="reference external" href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet">Anscombe’s quartet</a><a class="headerlink" href="#anscombe-s-quartet" title="Permalink to this headline">¶</a></h1>
+<p><img alt="" src="https://seaborn.pydata.org/_images/anscombes_quartet.png" /></p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="loss-functions">
+<h1>Loss functions<a class="headerlink" href="#loss-functions" title="Permalink to this headline">¶</a></h1>
+<p>The error in a single prediction <span class="math notranslate nohighlight">\(f(x_i,c)\)</span> of an observation <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> is often measured as
+<div class="math notranslate nohighlight">
+\[ \frac 1 2 \big( f(x_i, c) - y_i \big)^2, \]</div>
+
+which turns out to have a statistical interpretation when the noise is normally distributed.
+It is natural to define the error over the entire data set as</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8e886f9b-74e4-4b81-be37-6f63edb3137f">
+<span class="eqno">(17)<a class="headerlink" href="#equation-8e886f9b-74e4-4b81-be37-6f63edb3137f" title="Permalink to this equation">¶</a></span>\[\begin{align} L(c; x, y) &amp;= \sum_i \frac 1 2 \big( f(x_i, c) - y_i \big)^2 \\
+&amp;= \frac 1 2 \lVert f(x, c) - y \rVert^2
+\end{align}\]</div>
+<p>where I’ve used the notation <span class="math notranslate nohighlight">\(f(x,c)\)</span> to mean the vector resulting from gathering all of the outputs <span class="math notranslate nohighlight">\(f(x_i, c)\)</span>.
+The function <span class="math notranslate nohighlight">\(L\)</span> is called the “loss function” and is the key to relaxing the above assumptions.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="gradient-of-scalar-valued-function">
+<h1>Gradient of scalar-valued function<a class="headerlink" href="#gradient-of-scalar-valued-function" title="Permalink to this headline">¶</a></h1>
+<p>Let’s step back from optimization and consider how to differentiate a function of several variables.  Let <span class="math notranslate nohighlight">\(f(\boldsymbol x)\)</span> be a function of a vector <span class="math notranslate nohighlight">\(\boldsymbol x\)</span>.  For example,</p>
+<div class="math notranslate nohighlight">
+\[ f(\boldsymbol x) = x_1^2 + \sin(x_2) e^{3x_3} . \]</div>
+<p>We can evaluate the <strong>partial derivative</strong> by differentiating with respect to each component <span class="math notranslate nohighlight">\(x_i\)</span> separately (holding the others constant), and collect the result in a vector,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1c2e5a4f-12d8-43e7-9a51-32476cf4f130">
+<span class="eqno">(18)<a class="headerlink" href="#equation-1c2e5a4f-12d8-43e7-9a51-32476cf4f130" title="Permalink to this equation">¶</a></span>\[\begin{align}
+\frac{\partial f}{\partial \boldsymbol x} &amp;= \begin{bmatrix} \frac{\partial f}{\partial x_1} &amp; \frac{\partial f}{\partial x_2} &amp; \frac{\partial f}{\partial x_3} \end{bmatrix} \\
+&amp;= \begin{bmatrix} 2 x_1 &amp; \cos(x_2) e^{3 x_3} &amp; 3 \sin(x_2) e^{3 x_3} \end{bmatrix}.
+\end{align}\]</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="gradient-of-vector-valued-functions">
+<h1>Gradient of vector-valued functions<a class="headerlink" href="#gradient-of-vector-valued-functions" title="Permalink to this headline">¶</a></h1>
+<p>Now let’s consider a vector-valued function <span class="math notranslate nohighlight">\(\boldsymbol f(\boldsymbol x)\)</span>, e.g.,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \boldsymbol f(\boldsymbol x) = \begin{bmatrix} x_1^2 + \sin(x_2) e^{3x_3} \\ x_1 x_2^2 / x_3 \end{bmatrix} . \end{split}\]</div>
+<p>and write the derivative as a matrix,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-c29b2708-8b2c-40fb-87d8-f9a1420df2f7">
+<span class="eqno">(19)<a class="headerlink" href="#equation-c29b2708-8b2c-40fb-87d8-f9a1420df2f7" title="Permalink to this equation">¶</a></span>\[\begin{align}
+\frac{\partial \boldsymbol f}{\partial \boldsymbol x} &amp;=
+\begin{bmatrix} \frac{\partial f_1}{\partial x_1} &amp; \frac{\partial f_1}{\partial x_2} &amp; \frac{\partial f_1}{\partial x_3} \\
+\frac{\partial f_2}{\partial x_1} &amp; \frac{\partial f_2}{\partial x_2} &amp; \frac{\partial f_2}{\partial x_3} \\
+\end{bmatrix} \\
+&amp;= \begin{bmatrix} 2 x_1 &amp; \cos(x_2) e^{3 x_3} &amp; 3 \sin(x_2) e^{3 x_3} \\
+x_2^2 / x_3 &amp; 2 x_1 x_2 / x_3 &amp; -x_1 x_2^2 / x_3^2
+\end{bmatrix}.
+\end{align}\]</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="geometry-of-partial-derivatives">
+<h1>Geometry of partial derivatives<a class="headerlink" href="#geometry-of-partial-derivatives" title="Permalink to this headline">¶</a></h1>
+<p><img alt="" src="https://explained.ai/matrix-calculus/images/latex-6793E76E433509E38529D4B70EB4D956.svg" /></p>
+<ul class="simple">
+<li><p>Handy resource on partial derivatives for matrices and vectors: <a class="reference external" href="https://explained.ai/matrix-calculus/index.html#sec3">https://explained.ai/matrix-calculus/index.html#sec3</a></p></li>
+</ul>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="derivative-of-a-dot-product">
+<h1>Derivative of a dot product<a class="headerlink" href="#derivative-of-a-dot-product" title="Permalink to this headline">¶</a></h1>
+<p>Let <span class="math notranslate nohighlight">\(f(\boldsymbol x) = \boldsymbol y^T \boldsymbol x = \sum_i y_i x_i\)</span> and compute the derivative</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\partial f}{\partial \boldsymbol x} = \begin{bmatrix} y_0 &amp; y_1 &amp; \dotsb \end{bmatrix} = \boldsymbol y^T . \]</div>
+<p>Note that <span class="math notranslate nohighlight">\(\boldsymbol y^T \boldsymbol x = \boldsymbol x^T \boldsymbol y\)</span> and we have the product rule,</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\partial \lVert \boldsymbol x \rVert^2}{\partial \boldsymbol x} = \frac{\partial \boldsymbol x^T \boldsymbol x}{\partial \boldsymbol x} = 2 \boldsymbol x^T . \]</div>
+<p>Also,
+<div class="math notranslate nohighlight">
+\[ \frac{\partial \lVert \boldsymbol x - \boldsymbol y \rVert^2}{\partial \boldsymbol x} = \frac{\partial (\boldsymbol x - \boldsymbol y)^T (\boldsymbol x - \boldsymbol y)}{\partial \boldsymbol x} = 2 (\boldsymbol x - \boldsymbol y)^T .\]</div>
+</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="variational-notation">
+<h1>Variational notation<a class="headerlink" href="#variational-notation" title="Permalink to this headline">¶</a></h1>
+<p>It’s convenient to express derivatives in terms of how they act on an infinitessimal perturbation. So we might write</p>
+<div class="math notranslate nohighlight">
+\[ \delta f = \frac{\partial f}{\partial x} \delta x .\]</div>
+<p>(It’s common to use <span class="math notranslate nohighlight">\(\delta x\)</span> or <span class="math notranslate nohighlight">\(dx\)</span> for these infinitesimals.) This makes inner products look like a normal product rule</p>
+<div class="math notranslate nohighlight">
+\[ \delta(\mathbf x^T \mathbf y) = (\delta \mathbf x)^T \mathbf y + \mathbf x^T (\delta \mathbf y). \]</div>
+<p>A powerful example of variational notation is differentiating a matrix inverse</p>
+<div class="math notranslate nohighlight">
+\[ 0 = \delta I = \delta(A^{-1} A) = (\delta A^{-1}) A + A^{-1} (\delta A) \]</div>
+<p>and thus
+<div class="math notranslate nohighlight">
+\[ \delta A^{-1} = - A^{-1} (\delta A) A^{-1} \]</div>
+</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="practice">
+<h1>Practice<a class="headerlink" href="#practice" title="Permalink to this headline">¶</a></h1>
+<ol class="simple">
+<li><p>Differentiate <span class="math notranslate nohighlight">\(f(x) = A x\)</span> with respect to <span class="math notranslate nohighlight">\(x\)</span></p></li>
+<li><p>Differentiate <span class="math notranslate nohighlight">\(f(A) = A x\)</span> with respect to <span class="math notranslate nohighlight">\(A\)</span></p></li>
+</ol>
 </div>
 
     <script type="text/x-thebe-config">
@@ -1034,19 +1091,12 @@ It is possible in special circumstances, such as for periodic functions, in whic
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="2022-03-09-higher-dimensions.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022-03-11-noisy-data.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">2022-03-09 Higher dimensions</p>
+            <p class="prev-next-title">2022-03-11 Noisy data</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="2022-03-14-regression.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">2022-03-14 Regression</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             
