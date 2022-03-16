@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2022-03-14 Regression &#8212; Numerical Computation</title>
+    <title>2022-03-16 Beyond Linear Models &#8212; Numerical Computation</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -54,7 +54,7 @@
     <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="2022-03-11 Noisy data" href="2022-03-11-noisy-data.html" />
+    <link rel="prev" title="2022-03-14 Regression" href="2022-03-14-regression.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -239,9 +239,14 @@
      2022-03-11 Noisy data
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-03-14-regression.html">
+     2022-03-14 Regression
+    </a>
+   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     2022-03-14 Regression
+     2022-03-16 Beyond Linear Models
     </a>
    </li>
   </ul>
@@ -287,7 +292,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/slides/2022-03-14-regression.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/slides/2022-03-16-beyond-linear-models.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -307,7 +312,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cu-numcomp/spring22/issues/new?title=Issue%20on%20page%20%2Fslides/2022-03-14-regression.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cu-numcomp/spring22/issues/new?title=Issue%20on%20page%20%2Fslides/2022-03-16-beyond-linear-models.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -328,7 +333,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/cu-numcomp/spring22/main?urlpath=tree/slides/2022-03-14-regression.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cu-numcomp/spring22/main?urlpath=tree/slides/2022-03-16-beyond-linear-models.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -355,7 +360,7 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   2022-03-14 Regression
+   2022-03-16 Beyond Linear Models
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -376,33 +381,6 @@
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#regression-using-polynomials">
-   Regression using polynomials
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-happens-as-we-increase-polynomial-degree">
-   What happens as we increase polynomial degree?
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#interpretation-questions">
-   Interpretation questions
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#bias-and-variance-over-multiple-training-sets">
-   Bias and variance over multiple training sets
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#what-happens-if-we-repeat-this-process">
-     What happens if we repeat this process?
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#stacking-many-realizations">
    Stacking many realizations
   </a>
@@ -413,18 +391,80 @@
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#mean-over-all-the-realizations">
-   Mean over all the realizations
+  <a class="reference internal nav-link" href="#mean-and-variance-over-the-realizations">
+   Mean and variance over the realizations
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#variance-over-the-realizations">
-   Variance over the realizations
+  <a class="reference internal nav-link" href="#why-do-we-call-it-a-linear-model">
+   Why do we call it a linear model?
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#another-take-on-the-runge-phenomenon">
-   Another take on the Runge phenomenon
+  <a class="reference internal nav-link" href="#standard-assumptions-for-regression">
+   Standard assumptions for regression
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-way-we-ve-been-doing-it-so-far">
+     (the way we’ve been doing it so far)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#anscombe-s-quartet">
+   Anscombe’s quartet
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loss-functions">
+   Loss functions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-of-scalar-valued-function">
+   Gradient of scalar-valued function
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-of-vector-valued-functions">
+   Gradient of vector-valued functions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#geometry-of-partial-derivatives">
+   Geometry of partial derivatives
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#derivative-of-a-dot-product">
+   Derivative of a dot product
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variational-notation">
+   Variational notation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#practice">
+   Practice
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimization">
+   Optimization
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#derivative-of-loss-function">
+   Derivative of loss function
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#alternative-derivative">
+   Alternative derivative
   </a>
  </li>
 </ul>
@@ -437,7 +477,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>2022-03-14 Regression</h1>
+                <h1>2022-03-16 Beyond Linear Models</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -449,7 +489,7 @@
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   2022-03-14 Regression
+   2022-03-16 Beyond Linear Models
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -470,33 +510,6 @@
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#regression-using-polynomials">
-   Regression using polynomials
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#what-happens-as-we-increase-polynomial-degree">
-   What happens as we increase polynomial degree?
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#interpretation-questions">
-   Interpretation questions
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#bias-and-variance-over-multiple-training-sets">
-   Bias and variance over multiple training sets
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#what-happens-if-we-repeat-this-process">
-     What happens if we repeat this process?
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#stacking-many-realizations">
    Stacking many realizations
   </a>
@@ -507,18 +520,80 @@
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#mean-over-all-the-realizations">
-   Mean over all the realizations
+  <a class="reference internal nav-link" href="#mean-and-variance-over-the-realizations">
+   Mean and variance over the realizations
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#variance-over-the-realizations">
-   Variance over the realizations
+  <a class="reference internal nav-link" href="#why-do-we-call-it-a-linear-model">
+   Why do we call it a linear model?
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#another-take-on-the-runge-phenomenon">
-   Another take on the Runge phenomenon
+  <a class="reference internal nav-link" href="#standard-assumptions-for-regression">
+   Standard assumptions for regression
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-way-we-ve-been-doing-it-so-far">
+     (the way we’ve been doing it so far)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#anscombe-s-quartet">
+   Anscombe’s quartet
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loss-functions">
+   Loss functions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-of-scalar-valued-function">
+   Gradient of scalar-valued function
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-of-vector-valued-functions">
+   Gradient of vector-valued functions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#geometry-of-partial-derivatives">
+   Geometry of partial derivatives
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#derivative-of-a-dot-product">
+   Derivative of a dot product
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variational-notation">
+   Variational notation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#practice">
+   Practice
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimization">
+   Optimization
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#derivative-of-loss-function">
+   Derivative of loss function
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#alternative-derivative">
+   Alternative derivative
   </a>
  </li>
 </ul>
@@ -530,23 +605,23 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="regression">
-<h1>2022-03-14 Regression<a class="headerlink" href="#regression" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="beyond-linear-models">
+<h1>2022-03-16 Beyond Linear Models<a class="headerlink" href="#beyond-linear-models" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="last-time">
 <h2>Last time<a class="headerlink" href="#last-time" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Noisy data</p></li>
+<li><p>Discussion</p></li>
 <li><p>Bias-variance tradeoff</p></li>
-<li><p>Experiments with <a class="reference external" href="https://github.com/cu-numcomp/spring22/blob/main/slides/2022-03-11-noisy-data.ipynb">class notebook</a></p></li>
+<li><p>Linear models</p></li>
 </ul>
 </div>
 <div class="section" id="today">
 <h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Discussion</p></li>
-<li><p>Bias-variance tradeoff</p></li>
-<li><p>Linear models</p></li>
-<li><p>Loss functions and partial derivatives</p></li>
+<li><p>Assumptions of linear models</p></li>
+<li><p>Look at your data!</p></li>
+<li><p>Partial derivatives</p></li>
+<li><p>Loss functions</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -582,7 +657,13 @@
     <span class="n">T</span>
 <span class="k">end</span>
 
+<span class="k">function</span> <span class="n">chebyshev_regress_eval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xx</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">V</span> <span class="o">=</span> <span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">V</span>
+<span class="k">end</span>
+
 <span class="n">runge</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">=</span> <span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="n">sigma</span>
 
 <span class="n">CosRange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">.+</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="nb">pi</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
@@ -607,133 +688,12 @@
 The <span class="math notranslate nohighlight">\(\sigma^2\)</span> term is irreducible error (purely due to observation noise), but bias and variance can be controlled by model selection.
 More complex models are more capable of expressing the underlying function <span class="math notranslate nohighlight">\(f(x)\)</span>, thus are capable of reducing bias.  However, they are also more affected by noise, thereby increasing variance.</p>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="regression-using-polynomials">
-<h1>Regression using polynomials<a class="headerlink" href="#regression-using-polynomials" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">chebyshev_regress_eval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xx</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-    <span class="n">V</span> <span class="o">=</span> <span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-    <span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">V</span>
-<span class="k">end</span>
-
-<span class="n">runge</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">=</span> <span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="n">sigma</span>
-
-<span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
-<span class="n">ytrain</span> <span class="o">=</span> <span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
-<span class="n">yfit</span> <span class="o">=</span> <span class="n">chebyshev_regress_eval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span> <span class="o">*</span> <span class="n">ytrain</span>
-<span class="n">size</span><span class="p">(</span><span class="n">ytrain</span><span class="p">),</span> <span class="n">size</span><span class="p">(</span><span class="n">yfit</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((500,), (500,))
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s">&quot;runge(x)&quot;</span><span class="p">)</span>
-<span class="n">plot!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">yfit</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&quot;yfit&quot;</span><span class="p">)</span>
-<span class="n">scatter!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ytrain</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/2022-03-14-regression_5_0.svg" src="../_images/2022-03-14-regression_5_0.svg" /></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">ytest</span> <span class="o">=</span> <span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
-<span class="nd">@show</span> <span class="n">norm</span><span class="p">(</span><span class="n">yfit</span> <span class="o">-</span> <span class="n">ytrain</span><span class="p">)</span>
-<span class="nd">@show</span> <span class="n">norm</span><span class="p">(</span><span class="n">yfit</span> <span class="o">-</span> <span class="n">ytest</span><span class="p">);</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(yfit - ytrain) = 11.260549155614475
-norm(yfit - ytest) = 11.397657573604622
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="what-happens-as-we-increase-polynomial-degree">
-<h1>What happens as we increase polynomial degree?<a class="headerlink" href="#what-happens-as-we-increase-polynomial-degree" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">ks</span> <span class="o">=</span> <span class="mi">2</span><span class="o">:</span><span class="mi">2</span><span class="o">:</span><span class="mi">20</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="ss">:none</span><span class="p">)</span>
-<span class="k">function</span> <span class="n">residuals</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
-    <span class="c"># Fit polynomial of degree k to ytrain.</span>
-    <span class="n">yfit</span> <span class="o">=</span> <span class="n">chebyshev_regress_eval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">*</span> <span class="n">ytrain</span>
-    <span class="n">plot!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">yfit</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&quot;k=</span><span class="si">$k</span><span class="s">&quot;</span><span class="p">)</span>
-    <span class="p">[</span><span class="n">norm</span><span class="p">(</span><span class="n">yfit</span> <span class="o">-</span> <span class="n">ytrain</span><span class="p">)</span> <span class="n">norm</span><span class="p">(</span><span class="n">yfit</span> <span class="o">-</span> <span class="n">ytest</span><span class="p">)]</span>
-<span class="k">end</span>
-
-<span class="n">res</span> <span class="o">=</span> <span class="n">vcat</span><span class="p">([</span><span class="n">residuals</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="k">in</span> <span class="n">ks</span><span class="p">]</span><span class="o">...</span><span class="p">)</span>
-<span class="n">p</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/2022-03-14-regression_8_0.svg" src="../_images/2022-03-14-regression_8_0.svg" /></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span> <span class="n">size</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
-
-<span class="n">plot</span><span class="p">(</span><span class="n">ks</span><span class="p">,</span> <span class="n">res</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s">&quot;train&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;polynomial degree&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s">&quot;residual&quot;</span><span class="p">)</span>
-<span class="n">plot!</span><span class="p">(</span><span class="n">ks</span><span class="p">,</span> <span class="n">res</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s">&quot;test&quot;</span><span class="p">)</span>
-<span class="n">plot!</span><span class="p">(</span><span class="n">ks</span><span class="p">,</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">norm</span><span class="p">(</span><span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">ytrain</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s">&quot;perfect train&quot;</span><span class="p">)</span>
-<span class="n">plot!</span><span class="p">(</span><span class="n">ks</span><span class="p">,</span> <span class="n">_</span> <span class="o">-&gt;</span> <span class="n">norm</span><span class="p">(</span><span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">ytest</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s">&quot;perfect test&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>size(res) = (10, 2)
-</pre></div>
-</div>
-<img alt="../_images/2022-03-14-regression_9_1.svg" src="../_images/2022-03-14-regression_9_1.svg" /></div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="interpretation-questions">
-<h1>Interpretation questions<a class="headerlink" href="#interpretation-questions" title="Permalink to this headline">¶</a></h1>
-<p>Think about these questions, re-run the notebook, and try to formulate an answer.
-Please discuss online (Zulip or with a friend).</p>
-<ul class="simple">
-<li><p>Is “perfect train” (residual for the noisy sample of the zero-noise function) always greater than (or less than) “perfect test”?</p></li>
-<li><p>Can you identify when we begin “overfitting” by comparing “train” with “perfect train”?  Does it happen at about the same degree each time?</p></li>
-<li><p>In the real world, we don’t have access to the zero-noise function, thus can’t mark “perfect train”.  By looking at just “train” and “test”, can you identify (roughly) when we begin overfitting?</p></li>
-</ul>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="bias-and-variance-over-multiple-training-sets">
-<h1>Bias and variance over multiple training sets<a class="headerlink" href="#bias-and-variance-over-multiple-training-sets" title="Permalink to this headline">¶</a></h1>
-<p>What have we just done?</p>
-<ul class="simple">
-<li><p>We took one noisy sample of a function</p></li>
-<li><p>Fit polynomials of increasing degree to it</p></li>
-<li><p>Computed the residual of that fit on</p>
-<ul>
-<li><p>the training data</p></li>
-<li><p>an independent “test” sample</p></li>
-</ul>
-</li>
-</ul>
-<div class="section" id="what-happens-if-we-repeat-this-process">
-<h2>What happens if we repeat this process?<a class="headerlink" href="#what-happens-if-we-repeat-this-process" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Scroll up and re-run above</p></li>
-<li><p>We’ll do it many times below</p></li>
-</ul>
-</div>
-</div>
 <div class="tex2jax_ignore mathjax_ignore section" id="stacking-many-realizations">
 <h1>Stacking many realizations<a class="headerlink" href="#stacking-many-realizations" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">degree</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
 <span class="n">Y</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">50</span>
     <span class="n">yi</span> <span class="o">=</span> <span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>
@@ -751,7 +711,7 @@ Please discuss online (Zulip or with a friend).</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>size(Y) = (500, 50)
 </pre></div>
 </div>
-<img alt="../_images/2022-03-14-regression_13_1.svg" src="../_images/2022-03-14-regression_13_1.svg" /></div>
+<img alt="../_images/2022-03-16-beyond-linear-models_4_1.svg" src="../_images/2022-03-16-beyond-linear-models_4_1.svg" /></div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="interpretation">
@@ -763,8 +723,8 @@ Please discuss online (Zulip or with a friend).</p>
 <li><p>This tradeoff is fundamental: richer function spaces are more capable of approximating the functions we want, but they are more easily distracted by noise.</p></li>
 </ul>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="mean-over-all-the-realizations">
-<h1>Mean over all the realizations<a class="headerlink" href="#mean-over-all-the-realizations" title="Permalink to this headline">¶</a></h1>
+<div class="tex2jax_ignore mathjax_ignore section" id="mean-and-variance-over-the-realizations">
+<h1>Mean and variance over the realizations<a class="headerlink" href="#mean-and-variance-over-the-realizations" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Ymean</span> <span class="o">=</span> <span class="n">sum</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">size</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
@@ -774,19 +734,14 @@ Please discuss online (Zulip or with a friend).</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2022-03-14-regression_16_0.svg" src="../_images/2022-03-14-regression_16_0.svg" /></div>
+<img alt="../_images/2022-03-16-beyond-linear-models_7_0.svg" src="../_images/2022-03-16-beyond-linear-models_7_0.svg" /></div>
 </div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="variance-over-the-realizations">
-<h1>Variance over the realizations<a class="headerlink" href="#variance-over-the-realizations" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">variance</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
     <span class="s">&quot;&quot;&quot;Compute the Variance as defined at the top of this activity&quot;&quot;&quot;</span>
-    <span class="c">## BEGIN SOLUTION</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
     <span class="n">sum</span><span class="p">(</span><span class="n">Y</span><span class="o">.^</span><span class="mi">2</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">n</span> <span class="o">-</span> <span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">dims</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span> <span class="o">.^</span><span class="mi">2</span>
-    <span class="c">## END SOLUTION</span>
 <span class="k">end</span>
 
 <span class="n">Yvar</span> <span class="o">=</span> <span class="n">variance</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
@@ -799,24 +754,163 @@ Please discuss online (Zulip or with a friend).</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>size(Yvar) = (500, 1)
 </pre></div>
 </div>
-<img alt="../_images/2022-03-14-regression_18_1.svg" src="../_images/2022-03-14-regression_18_1.svg" /></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@assert</span> <span class="n">size</span><span class="p">(</span><span class="n">variance</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span> <span class="o">==</span> <span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
-</pre></div>
+<img alt="../_images/2022-03-16-beyond-linear-models_8_1.svg" src="../_images/2022-03-16-beyond-linear-models_8_1.svg" /></div>
 </div>
 </div>
+<div class="tex2jax_ignore mathjax_ignore section" id="why-do-we-call-it-a-linear-model">
+<h1>Why do we call it a linear model?<a class="headerlink" href="#why-do-we-call-it-a-linear-model" title="Permalink to this headline">¶</a></h1>
+<p>We are currently working with algorithms that express the regression as a linear function of the model parameters.  That is, we search for coefficients <span class="math notranslate nohighlight">\(c = [c_1, c_2, \dotsc]^T\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[ V(x) c \approx y \]</div>
+<p>where the left hand side is linear in <span class="math notranslate nohighlight">\(c\)</span>.  In different notation, we are searching for a predictive model</p>
+<div class="math notranslate nohighlight">
+\[ f(x_i, c) \approx y_i \text{ for all $(x_i, y_i)$} \]</div>
+<p>that is linear in <span class="math notranslate nohighlight">\(c\)</span>.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="standard-assumptions-for-regression">
+<h1>Standard assumptions for regression<a class="headerlink" href="#standard-assumptions-for-regression" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="the-way-we-ve-been-doing-it-so-far">
+<h2>(the way we’ve been doing it so far)<a class="headerlink" href="#the-way-we-ve-been-doing-it-so-far" title="Permalink to this headline">¶</a></h2>
+<ol class="simple">
+<li><p>The independent variables <span class="math notranslate nohighlight">\(x\)</span> are error-free</p></li>
+<li><p>The prediction (or “response”) <span class="math notranslate nohighlight">\(f(x,c)\)</span> is linear in <span class="math notranslate nohighlight">\(c\)</span></p></li>
+<li><p>The noise in the measurements <span class="math notranslate nohighlight">\(y\)</span> is independent (uncorrelated)</p></li>
+<li><p>The noise in the measurements <span class="math notranslate nohighlight">\(y\)</span> has constant variance</p></li>
+</ol>
+<p>There are reasons why all of these assumptions may be undesirable in practice, thus leading to more complicated methods.</p>
 </div>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="another-take-on-the-runge-phenomenon">
-<h1>Another take on the Runge phenomenon<a class="headerlink" href="#another-take-on-the-runge-phenomenon" title="Permalink to this headline">¶</a></h1>
-<p>The fact that variance blows up toward the end of our interval is a property of the approximation space (polynomials).
-Recall that it doesn’t depend on the basis used for fitting (Chebyshev in this case); that choice only relates to stability.
-If we could choose an approximation space such that variance was flat across the interval <span class="math notranslate nohighlight">\([-1, 1]\)</span>, we would be able to solve interpolation problems on equally spaced grids without numerical artifacts like the Runge phenomenon.
-Finding spaces of functions have flat variance and are rich enough to approximate interesting functions is “hard” (math speak for has no general solution).
-It is possible in special circumstances, such as for periodic functions, in which the Fourier basis (sine and cosine functions) can be used.</p>
-<p>In practice, we often use <strong>regularization</strong> to modify the least squares objective such that we can reduce variance while using function spaces rich enough to keep bias low.</p>
+<div class="tex2jax_ignore mathjax_ignore section" id="anscombe-s-quartet">
+<h1><a class="reference external" href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet">Anscombe’s quartet</a><a class="headerlink" href="#anscombe-s-quartet" title="Permalink to this headline">¶</a></h1>
+<p><img alt="" src="https://seaborn.pydata.org/_images/anscombes_quartet.png" /></p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="loss-functions">
+<h1>Loss functions<a class="headerlink" href="#loss-functions" title="Permalink to this headline">¶</a></h1>
+<p>The error in a single prediction <span class="math notranslate nohighlight">\(f(x_i,c)\)</span> of an observation <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> is often measured as
+<div class="math notranslate nohighlight">
+\[ \frac 1 2 \big( f(x_i, c) - y_i \big)^2, \]</div>
+
+which turns out to have a statistical interpretation when the noise is normally distributed.
+It is natural to define the error over the entire data set as</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d60d630f-78e9-4882-b4f6-c800c1c1f7d5">
+<span class="eqno">(17)<a class="headerlink" href="#equation-d60d630f-78e9-4882-b4f6-c800c1c1f7d5" title="Permalink to this equation">¶</a></span>\[\begin{align} L(c; x, y) &amp;= \sum_i \frac 1 2 \big( f(x_i, c) - y_i \big)^2 \\
+&amp;= \frac 1 2 \lVert f(x, c) - y \rVert^2
+\end{align}\]</div>
+<p>where I’ve used the notation <span class="math notranslate nohighlight">\(f(x,c)\)</span> to mean the vector resulting from gathering all of the outputs <span class="math notranslate nohighlight">\(f(x_i, c)\)</span>.
+The function <span class="math notranslate nohighlight">\(L\)</span> is called the “loss function” and is the key to relaxing the above assumptions.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="gradient-of-scalar-valued-function">
+<h1>Gradient of scalar-valued function<a class="headerlink" href="#gradient-of-scalar-valued-function" title="Permalink to this headline">¶</a></h1>
+<p>Let’s step back from optimization and consider how to differentiate a function of several variables.  Let <span class="math notranslate nohighlight">\(f(\boldsymbol x)\)</span> be a function of a vector <span class="math notranslate nohighlight">\(\boldsymbol x\)</span>.  For example,</p>
+<div class="math notranslate nohighlight">
+\[ f(\boldsymbol x) = x_1^2 + \sin(x_2) e^{3x_3} . \]</div>
+<p>We can evaluate the <strong>partial derivative</strong> by differentiating with respect to each component <span class="math notranslate nohighlight">\(x_i\)</span> separately (holding the others constant), and collect the result in a vector,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-f1d6b882-b55c-4756-8eb1-46b4710b8142">
+<span class="eqno">(18)<a class="headerlink" href="#equation-f1d6b882-b55c-4756-8eb1-46b4710b8142" title="Permalink to this equation">¶</a></span>\[\begin{align}
+\frac{\partial f}{\partial \boldsymbol x} &amp;= \begin{bmatrix} \frac{\partial f}{\partial x_1} &amp; \frac{\partial f}{\partial x_2} &amp; \frac{\partial f}{\partial x_3} \end{bmatrix} \\
+&amp;= \begin{bmatrix} 2 x_1 &amp; \cos(x_2) e^{3 x_3} &amp; 3 \sin(x_2) e^{3 x_3} \end{bmatrix}.
+\end{align}\]</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="gradient-of-vector-valued-functions">
+<h1>Gradient of vector-valued functions<a class="headerlink" href="#gradient-of-vector-valued-functions" title="Permalink to this headline">¶</a></h1>
+<p>Now let’s consider a vector-valued function <span class="math notranslate nohighlight">\(\boldsymbol f(\boldsymbol x)\)</span>, e.g.,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \boldsymbol f(\boldsymbol x) = \begin{bmatrix} x_1^2 + \sin(x_2) e^{3x_3} \\ x_1 x_2^2 / x_3 \end{bmatrix} . \end{split}\]</div>
+<p>and write the derivative as a matrix,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ceed81f3-954c-487f-b214-fd4c25658040">
+<span class="eqno">(19)<a class="headerlink" href="#equation-ceed81f3-954c-487f-b214-fd4c25658040" title="Permalink to this equation">¶</a></span>\[\begin{align}
+\frac{\partial \boldsymbol f}{\partial \boldsymbol x} &amp;=
+\begin{bmatrix} \frac{\partial f_1}{\partial x_1} &amp; \frac{\partial f_1}{\partial x_2} &amp; \frac{\partial f_1}{\partial x_3} \\
+\frac{\partial f_2}{\partial x_1} &amp; \frac{\partial f_2}{\partial x_2} &amp; \frac{\partial f_2}{\partial x_3} \\
+\end{bmatrix} \\
+&amp;= \begin{bmatrix} 2 x_1 &amp; \cos(x_2) e^{3 x_3} &amp; 3 \sin(x_2) e^{3 x_3} \\
+x_2^2 / x_3 &amp; 2 x_1 x_2 / x_3 &amp; -x_1 x_2^2 / x_3^2
+\end{bmatrix}.
+\end{align}\]</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="geometry-of-partial-derivatives">
+<h1>Geometry of partial derivatives<a class="headerlink" href="#geometry-of-partial-derivatives" title="Permalink to this headline">¶</a></h1>
+<p><img alt="" src="https://explained.ai/matrix-calculus/images/latex-6793E76E433509E38529D4B70EB4D956.svg" /></p>
+<ul class="simple">
+<li><p>Handy resource on partial derivatives for matrices and vectors: <a class="reference external" href="https://explained.ai/matrix-calculus/index.html#sec3">https://explained.ai/matrix-calculus/index.html#sec3</a></p></li>
+</ul>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="derivative-of-a-dot-product">
+<h1>Derivative of a dot product<a class="headerlink" href="#derivative-of-a-dot-product" title="Permalink to this headline">¶</a></h1>
+<p>Let <span class="math notranslate nohighlight">\(f(\boldsymbol x) = \boldsymbol y^T \boldsymbol x = \sum_i y_i x_i\)</span> and compute the derivative</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\partial f}{\partial \boldsymbol x} = \begin{bmatrix} y_0 &amp; y_1 &amp; \dotsb \end{bmatrix} = \boldsymbol y^T . \]</div>
+<p>Note that <span class="math notranslate nohighlight">\(\boldsymbol y^T \boldsymbol x = \boldsymbol x^T \boldsymbol y\)</span> and we have the product rule,</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\partial \lVert \boldsymbol x \rVert^2}{\partial \boldsymbol x} = \frac{\partial \boldsymbol x^T \boldsymbol x}{\partial \boldsymbol x} = 2 \boldsymbol x^T . \]</div>
+<p>Also,
+<div class="math notranslate nohighlight">
+\[ \frac{\partial \lVert \boldsymbol x - \boldsymbol y \rVert^2}{\partial \boldsymbol x} = \frac{\partial (\boldsymbol x - \boldsymbol y)^T (\boldsymbol x - \boldsymbol y)}{\partial \boldsymbol x} = 2 (\boldsymbol x - \boldsymbol y)^T .\]</div>
+</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="variational-notation">
+<h1>Variational notation<a class="headerlink" href="#variational-notation" title="Permalink to this headline">¶</a></h1>
+<p>It’s convenient to express derivatives in terms of how they act on an infinitessimal perturbation. So we might write</p>
+<div class="math notranslate nohighlight">
+\[ \delta f = \frac{\partial f}{\partial x} \delta x .\]</div>
+<p>(It’s common to use <span class="math notranslate nohighlight">\(\delta x\)</span> or <span class="math notranslate nohighlight">\(dx\)</span> for these infinitesimals.) This makes inner products look like a normal product rule</p>
+<div class="math notranslate nohighlight">
+\[ \delta(\mathbf x^T \mathbf y) = (\delta \mathbf x)^T \mathbf y + \mathbf x^T (\delta \mathbf y). \]</div>
+<p>A powerful example of variational notation is differentiating a matrix inverse</p>
+<div class="math notranslate nohighlight">
+\[ 0 = \delta I = \delta(A^{-1} A) = (\delta A^{-1}) A + A^{-1} (\delta A) \]</div>
+<p>and thus
+<div class="math notranslate nohighlight">
+\[ \delta A^{-1} = - A^{-1} (\delta A) A^{-1} \]</div>
+</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="practice">
+<h1>Practice<a class="headerlink" href="#practice" title="Permalink to this headline">¶</a></h1>
+<ol class="simple">
+<li><p>Differentiate <span class="math notranslate nohighlight">\(f(x) = A x\)</span> with respect to <span class="math notranslate nohighlight">\(x\)</span></p></li>
+<li><p>Differentiate <span class="math notranslate nohighlight">\(f(A) = A x\)</span> with respect to <span class="math notranslate nohighlight">\(A\)</span></p></li>
+</ol>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="optimization">
+<h1>Optimization<a class="headerlink" href="#optimization" title="Permalink to this headline">¶</a></h1>
+<p>Given data <span class="math notranslate nohighlight">\((x,y)\)</span> and loss function <span class="math notranslate nohighlight">\(L(c; x,y)\)</span>, we wish to find the coefficients <span class="math notranslate nohighlight">\(c\)</span> that minimize the loss, thus yielding the “best predictor” (in a sense that can be made statistically precise).  I.e.,
+<div class="math notranslate nohighlight">
+\[ \bar c = \arg\min_c L(c; x,y) . \]</div>
+</p>
+<p>It is usually desirable to design models such that the loss function is differentiable with respect to the coefficients <span class="math notranslate nohighlight">\(c\)</span>, because this allows the use of more efficient optimization methods.  Recall that our forward model is given in terms of the Vandermonde matrix,</p>
+<div class="math notranslate nohighlight">
+\[ f(x, c) = V(x) c \]</div>
+<p>and thus</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\partial f}{\partial c} = V(x) . \]</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="derivative-of-loss-function">
+<h1>Derivative of loss function<a class="headerlink" href="#derivative-of-loss-function" title="Permalink to this headline">¶</a></h1>
+<p>We can now differentiate our loss function
+<div class="math notranslate nohighlight">
+\[ L(c; x, y) = \frac 1 2 \lVert f(x, c) - y \rVert^2 = \frac 1 2 \sum_i (f(x_i,c) - y_i)^2 \]</div>
+
+term-by-term as</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8214590e-81a7-40ea-84f5-5310bfe1bd5a">
+<span class="eqno">(20)<a class="headerlink" href="#equation-8214590e-81a7-40ea-84f5-5310bfe1bd5a" title="Permalink to this equation">¶</a></span>\[\begin{align} \nabla_c L(c; x,y) = \frac{\partial L(c; x,y)}{\partial c} &amp;= \sum_i \big( f(x_i, c) - y_i \big) \frac{\partial f(x_i, c)}{\partial c} \\
+&amp;= \sum_i \big( f(x_i, c) - y_i \big) V(x_i)
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(V(x_i)\)</span> is the <span class="math notranslate nohighlight">\(i\)</span>th row of <span class="math notranslate nohighlight">\(V(x)\)</span>.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="alternative-derivative">
+<h1>Alternative derivative<a class="headerlink" href="#alternative-derivative" title="Permalink to this headline">¶</a></h1>
+<p>Alternatively, we can take a more linear algebraic approach to write the same expression is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-04ae5d43-5cc6-43fa-a0a2-90237ebb9565">
+<span class="eqno">(21)<a class="headerlink" href="#equation-04ae5d43-5cc6-43fa-a0a2-90237ebb9565" title="Permalink to this equation">¶</a></span>\[\begin{align} \nabla_c L(c; x,y) &amp;= \big( f(x,c) - y \big)^T V(x) \\
+&amp;= \big(V(x) c - y \big)^T V(x) \\
+&amp;= V(x)^T \big( V(x) c - y \big) .
+\end{align}\]</div>
+<p>A necessary condition for the loss function to be minimized is that <span class="math notranslate nohighlight">\(\nabla_c L(c; x,y) = 0\)</span>.</p>
+<ul class="simple">
+<li><p>Is the condition sufficient for general <span class="math notranslate nohighlight">\(f(x, c)\)</span>?</p></li>
+<li><p>Is the condition sufficient for the linear model <span class="math notranslate nohighlight">\(f(x,c) = V(x) c\)</span>?</p></li>
+<li><p>Have we seen this sort of equation before?</p></li>
+</ul>
 </div>
 
     <script type="text/x-thebe-config">
@@ -844,11 +938,11 @@ It is possible in special circumstances, such as for periodic functions, in whic
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="2022-03-11-noisy-data.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022-03-14-regression.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">2022-03-11 Noisy data</p>
+            <p class="prev-next-title">2022-03-14 Regression</p>
         </div>
     </a>
 </div>
