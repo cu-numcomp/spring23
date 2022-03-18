@@ -26,6 +26,8 @@ Welcome to **CSCI-3656: Numerical Computation**
   - Experiment with and compare methods for rootfinding at small and large scales.
 * - [2022-03-07-interpolation](https://classroom.github.com/a/GmgNP4Jp)
   - Learn and apply knowledge of conditioning and stability to explain the Runge effect.
+* - [spring22-project](https://classroom.github.com/a/5acFvKdm)
+  - Investigate how concepts from class appear in real-world software and conceptualize potential group projects.
 :::
 ::::
 
