@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2022-04-01 Nonlinear Regression &#8212; Numerical Computation</title>
+    <title>2022-04-04 Differentiation &#8212; Numerical Computation</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -54,8 +54,7 @@
     <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2022-04-04 Differentiation" href="2022-04-04-differentiation.html" />
-    <link rel="prev" title="2022-03-28 Gradient Descent" href="2022-03-28-gradient-descent.html" />
+    <link rel="prev" title="2022-04-01 Nonlinear Regression" href="2022-04-01-nonlinear-regression.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -255,13 +254,13 @@
      2022-03-28 Gradient Descent
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-04-01-nonlinear-regression.html">
      2022-04-01 Nonlinear Regression
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="2022-04-04-differentiation.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      2022-04-04 Differentiation
     </a>
    </li>
@@ -308,7 +307,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/slides/2022-04-01-nonlinear-regression.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/slides/2022-04-04-differentiation.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -328,7 +327,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cu-numcomp/spring22/issues/new?title=Issue%20on%20page%20%2Fslides/2022-04-01-nonlinear-regression.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cu-numcomp/spring22/issues/new?title=Issue%20on%20page%20%2Fslides/2022-04-04-differentiation.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -349,7 +348,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/cu-numcomp/spring22/main?urlpath=tree/slides/2022-04-01-nonlinear-regression.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cu-numcomp/spring22/main?urlpath=tree/slides/2022-04-04-differentiation.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -376,7 +375,7 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   2022-04-01 Nonlinear Regression
+   2022-04-04 Differentiation
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -389,27 +388,19 @@
      Today
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#gradient-descent">
-     Gradient descent
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#quadratic-model">
-     Quadratic model
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#chebyshev-regression-via-optimization">
-   Chebyshev regression via optimization
+  <a class="reference internal nav-link" href="#constructive-project-feedback-questions">
+   Constructive project feedback/questions
   </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#why-use-qr-vs-gradient-based-optimization">
-   Why use QR vs gradient-based optimization?
-  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#examples">
+     Examples
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#nonlinear-models">
@@ -429,21 +420,6 @@
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#how-do-we-compute-those-derivatives-as-the-model-gets-complicated">
    How do we compute those derivatives as the model gets complicated?
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#taylor-series">
-   Taylor series
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#rounding-error">
-   Rounding error
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#tedious-error-propagation">
-   Tedious error propagation
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -472,6 +448,11 @@
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-reverse-mode-example">
+   A reverse mode example
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#automatic-differentiation">
    Automatic differentiation
   </a>
@@ -479,6 +460,31 @@
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#how-does-zygote-work">
    How does Zygote work?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kinds-of-algorithmic-differentation">
+   Kinds of algorithmic differentation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#forward-or-reverse">
+   Forward or reverse?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ill-conditioned-optimization">
+   Ill-conditioned optimization
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#newton-like-methods-for-optimization">
+   Newton-like methods for optimization
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#outlook">
+   Outlook
   </a>
  </li>
 </ul>
@@ -491,7 +497,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>2022-04-01 Nonlinear Regression</h1>
+                <h1>2022-04-04 Differentiation</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -503,7 +509,7 @@
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   2022-04-01 Nonlinear Regression
+   2022-04-04 Differentiation
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -516,27 +522,19 @@
      Today
     </a>
    </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#gradient-descent">
-     Gradient descent
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#quadratic-model">
-     Quadratic model
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#chebyshev-regression-via-optimization">
-   Chebyshev regression via optimization
+  <a class="reference internal nav-link" href="#constructive-project-feedback-questions">
+   Constructive project feedback/questions
   </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#why-use-qr-vs-gradient-based-optimization">
-   Why use QR vs gradient-based optimization?
-  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#examples">
+     Examples
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#nonlinear-models">
@@ -556,21 +554,6 @@
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#how-do-we-compute-those-derivatives-as-the-model-gets-complicated">
    How do we compute those derivatives as the model gets complicated?
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#taylor-series">
-   Taylor series
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#rounding-error">
-   Rounding error
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#tedious-error-propagation">
-   Tedious error propagation
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -599,6 +582,11 @@
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-reverse-mode-example">
+   A reverse mode example
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#automatic-differentiation">
    Automatic differentiation
   </a>
@@ -606,6 +594,31 @@
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#how-does-zygote-work">
    How does Zygote work?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kinds-of-algorithmic-differentation">
+   Kinds of algorithmic differentation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#forward-or-reverse">
+   Forward or reverse?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ill-conditioned-optimization">
+   Ill-conditioned optimization
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#newton-like-methods-for-optimization">
+   Newton-like methods for optimization
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#outlook">
+   Outlook
   </a>
  </li>
 </ul>
@@ -617,27 +630,27 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="nonlinear-regression">
-<h1>2022-04-01 Nonlinear Regression<a class="headerlink" href="#nonlinear-regression" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="differentiation">
+<h1>2022-04-04 Differentiation<a class="headerlink" href="#differentiation" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="last-time">
 <h2>Last time<a class="headerlink" href="#last-time" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Discuss projects</p></li>
-<li><p>Gradient-based optimization for linear models</p></li>
-<li><p>Effect of conditioning on convergence rate</p></li>
-</ul>
-</div>
-<div class="section" id="today">
-<h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Nonlinear models</p></li>
 <li><p>Computing derivatives</p>
 <ul>
 <li><p>numeric</p></li>
 <li><p>analytic by hand</p></li>
-<li><p>algorithmic (automatic) differentiation</p></li>
 </ul>
 </li>
+</ul>
+</div>
+<div class="section" id="today">
+<h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Project feedback</p></li>
+<li><p>Computing derivatives in maintainable code</p></li>
+<li><p>Forward and reverse</p></li>
+<li><p>Algorithmic (automatic) differentiation</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -673,33 +686,10 @@
     <span class="n">T</span>
 <span class="k">end</span>
 
-<span class="k">function</span> <span class="n">chebyshev_regress_eval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">xx</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-    <span class="n">V</span> <span class="o">=</span> <span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-    <span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">V</span>
-<span class="k">end</span>
-
 <span class="n">runge</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">=</span> <span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">randn</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">*</span> <span class="n">sigma</span>
 
-<span class="n">CosRange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">.+</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="nb">pi</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
-
-<span class="n">vcond</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span> <span class="n">points</span><span class="p">,</span> <span class="n">nmax</span><span class="p">)</span> <span class="o">=</span> <span class="p">[</span><span class="n">cond</span><span class="p">(</span><span class="n">mat</span><span class="p">(</span><span class="n">points</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)))</span> <span class="k">for</span> <span class="n">n</span> <span class="k">in</span> <span class="mi">2</span><span class="o">:</span><span class="n">nmax</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>vcond (generic function with 1 method)
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="section" id="gradient-descent">
-<h2>Gradient descent<a class="headerlink" href="#gradient-descent" title="Permalink to this headline">¶</a></h2>
-<p>Instead of solving the least squares problem using linear algebra (QR factorization), we could solve it using gradient descent.  That is, on each iteration, we’ll take a step in the direction of the negative gradient.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">grad_descent</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="n">c0</span><span class="p">;</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">)</span>
+<span class="k">function</span> <span class="n">grad_descent</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="n">c0</span><span class="p">;</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">)</span>
     <span class="s">&quot;&quot;&quot;Minimize loss(c) via gradient descent with initial guess c0</span>
 <span class="s">    using learning rate gamma.  Declares convergence when gradient</span>
 <span class="s">    is less than tol or after 500 steps.</span>
@@ -728,95 +718,25 @@
 </div>
 </div>
 </div>
-<div class="section" id="quadratic-model">
-<h2>Quadratic model<a class="headerlink" href="#quadratic-model" title="Permalink to this headline">¶</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">1</span><span class="p">;</span> <span class="mi">1</span> <span class="mi">20</span><span class="p">]</span>
-<span class="nd">@show</span> <span class="n">cond</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-<span class="n">loss</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">=</span> <span class="mf">.5</span> <span class="o">*</span> <span class="n">c</span><span class="o">&#39;</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">c</span>
-<span class="n">grad</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="n">c</span>
-
-<span class="n">c</span><span class="p">,</span> <span class="n">chist</span><span class="p">,</span> <span class="n">lhist</span> <span class="o">=</span> <span class="n">grad_descent</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="p">[</span><span class="mf">.9</span><span class="p">,</span> <span class="mf">.9</span><span class="p">],</span>
-    <span class="n">gamma</span><span class="o">=</span><span class="mf">.09</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">lhist</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">,</span> <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">80</span><span class="p">))</span>
-</pre></div>
 </div>
+<div class="tex2jax_ignore mathjax_ignore section" id="constructive-project-feedback-questions">
+<h1>Constructive project feedback/questions<a class="headerlink" href="#constructive-project-feedback-questions" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>You can start now: look at a few projects in <code class="docutils literal notranslate"><span class="pre">#sharing</span></code> on Zulip</p></li>
+</ul>
+<div class="section" id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Explain (in a sentence or two) something you learned:</p></li>
+</ul>
+<blockquote>
+<div><p>It was neat to see how interpolation showed up in this graphics application, and how B-splines were used to have both sharp corners and smooth curves in the same representation.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Ask a question about the software, the underlying math, or about how people interact with or are affected by the software.</p></li>
+<li><p>Give a suggestion for improving or extending the project, or a new perspective by which to understand its context.</p></li>
+</ul>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cond(A) = 21.163274649089434
-</pre></div>
-</div>
-<img alt="../_images/2022-04-01-nonlinear-regression_5_1.svg" src="../_images/2022-04-01-nonlinear-regression_5_1.svg" /></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">chist</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">:</span><span class="p">],</span> <span class="n">chist</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="o">:</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="ss">:circle</span><span class="p">)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
-<span class="n">contour!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">loss</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/2022-04-01-nonlinear-regression_6_0.svg" src="../_images/2022-04-01-nonlinear-regression_6_0.svg" /></div>
-</div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="chebyshev-regression-via-optimization">
-<h1>Chebyshev regression via optimization<a class="headerlink" href="#chebyshev-regression-via-optimization" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">8</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
-<span class="n">V</span> <span class="o">=</span> <span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-<span class="k">function</span> <span class="n">loss</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="n">V</span> <span class="o">*</span> <span class="n">c</span> <span class="o">-</span> <span class="n">y</span>
-    <span class="mf">.5</span> <span class="o">*</span> <span class="n">r</span><span class="o">&#39;</span> <span class="o">*</span> <span class="n">r</span>
-<span class="k">end</span>
-<span class="k">function</span> <span class="n">grad</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="n">V</span> <span class="o">*</span> <span class="n">c</span> <span class="o">-</span> <span class="n">y</span>
-    <span class="n">V</span><span class="o">&#39;</span> <span class="o">*</span> <span class="n">r</span>
-<span class="k">end</span>
-<span class="n">c</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">lhist</span> <span class="o">=</span> <span class="n">grad_descent</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">grad</span><span class="p">,</span> <span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">),</span>
-    <span class="n">gamma</span><span class="o">=</span><span class="mf">0.008</span><span class="p">)</span>
-<span class="n">c</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8-element Vector{Float64}:
-  0.2574425176426252
- -0.07677183142880879
- -0.45869836761594074
- -0.03424918979535217
-  0.0015455111399231755
- -0.04040206116680208
- -0.2646122776404021
- -0.022719353732199264
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c0</span> <span class="o">=</span> <span class="n">V</span> <span class="o">\</span> <span class="n">y</span>
-<span class="n">l0</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">norm</span><span class="p">(</span><span class="n">V</span> <span class="o">*</span> <span class="n">c0</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span>
-<span class="nd">@show</span> <span class="n">cond</span><span class="p">(</span><span class="n">V</span><span class="o">&#39;</span> <span class="o">*</span> <span class="n">V</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">lhist</span> <span class="o">.-</span> <span class="n">l0</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">)</span>
-<span class="c">#plot!(i -&gt; l0, color=:black)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cond(V&#39; * V) = 9.259357328426905
-</pre></div>
-</div>
-<img alt="../_images/2022-04-01-nonlinear-regression_9_1.svg" src="../_images/2022-04-01-nonlinear-regression_9_1.svg" /></div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="why-use-qr-vs-gradient-based-optimization">
-<h1>Why use QR vs gradient-based optimization?<a class="headerlink" href="#why-use-qr-vs-gradient-based-optimization" title="Permalink to this headline">¶</a></h1>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="nonlinear-models">
 <h1>Nonlinear models<a class="headerlink" href="#nonlinear-models" title="Permalink to this headline">¶</a></h1>
@@ -837,8 +757,8 @@ We’ll use the same loss function
 \[ \nabla_c L(c; x,y) = \big( f(x,c) - y \big)^T \nabla_c f(x,c) \]</div>
 
 where</p>
-<div class="amsmath math notranslate nohighlight" id="equation-494f4902-f91e-4536-9040-6a351bee98a1">
-<span class="eqno">(24)<a class="headerlink" href="#equation-494f4902-f91e-4536-9040-6a351bee98a1" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-07255d5f-af84-470b-82ed-7e4dbcfe9ae0">
+<span class="eqno">(26)<a class="headerlink" href="#equation-07255d5f-af84-470b-82ed-7e4dbcfe9ae0" title="Permalink to this equation">¶</a></span>\[\begin{align}
 \frac{\partial f(x,c)}{\partial c_1} &amp;= -(c_1 + c_2 x + c_3 x^2)^{-2} = - f(x,c)^2 \\
 \frac{\partial f(x,c)}{\partial c_2} &amp;= -(c_1 + c_2 x + c_3 x^2)^{-2} x = - f(x,c)^2 x \\
 \frac{\partial f(x,c)}{\partial c_3} &amp;= -(c_1 + c_2 x + c_3 x^2)^{-2} x^2 = - f(x,c)^2 x^2 .
@@ -872,7 +792,9 @@ where</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">lhist</span> <span class="o">=</span> <span class="n">grad_descent</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">gradient</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">10.</span><span class="p">],</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">.5</span><span class="p">)</span>
+<span class="n">c</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">lhist</span> <span class="o">=</span> <span class="n">grad_descent</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">gradient</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">10.</span><span class="p">],</span>
     <span class="n">gamma</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span>
 <span class="nd">@show</span> <span class="n">c</span>
 <span class="n">plot</span><span class="p">(</span><span class="n">lhist</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">)</span>
@@ -880,10 +802,10 @@ where</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c = [0.9360587066416243, 0.49240962714220576, 10.23410523331987]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c = [1.0577450826384476, 0.22035329209217985, 9.689575039933658]
 </pre></div>
 </div>
-<img alt="../_images/2022-04-01-nonlinear-regression_14_1.svg" src="../_images/2022-04-01-nonlinear-regression_14_1.svg" /></div>
+<img alt="../_images/2022-04-04-differentiation_6_1.svg" src="../_images/2022-04-04-differentiation_6_1.svg" /></div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="compare-fits-on-noisy-data">
@@ -899,7 +821,7 @@ where</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2022-04-01-nonlinear-regression_16_0.svg" src="../_images/2022-04-01-nonlinear-regression_16_0.svg" /></div>
+<img alt="../_images/2022-04-04-differentiation_8_0.svg" src="../_images/2022-04-04-differentiation_8_0.svg" /></div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="how-do-we-compute-those-derivatives-as-the-model-gets-complicated">
@@ -908,51 +830,8 @@ where</p>
 \[\lim_{h\to 0} \frac{f(x+h) - f(x)}{h}\]</div>
 <ul class="simple">
 <li><p>How should we choose <span class="math notranslate nohighlight">\(h\)</span>?</p></li>
-</ul>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="taylor-series">
-<h1>Taylor series<a class="headerlink" href="#taylor-series" title="Permalink to this headline">¶</a></h1>
-<p>Classical accuracy analysis assumes that functions are sufficiently smooth, meaning that derivatives exist and Taylor expansions are valid within a neighborhood.  In particular,
-<div class="math notranslate nohighlight">
-\[ f(x+h) = f(x) + f'(x) h + f''(x) \frac{h^2}{2!} + \underbrace{f'''(x) \frac{h^3}{3!} + \dotsb}_{O(h^3)} . \]</div>
-</p>
-<p>The big-<span class="math notranslate nohighlight">\(O\)</span> notation is meant in the limit <span class="math notranslate nohighlight">\(h\to 0\)</span>.  Specifically, a function <span class="math notranslate nohighlight">\(g(h) \in O(h^p)\)</span> (sometimes written <span class="math notranslate nohighlight">\(g(h) = O(h^p)\)</span>) when
-there exists a constant <span class="math notranslate nohighlight">\(C\)</span> such that
-<div class="math notranslate nohighlight">
-\[ g(h) \le C h^p \]</div>
-
-for all sufficiently <em>small</em> <span class="math notranslate nohighlight">\(h\)</span>.</p>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="rounding-error">
-<h1>Rounding error<a class="headerlink" href="#rounding-error" title="Permalink to this headline">¶</a></h1>
-<p>We have an additional source of error, <em>rounding error</em>, which comes from not being able to compute <span class="math notranslate nohighlight">\(f(x)\)</span> or <span class="math notranslate nohighlight">\(f(x+h)\)</span> exactly, nor subtract them exactly.  Suppose that we can, however, compute these functions with a relative error on the order of <span class="math notranslate nohighlight">\(\epsilon_{\text{machine}}\)</span>.  This leads to
-<div class="math notranslate nohighlight">
-\[\begin{split} \begin{split}
-\tilde f(x) &amp;= f(x)(1 + \epsilon_1) \\
-\tilde f(x \oplus h) &amp;= \tilde f((x+h)(1 + \epsilon_2)) \\
-&amp;= f((x + h)(1 + \epsilon_2))(1 + \epsilon_3) \\
-&amp;= [f(x+h) + f'(x+h)(x+h)\epsilon_2 + O(\epsilon_2^2)](1 + \epsilon_3) \\
-&amp;= f(x+h)(1 + \epsilon_3) + f'(x+h)x\epsilon_2 + O(\epsilon_{\text{machine}}^2 + \epsilon_{\text{machine}} h)
-\end{split}
-\end{split}\]</div>
-</p>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="tedious-error-propagation">
-<h1>Tedious error propagation<a class="headerlink" href="#tedious-error-propagation" title="Permalink to this headline">¶</a></h1>
-<div class="math notranslate nohighlight">
-\[\begin{split} \begin{split}
-\left\lvert \frac{\tilde f(x+h) \ominus \tilde f(x)}{h} - \frac{f(x+h) - f(x)}{h} \right\rvert &amp;=
-  \left\lvert \frac{f(x+h)(1 + \epsilon_3) + f'(x+h)x\epsilon_2 + O(\epsilon_{\text{machine}}^2 + \epsilon_{\text{machine}} h) - f(x)(1 + \epsilon_1) - f(x+h) + f(x)}{h} \right\rvert \\
-  &amp;\le \frac{|f(x+h)\epsilon_3| + |f'(x+h)x\epsilon_2| + |f(x)\epsilon_1| + O(\epsilon_{\text{machine}}^2 + \epsilon_{\text{machine}}h)}{h} \\
-  &amp;\le \frac{(2 \max_{[x,x+h]} |f| + \max_{[x,x+h]} |f' x| \epsilon_{\text{machine}} + O(\epsilon_{\text{machine}}^2 + \epsilon_{\text{machine}} h)}{h} \\
-  &amp;= (2\max|f| + \max|f'x|) \frac{\epsilon_{\text{machine}}}{h} + O(\epsilon_{\text{machine}}) \\
-\end{split} \end{split}\]</div>
-<p>where we have assumed that <span class="math notranslate nohighlight">\(h \ge \epsilon_{\text{machine}}\)</span>.
-This error becomes large (relative to <span class="math notranslate nohighlight">\(f'\)</span> – we are concerned with relative error after all)</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(f\)</span> is large compared to <span class="math notranslate nohighlight">\(f'\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(x\)</span> is large</p></li>
-<li><p><span class="math notranslate nohighlight">\(h\)</span> is too small</p></li>
+<li><p>Too big: discretization error dominates (think of truncating the Taylor series)</p></li>
+<li><p>Too small: rounding error dominates</p></li>
 </ul>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="automatic-step-size-selection">
@@ -1023,7 +902,7 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span>
-<span class="k">for</span> <span class="n">_</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">3</span>
+<span class="k">for</span> <span class="n">_</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">2</span>
     <span class="n">y</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="o">^</span><span class="nb">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">log</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 <span class="k">end</span>
 <span class="n">expand_derivatives</span><span class="p">(</span><span class="n">Dx</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
@@ -1033,7 +912,7 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
 \[\begin{equation}
-\frac{\left( \frac{\left( \frac{\cos\left( x^{\pi} \right)}{x} - 3.141592653589793 x^{2.141592653589793} \log\left( x \right) \sin\left( x^{\pi} \right) \right) \cos\left( \cos^{3.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.141592653589793} \right)}{\cos\left( x^{\pi} \right) \log\left( x \right)} - \left( \frac{3.141592653589793 \cos^{3.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{2.141592653589793}}{x} - 9.869604401089358 \cos^{2.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.141592653589793} x^{2.141592653589793} \sin\left( x^{\pi} \right) \right) \sin\left( \cos^{3.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.141592653589793} \right) \log\left( \log\left( x \right) \cos\left( x^{\pi} \right) \right) \right) \cos\left( \left( \log\left( \log\left( x \right) \cos\left( x^{\pi} \right) \right) \right)^{3.141592653589793} \cos^{3.141592653589793}\left( \cos^{3.141592653589793}^{3.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.141592653589793} \right) \right)}{\log\left( \log\left( x \right) \cos\left( x^{\pi} \right) \right) \cos\left( \cos^{3.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.141592653589793} \right)} - \left(  - 3.141592653589793 \left( \log\left( \log\left( x \right) \cos\left( x^{\pi} \right) \right) \right)^{3.141592653589793} \cos^{2.141592653589793}\left( \cos^{2.141592653589793}^{3.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.141592653589793} \right) \left( \frac{3.141592653589793 \cos^{3.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{2.141592653589793}}{x} - 9.869604401089358 \cos^{2.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.141592653589793} x^{2.141592653589793} \sin\left( x^{\pi} \right) \right) \sin\left( \cos^{3.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.141592653589793} \right) + \frac{3.141592653589793 \left( \log\left( \log\left( x \right) \cos\left( x^{\pi} \right) \right) \right)^{2.141592653589793} \cos^{3.141592653589793}\left( \cos^{3.141592653589793}^{3.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.141592653589793} \right) \left( \frac{\cos\left( x^{\pi} \right)}{x} - 3.141592653589793 x^{2.141592653589793} \log\left( x \right) \sin\left( x^{\pi} \right) \right)}{\cos\left( x^{\pi} \right) \log\left( x \right)} \right) \sin\left( \left( \log\left( \log\left( x \right) \cos\left( x^{\pi} \right) \right) \right)^{3.141592653589793} \cos^{3.141592653589793}\left( \cos^{3.141592653589793}^{3.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.141592653589793} \right) \right) \log\left( \cos\left( \cos^{3.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.141592653589793} \right) \log\left( \log\left( x \right) \cos\left( x^{\pi} \right) \right) \right)
+\frac{\left( \frac{\cos\left( x^{\pi} \right)}{x} - 3.141592653589793 x^{2.141592653589793} \log\left( x \right) \sin\left( x^{\pi} \right) \right) \cos\left( \cos^{3.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.141592653589793} \right)}{\cos\left( x^{\pi} \right) \log\left( x \right)} - \left( \frac{3.141592653589793 \cos^{3.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{2.141592653589793}}{x} - 9.869604401089358 \cos^{2.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.141592653589793} x^{2.141592653589793} \sin\left( x^{\pi} \right) \right) \sin\left( \cos^{3.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.141592653589793} \right) \log\left( \log\left( x \right) \cos\left( x^{\pi} \right) \right)
 \end{equation}\]</div>
 </div>
 </div>
@@ -1087,7 +966,7 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-1.5346823414986814, -34.03241959914048)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1.9, 1)
 </pre></div>
 </div>
 </div>
@@ -1096,8 +975,8 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 <div class="tex2jax_ignore mathjax_ignore section" id="we-can-go-the-other-way">
 <h1>We can go the other way<a class="headerlink" href="#we-can-go-the-other-way" title="Permalink to this headline">¶</a></h1>
 <p>We can differentiate a composition <span class="math notranslate nohighlight">\(h(g(f(x)))\)</span> as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-87187dfa-dfd5-4de8-a63e-cb3ab544b04a">
-<span class="eqno">(25)<a class="headerlink" href="#equation-87187dfa-dfd5-4de8-a63e-cb3ab544b04a" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-75ace746-be07-41ca-aea8-cbbe01885ff3">
+<span class="eqno">(27)<a class="headerlink" href="#equation-75ace746-be07-41ca-aea8-cbbe01885ff3" title="Permalink to this equation">¶</a></span>\[\begin{align}
   \operatorname{d} h &amp;= h' \operatorname{d} g \\
   \operatorname{d} g &amp;= g' \operatorname{d} f \\
   \operatorname{d} f &amp;= f' \operatorname{d} x.
@@ -1107,7 +986,58 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 \[ \operatorname d h = \frac{dh}{dg} \left(\frac{dg}{df} \left(\frac{df}{dx} \operatorname d x \right) \right) .\]</div>
 <p>The expression means the same thing if we rearrange the parentheses,</p>
 <div class="math notranslate nohighlight">
-\[ \operatorname d h = \left( \left( \left( \frac{dh}{dg} \right) \frac{dg}{df} \right) \frac{df}{dx} \right) \operatorname d x .\]</div>
+\[ \operatorname d h = \left( \left( \left( \frac{dh}{dg} \right) \frac{dg}{df} \right) \frac{df}{dx} \right) \operatorname d x \]</div>
+<p>which we can compute with in reverse order via</p>
+<div class="math notranslate nohighlight">
+\[ \underbrace{\bar x}_{\frac{dh}{dx}} = \underbrace{\bar g \frac{dg}{df}}_{\bar f} \frac{df}{dx} .\]</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="a-reverse-mode-example">
+<h1>A reverse mode example<a class="headerlink" href="#a-reverse-mode-example" title="Permalink to this headline">¶</a></h1>
+<div class="math notranslate nohighlight">
+\[ \underbrace{\bar x}_{\frac{dh}{dx}} = \underbrace{\bar g \frac{dg}{df}}_{\bar f} \frac{df}{dx} .\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">x</span><span class="o">^</span><span class="nb">pi</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">b</span> <span class="o">*</span> <span class="n">c</span>
+    <span class="n">y</span>
+<span class="k">end</span>
+<span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="mf">1.4</span><span class="p">),</span> <span class="n">diff_wp</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.32484122107701546, -1.2559760384500684)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">gback</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">x</span><span class="o">^</span><span class="nb">pi</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">b</span> <span class="o">*</span> <span class="n">c</span>
+    <span class="c"># backward pass</span>
+    <span class="n">c_</span> <span class="o">=</span> <span class="n">y_</span> <span class="o">*</span> <span class="n">b</span> 
+    <span class="n">b_</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="n">y_</span>
+    <span class="n">a_</span> <span class="o">=</span> <span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">*</span> <span class="n">b_</span>
+    <span class="n">x_</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">x</span> <span class="o">*</span> <span class="n">c_</span> <span class="o">+</span> <span class="nb">pi</span> <span class="o">*</span> <span class="n">x</span><span class="o">^</span><span class="p">(</span><span class="nb">pi</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">a_</span>
+    <span class="n">x_</span>
+<span class="k">end</span>
+<span class="n">gback</span><span class="p">(</span><span class="mf">1.4</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1.2559761698835525
+</pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="automatic-differentiation">
 <h1>Automatic differentiation<a class="headerlink" href="#automatic-differentiation" title="Permalink to this headline">¶</a></h1>
@@ -1186,6 +1116,84 @@ top:
 </div>
 </div>
 </div>
+<div class="tex2jax_ignore mathjax_ignore section" id="kinds-of-algorithmic-differentation">
+<h1>Kinds of algorithmic differentation<a class="headerlink" href="#kinds-of-algorithmic-differentation" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Source transformation: Fortran code in, Fortran code out</p>
+<ul>
+<li><p>Duplicates compiler features, usually incomplete language coverage</p></li>
+<li><p>Produces efficient code</p></li>
+</ul>
+</li>
+<li><p>Operator overloading: C++ types</p>
+<ul>
+<li><p>Hard to vectorize</p></li>
+<li><p>Loops are effectively unrolled/inefficient</p></li>
+</ul>
+</li>
+<li><p>Just-in-time compilation: tightly coupled with compiler</p>
+<ul>
+<li><p>JIT lag</p></li>
+<li><p>Needs dynamic language features (JAX) or tight integration with compiler (Zygote, Enzyme)</p></li>
+<li><p>Some <a class="reference external" href="https://jax.readthedocs.io/en/latest/notebooks/Common_Gotchas_in_JAX.html#control-flow">sharp bits</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="forward-or-reverse">
+<h1>Forward or reverse?<a class="headerlink" href="#forward-or-reverse" title="Permalink to this headline">¶</a></h1>
+<p>It all depends on the shape.</p>
+<ul class="simple">
+<li><p>One input, many outputs: use forward mode</p>
+<ul>
+<li><p>“One input” can be looking in one direction</p></li>
+</ul>
+</li>
+<li><p>Many inputs, one output: use reverse mode</p>
+<ul>
+<li><p>Will need to traverse execution backwards (“tape”)</p></li>
+<li><p>Hierarchical checkpointing</p></li>
+</ul>
+</li>
+<li><p>About square? Forward is usually a bit more efficient.</p></li>
+</ul>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="ill-conditioned-optimization">
+<h1>Ill-conditioned optimization<a class="headerlink" href="#ill-conditioned-optimization" title="Permalink to this headline">¶</a></h1>
+<div class="math notranslate nohighlight">
+\[ L(c; x, y) = \frac 1 2 \lVert \underbrace{f(x, c) - y}_{r(c)} \rVert_{C^{-1}}^2 \]</div>
+<p>Gradient of <span class="math notranslate nohighlight">\(L\)</span> requires the Jacobian <span class="math notranslate nohighlight">\(J\)</span> of the model <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[ g(c) = \nabla_c L = r^T \underbrace{\nabla_c f}_{J} \]</div>
+<p>We can solve <span class="math notranslate nohighlight">\(g(c) = 0\)</span> using a Newton method</p>
+<div class="math notranslate nohighlight">
+\[ g(c + \delta c) = g(c) + \underbrace{\nabla_c g}_H\delta c + O((\delta c)^2) \]</div>
+<p>The Hessian requires the second derivative of <span class="math notranslate nohighlight">\(f\)</span>, which can cause problems.</p>
+<div class="math notranslate nohighlight">
+\[ H = J^T J + r^T (\nabla_c J)\]</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="newton-like-methods-for-optimization">
+<h1>Newton-like methods for optimization<a class="headerlink" href="#newton-like-methods-for-optimization" title="Permalink to this headline">¶</a></h1>
+<p>Solve</p>
+<div class="math notranslate nohighlight">
+\[ H \delta c = -g(c) \]</div>
+<p>Update <span class="math notranslate nohighlight">\(c \gets c + \gamma \delta c\)</span>$ using a line search or trust region.</p>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="outlook">
+<h1>Outlook<a class="headerlink" href="#outlook" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>The optimization problem can be solved using a Newton method.  It can be onerous to implement the needed derivatives.</p></li>
+<li><p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Gauss%E2%80%93Newton_algorithm">Gauss-Newton method</a> (see activity) is often more practical than Newton while being faster than gradient descent, though it lacks robustness.</p></li>
+<li><p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Levenberg%E2%80%93Marquardt_algorithm">Levenberg-Marquardt method</a> provides a sort of middle-ground between Gauss-Newton and gradient descent.</p></li>
+<li><p>Many globalization techniques are used for models that possess many local minima.</p></li>
+<li><p>One pervasive approach is stochastic gradient descent, where small batches (e.g., 1 or 10 or 20) are selected randomly from the corpus of observations (500 in our current example), and a step of gradient descent is applied to that reduced set of observations.  This helps to escape saddle points and weak local minima.</p></li>
+<li><p>Among expressive models <span class="math notranslate nohighlight">\(f(x,c)\)</span>, some may converge much more easily than others.  Having a good optimization algorithm is essential for nonlinear regression with complicated models, especially those with many parameters <span class="math notranslate nohighlight">\(c\)</span>.</p></li>
+<li><p>Classification is a very similar problem to regression, but the observations <span class="math notranslate nohighlight">\(y\)</span> are discrete, thus</p></li>
+<li><p>models <span class="math notranslate nohighlight">\(f(x,c)\)</span> must have discrete output</p></li>
+<li><p>the least squares loss function is not appropriate.</p></li>
+<li><p><a class="reference external" href="https://distill.pub/2017/momentum/">Why momentum really works</a></p></li>
+</ul>
+</div>
 
     <script type="text/x-thebe-config">
     {
@@ -1212,19 +1220,12 @@ top:
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="2022-03-28-gradient-descent.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022-04-01-nonlinear-regression.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">2022-03-28 Gradient Descent</p>
+            <p class="prev-next-title">2022-04-01 Nonlinear Regression</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="2022-04-04-differentiation.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">2022-04-04 Differentiation</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             
