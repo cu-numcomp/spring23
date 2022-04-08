@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2022-04-04 Differentiation &#8212; Numerical Computation</title>
+    <title>2022-04-08 Optimization &#8212; Numerical Computation</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -54,7 +54,7 @@
     <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="2022-04-01 Nonlinear Regression" href="2022-04-01-nonlinear-regression.html" />
+    <link rel="prev" title="2022-04-04 Differentiation" href="2022-04-04-differentiation.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -259,9 +259,14 @@
      2022-04-01 Nonlinear Regression
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-04-04-differentiation.html">
+     2022-04-04 Differentiation
+    </a>
+   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     2022-04-04 Differentiation
+     2022-04-08 Optimization
     </a>
    </li>
   </ul>
@@ -307,7 +312,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/slides/2022-04-04-differentiation.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/slides/2022-04-08-optimization.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -327,7 +332,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cu-numcomp/spring22/issues/new?title=Issue%20on%20page%20%2Fslides/2022-04-04-differentiation.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cu-numcomp/spring22/issues/new?title=Issue%20on%20page%20%2Fslides/2022-04-08-optimization.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -348,7 +353,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/cu-numcomp/spring22/main?urlpath=tree/slides/2022-04-04-differentiation.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cu-numcomp/spring22/main?urlpath=tree/slides/2022-04-08-optimization.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -375,7 +380,7 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   2022-04-04 Differentiation
+   2022-04-08 Optimization
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -389,53 +394,6 @@
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#constructive-project-feedback-questions">
-   Constructive project feedback/questions
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#examples">
-     Examples
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#nonlinear-models">
-   Nonlinear models
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fitting-a-rational-function">
-   Fitting a rational function
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#compare-fits-on-noisy-data">
-   Compare fits on noisy data
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#how-do-we-compute-those-derivatives-as-the-model-gets-complicated">
-   How do we compute those derivatives as the model gets complicated?
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#automatic-step-size-selection">
-   Automatic step size selection
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#symbolic-differentiation">
-   Symbolic differentiation
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#awesome-what-about-products">
-   Awesome, what about products?
-  </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#hand-coding-derivatives">
@@ -473,6 +431,11 @@
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#can-you-differentiate-an-algorithm">
+   Can you differentiate an algorithm?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ill-conditioned-optimization">
    Ill-conditioned optimization
   </a>
@@ -485,6 +448,11 @@
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#outlook">
    Outlook
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#team-project-workshopping">
+   Team project workshopping
   </a>
  </li>
 </ul>
@@ -497,7 +465,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>2022-04-04 Differentiation</h1>
+                <h1>2022-04-08 Optimization</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -509,7 +477,7 @@
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   2022-04-04 Differentiation
+   2022-04-08 Optimization
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -523,53 +491,6 @@
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#constructive-project-feedback-questions">
-   Constructive project feedback/questions
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#examples">
-     Examples
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#nonlinear-models">
-   Nonlinear models
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#fitting-a-rational-function">
-   Fitting a rational function
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#compare-fits-on-noisy-data">
-   Compare fits on noisy data
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#how-do-we-compute-those-derivatives-as-the-model-gets-complicated">
-   How do we compute those derivatives as the model gets complicated?
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#automatic-step-size-selection">
-   Automatic step size selection
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#symbolic-differentiation">
-   Symbolic differentiation
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#awesome-what-about-products">
-   Awesome, what about products?
-  </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#hand-coding-derivatives">
@@ -607,6 +528,11 @@
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#can-you-differentiate-an-algorithm">
+   Can you differentiate an algorithm?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ill-conditioned-optimization">
    Ill-conditioned optimization
   </a>
@@ -621,6 +547,11 @@
    Outlook
   </a>
  </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#team-project-workshopping">
+   Team project workshopping
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -630,27 +561,24 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="differentiation">
-<h1>2022-04-04 Differentiation<a class="headerlink" href="#differentiation" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="optimization">
+<h1>2022-04-08 Optimization<a class="headerlink" href="#optimization" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="last-time">
 <h2>Last time<a class="headerlink" href="#last-time" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Nonlinear models</p></li>
-<li><p>Computing derivatives</p>
-<ul>
-<li><p>numeric</p></li>
-<li><p>analytic by hand</p></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="section" id="today">
-<h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Project feedback</p></li>
 <li><p>Computing derivatives in maintainable code</p></li>
 <li><p>Forward and reverse</p></li>
 <li><p>Algorithmic (automatic) differentiation</p></li>
+<li><p>Projects</p></li>
+</ul>
+</div>
+<div class="section" id="today">
+<h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Reflect on differentiation</p></li>
+<li><p>Second order (Newton type) optimization</p></li>
+<li><p>Project discussion</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -708,217 +636,22 @@
     <span class="k">end</span>
     <span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">hcat</span><span class="p">(</span><span class="n">chist</span><span class="o">...</span><span class="p">),</span> <span class="n">lhist</span><span class="p">)</span>
 <span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>grad_descent (generic function with 1 method)
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="constructive-project-feedback-questions">
-<h1>Constructive project feedback/questions<a class="headerlink" href="#constructive-project-feedback-questions" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p>You can start now: look at a few projects in <code class="docutils literal notranslate"><span class="pre">#sharing</span></code> on Zulip</p></li>
-</ul>
-<div class="section" id="examples">
-<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Explain (in a sentence or two) something you learned:</p></li>
-</ul>
-<blockquote>
-<div><p>It was neat to see how interpolation showed up in this graphics application, and how B-splines were used to have both sharp corners and smooth curves in the same representation.</p>
-</div></blockquote>
-<ul class="simple">
-<li><p>Ask a question about the software, the underlying math, or about how people interact with or are affected by the software.</p></li>
-<li><p>Give a suggestion for improving or extending the project, or a new perspective by which to understand its context.</p></li>
-</ul>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="nonlinear-models">
-<h1>Nonlinear models<a class="headerlink" href="#nonlinear-models" title="Permalink to this headline">¶</a></h1>
-<p>Instead of the linear model
-<div class="math notranslate nohighlight">
-\[ f(x,c) = V(x) c = c_0 + c_1 \underbrace{x}_{T_1(x)} + c_2 T_2(x) + \dotsb \]</div>
-
-let’s consider a rational model with only three parameters
-<div class="math notranslate nohighlight">
-\[ f(x,c) = \frac{1}{c_1 + c_2 x + c_3 x^2} = (c_1 + c_2 x + c_3 x^2)^{-1} . \]</div>
-
-We’ll use the same loss function
-<div class="math notranslate nohighlight">
-\[ L(c; x,y) = \frac 1 2 \lVert f(x,c) - y \rVert^2 . \]</div>
-</p>
-<p>We will also need the gradient
-<div class="math notranslate nohighlight">
-\[ \nabla_c L(c; x,y) = \big( f(x,c) - y \big)^T \nabla_c f(x,c) \]</div>
-
-where</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1e717d67-c3b3-497a-8b0a-29eb87417555">
-<span class="eqno">(26)<a class="headerlink" href="#equation-1e717d67-c3b3-497a-8b0a-29eb87417555" title="Permalink to this equation">¶</a></span>\[\begin{align}
-\frac{\partial f(x,c)}{\partial c_1} &amp;= -(c_1 + c_2 x + c_3 x^2)^{-2} = - f(x,c)^2 \\
-\frac{\partial f(x,c)}{\partial c_2} &amp;= -(c_1 + c_2 x + c_3 x^2)^{-2} x = - f(x,c)^2 x \\
-\frac{\partial f(x,c)}{\partial c_3} &amp;= -(c_1 + c_2 x + c_3 x^2)^{-2} x^2 = - f(x,c)^2 x^2 .
-\end{align}\]</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="fitting-a-rational-function">
-<h1>Fitting a rational function<a class="headerlink" href="#fitting-a-rational-function" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">./</span> <span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">.+</span> <span class="n">c</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.*</span><span class="n">x</span> <span class="o">+</span> <span class="n">c</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.*</span><span class="n">x</span><span class="o">.^</span><span class="mi">2</span><span class="p">)</span>
-<span class="k">function</span> <span class="n">gradf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
-    <span class="n">f2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span><span class="o">.^</span><span class="mi">2</span>
-    <span class="p">[</span><span class="o">-</span><span class="n">f2</span> <span class="o">-</span><span class="n">f2</span><span class="o">.*</span><span class="n">x</span> <span class="o">-</span><span class="n">f2</span><span class="o">.*</span><span class="n">x</span><span class="o">.^</span><span class="mi">2</span><span class="p">]</span>
-<span class="k">end</span>
-<span class="k">function</span> <span class="n">loss</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span>
-    <span class="mf">0.5</span> <span class="o">*</span> <span class="n">r</span><span class="o">&#39;</span> <span class="o">*</span> <span class="n">r</span>
-<span class="k">end</span>
-<span class="k">function</span> <span class="n">gradient</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">-</span> <span class="n">y</span>
-    <span class="n">vec</span><span class="p">(</span><span class="n">r</span><span class="o">&#39;</span> <span class="o">*</span> <span class="n">gradf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
-<span class="k">end</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>gradient (generic function with 1 method)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mf">.5</span><span class="p">)</span>
-<span class="n">c</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">lhist</span> <span class="o">=</span> <span class="n">grad_descent</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="n">gradient</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
-    <span class="n">gamma</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">)</span>
-<span class="nd">@show</span> <span class="n">c</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">lhist</span><span class="p">,</span> <span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c = [1.189773116107557, 0.37072648768485034, 6.165752708060916]
-</pre></div>
-</div>
-<img alt="../_images/2022-04-04-differentiation_6_1.svg" src="../_images/2022-04-04-differentiation_6_1.svg" /></div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="compare-fits-on-noisy-data">
-<h1>Compare fits on noisy data<a class="headerlink" href="#compare-fits-on-noisy-data" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="n">V</span> <span class="o">=</span> <span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
-<span class="n">plot!</span><span class="p">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">runge</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="ss">:black</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&quot;Runge&quot;</span><span class="p">)</span>
-<span class="n">plot!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">V</span> <span class="o">*</span> <span class="p">(</span><span class="n">V</span> <span class="o">\</span> <span class="n">y</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s">&quot;Chebyshev fit&quot;</span><span class="p">)</span>
-<span class="n">plot!</span><span class="p">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s">&quot;Rational fit&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/2022-04-04-differentiation_8_0.svg" src="../_images/2022-04-04-differentiation_8_0.svg" /></div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="how-do-we-compute-those-derivatives-as-the-model-gets-complicated">
-<h1>How do we compute those derivatives as the model gets complicated?<a class="headerlink" href="#how-do-we-compute-those-derivatives-as-the-model-gets-complicated" title="Permalink to this headline">¶</a></h1>
-<div class="math notranslate nohighlight">
-\[\lim_{h\to 0} \frac{f(x+h) - f(x)}{h}\]</div>
-<ul class="simple">
-<li><p>How should we choose <span class="math notranslate nohighlight">\(h\)</span>?</p></li>
-<li><p>Too big: discretization error dominates (think of truncating the Taylor series)</p></li>
-<li><p>Too small: rounding error dominates</p></li>
-</ul>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="automatic-step-size-selection">
-<h1>Automatic step size selection<a class="headerlink" href="#automatic-step-size-selection" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p>Walker and Pernice</p></li>
-<li><p>Dennis and Schnabel</p></li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">;</span> <span class="n">h</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="n">h</span>
 
 <span class="k">function</span> <span class="n">diff_wp</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">x</span><span class="p">;</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">)</span>
     <span class="s">&quot;&quot;&quot;Diff using Walker and Pernice (1998) choice of step&quot;&quot;&quot;</span>
     <span class="n">h</span> <span class="o">=</span> <span class="n">eps</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
     <span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="n">h</span>
 <span class="k">end</span>
-
-<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">diff_wp</span><span class="p">(</span><span class="n">sin</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-2.9698852266335507e-9
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>diff_wp (generic function with 1 method)
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="symbolic-differentiation">
-<h1>Symbolic differentiation<a class="headerlink" href="#symbolic-differentiation" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">Symbolics</span>
-
-<span class="nd">@variables</span> <span class="n">x</span>
-<span class="n">Dx</span> <span class="o">=</span> <span class="n">Differential</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-
-<span class="n">y</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">Dx</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\begin{equation}
-\frac{dsin(x)}{dx}
-\end{equation}\]</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">expand_derivatives</span><span class="p">(</span><span class="n">Dx</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\begin{equation}
-\cos\left( x \right)
-\end{equation}\]</div>
-</div>
-</div>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="awesome-what-about-products">
-<h1>Awesome, what about products?<a class="headerlink" href="#awesome-what-about-products" title="Permalink to this headline">¶</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span>
-<span class="k">for</span> <span class="n">_</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">2</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="o">^</span><span class="nb">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">log</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-<span class="k">end</span>
-<span class="n">expand_derivatives</span><span class="p">(</span><span class="n">Dx</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_latex math notranslate nohighlight">
-\[\begin{equation}
-\frac{\left( \frac{\cos\left( x^{\pi} \right)}{x} - 3.141592653589793 x^{2.141592653589793} \log\left( x \right) \sin\left( x^{\pi} \right) \right) \cos\left( \cos^{3.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.141592653589793} \right)}{\cos\left( x^{\pi} \right) \log\left( x \right)} - \left( \frac{3.141592653589793 \cos^{3.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{2.141592653589793}}{x} - 9.869604401089358 \cos^{2.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.141592653589793} x^{2.141592653589793} \sin\left( x^{\pi} \right) \right) \sin\left( \cos^{3.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.141592653589793} \right) \log\left( \log\left( x \right) \cos\left( x^{\pi} \right) \right)
-\end{equation}\]</div>
-</div>
-</div>
-<ul class="simple">
-<li><p>The size of these expressions can grow <strong>exponentially</strong></p></li>
-</ul>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="hand-coding-derivatives">
 <h1>Hand-coding derivatives<a class="headerlink" href="#hand-coding-derivatives" title="Permalink to this headline">¶</a></h1>
@@ -979,8 +712,8 @@ where</p>
 <div class="tex2jax_ignore mathjax_ignore section" id="we-can-go-the-other-way">
 <h1>We can go the other way<a class="headerlink" href="#we-can-go-the-other-way" title="Permalink to this headline">¶</a></h1>
 <p>We can differentiate a composition <span class="math notranslate nohighlight">\(h(g(f(x)))\)</span> as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-b6d0e1b3-45ad-4d36-b05f-1ce874ace651">
-<span class="eqno">(27)<a class="headerlink" href="#equation-b6d0e1b3-45ad-4d36-b05f-1ce874ace651" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-0989fd77-e145-4627-aafe-f01e7414b1c0">
+<span class="eqno">(28)<a class="headerlink" href="#equation-0989fd77-e145-4627-aafe-f01e7414b1c0" title="Permalink to this equation">¶</a></span>\[\begin{align}
   \operatorname{d} h &amp;= h' \operatorname{d} g \\
   \operatorname{d} g &amp;= g' \operatorname{d} f \\
   \operatorname{d} f &amp;= f' \operatorname{d} x.
@@ -1051,11 +784,6 @@ where</p>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: using Zygote.gradient in module Main conflicts with an existing identifier.
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1080,8 +808,8 @@ where</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[41]:1 within `square`
-define <span class=" -Color -Color-Cyan">double</span> @julia_square_10931<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[8]:1 within `square`
+define <span class=" -Color -Color-Cyan">double</span> @julia_square_5092<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
 top:
 ; ┌ @ intfuncs.jl:312 within `literal_pow`
 ; │┌ @ float.jl:405 within `*`
@@ -1101,11 +829,11 @@ top:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ /home/jed/.julia/packages/Zygote/H6vD3/src/compiler/interface.jl:74 within `gradient`
-define <span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> @julia_gradient_11254<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+define <span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> @julia_gradient_5209<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
 top:
 ;  @ /home/jed/.julia/packages/Zygote/H6vD3/src/compiler/interface.jl:76 within `gradient`
 ; ┌ @ /home/jed/.julia/packages/Zygote/H6vD3/src/compiler/interface.jl:41 within `#56`
-; │┌ @ In[26]:1 within `Pullback`
+; │┌ @ In[8]:1 within `Pullback`
 ; ││┌ @ /home/jed/.julia/packages/ZygoteRules/AIbCs/src/adjoint.jl:67 within `#1822#back`
 ; │││┌ @ /home/jed/.julia/packages/Zygote/H6vD3/src/lib/number.jl:6 within `#254`
 ; ││││┌ @ promotion.jl:380 within `*` @ float.jl:405
@@ -1159,7 +887,20 @@ top:
 <li><p>Hierarchical checkpointing</p></li>
 </ul>
 </li>
+<li><p>Small intermediate results?</p>
+<ul>
+<li><p>Break into pieces and use forward/reverse for the smaller pieces.</p></li>
+</ul>
+</li>
 <li><p>About square? Forward is usually a bit more efficient.</p></li>
+</ul>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="can-you-differentiate-an-algorithm">
+<h1>Can you differentiate an algorithm?<a class="headerlink" href="#can-you-differentiate-an-algorithm" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>Input <span class="math notranslate nohighlight">\(c\)</span>, output <span class="math notranslate nohighlight">\(x\)</span> such that <span class="math notranslate nohighlight">\(f(x,c) = 0\)</span></p></li>
+<li><p>Input <span class="math notranslate nohighlight">\(A\)</span>, output <span class="math notranslate nohighlight">\(\lambda\)</span> such that <span class="math notranslate nohighlight">\(A x = \lambda x\)</span> for some nonzero vector <span class="math notranslate nohighlight">\(x\)</span></p></li>
+<li><p>Input <code class="docutils literal notranslate"><span class="pre">buffer</span></code>, output <code class="docutils literal notranslate"><span class="pre">sha256(buffer)</span></code></p></li>
 </ul>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="ill-conditioned-optimization">
@@ -1181,13 +922,17 @@ top:
 <p>Solve</p>
 <div class="math notranslate nohighlight">
 \[ H \delta c = -g(c) \]</div>
-<p>Update <span class="math notranslate nohighlight">\(c \gets c + \gamma \delta c\)</span>$ using a line search or trust region.</p>
+<p>Update <span class="math notranslate nohighlight">\(c \gets c + \gamma \delta c\)</span> using a line search or trust region.</p>
+<ul class="simple">
+<li><p>Gauss-Newton: <span class="math notranslate nohighlight">\(H = J^T J\)</span></p></li>
+<li><p>Levenberg-Marquardt: <span class="math notranslate nohighlight">\(H = J^T J + \alpha I\)</span></p></li>
+</ul>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="outlook">
 <h1>Outlook<a class="headerlink" href="#outlook" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p>The optimization problem can be solved using a Newton method.  It can be onerous to implement the needed derivatives.</p></li>
-<li><p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Gauss%E2%80%93Newton_algorithm">Gauss-Newton method</a> (see activity) is often more practical than Newton while being faster than gradient descent, though it lacks robustness.</p></li>
+<li><p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Gauss%E2%80%93Newton_algorithm">Gauss-Newton method</a> is often more practical than Newton while being faster than gradient descent, though it lacks robustness.</p></li>
 <li><p>The <a class="reference external" href="https://en.wikipedia.org/wiki/Levenberg%E2%80%93Marquardt_algorithm">Levenberg-Marquardt method</a> provides a sort of middle-ground between Gauss-Newton and gradient descent.</p></li>
 <li><p>Many globalization techniques are used for models that possess many local minima.</p></li>
 <li><p>One pervasive approach is stochastic gradient descent, where small batches (e.g., 1 or 10 or 20) are selected randomly from the corpus of observations (500 in our current example), and a step of gradient descent is applied to that reduced set of observations.  This helps to escape saddle points and weak local minima.</p></li>
@@ -1197,6 +942,23 @@ top:
 <li><p>the least squares loss function is not appropriate.</p></li>
 <li><p><a class="reference external" href="https://distill.pub/2017/momentum/">Why momentum really works</a></p></li>
 </ul>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="team-project-workshopping">
+<h1>Team project workshopping<a class="headerlink" href="#team-project-workshopping" title="Permalink to this headline">¶</a></h1>
+<ol class="simple">
+<li><p>Identify one or more software packages and execution environments that will be used.</p></li>
+<li><p>Identify one or more stakeholders in this problem space.</p></li>
+<li><p>Identify one or more decisions that depend on the use or behavior of the methods or software.</p></li>
+<li><p>What will you do?</p></li>
+</ol>
+<ul class="simple">
+<li><p>Identify a test you can conduct to inform the decision. Think about the stakeholders and context.</p></li>
+<li><p>Create something new using the software and reflect on how it works.</p></li>
+<li><p>Make a contribution to improve the software or community (diagnostics, decumentation, efficiency). (Please share your ideas with me before choosing this.)</p></li>
+</ul>
+<ol class="simple">
+<li><p>Create a thread in <code class="docutils literal notranslate"><span class="pre">#projects</span></code> summarizing the above and naming your group members.</p></li>
+</ol>
 </div>
 
     <script type="text/x-thebe-config">
@@ -1224,11 +986,11 @@ top:
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="2022-04-01-nonlinear-regression.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022-04-04-differentiation.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">2022-04-01 Nonlinear Regression</p>
+            <p class="prev-next-title">2022-04-04 Differentiation</p>
         </div>
     </a>
 </div>
