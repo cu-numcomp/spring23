@@ -54,6 +54,7 @@
     <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2022-04-15 Transformed Quadrature" href="2022-04-15-transforms.html" />
     <link rel="prev" title="2022-04-11 Integration" href="2022-04-11-integration.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -279,6 +280,11 @@
      2022-04-13 Quadrature
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-04-15-transforms.html">
+     2022-04-15 Transformed Quadrature
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -482,6 +488,11 @@
    FastGaussQuadrature.jl
   </a>
  </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transforming-integrals">
+   Transforming integrals
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -594,6 +605,11 @@
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#fastgaussquadrature-jl">
    FastGaussQuadrature.jl
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transforming-integrals">
+   Transforming integrals
   </a>
  </li>
 </ul>
@@ -832,8 +848,9 @@ This is called <strong>Richardson extrapolation</strong>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">P</span> <span class="o">=</span> <span class="n">vander_legendre</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">vander_legendre</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">x</span> <span class="o">-&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="ss">:black</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="ss">:none</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -985,8 +1002,8 @@ This is called <strong>Richardson extrapolation</strong>.</p>
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">FastGaussQuadrature</span>
 
-<span class="n">n</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">x</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">gausslegendre</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">gausslegendre</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&quot;Gauss-Legendre&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s">&quot;weight&quot;</span><span class="p">,</span> <span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 <span class="n">scatter!</span><span class="p">(</span><span class="n">gausslobatto</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">...</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&quot;Gauss-Lobatto&quot;</span><span class="p">)</span>
 </pre></div>
@@ -995,6 +1012,27 @@ This is called <strong>Richardson extrapolation</strong>.</p>
 <div class="cell_output docutils container">
 <img alt="../_images/2022-04-13-quadrature_26_0.svg" src="../_images/2022-04-13-quadrature_26_0.svg" /></div>
 </div>
+<p><a class="reference external" href="https://people.maths.ox.ac.uk/trefethen/mythspaper.pdf">Trefethen, <em>Six Myths of Polynomial Interpolation and Quadrature</em></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span> <span class="n">gausslegendre</span><span class="p">(</span><span class="mi">1000000</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.023108 seconds (10 allocations: 22.888 MiB)
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="transforming-integrals">
+<h1>Transforming integrals<a class="headerlink" href="#transforming-integrals" title="Permalink to this headline">¶</a></h1>
+<p>Suppose we have a strictly monotone differentiable function <span class="math notranslate nohighlight">\(\phi: (-\infty, \infty) \to (-1, 1)\)</span>.
+Then with <span class="math notranslate nohighlight">\(x = \phi(s)\)</span>, our integral transforms as
+<div class="math notranslate nohighlight">
+\[ \int_{-1}^1 f(x) \mathrm dx = \int_{-\infty}^\infty f(\phi(s)) \phi'(s) \mathrm d s . \]</div>
+</p>
 </div>
 
     <script type="text/x-thebe-config">
@@ -1028,6 +1066,13 @@ This is called <strong>Richardson extrapolation</strong>.</p>
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">2022-04-11 Integration</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="2022-04-15-transforms.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2022-04-15 Transformed Quadrature</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             
