@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>2022-04-18 Differential Equations &#8212; Numerical Computation</title>
+    <title>2022-04-20 Stiff equations &#8212; Numerical Computation</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet">
   <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -54,8 +54,7 @@
     <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2022-04-20 Stiff equations" href="2022-04-20-stiffness.html" />
-    <link rel="prev" title="2022-04-15 Transformed Quadrature" href="2022-04-15-transforms.html" />
+    <link rel="prev" title="2022-04-18 Differential Equations" href="2022-04-18-diffeq.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -285,13 +284,13 @@
      2022-04-15 Transformed Quadrature
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="2022-04-18-diffeq.html">
      2022-04-18 Differential Equations
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="2022-04-20-stiffness.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      2022-04-20 Stiff equations
     </a>
    </li>
@@ -338,7 +337,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/slides/2022-04-18-diffeq.ipynb"><button type="button"
+        <a class="dropdown-buttons" href="../_sources/slides/2022-04-20-stiffness.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.ipynb</button></a>
         <!-- Download PDF via print -->
@@ -358,7 +357,7 @@
                 data-toggle="tooltip" data-placement="left" title="Source repository"><i
                     class="fab fa-github"></i>repository</button></a>
         <a class="issues-button"
-            href="https://github.com/cu-numcomp/spring22/issues/new?title=Issue%20on%20page%20%2Fslides/2022-04-18-diffeq.html&body=Your%20issue%20content%20here."><button
+            href="https://github.com/cu-numcomp/spring22/issues/new?title=Issue%20on%20page%20%2Fslides/2022-04-20-stiffness.html&body=Your%20issue%20content%20here."><button
                 type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip" data-placement="left"
                 title="Open an issue"><i class="fas fa-lightbulb"></i>open issue</button></a>
         
@@ -379,7 +378,7 @@
         aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
     <div class="dropdown-buttons">
         
-        <a class="binder-button" href="https://mybinder.org/v2/gh/cu-numcomp/spring22/main?urlpath=tree/slides/2022-04-18-diffeq.ipynb"><button type="button"
+        <a class="binder-button" href="https://mybinder.org/v2/gh/cu-numcomp/spring22/main?urlpath=tree/slides/2022-04-20-stiffness.ipynb"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
                 data-placement="left"><img class="binder-button-logo"
                     src="../_static/images/logo_binder.svg"
@@ -406,7 +405,7 @@
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   2022-04-18 Differential Equations
+   2022-04-20 Stiff equations
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -422,33 +421,9 @@
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#notes-on-integration">
-   Notes on integration
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#high-dimensional-integrals">
-     High-dimensional integrals
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ordinary-differential-equations">
    Ordinary Differential Equations
   </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#why-a-causal-model">
-   Why a causal model?
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#how-was-ihme-making-predictions-in-march-april-2020">
-     How was IHME making predictions in March/April 2020?
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#solving-differential-equations">
@@ -512,6 +487,75 @@
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#computing-with-implicit-methods">
    Computing with implicit methods
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-theta-method">
+   The
+   <span class="math notranslate nohighlight">
+    \(\theta\)
+   </span>
+   method
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#theta-method-for-the-oscillator">
+   <span class="math notranslate nohighlight">
+    \(\theta\)
+   </span>
+   method for the oscillator
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#theta-method-for-the-cosine-decay">
+   <span class="math notranslate nohighlight">
+    \(\theta\)
+   </span>
+   method for the cosine decay
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stability-classes-and-the-theta-method">
+   Stability classes and the
+   <span class="math notranslate nohighlight">
+    \(\theta\)
+   </span>
+   method
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#definition-a-stability">
+     Definition:
+     <span class="math notranslate nohighlight">
+      \(A\)
+     </span>
+     -stability
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#definition-l-stability">
+     Definition:
+     <span class="math notranslate nohighlight">
+      \(L\)
+     </span>
+     -stability
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#heat-equation-as-linear-ode">
+   Heat equation as linear ODE
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#advection-as-a-linear-ode">
+   Advection as a linear ODE
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spectrum-of-operators">
+   Spectrum of operators
   </a>
  </li>
 </ul>
@@ -524,7 +568,7 @@
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>2022-04-18 Differential Equations</h1>
+                <h1>2022-04-20 Stiff equations</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -536,7 +580,7 @@
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   2022-04-18 Differential Equations
+   2022-04-20 Stiff equations
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -552,33 +596,9 @@
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#notes-on-integration">
-   Notes on integration
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#high-dimensional-integrals">
-     High-dimensional integrals
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#ordinary-differential-equations">
    Ordinary Differential Equations
   </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#why-a-causal-model">
-   Why a causal model?
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#how-was-ihme-making-predictions-in-march-april-2020">
-     How was IHME making predictions in March/April 2020?
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#solving-differential-equations">
@@ -644,6 +664,75 @@
    Computing with implicit methods
   </a>
  </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-theta-method">
+   The
+   <span class="math notranslate nohighlight">
+    \(\theta\)
+   </span>
+   method
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#theta-method-for-the-oscillator">
+   <span class="math notranslate nohighlight">
+    \(\theta\)
+   </span>
+   method for the oscillator
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#theta-method-for-the-cosine-decay">
+   <span class="math notranslate nohighlight">
+    \(\theta\)
+   </span>
+   method for the cosine decay
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stability-classes-and-the-theta-method">
+   Stability classes and the
+   <span class="math notranslate nohighlight">
+    \(\theta\)
+   </span>
+   method
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#definition-a-stability">
+     Definition:
+     <span class="math notranslate nohighlight">
+      \(A\)
+     </span>
+     -stability
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#definition-l-stability">
+     Definition:
+     <span class="math notranslate nohighlight">
+      \(L\)
+     </span>
+     -stability
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#heat-equation-as-linear-ode">
+   Heat equation as linear ODE
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#advection-as-a-linear-ode">
+   Advection as a linear ODE
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spectrum-of-operators">
+   Spectrum of operators
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -653,23 +742,23 @@
             
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="differential-equations">
-<h1>2022-04-18 Differential Equations<a class="headerlink" href="#differential-equations" title="Permalink to this headline">¶</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="stiff-equations">
+<h1>2022-04-20 Stiff equations<a class="headerlink" href="#stiff-equations" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="last-time">
 <h2>Last time<a class="headerlink" href="#last-time" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>Singular integrals and Tanh-Sinh quadrature</p></li>
-<li><p>Finite element integration and mapped elements</p></li>
-<li><p>Integration in multiple dimensions</p></li>
-</ul>
-</div>
-<div class="section" id="today">
-<h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Notes on integration</p></li>
 <li><p>Ordinary differential equations (ODE)</p></li>
 <li><p>Explicit methods for solving ODE</p></li>
 <li><p>Stability</p></li>
+</ul>
+</div>
+<div class="section" id="today">
+<h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Implicit and explicit methods</p></li>
+<li><p>Stiff equations</p></li>
+<li><p>PDE examples</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -731,33 +820,6 @@
 </div>
 </div>
 </div>
-<div class="tex2jax_ignore mathjax_ignore section" id="notes-on-integration">
-<h1>Notes on integration<a class="headerlink" href="#notes-on-integration" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p>Transforms can make the integrand smooth</p></li>
-<li><p>Transforms can make the domain shape more convenient</p></li>
-<li><p>Adaptive integration</p></li>
-<li><p>Curse of dimensionality</p>
-<ul>
-<li><p>Sparse grids (<a class="reference external" href="https://en.wikipedia.org/wiki/Sparse_grid#Smolyak%27s_quadrature_rule">Smolyak quadrature</a>)</p></li>
-<li><p>Adaptive randomized methods (Markov Chain Monte Carlo)</p></li>
-</ul>
-</li>
-</ul>
-<div class="section" id="high-dimensional-integrals">
-<h2>High-dimensional integrals<a class="headerlink" href="#high-dimensional-integrals" title="Permalink to this headline">¶</a></h2>
-<p>Suppose we have a joint probability density <span class="math notranslate nohighlight">\(p(x; y)\)</span>.</p>
-<ul class="simple">
-<li><p>Perhaps it’s the probability of getting <span class="math notranslate nohighlight">\(x\)</span> inches of snow, where <span class="math notranslate nohighlight">\(y\)</span> represents known and unknown quantities (location, season, wind direction, El Niño year).</p></li>
-<li><p>The marginal distribution <span class="math notranslate nohighlight">\(p(x)\)</span> allows us to incorporate knowledge (and uncertainty) of <span class="math notranslate nohighlight">\(y\)</span> to make a distribution over only <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[p(x) = \int_y p(x; y) p_Y(y)\]</div>
-<ul class="simple">
-<li><p>Curve ball: we aren’t given <span class="math notranslate nohighlight">\(p(x;y)\)</span> or <span class="math notranslate nohighlight">\(p_Y(y)\)</span>, but we can use data and models to sample those distributions.</p></li>
-</ul>
-</div>
-</div>
 <div class="tex2jax_ignore mathjax_ignore section" id="ordinary-differential-equations">
 <h1>Ordinary Differential Equations<a class="headerlink" href="#ordinary-differential-equations" title="Permalink to this headline">¶</a></h1>
 <p>Given initial condition <span class="math notranslate nohighlight">\(y_0 = y(t=0)\)</span>, find <span class="math notranslate nohighlight">\(y(t)\)</span> for <span class="math notranslate nohighlight">\(t &gt; 0\)</span> that satisfies</p>
@@ -788,14 +850,6 @@
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(y\)</span> can be a scalar or a vector</p></li>
 </ul>
-</div>
-<div class="tex2jax_ignore mathjax_ignore section" id="why-a-causal-model">
-<h1>Why a causal model?<a class="headerlink" href="#why-a-causal-model" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="how-was-ihme-making-predictions-in-march-april-2020">
-<h2>How was IHME making predictions in March/April 2020?<a class="headerlink" href="#how-was-ihme-making-predictions-in-march-april-2020" title="Permalink to this headline">¶</a></h2>
-<p><img alt="image-2.png" src="slides/attachment:image-2.png" /></p>
-<p><img alt="image.png" src="slides/attachment:image.png" /></p>
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">26. Here&#39;s an interesting example of the perversity of the curve-fit. <br><br>The model has been consistently underestimating deaths in Spain. But it has to match the back side of the curve to the front side. To do that it has to *steepen* the downward trajectory. <a href="https://t.co/LzKRDv9BoO">pic.twitter.com/LzKRDv9BoO</a></p>&mdash; Carl T. Bergstrom (@CT_Bergstrom) <a href="https://twitter.com/CT_Bergstrom/status/1250369165984010241?ref_src=twsrc%5Etfw">April 15, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="solving-differential-equations">
 <h1>Solving differential equations<a class="headerlink" href="#solving-differential-equations" title="Permalink to this headline">¶</a></h1>
@@ -870,16 +924,16 @@ where <span class="math notranslate nohighlight">\(k\)</span> is a parameter con
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f1</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span> <span class="n">k</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span> <span class="o">=</span> <span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">.-</span> <span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f1</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="o">-</span><span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">.-</span> <span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
 
-<span class="n">thist</span><span class="p">,</span> <span class="n">yhist</span> <span class="o">=</span> <span class="n">ode_euler</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.</span><span class="p">],</span> <span class="n">tfinal</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mf">.1</span><span class="p">)</span>
+<span class="n">thist</span><span class="p">,</span> <span class="n">yhist</span> <span class="o">=</span> <span class="n">ode_euler</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.</span><span class="p">],</span> <span class="n">tfinal</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mf">.2</span><span class="p">)</span>
 <span class="n">scatter</span><span class="p">(</span><span class="n">thist</span><span class="p">,</span> <span class="n">yhist</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">:</span><span class="p">])</span>
 <span class="n">plot!</span><span class="p">(</span><span class="n">cos</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2022-04-18-diffeq_18_0.svg" src="../_images/2022-04-18-diffeq_18_0.svg" /></div>
+<img alt="../_images/2022-04-20-stiffness_11_0.svg" src="../_images/2022-04-20-stiffness_11_0.svg" /></div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="forward-euler-on-a-linear-system">
@@ -890,31 +944,25 @@ where <span class="math notranslate nohighlight">\(k\)</span> is a parameter con
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f2</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">;</span> <span class="o">-</span><span class="mi">1</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">y</span>
 
-<span class="n">thist</span><span class="p">,</span> <span class="n">yhist</span> <span class="o">=</span> <span class="n">ode_euler</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">h</span><span class="o">=</span><span class="mf">.05</span><span class="p">,</span> <span class="n">tfinal</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">thist</span><span class="p">,</span> <span class="n">yhist</span> <span class="o">=</span> <span class="n">ode_euler</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">h</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">tfinal</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">scatter</span><span class="p">(</span><span class="n">thist</span><span class="p">,</span> <span class="n">yhist</span><span class="o">&#39;</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">([</span><span class="n">cos</span><span class="p">,</span> <span class="n">sin</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2022-04-18-diffeq_20_0.svg" src="../_images/2022-04-18-diffeq_20_0.svg" /></div>
+<img alt="../_images/2022-04-20-stiffness_13_0.svg" src="../_images/2022-04-20-stiffness_13_0.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">eigen</span><span class="p">([</span><span class="mi">0</span> <span class="mi">1</span><span class="p">;</span> <span class="o">-</span><span class="mi">1</span> <span class="mi">0</span><span class="p">])</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">eigvals</span><span class="p">([</span><span class="mi">0</span> <span class="mi">1</span><span class="p">;</span> <span class="o">-</span><span class="mi">1</span> <span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Eigen{ComplexF64, ComplexF64, Matrix{ComplexF64}, Vector{ComplexF64}}
-values:
-2-element Vector{ComplexF64}:
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element Vector{ComplexF64}:
  0.0 - 1.0im
  0.0 + 1.0im
-vectors:
-2×2 Matrix{ComplexF64}:
- 0.707107-0.0im       0.707107+0.0im
-      0.0-0.707107im       0.0+0.707107im
 </pre></div>
 </div>
 </div>
@@ -924,14 +972,14 @@ vectors:
 <h1>Runge-Kutta 4<a class="headerlink" href="#runge-kutta-4" title="Permalink to this headline">¶</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">thist</span><span class="p">,</span> <span class="n">yhist</span> <span class="o">=</span> <span class="n">ode_rk_explicit</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">h</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">tfinal</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">thist</span><span class="p">,</span> <span class="n">yhist</span> <span class="o">=</span> <span class="n">ode_rk_explicit</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">h</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">tfinal</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 <span class="n">scatter</span><span class="p">(</span><span class="n">thist</span><span class="p">,</span> <span class="n">yhist</span><span class="o">&#39;</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">([</span><span class="n">cos</span><span class="p">,</span> <span class="n">sin</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">500</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2022-04-18-diffeq_23_0.svg" src="../_images/2022-04-18-diffeq_23_0.svg" /></div>
+<img alt="../_images/2022-04-20-stiffness_16_0.svg" src="../_images/2022-04-20-stiffness_16_0.svg" /></div>
 </div>
 <ul class="simple">
 <li><p>Apparently it is possible to integrate this system using large time steps.</p></li>
@@ -949,7 +997,7 @@ We can understand the convergence of methods by analyzing the test problem
 for different values of <span class="math notranslate nohighlight">\(\lambda\)</span> in the complex plane.
 One step of the Euler method with step size <span class="math notranslate nohighlight">\(h\)</span> maps
 <div class="math notranslate nohighlight">
-\[ y \to y + h \lambda y = \underbrace{(1 + h \lambda)}_{R(h \lambda)} y .\]</div>
+\[ y \mapsto y + h \lambda y = \underbrace{(1 + h \lambda)}_{R(h \lambda)} y .\]</div>
 
 When does this map cause solutions to “blow up” and when is it stable?</p>
 <div class="cell docutils container">
@@ -959,6 +1007,7 @@ When does this map cause solutions to “blow up” and when is it stable?</p>
     <span class="n">y</span> <span class="o">=</span> <span class="n">ylim</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">:</span><span class="mf">.02</span><span class="o">:</span><span class="n">ylim</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
     <span class="n">plot</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Stability: </span><span class="si">$method</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">aspect_ratio</span><span class="o">=</span><span class="ss">:equal</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="n">xlim</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="n">ylim</span><span class="p">)</span>
     <span class="n">heatmap!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abs</span><span class="p">(</span><span class="n">Rz</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="nb">im</span><span class="o">*</span><span class="n">y</span><span class="p">)),</span> <span class="n">c</span><span class="o">=</span><span class="ss">:bwr</span><span class="p">,</span> <span class="n">clims</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">contour!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">abs</span><span class="p">(</span><span class="n">Rz</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="nb">im</span><span class="o">*</span><span class="n">y</span><span class="p">)),</span> <span class="n">color</span><span class="o">=</span><span class="ss">:black</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mf">1.</span><span class="p">])</span>
     <span class="n">plot!</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="ss">:black</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="ss">:none</span><span class="p">)</span>
     <span class="n">plot!</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="n">ylim</span><span class="o">...</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="ss">:black</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="ss">:none</span><span class="p">)</span>
 <span class="k">end</span>
@@ -966,7 +1015,7 @@ When does this map cause solutions to “blow up” and when is it stable?</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>plot_stability (generic function with 2 methods)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>plot_stability (generic function with 1 method)
 </pre></div>
 </div>
 </div>
@@ -978,7 +1027,7 @@ When does this map cause solutions to “blow up” and when is it stable?</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2022-04-18-diffeq_27_0.svg" src="../_images/2022-04-18-diffeq_27_0.svg" /></div>
+<img alt="../_images/2022-04-20-stiffness_20_0.svg" src="../_images/2022-04-20-stiffness_20_0.svg" /></div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="stability-for-rk4">
@@ -990,7 +1039,7 @@ When does this map cause solutions to “blow up” and when is it stable?</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2022-04-18-diffeq_29_0.svg" src="../_images/2022-04-18-diffeq_29_0.svg" /></div>
+<img alt="../_images/2022-04-20-stiffness_22_0.svg" src="../_images/2022-04-20-stiffness_22_0.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -999,7 +1048,7 @@ When does this map cause solutions to “blow up” and when is it stable?</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2022-04-18-diffeq_30_0.svg" src="../_images/2022-04-18-diffeq_30_0.svg" /></div>
+<img alt="../_images/2022-04-20-stiffness_23_0.svg" src="../_images/2022-04-20-stiffness_23_0.svg" /></div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="implicit-methods">
@@ -1029,7 +1078,7 @@ or
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2022-04-18-diffeq_33_0.svg" src="../_images/2022-04-18-diffeq_33_0.svg" /></div>
+<img alt="../_images/2022-04-20-stiffness_26_0.svg" src="../_images/2022-04-20-stiffness_26_0.svg" /></div>
 </div>
 </div>
 <div class="tex2jax_ignore mathjax_ignore section" id="computing-with-implicit-methods">
@@ -1048,7 +1097,261 @@ or
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2022-04-18-diffeq_36_0.svg" src="../_images/2022-04-18-diffeq_36_0.svg" /></div>
+<img alt="../_images/2022-04-20-stiffness_29_0.svg" src="../_images/2022-04-20-stiffness_29_0.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="the-theta-method">
+<h1>The <span class="math notranslate nohighlight">\(\theta\)</span> method<a class="headerlink" href="#the-theta-method" title="Permalink to this headline">¶</a></h1>
+<p>Forward and backward Euler are bookends of the family known as <span class="math notranslate nohighlight">\(\theta\)</span> methods.</p>
+<div class="math notranslate nohighlight">
+\[ \tilde u(h) = u(0) + h f\Big(\theta h, \theta\tilde u(h) + (1-\theta)u(0) \Big) \]</div>
+<p>which, for linear problems, is solved as</p>
+<div class="math notranslate nohighlight">
+\[ (I - h \theta A) u(h) = \Big(I + h (1-\theta) A \Big) u(0) . \]</div>
+<p><span class="math notranslate nohighlight">\(\theta=0\)</span> is explicit Euler, <span class="math notranslate nohighlight">\(\theta=1\)</span> is implicit Euler, and <span class="math notranslate nohighlight">\(\theta=1/2\)</span> are the midpoint or trapezoid rules (equivalent for linear problems).
+The stability function is
+<div class="math notranslate nohighlight">
+\[ R(z) = \frac{1 + (1-\theta)z}{1 - \theta z}. \]</div>
+</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Rz_theta</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">z</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">theta</span><span class="o">*</span><span class="n">z</span><span class="p">)</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="mf">.6</span>
+<span class="n">plot_stability</span><span class="p">(</span><span class="n">z</span> <span class="o">-&gt;</span> <span class="n">Rz_theta</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">theta</span><span class="p">),</span> <span class="s">&quot;</span><span class="se">\$\\</span><span class="s">theta=</span><span class="si">$theta</span><span class="se">\$</span><span class="s">&quot;</span><span class="p">,</span> 
+    <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-04-20-stiffness_32_0.svg" src="../_images/2022-04-20-stiffness_32_0.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="theta-method-for-the-oscillator">
+<h1><span class="math notranslate nohighlight">\(\theta\)</span> method for the oscillator<a class="headerlink" href="#theta-method-for-the-oscillator" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">ode_theta_linear</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">u0</span><span class="p">;</span> <span class="n">forcing</span><span class="o">=</span><span class="n">zero</span><span class="p">,</span> <span class="n">tfinal</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">u0</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="n">thist</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="p">]</span>
+    <span class="n">uhist</span> <span class="o">=</span> <span class="p">[</span><span class="n">u0</span><span class="p">]</span>
+    <span class="k">while</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">tfinal</span>
+        <span class="n">tnext</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="n">h</span><span class="p">,</span> <span class="n">tfinal</span><span class="p">)</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">tnext</span> <span class="o">-</span> <span class="n">t</span>
+        <span class="n">rhs</span> <span class="o">=</span> <span class="p">(</span><span class="n">I</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">A</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span> <span class="o">.+</span> <span class="n">h</span><span class="o">*</span><span class="n">forcing</span><span class="p">(</span><span class="n">t</span><span class="o">+</span><span class="n">h</span><span class="o">*</span><span class="n">theta</span><span class="p">)</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="p">(</span><span class="n">I</span> <span class="o">-</span> <span class="n">h</span><span class="o">*</span><span class="n">theta</span><span class="o">*</span><span class="n">A</span><span class="p">)</span> <span class="o">\</span> <span class="n">rhs</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">tnext</span>
+        <span class="n">push!</span><span class="p">(</span><span class="n">thist</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+        <span class="n">push!</span><span class="p">(</span><span class="n">uhist</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
+    <span class="k">end</span>
+    <span class="n">thist</span><span class="p">,</span> <span class="n">hcat</span><span class="p">(</span><span class="n">uhist</span><span class="o">...</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ode_theta_linear (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Test on oscillator</span>
+<span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">;</span> <span class="o">-</span><span class="mi">1</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">thist</span><span class="p">,</span> <span class="n">uhist</span> <span class="o">=</span> <span class="n">ode_theta_linear</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">h</span><span class="o">=</span><span class="mf">.2</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span> <span class="n">tfinal</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">scatter</span><span class="p">(</span><span class="n">thist</span><span class="p">,</span> <span class="n">uhist</span><span class="o">&#39;</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">([</span><span class="n">cos</span><span class="p">,</span> <span class="n">sin</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-04-20-stiffness_35_0.svg" src="../_images/2022-04-20-stiffness_35_0.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="theta-method-for-the-cosine-decay">
+<h1><span class="math notranslate nohighlight">\(\theta\)</span> method for the cosine decay<a class="headerlink" href="#theta-method-for-the-cosine-decay" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">theta</span> <span class="o">=</span> <span class="mf">.5</span>
+<span class="n">thist</span><span class="p">,</span> <span class="n">uhist</span> <span class="o">=</span> <span class="n">ode_theta_linear</span><span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="p">,</span> <span class="p">[</span><span class="mf">.2</span><span class="p">],</span> <span class="n">forcing</span><span class="o">=</span><span class="n">t</span> <span class="o">-&gt;</span> <span class="n">k</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="n">tfinal</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">)</span>
+<span class="n">scatter</span><span class="p">(</span><span class="n">thist</span><span class="p">,</span> <span class="n">uhist</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">:</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\$\\</span><span class="s">theta = </span><span class="si">$theta</span><span class="se">\$</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">cos</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span> <span class="mi">500</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-04-20-stiffness_37_0.svg" src="../_images/2022-04-20-stiffness_37_0.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="stability-classes-and-the-theta-method">
+<h1>Stability classes and the <span class="math notranslate nohighlight">\(\theta\)</span> method<a class="headerlink" href="#stability-classes-and-the-theta-method" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="definition-a-stability">
+<h2>Definition: <span class="math notranslate nohighlight">\(A\)</span>-stability<a class="headerlink" href="#definition-a-stability" title="Permalink to this headline">¶</a></h2>
+<p>A method is <span class="math notranslate nohighlight">\(A\)</span>-stable if the stability region
+<div class="math notranslate nohighlight">
+\[ \{ z : |R(z)| \le 1 \} \]</div>
+
+contains the entire left half plane <div class="math notranslate nohighlight">
+\[ \Re[z] \le 0 .\]</div>
+
+This means that the method can take arbitrarily large time steps without becoming unstable (diverging) for any problem that is indeed physically stable.</p>
+</div>
+<div class="section" id="definition-l-stability">
+<h2>Definition: <span class="math notranslate nohighlight">\(L\)</span>-stability<a class="headerlink" href="#definition-l-stability" title="Permalink to this headline">¶</a></h2>
+<p>A time integrator with stability function <span class="math notranslate nohighlight">\(R(z)\)</span> is <span class="math notranslate nohighlight">\(L\)</span>-stable if
+<div class="math notranslate nohighlight">
+\[ \lim_{z\to\infty} R(z) = 0 .\]</div>
+
+For the <span class="math notranslate nohighlight">\(\theta\)</span> method, we have
+<div class="math notranslate nohighlight">
+\[ \lim_{z\to \infty} \frac{1 + (1-\theta)z}{1 - \theta z} = \frac{1-\theta}{\theta} . \]</div>
+
+Evidently only <span class="math notranslate nohighlight">\(\theta=1\)</span> is <span class="math notranslate nohighlight">\(L\)</span>-stable.</p>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="heat-equation-as-linear-ode">
+<h1>Heat equation as linear ODE<a class="headerlink" href="#heat-equation-as-linear-ode" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p>How do different <span class="math notranslate nohighlight">\(\theta \in [0, 1]\)</span> compare in terms of stability?</p></li>
+<li><p>Are there artifacts even when the solution is stable?</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span> <span class="n">SparseArrays</span>
+
+<span class="k">function</span> <span class="n">heat_matrix</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">n</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">vals</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span><span class="p">]</span>
+    <span class="n">wrap</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+        <span class="n">append!</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
+        <span class="n">append!</span><span class="p">(</span><span class="n">cols</span><span class="p">,</span> <span class="n">wrap</span><span class="o">.</span><span class="p">([</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="n">append!</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">./</span> <span class="n">dx</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">end</span>
+    <span class="n">sparse</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">vals</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="n">heat_matrix</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5×5 SparseMatrixCSC{Float64, Int64} with 15 stored entries:
+ -12.5     6.25     ⋅       ⋅      6.25
+   6.25  -12.5     6.25     ⋅       ⋅ 
+    ⋅      6.25  -12.5     6.25     ⋅ 
+    ⋅       ⋅      6.25  -12.5     6.25
+   6.25     ⋅       ⋅      6.25  -12.5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">heat_matrix</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">u0</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="p">(</span><span class="o">-</span><span class="mi">200</span> <span class="o">*</span> <span class="n">x</span> <span class="o">.^</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nd">@time</span> <span class="n">thist</span><span class="p">,</span> <span class="n">uhist</span> <span class="o">=</span> <span class="n">ode_theta_linear</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tfinal</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">nsteps</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">uhist</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">uhist</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.398294 seconds (4.36 M allocations: 229.282 MiB, 5.36% gc time, 99.92% compilation time)
+</pre></div>
+</div>
+<img alt="../_images/2022-04-20-stiffness_43_1.svg" src="../_images/2022-04-20-stiffness_43_1.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="advection-as-a-linear-ode">
+<h1>Advection as a linear ODE<a class="headerlink" href="#advection-as-a-linear-ode" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span> <span class="n">advect_matrix</span><span class="p">(</span><span class="n">n</span><span class="p">;</span> <span class="n">upwind</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">n</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">vals</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.</span><span class="p">]</span>
+    <span class="n">wrap</span><span class="p">(</span><span class="n">j</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">j</span> <span class="o">+</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+        <span class="n">append!</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">upwind</span>
+            <span class="n">append!</span><span class="p">(</span><span class="n">cols</span><span class="p">,</span> <span class="n">wrap</span><span class="o">.</span><span class="p">([</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="p">]))</span>
+            <span class="n">append!</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">./</span> <span class="n">dx</span><span class="p">)</span>
+        <span class="k">else</span>
+            <span class="n">append!</span><span class="p">(</span><span class="n">cols</span><span class="p">,</span> <span class="n">wrap</span><span class="o">.</span><span class="p">([</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="n">append!</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">./</span> <span class="mi">2</span><span class="n">dx</span><span class="p">)</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+    <span class="n">sparse</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span> <span class="n">cols</span><span class="p">,</span> <span class="n">vals</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="n">advect_matrix</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5×5 SparseMatrixCSC{Float64, Int64} with 11 stored entries:
+  0.0   -1.25    ⋅      ⋅     1.25
+  1.25    ⋅    -1.25    ⋅      ⋅ 
+   ⋅     1.25    ⋅    -1.25    ⋅ 
+   ⋅      ⋅     1.25    ⋅    -1.25
+ -1.25    ⋅      ⋅     1.25    ⋅ 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">advect_matrix</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">upwind</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">u0</span> <span class="o">=</span> <span class="n">exp</span><span class="o">.</span><span class="p">(</span><span class="o">-</span><span class="mi">9</span> <span class="o">*</span> <span class="n">x</span> <span class="o">.^</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nd">@time</span> <span class="n">thist</span><span class="p">,</span> <span class="n">uhist</span> <span class="o">=</span> <span class="n">ode_theta_linear</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mf">.04</span><span class="p">,</span> <span class="n">theta</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">tfinal</span><span class="o">=</span><span class="mf">1.</span><span class="p">);</span>
+<span class="n">nsteps</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">uhist</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">uhist</span><span class="p">[</span><span class="o">:</span><span class="p">,</span> <span class="mi">1</span><span class="o">:</span><span class="p">(</span><span class="n">nsteps÷8</span><span class="p">)</span><span class="o">:</span><span class="k">end</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.127159 seconds (179.07 k allocations: 11.513 MiB, 13.49% gc time, 83.18% compilation time)
+</pre></div>
+</div>
+<img alt="../_images/2022-04-20-stiffness_46_1.svg" src="../_images/2022-04-20-stiffness_46_1.svg" /></div>
+</div>
+</div>
+<div class="tex2jax_ignore mathjax_ignore section" id="spectrum-of-operators">
+<h1>Spectrum of operators<a class="headerlink" href="#spectrum-of-operators" title="Permalink to this headline">¶</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span><span class="o">=</span><span class="mf">.5</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">.1</span>
+<span class="n">plot_stability</span><span class="p">(</span><span class="n">z</span> <span class="o">-&gt;</span> <span class="n">Rz_theta</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">theta</span><span class="p">),</span> <span class="s">&quot;</span><span class="se">\$\\</span><span class="s">theta=</span><span class="si">$theta</span><span class="s">, h=</span><span class="si">$h</span><span class="se">\$</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="n">ev</span> <span class="o">=</span> <span class="n">eigvals</span><span class="p">(</span><span class="kt">Matrix</span><span class="p">(</span><span class="n">h</span><span class="o">*</span><span class="n">advect_matrix</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">upwind</span><span class="o">=</span><span class="nb">true</span><span class="p">)))</span>
+<span class="n">scatter!</span><span class="p">(</span><span class="n">real</span><span class="p">(</span><span class="n">ev</span><span class="p">),</span> <span class="n">imag</span><span class="p">(</span><span class="n">ev</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-04-20-stiffness_48_0.svg" src="../_images/2022-04-20-stiffness_48_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span><span class="o">=</span><span class="mf">.5</span>
+<span class="n">h</span> <span class="o">=</span> <span class="mf">.2</span> <span class="o">/</span> <span class="mi">4</span>
+<span class="n">plot_stability</span><span class="p">(</span><span class="n">z</span> <span class="o">-&gt;</span> <span class="n">Rz_theta</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">theta</span><span class="p">),</span> <span class="s">&quot;</span><span class="se">\$\\</span><span class="s">theta=</span><span class="si">$theta</span><span class="s">, h=</span><span class="si">$h</span><span class="se">\$</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="n">ev</span> <span class="o">=</span> <span class="n">eigvals</span><span class="p">(</span><span class="kt">Matrix</span><span class="p">(</span><span class="n">h</span><span class="o">*</span><span class="n">heat_matrix</span><span class="p">(</span><span class="mi">20</span><span class="p">)))</span>
+<span class="n">scatter!</span><span class="p">(</span><span class="n">real</span><span class="p">(</span><span class="n">ev</span><span class="p">),</span> <span class="n">imag</span><span class="p">(</span><span class="n">ev</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2022-04-20-stiffness_49_0.svg" src="../_images/2022-04-20-stiffness_49_0.svg" /></div>
 </div>
 </div>
 
@@ -1077,19 +1380,12 @@ or
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="2022-04-15-transforms.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="2022-04-18-diffeq.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">2022-04-15 Transformed Quadrature</p>
+            <p class="prev-next-title">2022-04-18 Differential Equations</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="2022-04-20-stiffness.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">2022-04-20 Stiff equations</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             
