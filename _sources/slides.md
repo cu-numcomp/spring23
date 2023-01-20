@@ -5,7 +5,7 @@ You can view them here, or open them to interact.
 
 ## Environment
 
-This explains how I configure my environment in case you wish to install and use the slides locally, or adapt these tools for your own use.
+This explains how I configure my environment so you can experiment with the slides locally, or adapt these tools for your own use.
 
 ### Install Dependencies
 
@@ -18,7 +18,7 @@ And for these (using Julia in Jupyter)
 
     julia -e 'import Pkg; Pkg.add("IJulia")'
     
-The main packages are
+You can open these notebooks as normal notebooks (continuous scroll). If you wish to use them as slides, the key packages are
 
 * [RISE](https://github.com/damianavila/RISE): General editing and presentation of slides
   * Alt-R: Snap in and out of presentation mode
@@ -41,23 +41,11 @@ The main packages are
 
 Open in your browser
 
-    jupyter-notebook the-slides.ipynb
+    jupyter-nbclassic --notebook-dir=. slides/the-slides.ipynb
     
-Toggle slide-show mode using Alt-R.
+Toggle slide-show mode using `Alt-R`.
 
 ### Best practices
 
 * When saving, use `Kernel -> Restart & Clear Output` to keep the stored data and diffs in the notebook small.
 * PDF files are not web-friendly. PDF images can be converted to SVG using `pdf2svg`, and the result will still look sharp (unlike PNG).
-
-### Merging
-
-Install the latest nbmerge
-
-    pip install -U nbmerge
-
-and run
-
-    make integrated.ipynb
-
-

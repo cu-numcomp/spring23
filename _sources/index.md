@@ -1,35 +1,16 @@
 # Welcome
 
-Welcome to **CSCI-3656: Numerical Computation**
+Welcome to **Numerical Computation**, CSCI-3656 and CSCI-5606
 
 :::{admonition} Logistics
-* Meeting Time: MWF 1:25-2:15 in FLMG 157
-* Office hours: Monday 9-10am, Tuesday 2-3pm, Thursday 2-3pm (via Zoom until further notice)
-* [Join in Zoom](https://cuboulder.zoom.us/j/95889180311) (["Cloud Recordings" on Canvas](https://canvas.colorado.edu/courses/80290/external_tools/16942))
-* [Join Zulip](https://cu-numcomp.zulipchat.com/join/2hpdkyspe5pii6mep3yl76qm/)
-* [Canvas page](https://canvas.colorado.edu/courses/80290)
-* Grader office hours: Friday 11:00 am - 12:30 am via Zoom (https://cuboulder.zoom.us/j/99647042373, Passcode: 906126)
+* CSCI-3656 Meeting Time: MWF 11:15-12:05 in CASE E340
+  * [Canvas page](https://canvas.colorado.edu/courses/90008)
+  * [Join Zulip](https://cu-numcomp.zulipchat.com/join/7v4xhqax7kidswditk3khdi5/)
+* CSCI-5606 Meeting Time: MWF 2:30-3:20 in ECCS 1B14
+  * [Canvas page](https://canvas.colorado.edu/courses/90009)
+  * [Join Zulip](https://cu-numcomp.zulipchat.com/join/ukd6chvjlok245dx5gwq2nbi/)
+* Office hours: [Choose a time](https://app.simplymeet.me/jed/numcomp) (individual or group)
 :::
-
-::::{admonition} Activities
-:::{list-table}
-:header-rows: 1
-:widths: 30 70
-
-* - Name
-  - Objectives
-* - [Portfolio](https://classroom.github.com/a/strHwkaV)
-  - Set goals, reflect on them, and gather any thoughts and independent activities.
-* - [2022-01-12-taylor-series](https://classroom.github.com/a/VkPvGOgu)
-  - Use GitHub classroom and Julia to observe numerical instability.
-* - [2022-01-28-rootfinding](https://classroom.github.com/a/ZVZ8AQYM)
-  - Experiment with and compare methods for rootfinding at small and large scales.
-* - [2022-03-07-interpolation](https://classroom.github.com/a/GmgNP4Jp)
-  - Learn and apply knowledge of conditioning and stability to explain the Runge effect.
-* - [spring22-project](https://classroom.github.com/a/5acFvKdm)
-  - Investigate how concepts from class appear in real-world software and conceptualize potential group projects.
-:::
-::::
 
 :::{admonition} Resources
 
@@ -52,6 +33,6 @@ Welcome to **CSCI-3656: Numerical Computation**
   * [Eijkhout (2021), **Introduction to High-Performance Scientific Computing**](http://pages.tacc.utexas.edu/~eijkhout/istc/istc.html)
     * includes introductory numerical linear algebra from a performance standpoint; free PDF.
 * Papers
-  * [Butler, **Enhancing and undermining intrinsic motivation: The effects of task-involving and ego-involving evaluation on interest and performance**](https://cu-numcomp.github.io/spring22/downloads/Butler-EnhancingAndUnderminingIntrinsicMotivation-1988.pdf)
+  * [Butler, **Enhancing and undermining intrinsic motivation: The effects of task-involving and ego-involving evaluation on interest and performance**](https://cu-numcomp.github.io/spring23/downloads/Butler-EnhancingAndUnderminingIntrinsicMotivation-1988.pdf)
   * [Turk, **Scaling a code in the human dimension**](https://dl.acm.org/doi/10.1145/2484762.2484782) [arXiv](https://arxiv.org/pdf/1301.7064.pdf)
 :::

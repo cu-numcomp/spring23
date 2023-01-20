@@ -2,22 +2,14 @@
 
 ## Logistics
 
-CU Boulder: CSCI 3656 (Spring 2022)
-
-Meeting Time: MWF 1:25-2:15pm in FLMG 157
-
-* [Join in Zoom](https://cuboulder.zoom.us/j/95889180311)
-* [Canvas page](https://canvas.colorado.edu/courses/80290)
+CU Boulder: CSCI 3656 and 5606 (Spring 2023)
 
 ### Recordings
 
 Recordings will be available in Canvas Mediasite.
 
-### Zulip discussion forum
-
-* [Join Zulip](https://cu-numcomp.zulipchat.com/join/2hpdkyspe5pii6mep3yl76qm/)
-
 ### Instructor: [Jed Brown](https://jedbrown.org), [`jed.brown@colorado.edu`](mailto:jed.brown@colorado.edu), ECOT 824
+
 
 **Office Hours**: Please complete [this survey](https://www.when2meet.com/?14081593-m9NMR) to give your available times. I'm also always happy to meet by appointment.
 
@@ -25,15 +17,11 @@ Recordings will be available in Canvas Mediasite.
 Office hours are an important time for asking questions, solving problems, discussion of broader academic and career strategy, and to provide feedback so I can make the class serve your needs and those of people with similar experiences and interests.
 :::
 
-:::{warning}
-I have two children who are not yet eligible to be vaccinated, and would prefer to meet virtually while case numbers are high in Boulder County. Please let me know if you feel an in-person meeting is important and I'll happily accommodate. I intend to return to in-person by default (i.e., I'll be in my office during the scheduled times) when 7-day average positivity in Boulder County drops below 30 cases/day or my kids can be vaccinated. Of course you're always welcome to join virtually.
-:::
-
 ## Overview
 
-Numerical computation is the foundation of data-intensive and model-based science and engineering.
-Most people interact with numerical computation through libraries and higher level software packages, these interfaces are fundamentally leaky and it requires expertise to formulate well-posed problems and to recognize and diagnose when methods fail.
-
+Numerical computation is the foundation of mechanistic/model-based and data-intensive science and engineering.
+Most people interact with numerical computation through libraries and higher level software packages.
+These interfaces are fundamentally leaky and it requires expertise to formulate well-posed problems and to recognize and diagnose when methods fail.
 
 ## Organization
 
@@ -67,30 +55,40 @@ Upon completing this course, students will be able to
 
 I'm here to be your partner, not your adversary, and I promise not to waste your time. 
 So I won't grade (score) your work, though I will write feedback and meet with you to reflect and discuss strategy for growth.
-Why? TL;DR: [Evidence](https://cu-numcomp.github.io/spring22/downloads/Butler-EnhancingAndUnderminingIntrinsicMotivation-1988.pdf) shows that scoring undermines the value of writing comments.
+Why? TL;DR: [Evidence](https://cu-numcomp.github.io/spring23/downloads/Butler-EnhancingAndUnderminingIntrinsicMotivation-1988.pdf) shows that scoring undermines the value of writing comments.
 
 ![Butler (1988) Table 1](img/Butler1988-Table1.png)
 
+Some activities and quizzes will be auto-scored. Those are formative assessments for you to check your understanding, not grades to be tallied.
+If you're struggling, your journal should reflect on why, make goals for [adaptive coping](https://cu-numcomp.github.io/spring23/downloads/HenryShorterCharkoudianHeemstraCorwin-FAILFrameworkChallengeResponsesSTEM-2019.pdf), and assess how that worked.
+
+![Henry et al. (2019) Table 1](img/Henry2019-Table1.png)
+
+![Henry et al. (2019) Figure 3](img/Henry2019-Figure3.png)
+
 ### Expectations
 
-1. Attend class (in-person or virtual) and participate in discussions
+1. Enter with a growth mindset, practice adaptive coping, and nurture your intrinsic motivation
+2. Attend class (in-person or virtual) and participate in discussions
     * you may choose asynchronous as needed for personal reasons, but please make sure to check in with other students and to actively experiment
-2. Make an honest attempt on activities
-3. Interact with the class notebooks and read reference material
-4. Set goals and track your progress
+3. Annotate assigned readings and respond thoughtfully to prompts
+4. Make an honest attempt on activities, quizzes, etc.
+5. Interact with the class notebooks and read reference material
+6. Set goals and track your progress in your portfolio repository
     * revise these goals as you learn more
-5. Meet/chat with your partner weekly for at least a few minutes
+    * chase your creative impulses and include artifacts in your portfolio
+7. Meet/chat with your partner weekly for at least a few minutes
     * share how lecture and activities are going
     * share your goals and how you're progressing
     * identify questions
-6. Ask or answer at least one question per week (mostly Zulip)
+8. Ask or answer at least one question per week (mostly Zulip and Hypothesis)
     * ask a question that you don't know the answer to
     * ask a question that you do know the answer to, but you think will be a good exercise/seed for discussion
     * ask me during office hours, write up your best understanding
     * make a meme relevant to the class
     * raise a concern or suggestion that you and/or peers have
     * contribute an answer or relevant discussion to any of the above
-7. Individual and group projects
+9. Individual and group projects
 
 ## GitHub
 

@@ -1,0 +1,1167 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>2023-03-22 Beyond Linear Models &#8212; Numerical Computation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2023-03-24 Gradient Descent" href="2023-03-24-gradient-descent.html" />
+    <link rel="prev" title="2023-03-20 Regression" href="2023-03-20-regression.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/cu-numcomp.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Numerical Computation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../slides.html">
+   Slides
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-01-20-first-day.html">
+     2023-01-20 First Day
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-01-23-functions.html">
+     2023-01-23 Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-01-25-function-errors.html">
+     2023-01-25 Function errors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-01-27-conditioning.html">
+     2023-01-27 Conditioning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-01-30-rootfinding.html">
+     2023-01-30 Rootfinding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-01-convergence-classes.html">
+     2023-02-01 Convergence classes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-03-newton.html">
+     2022-02-03 Newton methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-06-more-newton.html">
+     2023-02-06 More Newton
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-08-formulation.html">
+     2023-02-08 Formulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-10-stability.html">
+     2023-02-10 Stability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-13-linear-algebra.html">
+     2023-02-13 Linear Algebra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-15-projections.html">
+     2023-02-15 Projections, rotations, and reflections
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-17-gram-schmidt.html">
+     2023-02-17 Gram-Schmidt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-20-qr-factorization.html">
+     2023-02-20 QR Factorization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-22-qr-stability.html">
+     2023-02-22 QR Stability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-24-householder.html">
+     2023-02-24 Householder QR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-27-qr-retrospective.html">
+     2023-02-27 QR Retrospective
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-01-svd.html">
+     2023-03-01 Singular Value Decomposition
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-03-svd-geometry.html">
+     2023-03-03 SVD Geometry
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-06-low-rank.html">
+     2023-03-06 Low Rank
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-08-interpolation.html">
+     2023-03-08 Polynomial Interpolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-10-interpolation2.html">
+     2023-03-10 Global and Piecewise Interpolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-13-splines.html">
+     2023-03-13 Spline interpolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-15-higher-dimensions.html">
+     2023-03-15 Higher dimensions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-17-noisy-data.html">
+     2023-03-17 Noisy data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-20-regression.html">
+     2023-03-20 Regression
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     2023-03-22 Beyond Linear Models
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-24-gradient-descent.html">
+     2023-03-24 Gradient Descent
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-03-nonlinear-regression.html">
+     2023-04-03 Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-05-differentiation.html">
+     2023-04-05 Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-07-optimization.html">
+     2023-04-07 Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-12-integration.html">
+     2023-04-12 Integration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-14-quadrature.html">
+     2023-04-14 Quadrature
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-17-transforms.html">
+     2023-04-17 Transformed Quadrature
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-19-diffeq.html">
+     2023-04-19 Differential Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-21-stiffness.html">
+     2023-04-21 Stiff equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-24-adaptivity.html">
+     2023-04-24 Adaptivity
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/cu-numcomp/spring23/main?urlpath=tree/slides/2023-03-22-beyond-linear-models.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/cu-numcomp/spring23"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/cu-numcomp/spring23/issues/new?title=Issue%20on%20page%20%2Fslides/2023-03-22-beyond-linear-models.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/slides/2023-03-22-beyond-linear-models.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2023-03-22 Beyond Linear Models
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#last-time">
+     Last time
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#today">
+     Today
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bias-variance-tradeoff">
+   Bias-variance tradeoff
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stacking-many-realizations">
+   Stacking many realizations
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interpretation">
+   Interpretation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mean-and-variance-over-the-realizations">
+   Mean and variance over the realizations
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-do-we-call-it-a-linear-model">
+   Why do we call it a linear model?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#standard-assumptions-for-regression">
+   Standard assumptions for regression
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-way-we-ve-been-doing-it-so-far">
+     (the way we’ve been doing it so far)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#anscombe-s-quartet">
+   Anscombe’s quartet
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loss-functions">
+   Loss functions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-of-scalar-valued-function">
+   Gradient of scalar-valued function
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-of-vector-valued-functions">
+   Gradient of vector-valued functions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#geometry-of-partial-derivatives">
+   Geometry of partial derivatives
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#derivative-of-a-dot-product">
+   Derivative of a dot product
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variational-notation">
+   Variational notation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#practice">
+   Practice
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimization">
+   Optimization
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#derivative-of-loss-function">
+   Derivative of loss function
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#alternative-derivative">
+   Alternative derivative
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>2023-03-22 Beyond Linear Models</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2023-03-22 Beyond Linear Models
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#last-time">
+     Last time
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#today">
+     Today
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bias-variance-tradeoff">
+   Bias-variance tradeoff
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stacking-many-realizations">
+   Stacking many realizations
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interpretation">
+   Interpretation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mean-and-variance-over-the-realizations">
+   Mean and variance over the realizations
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#why-do-we-call-it-a-linear-model">
+   Why do we call it a linear model?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#standard-assumptions-for-regression">
+   Standard assumptions for regression
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-way-we-ve-been-doing-it-so-far">
+     (the way we’ve been doing it so far)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#anscombe-s-quartet">
+   Anscombe’s quartet
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#loss-functions">
+   Loss functions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-of-scalar-valued-function">
+   Gradient of scalar-valued function
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-of-vector-valued-functions">
+   Gradient of vector-valued functions
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#geometry-of-partial-derivatives">
+   Geometry of partial derivatives
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#derivative-of-a-dot-product">
+   Derivative of a dot product
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variational-notation">
+   Variational notation
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#practice">
+   Practice
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimization">
+   Optimization
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#derivative-of-loss-function">
+   Derivative of loss function
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#alternative-derivative">
+   Alternative derivative
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="beyond-linear-models">
+<h1>2023-03-22 Beyond Linear Models<a class="headerlink" href="#beyond-linear-models" title="Permalink to this headline">#</a></h1>
+<section id="last-time">
+<h2>Last time<a class="headerlink" href="#last-time" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Discussion</p></li>
+<li><p>Bias-variance tradeoff</p></li>
+<li><p>Linear models</p></li>
+</ul>
+</section>
+<section id="today">
+<h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Assumptions of linear models</p></li>
+<li><p>Look at your data!</p></li>
+<li><p>Partial derivatives</p></li>
+<li><p>Loss functions</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">LinearAlgebra</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Plots</span>
+<span class="n">default</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">legendfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="o">=</span><span class="nb">nothing</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">isnothing</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="w">        </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="n">V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">2</span><span class="o">:</span><span class="n">k</span>
+<span class="w">        </span><span class="n">V</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">V</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">x</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">V</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">=</span><span class="nb">nothing</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">isnothing</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">        </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="c"># Square by default</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="n">T</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">3</span><span class="o">:</span><span class="n">n</span>
+<span class="w">        </span><span class="c">#T[:, k] = x .* T[:, k-1]</span>
+<span class="w">        </span><span class="n">T</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">T</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">T</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">T</span>
+<span class="k">end</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">chebyshev_regress_eval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">xx</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">V</span>
+<span class="k">end</span>
+
+<span class="n">runge</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">10</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">sigma</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sigma</span>
+
+<span class="n">CosRange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="nb">pi</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">))</span>
+
+<span class="n">vcond</span><span class="p">(</span><span class="n">mat</span><span class="p">,</span><span class="w"> </span><span class="n">points</span><span class="p">,</span><span class="w"> </span><span class="n">nmax</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">cond</span><span class="p">(</span><span class="n">mat</span><span class="p">(</span><span class="n">points</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)))</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">2</span><span class="o">:</span><span class="n">nmax</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>vcond (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="bias-variance-tradeoff">
+<h1>Bias-variance tradeoff<a class="headerlink" href="#bias-variance-tradeoff" title="Permalink to this headline">#</a></h1>
+<p>The expected error in our approximation <span class="math notranslate nohighlight">\(\hat f(x)\)</span> of noisy data <span class="math notranslate nohighlight">\(y = f(x) + \epsilon\)</span> (with <span class="math notranslate nohighlight">\(\epsilon \sim \mathcal N(0, \sigma)\)</span>), can be decomposed as
+<div class="math notranslate nohighlight">
+\[ E[(\hat f(x) - y)^2] = \sigma^2 + \big(\underbrace{E[\hat f(x)] - f(x)}_{\text{Bias}}\big)^2 + \underbrace{E[\hat f(x)^2] - E[\hat f(x)]^2}_{\text{Variance}} . \]</div>
+
+The <span class="math notranslate nohighlight">\(\sigma^2\)</span> term is irreducible error (purely due to observation noise), but bias and variance can be controlled by model selection.
+More complex models are more capable of expressing the underlying function <span class="math notranslate nohighlight">\(f(x)\)</span>, thus are capable of reducing bias.  However, they are also more affected by noise, thereby increasing variance.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="stacking-many-realizations">
+<h1>Stacking many realizations<a class="headerlink" href="#stacking-many-realizations" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">degree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span>
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">)</span>
+<span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">100</span>
+<span class="w">    </span><span class="n">yi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mf">0.25</span><span class="p">)</span>
+<span class="w">    </span><span class="n">push!</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">chebyshev_regress_eval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">degree</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">yi</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hcat</span><span class="p">(</span><span class="n">Y</span><span class="o">...</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span><span class="w"> </span><span class="c"># (number of points in each fit, number of fits)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="nb">nothing</span><span class="p">);</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="ss">:black</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>size(Y) = (500, 100)
+</pre></div>
+</div>
+<img alt="../_images/2023-03-22-beyond-linear-models_4_1.svg" src="../_images/2023-03-22-beyond-linear-models_4_1.svg" /></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="interpretation">
+<h1>Interpretation<a class="headerlink" href="#interpretation" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>Re-run the cell above for different values of <code class="docutils literal notranslate"><span class="pre">degree</span></code>.  (Set it back to a number around 7 to 10 before moving on.)</p></li>
+<li><p>Low-degree polynomials are not rich enough to capture the peak of the function.</p></li>
+<li><p>As we increase degree, we are able to resolve the peak better, but see more eratic behavior near the ends of the interval.  This erratic behavior is <strong>overfitting</strong>, which we’ll quantify as <em>variance</em>.</p></li>
+<li><p>This tradeoff is fundamental: richer function spaces are more capable of approximating the functions we want, but they are more easily distracted by noise.</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="mean-and-variance-over-the-realizations">
+<h1>Mean and variance over the realizations<a class="headerlink" href="#mean-and-variance-over-the-realizations" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Ymean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">dims</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">Ymean</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\$</span><span class="s"> E[</span><span class="se">\\</span><span class="s">hat{f}(x)] </span><span class="se">\$</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\$</span><span class="s"> f(x) </span><span class="se">\$</span><span class="s">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2023-03-22-beyond-linear-models_7_0.svg" src="../_images/2023-03-22-beyond-linear-models_7_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">variance</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+<span class="w">    </span><span class="s">&quot;&quot;&quot;Compute the Variance as defined at the top of this activity&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="n">sum</span><span class="p">(</span><span class="n">Y</span><span class="o">.^</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">dims</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">dims</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">.^</span><span class="mi">2</span>
+<span class="k">end</span>
+
+<span class="n">Yvar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">variance</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">Yvar</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">Yvar</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>size(Yvar) = (500, 1)
+</pre></div>
+</div>
+<img alt="../_images/2023-03-22-beyond-linear-models_8_1.svg" src="../_images/2023-03-22-beyond-linear-models_8_1.svg" /></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="why-do-we-call-it-a-linear-model">
+<h1>Why do we call it a linear model?<a class="headerlink" href="#why-do-we-call-it-a-linear-model" title="Permalink to this headline">#</a></h1>
+<p>We are currently working with algorithms that express the regression as a linear function of the model parameters.  That is, we search for coefficients <span class="math notranslate nohighlight">\(c = [c_1, c_2, \dotsc]^T\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[ V(x) c \approx y \]</div>
+<p>where the left hand side is linear in <span class="math notranslate nohighlight">\(c\)</span>.  In different notation, we are searching for a predictive model</p>
+<div class="math notranslate nohighlight">
+\[ f(x_i, c) \approx y_i \text{ for all $(x_i, y_i)$} \]</div>
+<p>that is linear in <span class="math notranslate nohighlight">\(c\)</span>.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="standard-assumptions-for-regression">
+<h1>Standard assumptions for regression<a class="headerlink" href="#standard-assumptions-for-regression" title="Permalink to this headline">#</a></h1>
+<section id="the-way-we-ve-been-doing-it-so-far">
+<h2>(the way we’ve been doing it so far)<a class="headerlink" href="#the-way-we-ve-been-doing-it-so-far" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p>The independent variables <span class="math notranslate nohighlight">\(x\)</span> are error-free</p></li>
+<li><p>The prediction (or “response”) <span class="math notranslate nohighlight">\(f(x,c)\)</span> is linear in <span class="math notranslate nohighlight">\(c\)</span></p></li>
+<li><p>The noise in the measurements <span class="math notranslate nohighlight">\(y\)</span> is independent (uncorrelated)</p></li>
+<li><p>The noise in the measurements <span class="math notranslate nohighlight">\(y\)</span> has constant variance</p></li>
+</ol>
+<p>There are reasons why all of these assumptions may be undesirable in practice, thus leading to more complicated methods.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="anscombe-s-quartet">
+<h1><a class="reference external" href="https://en.wikipedia.org/wiki/Anscombe%27s_quartet">Anscombe’s quartet</a><a class="headerlink" href="#anscombe-s-quartet" title="Permalink to this headline">#</a></h1>
+<p><img alt="" src="https://seaborn.pydata.org/_images/anscombes_quartet.png" /></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="loss-functions">
+<h1>Loss functions<a class="headerlink" href="#loss-functions" title="Permalink to this headline">#</a></h1>
+<p>The error in a single prediction <span class="math notranslate nohighlight">\(f(x_i,c)\)</span> of an observation <span class="math notranslate nohighlight">\((x_i, y_i)\)</span> is often measured as
+<div class="math notranslate nohighlight">
+\[ \frac 1 2 \big( f(x_i, c) - y_i \big)^2, \]</div>
+
+which turns out to have a statistical interpretation when the noise is normally distributed.
+It is natural to define the error over the entire data set as</p>
+<div class="amsmath math notranslate nohighlight" id="equation-0ead25fd-5dc1-41f4-a470-d429bffdac83">
+<span class="eqno">(17)<a class="headerlink" href="#equation-0ead25fd-5dc1-41f4-a470-d429bffdac83" title="Permalink to this equation">#</a></span>\[\begin{align} L(c; x, y) &amp;= \sum_i \frac 1 2 \big( f(x_i, c) - y_i \big)^2 \\
+&amp;= \frac 1 2 \lVert f(x, c) - y \rVert^2
+\end{align}\]</div>
+<p>where I’ve used the notation <span class="math notranslate nohighlight">\(f(x,c)\)</span> to mean the vector resulting from gathering all of the outputs <span class="math notranslate nohighlight">\(f(x_i, c)\)</span>.
+The function <span class="math notranslate nohighlight">\(L\)</span> is called the “loss function” and is the key to relaxing the above assumptions.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="gradient-of-scalar-valued-function">
+<h1>Gradient of scalar-valued function<a class="headerlink" href="#gradient-of-scalar-valued-function" title="Permalink to this headline">#</a></h1>
+<p>Let’s step back from optimization and consider how to differentiate a function of several variables.  Let <span class="math notranslate nohighlight">\(f(\boldsymbol x)\)</span> be a function of a vector <span class="math notranslate nohighlight">\(\boldsymbol x\)</span>.  For example,</p>
+<div class="math notranslate nohighlight">
+\[ f(\boldsymbol x) = x_1^2 + \sin(x_2) e^{3x_3} . \]</div>
+<p>We can evaluate the <strong>partial derivative</strong> by differentiating with respect to each component <span class="math notranslate nohighlight">\(x_i\)</span> separately (holding the others constant), and collect the result in a vector,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-726d0071-c531-4a0c-9186-80f0fe1d6378">
+<span class="eqno">(18)<a class="headerlink" href="#equation-726d0071-c531-4a0c-9186-80f0fe1d6378" title="Permalink to this equation">#</a></span>\[\begin{align}
+\frac{\partial f}{\partial \boldsymbol x} &amp;= \begin{bmatrix} \frac{\partial f}{\partial x_1} &amp; \frac{\partial f}{\partial x_2} &amp; \frac{\partial f}{\partial x_3} \end{bmatrix} \\
+&amp;= \begin{bmatrix} 2 x_1 &amp; \cos(x_2) e^{3 x_3} &amp; 3 \sin(x_2) e^{3 x_3} \end{bmatrix}.
+\end{align}\]</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="gradient-of-vector-valued-functions">
+<h1>Gradient of vector-valued functions<a class="headerlink" href="#gradient-of-vector-valued-functions" title="Permalink to this headline">#</a></h1>
+<p>Now let’s consider a vector-valued function <span class="math notranslate nohighlight">\(\boldsymbol f(\boldsymbol x)\)</span>, e.g.,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} \boldsymbol f(\boldsymbol x) = \begin{bmatrix} x_1^2 + \sin(x_2) e^{3x_3} \\ x_1 x_2^2 / x_3 \end{bmatrix} . \end{split}\]</div>
+<p>and write the derivative as a matrix,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ecf24860-da4f-4b50-aacb-f6eeb420e220">
+<span class="eqno">(19)<a class="headerlink" href="#equation-ecf24860-da4f-4b50-aacb-f6eeb420e220" title="Permalink to this equation">#</a></span>\[\begin{align}
+\frac{\partial \boldsymbol f}{\partial \boldsymbol x} &amp;=
+\begin{bmatrix} \frac{\partial f_1}{\partial x_1} &amp; \frac{\partial f_1}{\partial x_2} &amp; \frac{\partial f_1}{\partial x_3} \\
+\frac{\partial f_2}{\partial x_1} &amp; \frac{\partial f_2}{\partial x_2} &amp; \frac{\partial f_2}{\partial x_3} \\
+\end{bmatrix} \\
+&amp;= \begin{bmatrix} 2 x_1 &amp; \cos(x_2) e^{3 x_3} &amp; 3 \sin(x_2) e^{3 x_3} \\
+x_2^2 / x_3 &amp; 2 x_1 x_2 / x_3 &amp; -x_1 x_2^2 / x_3^2
+\end{bmatrix}.
+\end{align}\]</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="geometry-of-partial-derivatives">
+<h1>Geometry of partial derivatives<a class="headerlink" href="#geometry-of-partial-derivatives" title="Permalink to this headline">#</a></h1>
+<img src="https://explained.ai/matrix-calculus/images/latex-6793E76E433509E38529D4B70EB4D956.svg" width="40%" />
+<ul class="simple">
+<li><p>Handy resource on partial derivatives for matrices and vectors: <a class="reference external" href="https://explained.ai/matrix-calculus/index.html#sec3">https://explained.ai/matrix-calculus/index.html#sec3</a></p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="derivative-of-a-dot-product">
+<h1>Derivative of a dot product<a class="headerlink" href="#derivative-of-a-dot-product" title="Permalink to this headline">#</a></h1>
+<p>Let <span class="math notranslate nohighlight">\(f(\boldsymbol x) = \boldsymbol y^T \boldsymbol x = \sum_i y_i x_i\)</span> and compute the derivative</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\partial f}{\partial \boldsymbol x} = \begin{bmatrix} y_0 &amp; y_1 &amp; \dotsb \end{bmatrix} = \boldsymbol y^T . \]</div>
+<p>Note that <span class="math notranslate nohighlight">\(\boldsymbol y^T \boldsymbol x = \boldsymbol x^T \boldsymbol y\)</span> and we have the product rule,</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\partial \lVert \boldsymbol x \rVert^2}{\partial \boldsymbol x} = \frac{\partial \boldsymbol x^T \boldsymbol x}{\partial \boldsymbol x} = 2 \boldsymbol x^T . \]</div>
+<p>Also,
+<div class="math notranslate nohighlight">
+\[ \frac{\partial \lVert \boldsymbol x - \boldsymbol y \rVert^2}{\partial \boldsymbol x} = \frac{\partial (\boldsymbol x - \boldsymbol y)^T (\boldsymbol x - \boldsymbol y)}{\partial \boldsymbol x} = 2 (\boldsymbol x - \boldsymbol y)^T .\]</div>
+</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="variational-notation">
+<h1>Variational notation<a class="headerlink" href="#variational-notation" title="Permalink to this headline">#</a></h1>
+<p>It’s convenient to express derivatives in terms of how they act on an infinitessimal perturbation. So we might write</p>
+<div class="math notranslate nohighlight">
+\[ \delta f = \frac{\partial f}{\partial x} \delta x .\]</div>
+<p>(It’s common to use <span class="math notranslate nohighlight">\(\delta x\)</span> or <span class="math notranslate nohighlight">\(dx\)</span> for these infinitesimals.) This makes inner products look like a normal product rule</p>
+<div class="math notranslate nohighlight">
+\[ \delta(\mathbf x^T \mathbf y) = (\delta \mathbf x)^T \mathbf y + \mathbf x^T (\delta \mathbf y). \]</div>
+<p>A powerful example of variational notation is differentiating a matrix inverse</p>
+<div class="math notranslate nohighlight">
+\[ 0 = \delta I = \delta(A^{-1} A) = (\delta A^{-1}) A + A^{-1} (\delta A) \]</div>
+<p>and thus
+<div class="math notranslate nohighlight">
+\[ \delta A^{-1} = - A^{-1} (\delta A) A^{-1} \]</div>
+</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="practice">
+<h1>Practice<a class="headerlink" href="#practice" title="Permalink to this headline">#</a></h1>
+<ol class="simple">
+<li><p>Differentiate <span class="math notranslate nohighlight">\(f(x) = A x\)</span> with respect to <span class="math notranslate nohighlight">\(x\)</span></p></li>
+<li><p>Differentiate <span class="math notranslate nohighlight">\(f(A) = A x\)</span> with respect to <span class="math notranslate nohighlight">\(A\)</span></p></li>
+</ol>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="optimization">
+<h1>Optimization<a class="headerlink" href="#optimization" title="Permalink to this headline">#</a></h1>
+<p>Given data <span class="math notranslate nohighlight">\((x,y)\)</span> and loss function <span class="math notranslate nohighlight">\(L(c; x,y)\)</span>, we wish to find the coefficients <span class="math notranslate nohighlight">\(c\)</span> that minimize the loss, thus yielding the “best predictor” (in a sense that can be made statistically precise).  I.e.,
+<div class="math notranslate nohighlight">
+\[ \bar c = \arg\min_c L(c; x,y) . \]</div>
+</p>
+<p>It is usually desirable to design models such that the loss function is differentiable with respect to the coefficients <span class="math notranslate nohighlight">\(c\)</span>, because this allows the use of more efficient optimization methods.  Recall that our forward model is given in terms of the Vandermonde matrix,</p>
+<div class="math notranslate nohighlight">
+\[ f(x, c) = V(x) c \]</div>
+<p>and thus</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\partial f}{\partial c} = V(x) . \]</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="derivative-of-loss-function">
+<h1>Derivative of loss function<a class="headerlink" href="#derivative-of-loss-function" title="Permalink to this headline">#</a></h1>
+<p>We can now differentiate our loss function
+<div class="math notranslate nohighlight">
+\[ L(c; x, y) = \frac 1 2 \lVert f(x, c) - y \rVert^2 = \frac 1 2 \sum_i (f(x_i,c) - y_i)^2 \]</div>
+
+term-by-term as</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1b1693e1-e337-44d0-9e6f-325a02b4bdb8">
+<span class="eqno">(20)<a class="headerlink" href="#equation-1b1693e1-e337-44d0-9e6f-325a02b4bdb8" title="Permalink to this equation">#</a></span>\[\begin{align} \nabla_c L(c; x,y) = \frac{\partial L(c; x,y)}{\partial c} &amp;= \sum_i \big( f(x_i, c) - y_i \big) \frac{\partial f(x_i, c)}{\partial c} \\
+&amp;= \sum_i \big( f(x_i, c) - y_i \big) V(x_i)
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(V(x_i)\)</span> is the <span class="math notranslate nohighlight">\(i\)</span>th row of <span class="math notranslate nohighlight">\(V(x)\)</span>.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="alternative-derivative">
+<h1>Alternative derivative<a class="headerlink" href="#alternative-derivative" title="Permalink to this headline">#</a></h1>
+<p>Alternatively, we can take a more linear algebraic approach to write the same expression is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-88c87983-a6c9-49c2-b096-8aac74548935">
+<span class="eqno">(21)<a class="headerlink" href="#equation-88c87983-a6c9-49c2-b096-8aac74548935" title="Permalink to this equation">#</a></span>\[\begin{align} \nabla_c L(c; x,y) &amp;= \big( f(x,c) - y \big)^T V(x) \\
+&amp;= \big(V(x) c - y \big)^T V(x) \\
+&amp;= V(x)^T \big( V(x) c - y \big) .
+\end{align}\]</div>
+<p>A necessary condition for the loss function to be minimized is that <span class="math notranslate nohighlight">\(\nabla_c L(c; x,y) = 0\)</span>.</p>
+<ul class="simple">
+<li><p>Is the condition sufficient for general <span class="math notranslate nohighlight">\(f(x, c)\)</span>?</p></li>
+<li><p>Is the condition sufficient for the linear model <span class="math notranslate nohighlight">\(f(x,c) = V(x) c\)</span>?</p></li>
+<li><p>Have we seen this sort of equation before?</p></li>
+</ul>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cu-numcomp/spring23",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.7"
+        },
+        kernelOptions: {
+            kernelName: "julia-1.7",
+            path: "./slides"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.7'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="2023-03-20-regression.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">2023-03-20 Regression</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="2023-03-24-gradient-descent.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2023-03-24 Gradient Descent</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jed Brown<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

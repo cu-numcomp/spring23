@@ -1,0 +1,1411 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>2023-02-08 Formulation &#8212; Numerical Computation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2023-02-10 Stability" href="2023-02-10-stability.html" />
+    <link rel="prev" title="2023-02-06 More Newton" href="2023-02-06-more-newton.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/cu-numcomp.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Numerical Computation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../slides.html">
+   Slides
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-01-20-first-day.html">
+     2023-01-20 First Day
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-01-23-functions.html">
+     2023-01-23 Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-01-25-function-errors.html">
+     2023-01-25 Function errors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-01-27-conditioning.html">
+     2023-01-27 Conditioning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-01-30-rootfinding.html">
+     2023-01-30 Rootfinding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-01-convergence-classes.html">
+     2023-02-01 Convergence classes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-03-newton.html">
+     2022-02-03 Newton methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-06-more-newton.html">
+     2023-02-06 More Newton
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     2023-02-08 Formulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-10-stability.html">
+     2023-02-10 Stability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-13-linear-algebra.html">
+     2023-02-13 Linear Algebra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-15-projections.html">
+     2023-02-15 Projections, rotations, and reflections
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-17-gram-schmidt.html">
+     2023-02-17 Gram-Schmidt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-20-qr-factorization.html">
+     2023-02-20 QR Factorization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-22-qr-stability.html">
+     2023-02-22 QR Stability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-24-householder.html">
+     2023-02-24 Householder QR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-27-qr-retrospective.html">
+     2023-02-27 QR Retrospective
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-01-svd.html">
+     2023-03-01 Singular Value Decomposition
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-03-svd-geometry.html">
+     2023-03-03 SVD Geometry
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-06-low-rank.html">
+     2023-03-06 Low Rank
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-08-interpolation.html">
+     2023-03-08 Polynomial Interpolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-10-interpolation2.html">
+     2023-03-10 Global and Piecewise Interpolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-13-splines.html">
+     2023-03-13 Spline interpolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-15-higher-dimensions.html">
+     2023-03-15 Higher dimensions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-17-noisy-data.html">
+     2023-03-17 Noisy data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-20-regression.html">
+     2023-03-20 Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-22-beyond-linear-models.html">
+     2023-03-22 Beyond Linear Models
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-24-gradient-descent.html">
+     2023-03-24 Gradient Descent
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-03-nonlinear-regression.html">
+     2023-04-03 Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-05-differentiation.html">
+     2023-04-05 Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-07-optimization.html">
+     2023-04-07 Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-12-integration.html">
+     2023-04-12 Integration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-14-quadrature.html">
+     2023-04-14 Quadrature
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-17-transforms.html">
+     2023-04-17 Transformed Quadrature
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-19-diffeq.html">
+     2023-04-19 Differential Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-21-stiffness.html">
+     2023-04-21 Stiff equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-24-adaptivity.html">
+     2023-04-24 Adaptivity
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/cu-numcomp/spring23/main?urlpath=tree/slides/2023-02-08-formulation.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/cu-numcomp/spring23"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/cu-numcomp/spring23/issues/new?title=Issue%20on%20page%20%2Fslides/2023-02-08-formulation.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/slides/2023-02-08-formulation.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2023-02-08 Formulation
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#last-time">
+     Last time
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#today">
+     Today
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#formulations-are-not-unique-functions">
+   Formulations are not unique (functions)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#newton-s-method-by-fixed-point-convergence">
+   Newton’s method by fixed point convergence
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quadratic-convergence">
+   Quadratic convergence!
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rootfinding-methods-outlook">
+   Rootfinding methods outlook
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploratory-rootfinding">
+   Exploratory rootfinding
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#equation-of-state-example">
+   Equation of state example
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#roots-with-multiplicity">
+   Roots with multiplicity
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-did-the-roots-move">
+   How did the roots move?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-does-newton-find">
+   What does Newton find?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-polynomials">
+   Using
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Polynomials
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-all-roots-of-polynomials">
+   Finding all roots of polynomials
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fundamental-theorem-of-algebra">
+     Fundamental Theorem of Algebra
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#wilkinson-s-polynomial">
+   Wilkinson’s polynomial
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#which-is-better-to-model-inputs-to-a-rootfinder">
+   Which is better to model inputs to a rootfinder?
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#figure-from-trefethen-and-bau-1999">
+     Figure from Trefethen and Bau (1999)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#forward-vs-backward-error-and-stability">
+   Forward vs backward error and stability
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stability">
+     Stability
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#backward-stability">
+     Backward Stability
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#map-angle-to-the-unit-circle">
+   Map angle to the unit circle
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#are-we-observing-a-stabiltiy-b-backward-stability-or-c-neither">
+     Are we observing A=stabiltiy, B=backward stability, or C=neither?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#accuracy-of-backward-stable-algorithms-theorem">
+   Accuracy of backward stable algorithms (Theorem)
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>2023-02-08 Formulation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   2023-02-08 Formulation
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#last-time">
+     Last time
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#today">
+     Today
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#formulations-are-not-unique-functions">
+   Formulations are not unique (functions)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#newton-s-method-by-fixed-point-convergence">
+   Newton’s method by fixed point convergence
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quadratic-convergence">
+   Quadratic convergence!
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rootfinding-methods-outlook">
+   Rootfinding methods outlook
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploratory-rootfinding">
+   Exploratory rootfinding
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#equation-of-state-example">
+   Equation of state example
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#roots-with-multiplicity">
+   Roots with multiplicity
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#how-did-the-roots-move">
+   How did the roots move?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-does-newton-find">
+   What does Newton find?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-polynomials">
+   Using
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Polynomials
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#finding-all-roots-of-polynomials">
+   Finding all roots of polynomials
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fundamental-theorem-of-algebra">
+     Fundamental Theorem of Algebra
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#wilkinson-s-polynomial">
+   Wilkinson’s polynomial
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#which-is-better-to-model-inputs-to-a-rootfinder">
+   Which is better to model inputs to a rootfinder?
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#figure-from-trefethen-and-bau-1999">
+     Figure from Trefethen and Bau (1999)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#forward-vs-backward-error-and-stability">
+   Forward vs backward error and stability
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stability">
+     Stability
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#backward-stability">
+     Backward Stability
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#map-angle-to-the-unit-circle">
+   Map angle to the unit circle
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#are-we-observing-a-stabiltiy-b-backward-stability-or-c-neither">
+     Are we observing A=stabiltiy, B=backward stability, or C=neither?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#accuracy-of-backward-stable-algorithms-theorem">
+   Accuracy of backward stable algorithms (Theorem)
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="formulation">
+<h1>2023-02-08 Formulation<a class="headerlink" href="#formulation" title="Permalink to this headline">#</a></h1>
+<section id="last-time">
+<h2>Last time<a class="headerlink" href="#last-time" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Derive Newton’s method via fixed point convergence theory</p></li>
+<li><p>Newton methods in computing culture</p></li>
+</ul>
+</section>
+<section id="today">
+<h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Breaking Newton’s method</p></li>
+<li><p>Exploration</p></li>
+<li><p>Multiple roots</p></li>
+<li><p>Conditioning of the rootfinding problem</p></li>
+<li><p>Forward and backward stability</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Plots</span>
+<span class="n">default</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">legendfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="k">function</span><span class="w"> </span><span class="n">newton_hist</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">fp</span><span class="p">,</span><span class="w"> </span><span class="n">x0</span><span class="p">;</span><span class="w"> </span><span class="n">tol</span><span class="o">=</span><span class="mf">1e-12</span><span class="p">)</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x0</span>
+<span class="w">    </span><span class="n">hist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">100</span><span class="w"> </span><span class="c"># max number of iterations</span>
+<span class="w">        </span><span class="n">fx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">        </span><span class="n">fpx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">        </span><span class="n">push!</span><span class="p">(</span><span class="n">hist</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="w"> </span><span class="n">fx</span><span class="w"> </span><span class="n">fpx</span><span class="p">])</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">fx</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">tol</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">vcat</span><span class="p">(</span><span class="n">hist</span><span class="o">...</span><span class="p">)</span>
+<span class="w">        </span><span class="k">end</span>
+<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">fx</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">fpx</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fp (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="formulations-are-not-unique-functions">
+<h1>Formulations are not unique (functions)<a class="headerlink" href="#formulations-are-not-unique-functions" title="Permalink to this headline">#</a></h1>
+<p>If <span class="math notranslate nohighlight">\(x = g(x)\)</span> then
+<div class="math notranslate nohighlight">
+\[x = \underbrace{x + h(x) \big(g(x) - x\big)}_{g_3(x)}\]</div>
+
+for any smooth <span class="math notranslate nohighlight">\(h(x) \ne 0\)</span>. Can we choose <span class="math notranslate nohighlight">\(h(x)\)</span> to make <span class="math notranslate nohighlight">\(\lvert g_3'(x) \rvert\)</span> small?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">gp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">h</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">gp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="n">g3</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">h</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">cos</span><span class="p">,</span><span class="w"> </span><span class="n">g3</span><span class="p">],</span><span class="w"> </span><span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2023-02-08-formulation_3_0.svg" src="../_images/2023-02-08-formulation_3_0.svg" /></div>
+</div>
+<ul class="simple">
+<li><p>We don’t know <span class="math notranslate nohighlight">\(g'(x_*)\)</span> in advance because we don’t know <span class="math notranslate nohighlight">\(x_*\)</span> yet.</p></li>
+<li><p>This method converges very fast</p></li>
+<li><p>We actually just derived Newton’s method.</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="newton-s-method-by-fixed-point-convergence">
+<h1>Newton’s method by fixed point convergence<a class="headerlink" href="#newton-s-method-by-fixed-point-convergence" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>A rootfinding problem <span class="math notranslate nohighlight">\(f(x) = 0\)</span> can be converted to a fixed point problem <div class="math notranslate nohighlight">
+\[x = x + f(x) =: g(x)\]</div>
+ but there is no guarantee that <span class="math notranslate nohighlight">\(g'(x_*) = 1 + f'(x_*)\)</span> will have magnitude less than 1.</p></li>
+<li><p>Problem-specific algebraic manipulation can be used to make <span class="math notranslate nohighlight">\(|g'(x_*)|\)</span> small.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x = x + h(x) f(x)\)</span> is also a valid formulation for any <span class="math notranslate nohighlight">\(h(x)\)</span> bounded away from <span class="math notranslate nohighlight">\(0\)</span>.</p></li>
+<li><p>Can we choose <span class="math notranslate nohighlight">\(h(x)\)</span> such that <div class="math notranslate nohighlight">
+\[ g'(x) = 1 + h'(x) f(x) + h(x) f'(x) = 0\]</div>
+ when <span class="math notranslate nohighlight">\(f(x) = 0\)</span>?</p></li>
+</ul>
+<p>In other words,
+<div class="math notranslate nohighlight">
+\[ x_{k+1} = x_k + \underbrace{\frac{-1}{f'(x_k)}}_{h(x_k)} f(x_k)  . \]</div>
+</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="quadratic-convergence">
+<h1>Quadratic convergence!<a class="headerlink" href="#quadratic-convergence" title="Permalink to this headline">#</a></h1>
+<div class="math notranslate nohighlight">
+\[ \left\lvert \frac{e_{k+1}}{e_k} \right\rvert \to \lvert g'(x_*) \rvert \]</div>
+<ul class="simple">
+<li><p>What does it mean that <span class="math notranslate nohighlight">\(g'(x_*) = 0\)</span>?</p></li>
+<li><p>It turns out that Newton’s method has <em>locally <strong>q-quadratic</strong></em> convergence to simple roots,
+<div class="math notranslate nohighlight">
+\[\lim_{k \to \infty} \frac{|e_{k+1}|}{|e_k|^2} &lt; \infty.\]</div>
+</p></li>
+<li><p>“The number of correct digits doubles each iteration.”</p></li>
+<li><p>Now that we know how to make a good guess accurate, the effort lies in getting a good guess.</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="rootfinding-methods-outlook">
+<h1>Rootfinding methods outlook<a class="headerlink" href="#rootfinding-methods-outlook" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>Newton methods are immensely successful</p>
+<ul>
+<li><p>Convergence theory is local; we need good initial guesses (activity)</p></li>
+<li><p>Computing the derivative <span class="math notranslate nohighlight">\(f'(x)\)</span> is <em>intrusive</em></p>
+<ul>
+<li><p>Avoided by secant methods (approximate the derivative; activity)</p></li>
+<li><p>Algorithmic or numerical differentiation (future topics)</p></li>
+</ul>
+</li>
+<li><p>Bisection is robust when conditions are met</p></li>
+<li><p>Line search (activity)</p></li>
+<li><p>When does Newton diverge?</p></li>
+</ul>
+</li>
+<li><p>More topics</p>
+<ul>
+<li><p>Find <em>all</em> the roots</p></li>
+<li><p>Use Newton-type methods with bounds</p></li>
+<li><p>Times when Newton converges slowly</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="exploratory-rootfinding">
+<h1>Exploratory rootfinding<a class="headerlink" href="#exploratory-rootfinding" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>Find a function <span class="math notranslate nohighlight">\(f(x)\)</span> that models something you’re interested in. You could consider nonlinear physical models (aerodynamic drag, nonlinear elasticity), behavioral models, probability distributions, or anything else that that catches your interest. Implement the function in Julia or another language.</p></li>
+<li><p>Consider how you might know the output of such functions, but not an input. Think from the position of different stakeholders: is the equation used differently by an experimentalist collecting data versus by someone making predictions through simulation? How about a company or government reasoning about people versus the people their decisions may impact?</p></li>
+<li><p>Formulate the map from known to desired data as a rootfinding problem and try one or more methods (Newton, bisection, etc., or use a rootfinding library).</p></li>
+<li><p>Plot the inverse function (output versus input) from the standpoint of one or more stakeholder. Are there interesting inflection points? Are the methods reliable?</p></li>
+<li><p>If there are a hierarchy of models for the application you’re interested in, consider using a simpler model to provide an initial guess to a more complicated model.</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="equation-of-state-example">
+<h1>Equation of state example<a class="headerlink" href="#equation-of-state-example" title="Permalink to this headline">#</a></h1>
+<p>Consider an <a class="reference external" href="https://en.wikipedia.org/wiki/Real_gas#Beattie%E2%80%93Bridgeman_model">equation of state</a> for a real gas, which might provide pressure <span class="math notranslate nohighlight">\(p(T, \rho)\)</span> as a function of temperature <span class="math notranslate nohighlight">\(T\)</span> and density <span class="math notranslate nohighlight">\(\rho = 1/v\)</span>.</p>
+<ul class="simple">
+<li><p>An experimentalist can measure temperature and pressure, and will need to solve for density (which is difficult to measure directly).</p></li>
+<li><p>A simulation might know (at each cell or mesh point, at each time step) the density and internal energy, and need to compute pressure (and maybe temperature).</p></li>
+<li><p>An analyst might have access to simulation output and wish to compute entropy (a thermodynamic property whose change reflects irreversible processes, and can be used to assess accuracy/stability of a simulation or efficiency of a machine).</p></li>
+</ul>
+<p>The above highlights how many equations are incomplete, failing to model how related quantities (internal energy and entropy in this case) depend on the other quantities. Standardization bodies (such as NIST, here in Boulder) and practitioners often prefer models that intrinsically provide a complete set of consistent relations. An elegent methodology for equations of state for gasses and fluids is by way of the <a class="reference external" href="http://www.coolprop.org/fluid_properties/PurePseudoPure.html#pure-and-pseudo-pure-fluid-properties">Helmholtz free energy</a>, which is not observable, but whose partial derivatives define a complete set of thermodynamic properties. The <a class="reference external" href="http://www.coolprop.org">CoolProp</a> software has highly accurate models for many gasses, and practitioners often build less expensive models for narrower ranges of theromdynamic conditions.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="roots-with-multiplicity">
+<h1>Roots with multiplicity<a class="headerlink" href="#roots-with-multiplicity" title="Permalink to this headline">#</a></h1>
+<p>There are multiple ways to represent (monic) polynomials</p>
+<div class="amsmath math notranslate nohighlight" id="equation-41e68b84-271c-4d3f-837f-afddde74a257">
+<span class="eqno">(6)<a class="headerlink" href="#equation-41e68b84-271c-4d3f-837f-afddde74a257" title="Permalink to this equation">#</a></span>\[\begin{align}
+f(x) &amp;= (x - a_1) (x - a_2) &amp; g(x) &amp;= x^2 \underbrace{- (a_1 + a_2)}_{b_1} x + \underbrace{a_1 a_2}_{b_2}
+\end{align}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">poly_eval_prod</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">prod</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
+<span class="k">function</span><span class="w"> </span><span class="n">poly_eval_sum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span>
+<span class="w">    </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">b</span>
+<span class="w">        </span><span class="c"># This is known as Horner&#39;s rule</span>
+<span class="w">        </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">sum</span>
+<span class="k">end</span>
+
+<span class="n">eps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e-10</span>
+<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1e5</span><span class="p">,</span><span class="w"> </span><span class="mf">1e5</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span><span class="w"> </span><span class="c"># tiny perturbation to root</span>
+<span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="c"># tiny perturbation to monomial coefficent</span>
+<span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
+<span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">poly_eval_prod</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
+<span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">poly_eval_sum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">([</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="p">],</span><span class="w"> </span><span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">zero</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="ss">:black</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="ss">:none</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2023-02-08-formulation_12_0.svg" src="../_images/2023-02-08-formulation_12_0.svg" /></div>
+</div>
+<ul class="simple">
+<li><p>Perturbing the coefficient in the tenth digit made the difference between one root and two.</p></li>
+<li><p>The distance between the roots was big when <span class="math notranslate nohighlight">\(b_1\)</span> was perturbed.</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="how-did-the-roots-move">
+<h1>How did the roots move?<a class="headerlink" href="#how-did-the-roots-move" title="Permalink to this headline">#</a></h1>
+<p>Take two roots at <span class="math notranslate nohighlight">\(x=a\)</span> and perturb the middle coefficient.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-3e227e1e-4cb3-45f1-995a-55b3cb214b4b">
+<span class="eqno">(7)<a class="headerlink" href="#equation-3e227e1e-4cb3-45f1-995a-55b3cb214b4b" title="Permalink to this equation">#</a></span>\[\begin{align}
+x^2 \underbrace{- 2a(1 + \epsilon)}_{b_1} x + \underbrace{a^2}_{b_2} = 0
+\end{align}\]</div>
+<p>Analytically, we know the roots are at</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d148e1ab-3c9b-4241-9294-e42d91d597c3">
+<span class="eqno">(8)<a class="headerlink" href="#equation-d148e1ab-3c9b-4241-9294-e42d91d597c3" title="Permalink to this equation">#</a></span>\[\begin{align}
+\frac{b_1}{2} \pm \sqrt{\frac{b_1^2}{4} - b_2} 
+&amp;= a(1+\epsilon) \pm \sqrt{a^2(1+\epsilon)^2 - a^2} \\
+&amp;= a(1+\epsilon) \pm a \sqrt{2 \epsilon + \epsilon^2} \\
+&amp;\approx a \Bigl(1 + \epsilon \pm \sqrt{2 \epsilon} \Bigr).
+\end{align}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">sqrt</span><span class="p">],</span><span class="w"> </span><span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2023-02-08-formulation_16_0.svg" src="../_images/2023-02-08-formulation_16_0.svg" /></div>
+</div>
+<p>Note that condition number is well behaved.
+<div class="math notranslate nohighlight">
+\[ \kappa(\sqrt{\epsilon}) = \frac{1}{2\sqrt{\epsilon}} \frac{\epsilon}{\sqrt{\epsilon}} = \frac 1 2\]</div>
+</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="what-does-newton-find">
+<h1>What does Newton find?<a class="headerlink" href="#what-does-newton-find" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">hist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newton_hist</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="mf">1.1e5</span><span class="p">;</span><span class="w"> </span><span class="n">tol</span><span class="o">=</span><span class="mf">1e-14</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>25×3 Matrix{Float64}:
+ 110000.0             1.0e8        20000.0
+ 105000.0             2.5e7        10000.0
+ 102500.0             6.25e6        5000.0
+ 101250.0             1.5625e6      2500.0
+ 100625.0        390625.0           1250.0
+      1.00312e5   97656.2            625.0
+      1.00156e5   24414.1            312.5
+      1.00078e5    6103.52           156.25
+      1.00039e5    1525.88            78.125
+      1.0002e5      381.47            39.0625
+      1.0001e5       95.3674          19.5312
+      1.00005e5      23.8419           9.76562
+      1.00002e5       5.96046          4.88281
+      1.00001e5       1.49012          2.44141
+      1.00001e5       0.372528         1.2207
+      1.0e5           0.093132         0.610353
+      1.0e5           0.023283         0.305179
+      1.0e5           0.00582123       0.152593
+ 100000.0             0.00145531       0.0762955
+ 100000.0             0.000364304      0.0381463
+ 100000.0             9.15527e-5       0.0190459
+ 100000.0             2.28882e-5       0.00943207
+ 100000.0             5.72205e-6       0.0045788
+ 100000.0             1.90735e-6       0.00207943
+ 100000.0             0.0              0.000244935
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">hist</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">hist</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="n">seriestype</span><span class="o">=</span><span class="ss">:path</span><span class="p">,</span><span class="w"> </span><span class="n">marker</span><span class="o">=</span><span class="ss">:auto</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Root </span><span class="si">$</span><span class="p">(</span><span class="n">hist</span><span class="p">[</span><span class="k">end</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">alpha</span><span class="o">=</span><span class="mf">.5</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">zero</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="ss">:black</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="ss">:none</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2023-02-08-formulation_20_0.svg" src="../_images/2023-02-08-formulation_20_0.svg" /></div>
+</div>
+<ul class="simple">
+<li><p>Convergence is kinda slow.</p></li>
+<li><p>The solution is not nearly as accurate as machine precision.</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="using-polynomials">
+<h1>Using <code class="docutils literal notranslate"><span class="pre">Polynomials</span></code><a class="headerlink" href="#using-polynomials" title="Permalink to this headline">#</a></h1>
+<p>Julia has a nice package to evaluate and manipulate polynomials. The coefficients are given in the other order <span class="math notranslate nohighlight">\(b_0 + b_1 x + b_2 x^2 + \dotsb\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Polynomials</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">fpoly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Polynomial</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">gpoly</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fromroots</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="mf">1e5</span><span class="p">)</span>
+<span class="n">derivative</span><span class="p">(</span><span class="n">gpoly</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fpoly = Polynomial([2, -3, 1]) = Polynomial(2 - 3*x + x^2)
+gpoly = fromroots([1, 2] .+ 100000.0) = Polynomial(1.0000300002e10 - 200003.0*x + 1.0*x^2)
+</pre></div>
+</div>
+<div class="output text_html">&#45;200003.0 &#43; 2.0&#8729;x</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">newton_hist</span><span class="p">(</span><span class="n">gpoly</span><span class="p">,</span><span class="w"> </span><span class="n">derivative</span><span class="p">(</span><span class="n">gpoly</span><span class="p">),</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23×3 Matrix{Float64}:
+      3.0            9.9997e9     -199997.0
+  50002.2            2.49993e9     -99998.5
+  75001.9            6.24981e8     -49999.3
+  87501.7            1.56245e8     -24999.6
+  93751.6            3.90613e7     -12499.8
+  96876.5            9.76533e6      -6249.91
+  98439.0            2.44133e6      -3124.95
+  99220.3            6.10333e5      -1562.48
+  99610.9            1.52583e5       -781.239
+  99806.2        38145.7             -390.62
+  99903.8         9536.37            -195.311
+  99952.7         2384.03             -97.6582
+  99977.1          595.945            -48.8342
+  99989.3          148.924            -24.4273
+  99995.4           37.1686           -12.2341
+  99998.4            9.23006           -6.15794
+  99999.9            2.24666           -3.16017
+      1.00001e5      0.505424          -1.7383
+      1.00001e5      0.0845398         -1.15679
+ 100001.0            0.0053409         -1.01063
+ 100001.0            2.79285e-5        -1.00006
+ 100001.0            7.85803e-10       -1.0
+ 100001.0            0.0               -1.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="finding-all-roots-of-polynomials">
+<h1>Finding all roots of polynomials<a class="headerlink" href="#finding-all-roots-of-polynomials" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">roots</span><span class="p">(</span><span class="n">Polynomial</span><span class="p">([</span><span class="mf">1e10</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2e5</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1e-10</span><span class="p">),</span><span class="w"> </span><span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2-element Vector{Float64}:
+  99998.58579643762
+ 100001.41422356237
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fromroots</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="mf">1e3</span><span class="p">)</span>
+<span class="n">xs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">roots</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="n">scatter</span><span class="p">(</span><span class="n">real</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span><span class="w"> </span><span class="n">imag</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="ss">:red</span><span class="p">)</span>
+<span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">100</span>
+<span class="w">    </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">p</span><span class="p">))</span><span class="w"> </span><span class="c"># normally distributed mean 0, stddev 1</span>
+<span class="w">    </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copy</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="w">    </span><span class="n">q</span><span class="p">[</span><span class="o">:</span><span class="p">]</span><span class="w"> </span><span class="o">.*=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="mf">1e-10</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">r</span>
+<span class="w">    </span><span class="n">xs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">roots</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="w">    </span><span class="n">scatter!</span><span class="p">(</span><span class="n">real</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span><span class="w"> </span><span class="n">imag</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span><span class="w"> </span><span class="n">markersize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="ss">:none</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2023-02-08-formulation_27_0.svg" src="../_images/2023-02-08-formulation_27_0.svg" /></div>
+</div>
+<section id="fundamental-theorem-of-algebra">
+<h2><a class="reference external" href="https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra">Fundamental Theorem of Algebra</a><a class="headerlink" href="#fundamental-theorem-of-algebra" title="Permalink to this headline">#</a></h2>
+<p>Every non-zero, single-variable, degree <span class="math notranslate nohighlight">\(n\)</span> polynomial with complex coefficients has, counted with multiplicity, exactly <span class="math notranslate nohighlight">\(n\)</span> complex roots.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="wilkinson-s-polynomial">
+<h1>Wilkinson’s polynomial<a class="headerlink" href="#wilkinson-s-polynomial" title="Permalink to this headline">#</a></h1>
+<p>Suppose we add more terms
+<div class="math notranslate nohighlight">
+\[ w(x) = \prod_{k=1}^{20} (x - k) = (x - 1) (x - 2) \dotsb (x - 20) = \sum_{k=0}^{20} b_k x^k \]</div>
+</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span>
+<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">collect</span><span class="p">(</span><span class="mf">1.</span><span class="o">:</span><span class="n">n</span><span class="p">)</span>
+<span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fromroots</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">w</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1e-12</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">w</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span><span class="w"> </span><span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2023-02-08-formulation_30_0.svg" src="../_images/2023-02-08-formulation_30_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fromroots</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">scatter</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">zero</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="ss">:red</span><span class="p">)</span>
+<span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">100</span>
+<span class="w">    </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
+<span class="w">    </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copy</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+<span class="w">    </span><span class="n">q</span><span class="p">[</span><span class="o">:</span><span class="p">]</span><span class="w"> </span><span class="o">.*=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="mf">1e-10</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">r</span>
+<span class="w">    </span><span class="n">xs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">roots</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="w">    </span><span class="n">scatter!</span><span class="p">(</span><span class="n">real</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span><span class="w"> </span><span class="n">imag</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span><span class="w"> </span><span class="n">markersize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="ss">:none</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2023-02-08-formulation_31_0.svg" src="../_images/2023-02-08-formulation_31_0.svg" /></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="which-is-better-to-model-inputs-to-a-rootfinder">
+<h1>Which is better to model inputs to a rootfinder?<a class="headerlink" href="#which-is-better-to-model-inputs-to-a-rootfinder" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>A: coefficients <span class="math notranslate nohighlight">\(a_k\)</span> in <div class="math notranslate nohighlight">
+\[p(x) = \prod_k (x - a_k)\]</div>
+</p></li>
+</ul>
+<ul class="simple">
+<li><p>B: coefficients <span class="math notranslate nohighlight">\(b_k\)</span> in <div class="math notranslate nohighlight">
+\[p(x) = \sum_k b_k x^k\]</div>
+</p></li>
+</ul>
+<section id="figure-from-trefethen-and-bau-1999">
+<h2>Figure from Trefethen and Bau (1999)<a class="headerlink" href="#figure-from-trefethen-and-bau-1999" title="Permalink to this headline">#</a></h2>
+<img alt="Ill conditioning of roots of Wilkinson's polynomial" src="../img/TB-Wilkinson.png" width="90%" /></section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="forward-vs-backward-error-and-stability">
+<h1><a class="reference external" href="https://fncbook.github.io/fnc/intro/stability.html#backward-error">Forward vs backward error and stability</a><a class="headerlink" href="#forward-vs-backward-error-and-stability" title="Permalink to this headline">#</a></h1>
+<img src="https://fncbook.github.io/fnc/_images/backwarderror.svg" width="90%" /><section id="stability">
+<h2>Stability<a class="headerlink" href="#stability" title="Permalink to this headline">#</a></h2>
+<p><strong>“nearly the right answer to nearly the right question”</strong>
+<div class="math notranslate nohighlight">
+\[ \frac{\lvert \tilde f(x) - f(\tilde x) \rvert}{| f(\tilde x) |} \in O(\epsilon_{\text{machine}}) \]</div>
+
+for some <span class="math notranslate nohighlight">\(\tilde x\)</span> that is close to <span class="math notranslate nohighlight">\(x\)</span></p>
+</section>
+<section id="backward-stability">
+<h2>Backward Stability<a class="headerlink" href="#backward-stability" title="Permalink to this headline">#</a></h2>
+<p><strong>“exactly the right answer to nearly the right question”</strong>
+<div class="math notranslate nohighlight">
+\[ \tilde f(x) = f(\tilde x) \]</div>
+
+for some <span class="math notranslate nohighlight">\(\tilde x\)</span> that is close to <span class="math notranslate nohighlight">\(x\)</span></p>
+<ul class="simple">
+<li><p>Every backward stable algorithm is stable.</p></li>
+<li><p>Not every stable algorithm is backward stable.</p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="map-angle-to-the-unit-circle">
+<h1>Map angle to the unit circle<a class="headerlink" href="#map-angle-to-the-unit-circle" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
+<span class="n">scatter</span><span class="p">(</span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="ss">:none</span><span class="p">,</span><span class="w"> </span><span class="n">aspect_ratio</span><span class="o">=</span><span class="ss">:equal</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2023-02-08-formulation_40_0.svg" src="../_images/2023-02-08-formulation_40_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">+</span><span class="mf">2e-5</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
+<span class="n">mysin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="mf">1e10</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="nb">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="n">aspect_ratio</span><span class="o">=</span><span class="ss">:equal</span><span class="p">)</span>
+<span class="n">scatter!</span><span class="p">(</span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="n">mysin</span><span class="o">.</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2023-02-08-formulation_41_0.svg" src="../_images/2023-02-08-formulation_41_0.svg" /></div>
+</div>
+<section id="are-we-observing-a-stabiltiy-b-backward-stability-or-c-neither">
+<h2>Are we observing A=stabiltiy, B=backward stability, or C=neither?<a class="headerlink" href="#are-we-observing-a-stabiltiy-b-backward-stability-or-c-neither" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>The numbers <span class="math notranslate nohighlight">\((\widetilde\cos \theta, \widetilde\sin \theta = (\operatorname{fl}(\cos \theta), \operatorname{fl}(\sin\theta))\)</span> do not lie exactly on the unit circles.</p>
+<ul>
+<li><p>There does not exist a <span class="math notranslate nohighlight">\(\tilde\theta\)</span> such that <span class="math notranslate nohighlight">\((\widetilde\cos \theta, \widetilde \sin\theta) = (\cos\tilde\theta, \sin\tilde\theta)\)</span></p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="accuracy-of-backward-stable-algorithms-theorem">
+<h1>Accuracy of backward stable algorithms (Theorem)<a class="headerlink" href="#accuracy-of-backward-stable-algorithms-theorem" title="Permalink to this headline">#</a></h1>
+<p>A backward stable algorithm for computing <span class="math notranslate nohighlight">\(f(x)\)</span> has relative accuracy
+<div class="math notranslate nohighlight">
+\[ \left\lvert \frac{\tilde f(x) - f(x)}{f(x)} \right\rvert \lesssim \kappa(f) \epsilon_{\text{machine}} . \]</div>
+
+Backward stability is generally the best we can hope for.</p>
+<p>In practice, it is rarely possible for a function to be backward stable when the output space is higher dimensional than the input space.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cu-numcomp/spring23",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.7"
+        },
+        kernelOptions: {
+            kernelName: "julia-1.7",
+            path: "./slides"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.7'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="2023-02-06-more-newton.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">2023-02-06 More Newton</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="2023-02-10-stability.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">2023-02-10 Stability</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jed Brown<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
