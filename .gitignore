@@ -1,0 +1,6 @@
+_build/
+VENV/
+.ipynb_checkpoints/
+nbgrader/
+portfolio/
+.auth*

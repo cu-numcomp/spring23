@@ -1,0 +1,46 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: index
+chapters:
+- file: syllabus
+- file: slides
+  sections:
+  - file: slides/2023-01-20-first-day.ipynb
+  - file: slides/2023-01-23-functions.ipynb
+  - file: slides/2023-01-25-function-errors.ipynb
+  - file: slides/2023-01-27-conditioning.ipynb
+  - file: slides/2023-01-30-rootfinding.ipynb
+  - file: slides/2023-02-01-convergence-classes.ipynb
+  - file: slides/2023-02-03-newton.ipynb
+  - file: slides/2023-02-06-more-newton.ipynb
+  - file: slides/2023-02-08-formulation.ipynb
+  - file: slides/2023-02-10-stability.ipynb
+  - file: slides/2023-02-13-linear-algebra.ipynb
+  - file: slides/2023-02-15-projections.ipynb
+  - file: slides/2023-02-17-gram-schmidt.ipynb
+  - file: slides/2023-02-20-qr-factorization.ipynb
+  - file: slides/2023-02-22-qr-stability.ipynb
+  - file: slides/2023-02-24-householder.ipynb
+  - file: slides/2023-02-27-qr-retrospective.ipynb
+  - file: slides/2023-03-01-svd.ipynb
+  - file: slides/2023-03-03-svd-geometry.ipynb
+  - file: slides/2023-03-06-low-rank.ipynb
+  - file: slides/2023-03-08-interpolation.ipynb
+  - file: slides/2023-03-10-interpolation2.ipynb
+  - file: slides/2023-03-13-splines.ipynb
+  - file: slides/2023-03-15-higher-dimensions.ipynb
+  - file: slides/2023-03-17-noisy-data.ipynb
+  - file: slides/2023-03-20-regression.ipynb
+  - file: slides/2023-03-22-beyond-linear-models.ipynb
+  - file: slides/2023-03-24-gradient-descent.ipynb
+  - file: slides/2023-04-03-nonlinear-regression.ipynb
+  - file: slides/2023-04-05-differentiation.ipynb
+  - file: slides/2023-04-07-optimization.ipynb
+  - file: slides/2023-04-12-integration.ipynb
+  - file: slides/2023-04-14-quadrature.ipynb
+  - file: slides/2023-04-17-transforms.ipynb
+  - file: slides/2023-04-19-diffeq.ipynb
+  - file: slides/2023-04-21-stiffness.ipynb
+  - file: slides/2023-04-24-adaptivity.ipynb
