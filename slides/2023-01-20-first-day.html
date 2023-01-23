@@ -1222,7 +1222,7 @@ title="Print to PDF"
 <li><p>What is this course about?</p></li>
 <li><p>How will it work?</p></li>
 <li><p>Discussion</p></li>
-<li><p>(maybe) First activity</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exp()</span></code> demo</p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1730,13 +1730,16 @@ and initial condition <span class="math notranslate nohighlight">\(u(0) = u_0\)<
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e-15</span>
 <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">),</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="ss">:none</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-01-20-first-day_65_0.svg" src="../_images/2023-01-20-first-day_65_0.svg" /></div>
+<img alt="../_images/2023-01-20-first-day_65_0.svg" src="../_images/2023-01-20-first-day_65_0.svg" /><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GKS: Possible loss of precision in routine SET_WINDOW
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="machine-epsilon">
