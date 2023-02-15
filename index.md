@@ -16,9 +16,8 @@ Welcome to **Numerical Computation**, CSCI-3656 and CSCI-5606
 
 * [SIAM Membership](http://www.siam.org/students/memberships.php) is free for CU students (30% discount on SIAM books)
 * Books
-  * [Driscoll and Braun, **Fundamentals of Numerical Computation**](https://fncbook.github.io/fnc/frontmatter.html)
+  * [Driscoll and Braun, **Fundamentals of Numerical Computation**](https://tobydriscoll.net/fnc-julia/)
     * free, in Julia with demo notebooks
-    * there is a print version with additional chapters
   * [Greenbaum and Chartier (2012), **Numerical Methods Design, Analysis, and Computer Implementation of Algorithms**](https://press.princeton.edu/titles/9763.html)
     * an excellent, comprehensive book
     * not free, uses Matlab for limited numerical examples
