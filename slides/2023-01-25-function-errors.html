@@ -122,6 +122,11 @@ const thebe_selector_output = ".output, .cell_output"
    Syllabus
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips.html">
+   Tips
+  </a>
+ </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../slides.html">
    Slides
@@ -547,6 +552,18 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#">
    2023-01-25 Function errors
   </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#last-time">
+     Last Time
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#today">
+     Today
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-is-floating-point-arithmetic">
@@ -646,8 +663,34 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#activity-2022-01-12-taylor-series">
-   Activity: 2022-01-12-taylor-series
+  <a class="reference internal nav-link" href="#floating-point-representation-is-relative-see-float-exposed">
+   Floating point representation is
+   <strong>
+    relative
+   </strong>
+   (see float.exposed)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exact-arithmetic-correctly-rounded">
+   Exact arithmetic, correctly rounded
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#seems-easy-how-do-operations-compose">
+     Seems easy, how do operations compose?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#which-operation-caused-the-error">
+   Which operation caused the error?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   Conditioning
   </a>
  </li>
 </ul>
@@ -673,6 +716,18 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#">
    2023-01-25 Function errors
   </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#last-time">
+     Last Time
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#today">
+     Today
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-is-floating-point-arithmetic">
@@ -772,8 +827,34 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#activity-2022-01-12-taylor-series">
-   Activity: 2022-01-12-taylor-series
+  <a class="reference internal nav-link" href="#floating-point-representation-is-relative-see-float-exposed">
+   Floating point representation is
+   <strong>
+    relative
+   </strong>
+   (see float.exposed)
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exact-arithmetic-correctly-rounded">
+   Exact arithmetic, correctly rounded
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#seems-easy-how-do-operations-compose">
+     Seems easy, how do operations compose?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#which-operation-caused-the-error">
+   Which operation caused the error?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   Conditioning
   </a>
  </li>
 </ul>
@@ -788,20 +869,36 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="function-errors">
 <h1>2023-01-25 Function errors<a class="headerlink" href="#function-errors" title="Permalink to this headline">#</a></h1>
+<section id="last-time">
+<h2>Last Time<a class="headerlink" href="#last-time" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
+<li><p>Intro to Julia</p></li>
+<li><p>Intro to floating point</p></li>
 <li><p>Summing series</p></li>
+</ul>
+</section>
+<section id="today">
+<h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
 <li><p>Conditioning and well posedness</p></li>
 <li><p>Relative and absolute errors</p></li>
-<li><p>Activity</p></li>
+<li><p>Condition numbers</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Plots</span>
-<span class="n">default</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">default</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">legendfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="n">xtickfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="n">ytickfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌ Info: Precompiling Plots [91a5bcdd-55d7-5caf-9e0b-520d859cae80]
+└ @ Base loading.jl:1664
 </pre></div>
 </div>
 </div>
 </div>
+</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="what-is-floating-point-arithmetic">
 <h1>What is floating point arithmetic?<a class="headerlink" href="#what-is-floating-point-arithmetic" title="Permalink to this headline">#</a></h1>
@@ -860,7 +957,7 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">eps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.f0</span>
-<span class="k">while</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">eps</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">1</span>
+<span class="k">while</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">eps</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">1</span>
 <span class="w">    </span><span class="n">eps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eps</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span>
 <span class="k">end</span>
 <span class="n">eps</span>
@@ -868,7 +965,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.9604645f-8
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.9802322f-8
 </pre></div>
 </div>
 </div>
@@ -979,7 +1076,7 @@ title="Print to PDF"
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">myexp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="w">    </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">100</span>
-<span class="w">        </span><span class="n">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">x</span><span class="o">^</span><span class="n">k</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">factorial</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+<span class="w">        </span><span class="n">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">x</span><span class="o">^</span><span class="n">k</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">factorial</span><span class="p">(</span><span class="n">big</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
 <span class="w">    </span><span class="k">end</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">sum</span>
 <span class="k">end</span>
@@ -988,21 +1085,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">OverflowError</span>: 21 is too large to look up in the table; consider using `factorial(big(21))` instead
-
-<span class="ne">Stacktrace</span>:
- <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">factorial_lookup</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">combinatorics</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">19</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">factorial</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">combinatorics</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">27</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">myexp</span><span class="p">(</span><span class="n">x</span><span class="p">::</span><span class="n">Int64</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Main</span> <span class="o">./</span><span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">]:</span><span class="mi">4</span>
- <span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
-   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">9</span><span class="p">]:</span><span class="mi">8</span>
- <span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="nb">eval</span>
-   <span class="o">@</span> <span class="o">./</span><span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">368</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
- <span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="n">include_string</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">REPL</span><span class="o">.</span><span class="n">softscope</span><span class="p">),</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">code</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">filename</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
-   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1428</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.445646891729250136554224997792468345749669676277240766303534163549513721620773e-16
 </pre></div>
 </div>
 </div>
@@ -1044,7 +1127,7 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">myexp</span><span class="p">,</span><span class="w"> </span><span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1e-15</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-15</span><span class="p">))</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">([</span><span class="n">exp</span><span class="w"> </span><span class="n">myexp</span><span class="p">],</span><span class="w"> </span><span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1e-15</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-15</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1136,7 +1219,7 @@ title="Print to PDF"
 <span class="w">    </span><span class="n">max</span><span class="p">(</span><span class="n">abs</span><span class="p">(</span><span class="n">fx</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">fx_ref</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">fx_ref</span><span class="p">),</span><span class="w"> </span><span class="mf">1e-17</span><span class="p">)</span>
 <span class="k">end</span>
 <span class="n">badexpm1</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">relerror</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">badexpm1</span><span class="p">,</span><span class="w"> </span><span class="n">expm1</span><span class="p">),</span><span class="w"> </span><span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">,</span><span class="w"> </span><span class="n">xrange</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">))</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">relerror</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">badexpm1</span><span class="p">,</span><span class="w"> </span><span class="n">expm1</span><span class="p">),</span><span class="w"> </span><span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">,</span><span class="w"> </span><span class="n">xrange</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1e-15</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-15</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1144,13 +1227,122 @@ title="Print to PDF"
 <img alt="../_images/2023-01-25-function-errors_32_0.svg" src="../_images/2023-01-25-function-errors_32_0.svg" /></div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="activity-2022-01-12-taylor-series">
-<h1>Activity: <a class="reference external" href="https://classroom.github.com/a/VkPvGOgu">2022-01-12-taylor-series</a><a class="headerlink" href="#activity-2022-01-12-taylor-series" title="Permalink to this headline">#</a></h1>
-<ul class="simple">
-<li><p>Use Julia, Jupyter, Git</p></li>
-<li><p>Look at how fast series converge when taking only finitely many terms</p></li>
-<li><p>Explore instability, as is occuring for large negative <code class="docutils literal notranslate"><span class="pre">x</span></code> above, but not for the standard library <code class="docutils literal notranslate"><span class="pre">expm1</span></code></p></li>
-</ul>
+<section class="tex2jax_ignore mathjax_ignore" id="floating-point-representation-is-relative-see-float-exposed">
+<h1>Floating point representation is <strong>relative</strong> (see <a class="reference external" href="https://float.exposed">float.exposed</a>)<a class="headerlink" href="#floating-point-representation-is-relative-see-float-exposed" title="Permalink to this headline">#</a></h1>
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/IEEE_754_Double_Floating_Point_Format.svg" width="80%" /><p>Let <span class="math notranslate nohighlight">\(\operatorname{fl}\)</span> round to the nearest floating point number.</p>
+<div class="math notranslate nohighlight">
+\[ \operatorname{fl}(x) = x (1 + \epsilon), \quad \text{where} |\epsilon| \le \epsilon_{\text{machine}} \]</div>
+<p>This also means that the relative error in representing <span class="math notranslate nohighlight">\(x\)</span> is small:</p>
+<div class="math notranslate nohighlight">
+\[ \frac{|\operatorname{fl}(x) - x|}{|x|} \le \epsilon_{\text{machine}} \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1e-15</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-15</span><span class="p">))</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2023-01-25-function-errors_35_0.svg" src="../_images/2023-01-25-function-errors_35_0.svg" /></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="exact-arithmetic-correctly-rounded">
+<h1>Exact arithmetic, correctly rounded<a class="headerlink" href="#exact-arithmetic-correctly-rounded" title="Permalink to this headline">#</a></h1>
+<p>Take an elementary math operation <span class="math notranslate nohighlight">\(*\)</span> (addition, subtraction, multiplication, division), and the discrete operation that our computers perform, <span class="math notranslate nohighlight">\(\circledast\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[x \circledast y := \operatorname{fl}(x * y)\]</div>
+<p>with a relative accuracy <span class="math notranslate nohighlight">\(\epsilon_{\text{machine}}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[ \frac{|(x \circledast y) - (x * y)|}{|x * y|} \le \epsilon_{\text{machine}} . \]</div>
+<section id="seems-easy-how-do-operations-compose">
+<h2>Seems easy, how do operations compose?<a class="headerlink" href="#seems-easy-how-do-operations-compose" title="Permalink to this headline">#</a></h2>
+<p>Is this true?</p>
+<div class="math notranslate nohighlight">
+\[ \frac{\Big\lvert \big((x \circledast y) \circledast z\big) - \big((x * y) * z\big) \Big\rvert}{|(x * y) * z|} \le^? \epsilon_{\text{machine}} \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">)</span><span class="o">+</span><span class="n">z</span><span class="w"> </span><span class="c"># The best arbitrary numbers are 0, 1, and -1</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="o">/</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1e-15</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-15</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2023-01-25-function-errors_39_0.svg" src="../_images/2023-01-25-function-errors_39_0.svg" /></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="which-operation-caused-the-error">
+<h1>Which operation caused the error?<a class="headerlink" href="#which-operation-caused-the-error" title="Permalink to this headline">#</a></h1>
+<ol class="simple">
+<li><p><span class="math notranslate nohighlight">\(\texttt{tmp} = \operatorname{fl}(x + 1)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\operatorname{fl}(\texttt{tmp} - 1)\)</span></p></li>
+</ol>
+<p>Use Julia’s <a class="reference external" href="https://docs.julialang.org/en/v1/base/numbers/#BigFloats-and-BigInts"><code class="docutils literal notranslate"><span class="pre">BigFloat</span></code></a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">typeof</span><span class="p">(</span><span class="n">big</span><span class="p">(</span><span class="mf">.1</span><span class="p">))</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">big</span><span class="p">(</span><span class="mf">.1</span><span class="p">)</span><span class="w">          </span><span class="c"># Or BigFloat(.1); parsed as Float64, then promoted</span>
+<span class="nd">@show</span><span class="w"> </span><span class="kt">BigFloat</span><span class="p">(</span><span class="s">&quot;.1&quot;</span><span class="p">);</span><span class="w">  </span><span class="c"># Parse directly to BigFloat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>typeof(big(0.1)) = BigFloat
+big(0.1) = 0.1000000000000000055511151231257827021181583404541015625
+BigFloat(&quot;.1&quot;) = 0.1000000000000000000000000000000000000000000000000000000000000000000000000000002
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">tmp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e-15</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">tmp_big</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">big</span><span class="p">(</span><span class="mf">1e-15</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c"># Parse as Float64, then promote</span>
+<span class="n">abs</span><span class="p">(</span><span class="n">tmp</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">tmp_big</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">tmp_big</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.102230246251563524952071662733800140614440125894379682676737388538642032894338e-16
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tmp</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">r_big</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">big</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">abs</span><span class="p">(</span><span class="n">r</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">r_big</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">r_big</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>This last experiment shows that step 2 is exact (there is no rounding). The only approximation occurs when rounding in step 1, and yet I blame step 2 for the error.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id2">
+<h1>Conditioning<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h1>
+<blockquote>
+<div><p>What sort of functions cause small errors to become big?</p>
+</div></blockquote>
+<p>Consider a function <span class="math notranslate nohighlight">\(f: X \to Y\)</span> and define the <strong>absolute condition number</strong>
+<div class="math notranslate nohighlight">
+\[ \hat\kappa = \lim_{\delta \to 0} \max_{|\delta x| &lt; \delta} \frac{|f(x + \delta x) - f(x)|}{|\delta x|} = \max_{\delta x} \frac{|\delta f|}{|\delta x|}. \]</div>
+
+If <span class="math notranslate nohighlight">\(f\)</span> is differentiable, then <span class="math notranslate nohighlight">\(\hat\kappa = |f'(x)|\)</span>.</p>
+<p>Floating point offers relative accuracy, so it’s more useful to discuss <strong>relative condition number</strong>,
+<div class="math notranslate nohighlight">
+\[ \kappa = \max_{\delta x} \frac{|\delta f|/|f|}{|\delta x|/|x|}
+= \max_{\delta x} \Big[ \frac{|\delta f|/|\delta x|}{|f| / |x|} \Big] \]</div>
+
+or, if <span class="math notranslate nohighlight">\(f\)</span> is differentiable,
+<div class="math notranslate nohighlight">
+\[ \kappa = |f'(x)| \frac{|x|}{|f|} . \]</div>
+</p>
 </section>
 
     <script type="text/x-thebe-config">

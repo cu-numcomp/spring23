@@ -122,6 +122,11 @@ const thebe_selector_output = ".output, .cell_output"
    Syllabus
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips.html">
+   Tips
+  </a>
+ </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../slides.html">
    Slides
@@ -549,14 +554,6 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#floating-point-representation-is-relative">
-   Floating point representation is
-   <strong>
-    relative
-   </strong>
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exact-arithmetic-correctly-rounded">
    Exact arithmetic, correctly rounded
   </a>
@@ -574,8 +571,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#activity-2022-01-12-taylor-series">
-   Activity: 2022-01-12-taylor-series
+  <a class="reference internal nav-link" href="#activity">
+   Activity
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -674,6 +671,11 @@ title="Print to PDF"
    <li class="toc-h2 nav-item toc-entry">
     <a class="reference internal nav-link" href="#further-reading-fnc-introduction">
      Further reading: FNC Introduction
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-big-are-these-condition-numbers">
+     How big are these condition numbers?
     </a>
    </li>
   </ul>
@@ -703,14 +705,6 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#floating-point-representation-is-relative">
-   Floating point representation is
-   <strong>
-    relative
-   </strong>
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exact-arithmetic-correctly-rounded">
    Exact arithmetic, correctly rounded
   </a>
@@ -728,8 +722,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#activity-2022-01-12-taylor-series">
-   Activity: 2022-01-12-taylor-series
+  <a class="reference internal nav-link" href="#activity">
+   Activity
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -830,6 +824,11 @@ title="Print to PDF"
      Further reading: FNC Introduction
     </a>
    </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#how-big-are-these-condition-numbers">
+     How big are these condition numbers?
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -845,38 +844,18 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="conditioning">
 <h1>2023-01-27 Conditioning<a class="headerlink" href="#conditioning" title="Permalink to this headline">#</a></h1>
 <ul class="simple">
-<li><p>More on floating point</p></li>
 <li><p>Discuss Taylor Series activity</p></li>
 <li><p>Condition numbers</p></li>
+<li><p>Reliable = well conditioned and stable</p></li>
 <li><p>Forward and backward error</p></li>
-<li><p>Computing volume of a polygon</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Plots</span>
-<span class="n">default</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">default</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">legendfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="n">xtickfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="n">ytickfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-</div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="floating-point-representation-is-relative">
-<h1>Floating point representation is <strong>relative</strong><a class="headerlink" href="#floating-point-representation-is-relative" title="Permalink to this headline">#</a></h1>
-<img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/IEEE_754_Double_Floating_Point_Format.svg" width="80%" /><p>Let <span class="math notranslate nohighlight">\(\operatorname{fl}\)</span> round to the nearest floating point number.</p>
-<div class="math notranslate nohighlight">
-\[ \operatorname{fl}(x) = x (1 + \epsilon), \quad \text{where} |\epsilon| \le \epsilon_{\text{machine}} \]</div>
-<p>This also means that the relative error in representing <span class="math notranslate nohighlight">\(x\)</span> is small:</p>
-<div class="math notranslate nohighlight">
-\[ \frac{|\operatorname{fl}(x) - x|}{|x|} \le \epsilon_{\text{machine}} \]</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1e-15</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-15</span><span class="p">))</span>
-<span class="n">plot!</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/2023-01-27-conditioning_4_0.svg" src="../_images/2023-01-27-conditioning_4_0.svg" /></div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="exact-arithmetic-correctly-rounded">
@@ -900,7 +879,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-01-27-conditioning_8_0.svg" src="../_images/2023-01-27-conditioning_8_0.svg" /></div>
+<img alt="../_images/2023-01-27-conditioning_5_0.svg" src="../_images/2023-01-27-conditioning_5_0.svg" /></div>
 </div>
 </section>
 </section>
@@ -956,13 +935,33 @@ BigFloat(&quot;.1&quot;) = 0.100000000000000000000000000000000000000000000000000
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="activity-2022-01-12-taylor-series">
-<h1>Activity: <a class="reference external" href="https://classroom.github.com/a/VkPvGOgu">2022-01-12-taylor-series</a><a class="headerlink" href="#activity-2022-01-12-taylor-series" title="Permalink to this headline">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="activity">
+<h1>Activity<a class="headerlink" href="#activity" title="Permalink to this headline">#</a></h1>
 <ul class="simple">
 <li><p>Use Julia, Jupyter, Git</p></li>
 <li><p>Look at how fast series converge when taking only finitely many terms</p></li>
 <li><p>Explore instability, as is occuring for large negative <code class="docutils literal notranslate"><span class="pre">x</span></code> above, but not for the standard library <code class="docutils literal notranslate"><span class="pre">expm1</span></code></p></li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">myexp</span><span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">),</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="ne">UndefVarError</span>: myexp not defined
+
+<span class="ne">Stacktrace</span>:
+ <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="n">top</span><span class="o">-</span><span class="n">level</span> <span class="n">scope</span>
+   <span class="o">@</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">]:</span><span class="mi">1</span>
+ <span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="nb">eval</span>
+   <span class="o">@</span> <span class="o">./</span><span class="n">boot</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">368</span> <span class="p">[</span><span class="n">inlined</span><span class="p">]</span>
+ <span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="n">include_string</span><span class="p">(</span><span class="n">mapexpr</span><span class="p">::</span><span class="n">typeof</span><span class="p">(</span><span class="n">REPL</span><span class="o">.</span><span class="n">softscope</span><span class="p">),</span> <span class="n">mod</span><span class="p">::</span><span class="n">Module</span><span class="p">,</span> <span class="n">code</span><span class="p">::</span><span class="n">String</span><span class="p">,</span> <span class="n">filename</span><span class="p">::</span><span class="n">String</span><span class="p">)</span>
+   <span class="o">@</span> <span class="n">Base</span> <span class="o">./</span><span class="n">loading</span><span class="o">.</span><span class="n">jl</span><span class="p">:</span><span class="mi">1428</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">myexp</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">)</span>
@@ -1006,12 +1005,12 @@ BigFloat(&quot;.1&quot;) = 0.100000000000000000000000000000000000000000000000000
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">ks</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">rel_error</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">),</span><span class="w"> </span><span class="n">xscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">,</span><span class="w"> </span><span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">ks</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">rel_error</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">),</span><span class="w"> </span><span class="n">xscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">,</span><span class="w"> </span><span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-01-27-conditioning_15_0.svg" src="../_images/2023-01-27-conditioning_15_0.svg" /></div>
+<img alt="../_images/2023-01-27-conditioning_13_0.svg" src="../_images/2023-01-27-conditioning_13_0.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1020,7 +1019,7 @@ BigFloat(&quot;.1&quot;) = 0.100000000000000000000000000000000000000000000000000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-01-27-conditioning_16_0.svg" src="../_images/2023-01-27-conditioning_16_0.svg" /></div>
+<img alt="../_images/2023-01-27-conditioning_14_0.svg" src="../_images/2023-01-27-conditioning_14_0.svg" /></div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="what-happened">
@@ -1082,16 +1081,17 @@ BigFloat(&quot;.1&quot;) = 0.100000000000000000000000000000000000000000000000000
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">bar</span><span class="p">(</span><span class="n">expterms</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">))</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">10</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">bar</span><span class="p">(</span><span class="n">expterms</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>exp(-10) = 4.5399929762484854e-5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>exp(x) = 4.5399929762484854e-5
 </pre></div>
 </div>
-<img alt="../_images/2023-01-27-conditioning_19_1.svg" src="../_images/2023-01-27-conditioning_19_1.svg" /></div>
+<img alt="../_images/2023-01-27-conditioning_17_1.svg" src="../_images/2023-01-27-conditioning_17_1.svg" /></div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="id1">
@@ -1128,7 +1128,7 @@ or, if <span class="math notranslate nohighlight">\(f\)</span> is differentiable
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-01-27-conditioning_22_0.svg" src="../_images/2023-01-27-conditioning_22_0.svg" /></div>
+<img alt="../_images/2023-01-27-conditioning_20_0.svg" src="../_images/2023-01-27-conditioning_20_0.svg" /></div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="back-to-f-x-e-x-1">
@@ -1142,7 +1142,7 @@ or, if <span class="math notranslate nohighlight">\(f\)</span> is differentiable
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-01-27-conditioning_24_0.svg" src="../_images/2023-01-27-conditioning_24_0.svg" /></div>
+<img alt="../_images/2023-01-27-conditioning_22_0.svg" src="../_images/2023-01-27-conditioning_22_0.svg" /></div>
 </div>
 <section id="what-does-it-mean">
 <h2>What does it mean?<a class="headerlink" href="#what-does-it-mean" title="Permalink to this headline">#</a></h2>
@@ -1173,6 +1173,18 @@ or, if <span class="math notranslate nohighlight">\(f\)</span> is differentiable
 <p>Standard math libraries define a more efficient stable variant, <span class="math notranslate nohighlight">\(\texttt{expm1}(x) = e^x - 1\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">expm1</span><span class="p">(</span><span class="o">-</span><span class="mi">40</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">40</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0, 4.248354255291589e-18)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
 <span class="w">      </span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">expm1</span><span class="p">(</span><span class="n">x</span><span class="p">)],</span>
 <span class="w">    </span><span class="n">xlims</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="o">-</span><span class="mf">1e-15</span><span class="p">,</span><span class="w"> </span><span class="mf">1e-15</span><span class="p">))</span>
@@ -1180,7 +1192,7 @@ or, if <span class="math notranslate nohighlight">\(f\)</span> is differentiable
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-01-27-conditioning_28_0.svg" src="../_images/2023-01-27-conditioning_28_0.svg" /></div>
+<img alt="../_images/2023-01-27-conditioning_27_0.svg" src="../_images/2023-01-27-conditioning_27_0.svg" /></div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="another-example-log-1-x">
@@ -1195,7 +1207,7 @@ or, if <span class="math notranslate nohighlight">\(f\)</span> is differentiable
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-01-27-conditioning_30_0.svg" src="../_images/2023-01-27-conditioning_30_0.svg" /></div>
+<img alt="../_images/2023-01-27-conditioning_29_0.svg" src="../_images/2023-01-27-conditioning_29_0.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1206,7 +1218,7 @@ or, if <span class="math notranslate nohighlight">\(f\)</span> is differentiable
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-01-27-conditioning_31_0.svg" src="../_images/2023-01-27-conditioning_31_0.svg" /></div>
+<img alt="../_images/2023-01-27-conditioning_30_0.svg" src="../_images/2023-01-27-conditioning_30_0.svg" /></div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="reliable-well-conditioned-and-stable">
@@ -1260,7 +1272,7 @@ I was sunk: you have to divide by pi to 100 decimal places! It was hopeless.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">tan</span><span class="p">(</span><span class="kt">BigFloat</span><span class="p">(</span><span class="s">&quot;1e100&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">precision</span><span class="o">=</span><span class="mi">500</span><span class="p">))</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">tan</span><span class="p">(</span><span class="kt">BigFloat</span><span class="p">(</span><span class="s">&quot;1e100&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">precision</span><span class="o">=</span><span class="mi">400</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1283,6 +1295,17 @@ I was sunk: you have to divide by pi to 100 decimal places! It was hopeless.</p>
 </ul>
 <section id="further-reading-fnc-introduction">
 <h2>Further reading: <a class="reference external" href="https://fncbook.github.io/fnc/intro/overview.html">FNC Introduction</a><a class="headerlink" href="#further-reading-fnc-introduction" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="how-big-are-these-condition-numbers">
+<h2>How big are these condition numbers?<a class="headerlink" href="#how-big-are-these-condition-numbers" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x) = x+c\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x) = cx\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x) = x^p\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x) = e^x\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x) = \log x\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(f(x) = \sin x\)</span></p></li>
+</ul>
 </section>
 </section>
 

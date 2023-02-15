@@ -16,9 +16,8 @@ Welcome to **Numerical Computation**, CSCI-3656 and CSCI-5606
 
 * [SIAM Membership](http://www.siam.org/students/memberships.php) is free for CU students (30% discount on SIAM books)
 * Books
-  * [Driscoll and Braun, **Fundamentals of Numerical Computation**](https://fncbook.github.io/fnc/frontmatter.html)
+  * [Driscoll and Braun, **Fundamentals of Numerical Computation**](https://tobydriscoll.net/fnc-julia/)
     * free, in Julia with demo notebooks
-    * there is a print version with additional chapters
   * [Greenbaum and Chartier (2012), **Numerical Methods Design, Analysis, and Computer Implementation of Algorithms**](https://press.princeton.edu/titles/9763.html)
     * an excellent, comprehensive book
     * not free, uses Matlab for limited numerical examples
@@ -30,8 +29,8 @@ Welcome to **Numerical Computation**, CSCI-3656 and CSCI-5606
     * fantastic, but limited to numerical linear algebra and covers more advanced topics; free PDF via library
   * [Myers, Van de Geijn, and Van de Geijn (2020), **Linear Algebra: Foundations to Frontiers**](http://www.ulaff.net/downloads.html)
     * linear algebra with attention to performance; free PDF and videos
-  * [Eijkhout (2021), **Introduction to High-Performance Scientific Computing**](http://pages.tacc.utexas.edu/~eijkhout/istc/istc.html)
-    * includes introductory numerical linear algebra from a performance standpoint; free PDF.
+  * [Eijkhout (2023), **The Art of HPC**](https://theartofhpc.com/)
+    * collection of free books on numerical and scientific computing, plus "carpentry"
 * Papers
   * [Butler, **Enhancing and undermining intrinsic motivation: The effects of task-involving and ego-involving evaluation on interest and performance**](https://cu-numcomp.github.io/spring23/downloads/Butler-EnhancingAndUnderminingIntrinsicMotivation-1988.pdf)
   * [Turk, **Scaling a code in the human dimension**](https://dl.acm.org/doi/10.1145/2484762.2484782) [arXiv](https://arxiv.org/pdf/1301.7064.pdf)

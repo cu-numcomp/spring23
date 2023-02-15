@@ -122,6 +122,11 @@ const thebe_selector_output = ".output, .cell_output"
    Syllabus
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips.html">
+   Tips
+  </a>
+ </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../slides.html">
    Slides
@@ -561,18 +566,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#newton-raphson-method-by-taylor-series">
-   Newton-Raphson Method (by Taylor Series)
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#convergence-of-fixed-point-by-taylor-series">
    Convergence of fixed-point (by Taylor Series)
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-of-a-fixed-point-iteration">
-   Example of a fixed point iteration
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -591,11 +586,6 @@ title="Print to PDF"
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#formulations-are-not-unique-constants">
-   Formulations are not unique (constants)
-  </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#formulations-are-not-unique-functions">
@@ -674,18 +664,8 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#newton-raphson-method-by-taylor-series">
-   Newton-Raphson Method (by Taylor Series)
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#convergence-of-fixed-point-by-taylor-series">
    Convergence of fixed-point (by Taylor Series)
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-of-a-fixed-point-iteration">
-   Example of a fixed point iteration
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
@@ -704,11 +684,6 @@ title="Print to PDF"
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#formulations-are-not-unique-constants">
-   Formulations are not unique (constants)
-  </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#formulations-are-not-unique-functions">
@@ -767,20 +742,21 @@ title="Print to PDF"
 <ul class="simple">
 <li><p>Newton’s method via Taylor series</p></li>
 <li><p>Convergence theory for fixed point methods</p></li>
+<li><p>Derive Newton’s method via fixed point convergence theory</p></li>
 </ul>
 </section>
 <section id="today">
 <h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p>Derive Newton’s method via fixed point convergence theory</p></li>
 <li><p>Newton methods in computing culture</p></li>
 <li><p>Breaking Newton’s method</p></li>
 <li><p>Exploration</p></li>
+<li><p>Portfolios</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Plots</span>
-<span class="n">default</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">legendfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">default</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">legendfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 
 <span class="k">function</span><span class="w"> </span><span class="n">newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">fp</span><span class="p">,</span><span class="w"> </span><span class="n">x0</span><span class="p">;</span><span class="w"> </span><span class="n">tol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span><span class="w"> </span><span class="n">verbose</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span>
 <span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x0</span>
@@ -810,23 +786,6 @@ title="Print to PDF"
 </div>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="newton-raphson-method-by-taylor-series">
-<h1>Newton-Raphson Method (by Taylor Series)<a class="headerlink" href="#newton-raphson-method-by-taylor-series" title="Permalink to this headline">#</a></h1>
-<p>Much of numerical analysis reduces to <a class="reference external" href="https://en.wikipedia.org/wiki/Taylor_series">Taylor series</a>, the approximation
-<div class="math notranslate nohighlight">
-\[ f(x) = f(x_0) + f'(x_0) (x-x_0) + f''(x_0) (x - x_0)^2 / 2 + \underbrace{\dotsb}_{O((x-x_0)^3)} \]</div>
-
-centered on some reference point <span class="math notranslate nohighlight">\(x_0\)</span>.</p>
-<p>In numerical computation, it is exceedingly rare to look beyond the first-order approximation
-<div class="math notranslate nohighlight">
-\[ \tilde f_{x_0}(x) = f(x_0) + f'(x_0)(x - x_0) . \]</div>
-
-Since <span class="math notranslate nohighlight">\(\tilde f_{x_0}(x)\)</span> is a linear function, we can explicitly compute the unique solution of <span class="math notranslate nohighlight">\(\tilde f_{x_0}(x) = 0\)</span> as
-<div class="math notranslate nohighlight">
-\[ x = x_0 - \frac{f(x_0)}{f'(x_0)} . \]</div>
-
-This is Newton’s Method (aka Newton-Raphson or Newton-Raphson-Simpson) for finding the roots of differentiable functions.</p>
-</section>
 <section class="tex2jax_ignore mathjax_ignore" id="convergence-of-fixed-point-by-taylor-series">
 <h1>Convergence of fixed-point (by Taylor Series)<a class="headerlink" href="#convergence-of-fixed-point-by-taylor-series" title="Permalink to this headline">#</a></h1>
 <p>Consider the iteration
@@ -839,8 +798,8 @@ Suppose that there exists a fixed point <span class="math notranslate nohighligh
 \[ g(x_k) = g(x_*) + g'(x_*)(x_k - x_*) + O((x_k-x_*)^2) \]</div>
 
 and thus</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3dc8a41b-3366-4722-bb81-ba539c431314">
-<span class="eqno">(4)<a class="headerlink" href="#equation-3dc8a41b-3366-4722-bb81-ba539c431314" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-47f83512-20b6-44c6-b75e-73263d342438">
+<span class="eqno">(4)<a class="headerlink" href="#equation-47f83512-20b6-44c6-b75e-73263d342438" title="Permalink to this equation">#</a></span>\[\begin{align}
 x_{k+1} - x_* &amp;= g(x_k) - g(x_*) \\
 &amp;= g'(x_*) (x_k - x_*) + O((x_k - x_*)^2).
 \end{align}\]</div>
@@ -852,33 +811,14 @@ x_{k+1} - x_* &amp;= g(x_k) - g(x_*) \\
 <div class="math notranslate nohighlight">
 \[ \lim_{k\to\infty} \left\lvert \frac{e_{k+1}}{e_k} \right\rvert = \rho &lt; 1. \]</div>
 </p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="example-of-a-fixed-point-iteration">
-<h1>Example of a fixed point iteration<a class="headerlink" href="#example-of-a-fixed-point-iteration" title="Permalink to this headline">#</a></h1>
-<p>We wanted to solve <span class="math notranslate nohighlight">\(\cos x - x = 0\)</span>, which occurs when <span class="math notranslate nohighlight">\(g(x) = \cos x\)</span> is a fixed point.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">xstar</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newton</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">fp</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">)</span>
 <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">gp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="nd">@show</span><span class="w"> </span><span class="n">xstar</span>
-<span class="nd">@show</span><span class="w"> </span><span class="n">gp</span><span class="p">(</span><span class="n">xstar</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="p">],</span><span class="w"> </span><span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">))</span>
-<span class="n">scatter!</span><span class="p">([</span><span class="n">xstar</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="n">xstar</span><span class="p">],</span>
-<span class="w">    </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\$</span><span class="s">x_*</span><span class="se">\$</span><span class="s">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>xstar = 0.739085133385284
-gp(xstar) = -0.6736120293089505
-</pre></div>
-</div>
-<img alt="../_images/2023-02-06-more-newton_7_1.svg" src="../_images/2023-02-06-more-newton_7_1.svg" /></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">fixed_point</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+
+
+<span class="k">function</span><span class="w"> </span><span class="n">fixed_point</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
 <span class="w">    </span><span class="n">xs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
 <span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -893,7 +833,7 @@ gp(xstar) = -0.6736120293089505
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-02-06-more-newton_8_0.svg" src="../_images/2023-02-06-more-newton_8_0.svg" /></div>
+<img alt="../_images/2023-02-06-more-newton_5_0.svg" src="../_images/2023-02-06-more-newton_5_0.svg" /></div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="verifying-fixed-point-convergence-theory">
@@ -940,7 +880,7 @@ gp(xstar) = -0.6736120293089505
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-02-06-more-newton_11_0.svg" src="../_images/2023-02-06-more-newton_11_0.svg" /></div>
+<img alt="../_images/2023-02-06-more-newton_8_0.svg" src="../_images/2023-02-06-more-newton_8_0.svg" /></div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="plotting-newton-convergence">
@@ -981,64 +921,11 @@ gp(xstar) = -0.6736120293089505
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>x_star = xs[end, 1] = 0.7390851332151607
 </pre></div>
 </div>
-<img alt="../_images/2023-02-06-more-newton_14_1.svg" src="../_images/2023-02-06-more-newton_14_1.svg" /></div>
+<img alt="../_images/2023-02-06-more-newton_11_1.svg" src="../_images/2023-02-06-more-newton_11_1.svg" /></div>
 </div>
 <section id="poll-is-this-convergence-a-q-linear-b-r-linear-c-neither">
 <h2>Poll: Is this convergence A=q-linear, B=r-linear, C=neither?<a class="headerlink" href="#poll-is-this-convergence-a-q-linear-b-r-linear-c-neither" title="Permalink to this headline">#</a></h2>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="formulations-are-not-unique-constants">
-<h1>Formulations are not unique (constants)<a class="headerlink" href="#formulations-are-not-unique-constants" title="Permalink to this headline">#</a></h1>
-<p>If <span class="math notranslate nohighlight">\(x = g(x)\)</span> then
-<div class="math notranslate nohighlight">
-\[x = \underbrace{x + c(g(x) - x)}_{g_2}\]</div>
-
-for any constant <span class="math notranslate nohighlight">\(c \ne 0\)</span>. Can we choose <span class="math notranslate nohighlight">\(c\)</span> to make <span class="math notranslate nohighlight">\(\lvert g_2'(x_*) \rvert\)</span> small?</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">gp</span><span class="p">(</span><span class="n">xstar</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
-<span class="n">g2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
-<span class="n">g2p</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
-<span class="nd">@show</span><span class="w"> </span><span class="n">g2p</span><span class="p">(</span><span class="n">xstar</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="n">g2</span><span class="p">],</span><span class="w"> </span><span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">),</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;x&quot;</span><span class="w"> </span><span class="s">&quot;g&quot;</span><span class="w"> </span><span class="s">&quot;g2&quot;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>g2p(xstar) = 0.0
-</pre></div>
-</div>
-<img alt="../_images/2023-02-06-more-newton_17_1.svg" src="../_images/2023-02-06-more-newton_17_1.svg" /></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">xs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fixed_point</span><span class="p">(</span><span class="n">g2</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">)</span>
-<span class="n">xs</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">xstar</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16-element Vector{Float64}:
-  0.26091486661471597
- -0.013759123582207766
- -4.1975680750594435e-5
- -5.591781482294778e-10
- -1.7012335984389892e-10
- -1.7012335984389892e-10
- -1.7012335984389892e-10
- -1.7012335984389892e-10
- -1.7012335984389892e-10
- -1.7012335984389892e-10
- -1.7012335984389892e-10
- -1.7012335984389892e-10
- -1.7012335984389892e-10
- -1.7012335984389892e-10
- -1.7012335984389892e-10
- -1.7012335984389892e-10
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="formulations-are-not-unique-functions">
 <h1>Formulations are not unique (functions)<a class="headerlink" href="#formulations-are-not-unique-functions" title="Permalink to this headline">#</a></h1>
@@ -1051,12 +938,12 @@ for any smooth <span class="math notranslate nohighlight">\(h(x) \ne 0\)</span>.
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">h</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">gp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
 <span class="n">g3</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">h</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">cos</span><span class="p">,</span><span class="w"> </span><span class="n">g2</span><span class="p">,</span><span class="w"> </span><span class="n">g3</span><span class="p">],</span><span class="w"> </span><span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">))</span>
+<span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">cos</span><span class="p">,</span><span class="w"> </span><span class="n">g3</span><span class="p">],</span><span class="w"> </span><span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-02-06-more-newton_20_0.svg" src="../_images/2023-02-06-more-newton_20_0.svg" /></div>
+<img alt="../_images/2023-02-06-more-newton_14_0.svg" src="../_images/2023-02-06-more-newton_14_0.svg" /></div>
 </div>
 <ul class="simple">
 <li><p>We don’t know <span class="math notranslate nohighlight">\(g'(x_*)\)</span> in advance because we don’t know <span class="math notranslate nohighlight">\(x_*\)</span> yet.</p></li>
@@ -1098,7 +985,7 @@ for any smooth <span class="math notranslate nohighlight">\(h(x) \ne 0\)</span>.
 <section class="tex2jax_ignore mathjax_ignore" id="culture-fast-inverse-square-root">
 <h1>Culture: fast inverse square root<a class="headerlink" href="#culture-fast-inverse-square-root" title="Permalink to this headline">#</a></h1>
 <p>The following code appeared literally (including comments) in the Quake III Arena source code (late 1990s).</p>
-<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span><span class="w"> </span><span class="nf">Q_rsqrt</span><span class="p">(</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="p">)</span>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span><span class="w"> </span><span class="nf">Q_rsqrt</span><span class="p">(</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="p">)</span>
 <span class="p">{</span>
 <span class="w">	</span><span class="kt">long</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
 <span class="w">	</span><span class="kt">float</span><span class="w"> </span><span class="n">x2</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
@@ -1135,8 +1022,8 @@ More at <a class="reference external" href="https://en.wikipedia.org/wiki/Fast_i
 
 but this would require a division.</p>
 <p>Newton’s method is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-4e645a7d-36b8-4cbe-b8e8-8f06ff835ca9">
-<span class="eqno">(5)<a class="headerlink" href="#equation-4e645a7d-36b8-4cbe-b8e8-8f06ff835ca9" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-6642995f-b67d-4e6f-aa47-f7ec4116a2b3">
+<span class="eqno">(5)<a class="headerlink" href="#equation-6642995f-b67d-4e6f-aa47-f7ec4116a2b3" title="Permalink to this equation">#</a></span>\[\begin{align}
 y_{k+1} &amp;= y_k - \frac{f(y_k)}{f'(y_k)} \\
 &amp;= y_k - \frac{1/y_k^2 - x}{-2/y_k^3} \\
 &amp;= y_k + \frac 1 2 (y_k - x y_k^3) \\
@@ -1168,6 +1055,18 @@ y_{k+1} &amp;= y_k - \frac{f(y_k)}{f'(y_k)} \\
 </ul>
 </li>
 </ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">log</span><span class="p">(</span><span class="kt">Complex</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1e-15</span><span class="nb">im</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.0e-31 - 3.1415926535897922im
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="exploratory-rootfinding">
 <h1>Exploratory rootfinding<a class="headerlink" href="#exploratory-rootfinding" title="Permalink to this headline">#</a></h1>

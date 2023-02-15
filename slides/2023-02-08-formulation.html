@@ -122,6 +122,11 @@ const thebe_selector_output = ".output, .cell_output"
    Syllabus
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips.html">
+   Tips
+  </a>
+ </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../slides.html">
    Slides
@@ -561,21 +566,6 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#formulations-are-not-unique-functions">
-   Formulations are not unique (functions)
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#newton-s-method-by-fixed-point-convergence">
-   Newton’s method by fixed point convergence
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#quadratic-convergence">
-   Quadratic convergence!
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#rootfinding-methods-outlook">
    Rootfinding methods outlook
   </a>
@@ -667,8 +657,8 @@ title="Print to PDF"
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#are-we-observing-a-stabiltiy-b-backward-stability-or-c-neither">
-     Are we observing A=stabiltiy, B=backward stability, or C=neither?
+    <a class="reference internal nav-link" href="#are-we-observing-a-stability-b-backward-stability-or-c-neither">
+     Are we observing A=stability, B=backward stability, or C=neither?
     </a>
    </li>
   </ul>
@@ -715,21 +705,6 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#formulations-are-not-unique-functions">
-   Formulations are not unique (functions)
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#newton-s-method-by-fixed-point-convergence">
-   Newton’s method by fixed point convergence
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#quadratic-convergence">
-   Quadratic convergence!
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#rootfinding-methods-outlook">
    Rootfinding methods outlook
   </a>
@@ -821,8 +796,8 @@ title="Print to PDF"
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#are-we-observing-a-stabiltiy-b-backward-stability-or-c-neither">
-     Are we observing A=stabiltiy, B=backward stability, or C=neither?
+    <a class="reference internal nav-link" href="#are-we-observing-a-stability-b-backward-stability-or-c-neither">
+     Are we observing A=stability, B=backward stability, or C=neither?
     </a>
    </li>
   </ul>
@@ -854,7 +829,7 @@ title="Print to PDF"
 <section id="today">
 <h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p>Breaking Newton’s method</p></li>
+<li><p>Goal sharing</p></li>
 <li><p>Exploration</p></li>
 <li><p>Multiple roots</p></li>
 <li><p>Conditioning of the rootfinding problem</p></li>
@@ -882,69 +857,12 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fp (generic function with 1 method)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>newton_hist (generic function with 1 method)
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="formulations-are-not-unique-functions">
-<h1>Formulations are not unique (functions)<a class="headerlink" href="#formulations-are-not-unique-functions" title="Permalink to this headline">#</a></h1>
-<p>If <span class="math notranslate nohighlight">\(x = g(x)\)</span> then
-<div class="math notranslate nohighlight">
-\[x = \underbrace{x + h(x) \big(g(x) - x\big)}_{g_3(x)}\]</div>
-
-for any smooth <span class="math notranslate nohighlight">\(h(x) \ne 0\)</span>. Can we choose <span class="math notranslate nohighlight">\(h(x)\)</span> to make <span class="math notranslate nohighlight">\(\lvert g_3'(x) \rvert\)</span> small?</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">gp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">h</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">gp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
-<span class="n">g3</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">h</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="o">-&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">cos</span><span class="p">,</span><span class="w"> </span><span class="n">g3</span><span class="p">],</span><span class="w"> </span><span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/2023-02-08-formulation_3_0.svg" src="../_images/2023-02-08-formulation_3_0.svg" /></div>
-</div>
-<ul class="simple">
-<li><p>We don’t know <span class="math notranslate nohighlight">\(g'(x_*)\)</span> in advance because we don’t know <span class="math notranslate nohighlight">\(x_*\)</span> yet.</p></li>
-<li><p>This method converges very fast</p></li>
-<li><p>We actually just derived Newton’s method.</p></li>
-</ul>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="newton-s-method-by-fixed-point-convergence">
-<h1>Newton’s method by fixed point convergence<a class="headerlink" href="#newton-s-method-by-fixed-point-convergence" title="Permalink to this headline">#</a></h1>
-<ul class="simple">
-<li><p>A rootfinding problem <span class="math notranslate nohighlight">\(f(x) = 0\)</span> can be converted to a fixed point problem <div class="math notranslate nohighlight">
-\[x = x + f(x) =: g(x)\]</div>
- but there is no guarantee that <span class="math notranslate nohighlight">\(g'(x_*) = 1 + f'(x_*)\)</span> will have magnitude less than 1.</p></li>
-<li><p>Problem-specific algebraic manipulation can be used to make <span class="math notranslate nohighlight">\(|g'(x_*)|\)</span> small.</p></li>
-<li><p><span class="math notranslate nohighlight">\(x = x + h(x) f(x)\)</span> is also a valid formulation for any <span class="math notranslate nohighlight">\(h(x)\)</span> bounded away from <span class="math notranslate nohighlight">\(0\)</span>.</p></li>
-<li><p>Can we choose <span class="math notranslate nohighlight">\(h(x)\)</span> such that <div class="math notranslate nohighlight">
-\[ g'(x) = 1 + h'(x) f(x) + h(x) f'(x) = 0\]</div>
- when <span class="math notranslate nohighlight">\(f(x) = 0\)</span>?</p></li>
-</ul>
-<p>In other words,
-<div class="math notranslate nohighlight">
-\[ x_{k+1} = x_k + \underbrace{\frac{-1}{f'(x_k)}}_{h(x_k)} f(x_k)  . \]</div>
-</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="quadratic-convergence">
-<h1>Quadratic convergence!<a class="headerlink" href="#quadratic-convergence" title="Permalink to this headline">#</a></h1>
-<div class="math notranslate nohighlight">
-\[ \left\lvert \frac{e_{k+1}}{e_k} \right\rvert \to \lvert g'(x_*) \rvert \]</div>
-<ul class="simple">
-<li><p>What does it mean that <span class="math notranslate nohighlight">\(g'(x_*) = 0\)</span>?</p></li>
-<li><p>It turns out that Newton’s method has <em>locally <strong>q-quadratic</strong></em> convergence to simple roots,
-<div class="math notranslate nohighlight">
-\[\lim_{k \to \infty} \frac{|e_{k+1}|}{|e_k|^2} &lt; \infty.\]</div>
-</p></li>
-<li><p>“The number of correct digits doubles each iteration.”</p></li>
-<li><p>Now that we know how to make a good guess accurate, the effort lies in getting a good guess.</p></li>
-</ul>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="rootfinding-methods-outlook">
 <h1>Rootfinding methods outlook<a class="headerlink" href="#rootfinding-methods-outlook" title="Permalink to this headline">#</a></h1>
@@ -995,8 +913,8 @@ for any smooth <span class="math notranslate nohighlight">\(h(x) \ne 0\)</span>.
 <section class="tex2jax_ignore mathjax_ignore" id="roots-with-multiplicity">
 <h1>Roots with multiplicity<a class="headerlink" href="#roots-with-multiplicity" title="Permalink to this headline">#</a></h1>
 <p>There are multiple ways to represent (monic) polynomials</p>
-<div class="amsmath math notranslate nohighlight" id="equation-41e68b84-271c-4d3f-837f-afddde74a257">
-<span class="eqno">(6)<a class="headerlink" href="#equation-41e68b84-271c-4d3f-837f-afddde74a257" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-8137b5e2-85e8-4082-af6a-9f9d193ac487">
+<span class="eqno">(6)<a class="headerlink" href="#equation-8137b5e2-85e8-4082-af6a-9f9d193ac487" title="Permalink to this equation">#</a></span>\[\begin{align}
 f(x) &amp;= (x - a_1) (x - a_2) &amp; g(x) &amp;= x^2 \underbrace{- (a_1 + a_2)}_{b_1} x + \underbrace{a_1 a_2}_{b_2}
 \end{align}\]</div>
 <div class="cell docutils container">
@@ -1012,8 +930,8 @@ f(x) &amp;= (x - a_1) (x - a_2) &amp; g(x) &amp;= x^2 \underbrace{- (a_1 + a_2)}
 <span class="k">end</span>
 
 <span class="n">eps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1e-10</span>
-<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1e5</span><span class="p">,</span><span class="w"> </span><span class="mf">1e5</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span><span class="w"> </span><span class="c"># tiny perturbation to root</span>
-<span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="c"># tiny perturbation to monomial coefficent</span>
+<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1e5</span><span class="p">,</span><span class="w"> </span><span class="mf">1e5</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">eps</span><span class="p">)]</span><span class="w"> </span><span class="c"># tiny perturbation to root</span>
+<span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="o">-</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">eps</span><span class="p">),</span><span class="w"> </span><span class="c"># tiny perturbation to monomial coefficent</span>
 <span class="w">    </span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
 <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">poly_eval_prod</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">)</span>
 <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">poly_eval_sum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span>
@@ -1028,13 +946,13 @@ f(x) &amp;= (x - a_1) (x - a_2) &amp; g(x) &amp;= x^2 \underbrace{- (a_1 + a_2)}
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">([</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="p">],</span><span class="w"> </span><span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">ylims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">))</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">([</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="p">],</span><span class="w"> </span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">))</span>
 <span class="n">plot!</span><span class="p">(</span><span class="n">zero</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="ss">:black</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="ss">:none</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-02-08-formulation_12_0.svg" src="../_images/2023-02-08-formulation_12_0.svg" /></div>
+<img alt="../_images/2023-02-08-formulation_7_0.svg" src="../_images/2023-02-08-formulation_7_0.svg" /></div>
 </div>
 <ul class="simple">
 <li><p>Perturbing the coefficient in the tenth digit made the difference between one root and two.</p></li>
@@ -1044,13 +962,13 @@ f(x) &amp;= (x - a_1) (x - a_2) &amp; g(x) &amp;= x^2 \underbrace{- (a_1 + a_2)}
 <section class="tex2jax_ignore mathjax_ignore" id="how-did-the-roots-move">
 <h1>How did the roots move?<a class="headerlink" href="#how-did-the-roots-move" title="Permalink to this headline">#</a></h1>
 <p>Take two roots at <span class="math notranslate nohighlight">\(x=a\)</span> and perturb the middle coefficient.</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3e227e1e-4cb3-45f1-995a-55b3cb214b4b">
-<span class="eqno">(7)<a class="headerlink" href="#equation-3e227e1e-4cb3-45f1-995a-55b3cb214b4b" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-5e6dc056-6274-40d4-a25e-371279512099">
+<span class="eqno">(7)<a class="headerlink" href="#equation-5e6dc056-6274-40d4-a25e-371279512099" title="Permalink to this equation">#</a></span>\[\begin{align}
 x^2 \underbrace{- 2a(1 + \epsilon)}_{b_1} x + \underbrace{a^2}_{b_2} = 0
 \end{align}\]</div>
 <p>Analytically, we know the roots are at</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d148e1ab-3c9b-4241-9294-e42d91d597c3">
-<span class="eqno">(8)<a class="headerlink" href="#equation-d148e1ab-3c9b-4241-9294-e42d91d597c3" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-f54697e5-8743-432a-a33f-f1e1052eb1f8">
+<span class="eqno">(8)<a class="headerlink" href="#equation-f54697e5-8743-432a-a33f-f1e1052eb1f8" title="Permalink to this equation">#</a></span>\[\begin{align}
 \frac{b_1}{2} \pm \sqrt{\frac{b_1^2}{4} - b_2} 
 &amp;= a(1+\epsilon) \pm \sqrt{a^2(1+\epsilon)^2 - a^2} \\
 &amp;= a(1+\epsilon) \pm a \sqrt{2 \epsilon + \epsilon^2} \\
@@ -1058,12 +976,12 @@ x^2 \underbrace{- 2a(1 + \epsilon)}_{b_1} x + \underbrace{a^2}_{b_2} = 0
 \end{align}\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">sqrt</span><span class="p">],</span><span class="w"> </span><span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.1</span><span class="p">))</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">sqrt</span><span class="p">],</span><span class="w"> </span><span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mf">.001</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-02-08-formulation_16_0.svg" src="../_images/2023-02-08-formulation_16_0.svg" /></div>
+<img alt="../_images/2023-02-08-formulation_11_0.svg" src="../_images/2023-02-08-formulation_11_0.svg" /></div>
 </div>
 <p>Note that condition number is well behaved.
 <div class="math notranslate nohighlight">
@@ -1118,7 +1036,7 @@ x^2 \underbrace{- 2a(1 + \epsilon)}_{b_1} x + \underbrace{a^2}_{b_2} = 0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-02-08-formulation_20_0.svg" src="../_images/2023-02-08-formulation_20_0.svg" /></div>
+<img alt="../_images/2023-02-08-formulation_15_0.svg" src="../_images/2023-02-08-formulation_15_0.svg" /></div>
 </div>
 <ul class="simple">
 <li><p>Convergence is kinda slow.</p></li>
@@ -1146,35 +1064,36 @@ gpoly = fromroots([1, 2] .+ 100000.0) = Polynomial(1.0000300002e10 - 200003.0*x 
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">newton_hist</span><span class="p">(</span><span class="n">gpoly</span><span class="p">,</span><span class="w"> </span><span class="n">derivative</span><span class="p">(</span><span class="n">gpoly</span><span class="p">),</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">newton_hist</span><span class="p">(</span><span class="n">gpoly</span><span class="p">,</span><span class="w"> </span><span class="n">derivative</span><span class="p">(</span><span class="n">gpoly</span><span class="p">),</span><span class="w"> </span><span class="mf">3e5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>23×3 Matrix{Float64}:
-      3.0            9.9997e9     -199997.0
-  50002.2            2.49993e9     -99998.5
-  75001.9            6.24981e8     -49999.3
-  87501.7            1.56245e8     -24999.6
-  93751.6            3.90613e7     -12499.8
-  96876.5            9.76533e6      -6249.91
-  98439.0            2.44133e6      -3124.95
-  99220.3            6.10333e5      -1562.48
-  99610.9            1.52583e5       -781.239
-  99806.2        38145.7             -390.62
-  99903.8         9536.37            -195.311
-  99952.7         2384.03             -97.6582
-  99977.1          595.945            -48.8342
-  99989.3          148.924            -24.4273
-  99995.4           37.1686           -12.2341
-  99998.4            9.23006           -6.15794
-  99999.9            2.24666           -3.16017
-      1.00001e5      0.505424          -1.7383
-      1.00001e5      0.0845398         -1.15679
- 100001.0            0.0053409         -1.01063
- 100001.0            2.79285e-5        -1.00006
- 100001.0            7.85803e-10       -1.0
- 100001.0            0.0               -1.0
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>24×3 Matrix{Float64}:
+ 300000.0            3.99994e10   399997.0
+      2.00001e5      9.99985e9         1.99999e5
+      1.50001e5      2.49996e9     99999.3
+      1.25001e5      6.24991e8     49999.6
+      1.12501e5      1.56248e8     24999.8
+      1.06251e5      3.90619e7     12499.9
+      1.03126e5      9.76548e6      6249.95
+ 101564.0            2.44137e6      3124.98
+      1.00783e5      6.10342e5      1562.49
+      1.00392e5      1.52586e5       781.245
+      1.00197e5  38146.3             390.623
+      1.00099e5   9536.52            195.313
+      1.0005e5    2384.07             97.6589
+      1.00026e5    595.954            48.8346
+      1.00014e5    148.926            24.4275
+      1.00008e5     37.1691           12.2342
+      1.00005e5      9.2302            6.15799
+      1.00003e5      2.2467            3.16019
+      1.00002e5      0.505433          1.73831
+      1.00002e5      0.0845417         1.15679
+ 100002.0            0.00534111        1.01063
+ 100002.0            2.79307e-5        1.00006
+ 100002.0            7.85803e-10       1.0
+ 100002.0            0.0               1.0
 </pre></div>
 </div>
 </div>
@@ -1198,7 +1117,7 @@ gpoly = fromroots([1, 2] .+ 100000.0) = Polynomial(1.0000300002e10 - 200003.0*x 
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fromroots</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="mf">1e3</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fromroots</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="mi">1000</span><span class="p">)</span>
 <span class="n">xs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">roots</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 <span class="n">scatter</span><span class="p">(</span><span class="n">real</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span><span class="w"> </span><span class="n">imag</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="ss">:red</span><span class="p">)</span>
 <span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">100</span>
@@ -1213,7 +1132,7 @@ gpoly = fromroots([1, 2] .+ 100000.0) = Polynomial(1.0000300002e10 - 200003.0*x 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-02-08-formulation_27_0.svg" src="../_images/2023-02-08-formulation_27_0.svg" /></div>
+<img alt="../_images/2023-02-08-formulation_22_0.svg" src="../_images/2023-02-08-formulation_22_0.svg" /></div>
 </div>
 <section id="fundamental-theorem-of-algebra">
 <h2><a class="reference external" href="https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra">Fundamental Theorem of Algebra</a><a class="headerlink" href="#fundamental-theorem-of-algebra" title="Permalink to this headline">#</a></h2>
@@ -1231,13 +1150,13 @@ gpoly = fromroots([1, 2] .+ 100000.0) = Polynomial(1.0000300002e10 - 200003.0*x 
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span>
 <span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">collect</span><span class="p">(</span><span class="mf">1.</span><span class="o">:</span><span class="n">n</span><span class="p">)</span>
 <span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fromroots</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<span class="n">w</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1e-12</span>
+<span class="n">w</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span>
 <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">w</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span><span class="w"> </span><span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-02-08-formulation_30_0.svg" src="../_images/2023-02-08-formulation_30_0.svg" /></div>
+<img alt="../_images/2023-02-08-formulation_25_0.svg" src="../_images/2023-02-08-formulation_25_0.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1255,7 +1174,7 @@ gpoly = fromroots([1, 2] .+ 100000.0) = Polynomial(1.0000300002e10 - 200003.0*x 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-02-08-formulation_31_0.svg" src="../_images/2023-02-08-formulation_31_0.svg" /></div>
+<img alt="../_images/2023-02-08-formulation_26_0.svg" src="../_images/2023-02-08-formulation_26_0.svg" /></div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="which-is-better-to-model-inputs-to-a-rootfinder">
@@ -1307,7 +1226,7 @@ for some <span class="math notranslate nohighlight">\(\tilde x\)</span> that is 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-02-08-formulation_40_0.svg" src="../_images/2023-02-08-formulation_40_0.svg" /></div>
+<img alt="../_images/2023-02-08-formulation_35_0.svg" src="../_images/2023-02-08-formulation_35_0.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1319,10 +1238,10 @@ for some <span class="math notranslate nohighlight">\(\tilde x\)</span> that is 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-02-08-formulation_41_0.svg" src="../_images/2023-02-08-formulation_41_0.svg" /></div>
+<img alt="../_images/2023-02-08-formulation_36_0.svg" src="../_images/2023-02-08-formulation_36_0.svg" /></div>
 </div>
-<section id="are-we-observing-a-stabiltiy-b-backward-stability-or-c-neither">
-<h2>Are we observing A=stabiltiy, B=backward stability, or C=neither?<a class="headerlink" href="#are-we-observing-a-stabiltiy-b-backward-stability-or-c-neither" title="Permalink to this headline">#</a></h2>
+<section id="are-we-observing-a-stability-b-backward-stability-or-c-neither">
+<h2>Are we observing A=stability, B=backward stability, or C=neither?<a class="headerlink" href="#are-we-observing-a-stability-b-backward-stability-or-c-neither" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
 <li><p>The numbers <span class="math notranslate nohighlight">\((\widetilde\cos \theta, \widetilde\sin \theta = (\operatorname{fl}(\cos \theta), \operatorname{fl}(\sin\theta))\)</span> do not lie exactly on the unit circles.</p>
 <ul>

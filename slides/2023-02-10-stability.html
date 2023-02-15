@@ -122,6 +122,11 @@ const thebe_selector_output = ".output, .cell_output"
    Syllabus
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips.html">
+   Tips
+  </a>
+ </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../slides.html">
    Slides
@@ -561,6 +566,11 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#wilkinson-s-polynomial">
+   Wilkinson’s polynomial
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#which-is-better-to-model-inputs-to-a-rootfinder">
    Which is better to model inputs to a rootfinder?
   </a>
@@ -665,6 +675,11 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#wilkinson-s-polynomial">
+   Wilkinson’s polynomial
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#which-is-better-to-model-inputs-to-a-rootfinder">
    Which is better to model inputs to a rootfinder?
   </a>
@@ -763,11 +778,50 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Plots</span>
 <span class="n">default</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">legendfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Polynomials</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="wilkinson-s-polynomial">
+<h1>Wilkinson’s polynomial<a class="headerlink" href="#wilkinson-s-polynomial" title="Permalink to this headline">#</a></h1>
+<p>Suppose we add more terms
+<div class="math notranslate nohighlight">
+\[ w(x) = \prod_{k=1}^{20} (x - k) = (x - 1) (x - 2) \dotsb (x - 20) = \sum_{k=0}^{20} b_k x^k \]</div>
+</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span>
+<span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">collect</span><span class="p">(</span><span class="mf">1.</span><span class="o">:</span><span class="n">n</span><span class="p">)</span>
+<span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fromroots</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="p">[</span><span class="n">w</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1e-10</span><span class="p">]</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">w</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span><span class="w"> </span><span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2023-02-10-stability_3_0.svg" src="../_images/2023-02-10-stability_3_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fromroots</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">scatter</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">zero</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="ss">:red</span><span class="p">)</span>
+<span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">100</span>
+<span class="w">    </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
+<span class="w">    </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copy</span><span class="p">(</span><span class="n">w</span><span class="p">);</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="mi">8</span><span class="p">]</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">r</span><span class="p">[</span><span class="mi">10</span><span class="o">:</span><span class="k">end</span><span class="p">]</span><span class="w"> </span><span class="o">.=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="n">q</span><span class="p">[</span><span class="o">:</span><span class="p">]</span><span class="w"> </span><span class="o">.*=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="mf">1e-10</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">r</span>
+<span class="w">    </span><span class="n">xs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">roots</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<span class="w">    </span><span class="n">scatter!</span><span class="p">(</span><span class="n">real</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span><span class="w"> </span><span class="n">imag</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span><span class="w"> </span><span class="n">markersize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="ss">:none</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2023-02-10-stability_4_0.svg" src="../_images/2023-02-10-stability_4_0.svg" /></div>
+</div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="which-is-better-to-model-inputs-to-a-rootfinder">
 <h1>Which is better to model inputs to a rootfinder?<a class="headerlink" href="#which-is-better-to-model-inputs-to-a-rootfinder" title="Permalink to this headline">#</a></h1>
@@ -818,22 +872,22 @@ for some <span class="math notranslate nohighlight">\(\tilde x\)</span> that is 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-02-10-stability_10_0.svg" src="../_images/2023-02-10-stability_10_0.svg" /><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GKS: Possible loss of precision in routine SET_WINDOW
+<img alt="../_images/2023-02-10-stability_13_0.svg" src="../_images/2023-02-10-stability_13_0.svg" /><div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>GKS: Possible loss of precision in routine SET_WINDOW
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">+</span><span class="mf">2e-5</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
-<span class="n">mysin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="mf">1e10</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="nb">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">+</span><span class="mf">2e-5</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
+<span class="n">mysin</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1e10</span><span class="p">)</span><span class="o">*</span><span class="nb">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">plot</span><span class="p">(</span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="n">aspect_ratio</span><span class="o">=</span><span class="ss">:equal</span><span class="p">)</span>
 <span class="n">scatter!</span><span class="p">(</span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="n">mysin</span><span class="o">.</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-02-10-stability_11_0.svg" src="../_images/2023-02-10-stability_11_0.svg" /></div>
+<img alt="../_images/2023-02-10-stability_14_0.svg" src="../_images/2023-02-10-stability_14_0.svg" /></div>
 </div>
 <section id="are-we-observing-a-stability-b-backward-stability-or-c-neither">
 <h2>Are we observing A=stability, B=backward stability, or C=neither?<a class="headerlink" href="#are-we-observing-a-stability-b-backward-stability-or-c-neither" title="Permalink to this headline">#</a></h2>
@@ -908,6 +962,7 @@ Backward stability is generally the best we can hope for.</p>
 <img src="../img/GustafsonPosits.png" width="90%" />
 <ul class="simple">
 <li><p><a class="reference external" href="http://www.johngustafson.net/pdfs/BeatingFloatingPoint.pdf">Gustafson and Yonemoto: <strong>Beating Floating Point at its Own Game: Posit Arithmetic</strong></a></p></li>
+<li><p><a class="reference external" href="https://people.eecs.berkeley.edu/~demmel/ma221_Fall20/Dinechin_etal_2019.pdf">de Dinechin: <strong>Posits: the good, the bad and the ugly</strong></a></p></li>
 <li><p><a class="reference external" href="https://cse512-19s.github.io/FP-Well-Rounded/">Interactive visualization</a></p></li>
 <li><p><a class="reference external" href="https://github.com/milankl/SoftPosit.jl">SoftPosit.jl</a> Julia package</p></li>
 </ul>

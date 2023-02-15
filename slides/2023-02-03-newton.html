@@ -122,6 +122,11 @@ const thebe_selector_output = ".output, .cell_output"
    Syllabus
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips.html">
+   Tips
+  </a>
+ </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../slides.html">
    Slides
@@ -1059,8 +1064,8 @@ Suppose that there exists a fixed point <span class="math notranslate nohighligh
 \[ g(x_k) = g(x_*) + g'(x_*)(x_k - x_*) + O((x_k-x_*)^2) \]</div>
 
 and thus</p>
-<div class="amsmath math notranslate nohighlight" id="equation-f1a1db73-6228-42e0-826e-46c6ccb1db0f">
-<span class="eqno">(1)<a class="headerlink" href="#equation-f1a1db73-6228-42e0-826e-46c6ccb1db0f" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-96ec414e-2b63-44ed-8300-0f4c2ad60197">
+<span class="eqno">(1)<a class="headerlink" href="#equation-96ec414e-2b63-44ed-8300-0f4c2ad60197" title="Permalink to this equation">#</a></span>\[\begin{align}
 x_{k+1} - x_* &amp;= g(x_k) - g(x_*) \\
 &amp;= g'(x_*) (x_k - x_*) + O((x_k - x_*)^2).
 \end{align}\]</div>
@@ -1095,8 +1100,8 @@ for some positive constants <span class="math notranslate nohighlight">\(c_1,c_2
 <div class="math notranslate nohighlight">
 \[ \lim_{h\to 0} \frac{\operatorname{term}(h)}{h^2} &lt; \infty . \]</div>
 <p>Big <span class="math notranslate nohighlight">\(O\)</span> terms can be manipulated as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0494d2da-e3ec-477a-a89f-0d1509587288">
-<span class="eqno">(2)<a class="headerlink" href="#equation-0494d2da-e3ec-477a-a89f-0d1509587288" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-3638337f-2c2d-45f7-992f-1d0dd77b35a1">
+<span class="eqno">(2)<a class="headerlink" href="#equation-3638337f-2c2d-45f7-992f-1d0dd77b35a1" title="Permalink to this equation">#</a></span>\[\begin{align}
 h O(h^k) &amp;= O(h^{k+1}) \\
 O(h^k)/h &amp;= O(h^{k-1}) \\
 c O(h^k) &amp;= O(h^k) \\
@@ -1386,8 +1391,8 @@ More at <a class="reference external" href="https://en.wikipedia.org/wiki/Fast_i
 
 but this would require a division.</p>
 <p>Newton’s method is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-2136ad7e-f1e5-4eb2-b229-d2c10ce09527">
-<span class="eqno">(3)<a class="headerlink" href="#equation-2136ad7e-f1e5-4eb2-b229-d2c10ce09527" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d09211f7-053c-4add-ac76-2539892fb1e2">
+<span class="eqno">(3)<a class="headerlink" href="#equation-d09211f7-053c-4add-ac76-2539892fb1e2" title="Permalink to this equation">#</a></span>\[\begin{align}
 y_{k+1} &amp;= y_k - \frac{f(y_k)}{f'(y_k)} \\
 &amp;= y_k - \frac{1/y_k^2 - x}{-2/y_k^3} \\
 &amp;= y_k + \frac 1 2 (y_k - x y_k^3) \\
