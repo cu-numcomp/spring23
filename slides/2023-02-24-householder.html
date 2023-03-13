@@ -122,6 +122,11 @@ const thebe_selector_output = ".output, .cell_output"
    Syllabus
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips.html">
+   Tips
+  </a>
+ </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../slides.html">
    Slides
@@ -871,8 +876,8 @@ title="Print to PDF"
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="a-gram-schmidt-with-more-parallelism">
 <h1>A Gram-Schmidt with more parallelism<a class="headerlink" href="#a-gram-schmidt-with-more-parallelism" title="Permalink to this headline">#</a></h1>
-<div class="amsmath math notranslate nohighlight" id="equation-acd42582-f40a-4b8c-b281-a6d6c14d3f51">
-<span class="eqno">(12)<a class="headerlink" href="#equation-acd42582-f40a-4b8c-b281-a6d6c14d3f51" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-ae89abe4-63e8-4251-bfd7-5b0ce6a92e81">
+<span class="eqno">(12)<a class="headerlink" href="#equation-ae89abe4-63e8-4251-bfd7-5b0ce6a92e81" title="Permalink to this equation">#</a></span>\[\begin{align}
 (I - q_2 q_2^T) (I - q_1 q_1^T) v &amp;= (I - q_1 q_1^T - q_2 q_2^T + q_2 q_2^T q_1 q_1^T) v \\
 &amp;= \Bigg( I - \Big[ q_1 \Big| q_2 \Big] \begin{bmatrix} q_1^T \\ q_2^T \end{bmatrix} \Bigg) v
 \end{align}\]</div>
@@ -924,8 +929,8 @@ norm(Q * R - A) = 7.350692433565389e-16
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="why-does-order-of-operations-matter">
 <h1>Why does order of operations matter?<a class="headerlink" href="#why-does-order-of-operations-matter" title="Permalink to this headline">#</a></h1>
-<div class="amsmath math notranslate nohighlight" id="equation-52e7f4b7-f215-47f9-b533-95fe49e82dbc">
-<span class="eqno">(13)<a class="headerlink" href="#equation-52e7f4b7-f215-47f9-b533-95fe49e82dbc" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-9aee24d6-e5c8-4bcb-8f6f-8eaa7ef3582f">
+<span class="eqno">(13)<a class="headerlink" href="#equation-9aee24d6-e5c8-4bcb-8f6f-8eaa7ef3582f" title="Permalink to this equation">#</a></span>\[\begin{align}
 (I - q_2 q_2^T) (I - q_1 q_1^T) v &amp;= (I - q_1 q_1^T - q_2 q_2^T + q_2 q_2^T q_1 q_1^T) v \\
 &amp;= \Bigg( I - \Big[ q_1 \Big| q_2 \Big] \begin{bmatrix} q_1^T \\ q_2^T \end{bmatrix} \Bigg) v
 \end{align}\]</div>
@@ -1084,10 +1089,10 @@ norm(Q * R - A) = 8.709998074379606e-16
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(Q&#39; * Q - I) = 3.1195004131362406e-15
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(Q&#39; * Q - I) = 3.216006485393791e-15
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.1195004131362406e-15
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.216006485393791e-15
 </pre></div>
 </div>
 </div>
@@ -1109,10 +1114,10 @@ norm(Q * R - A) = 8.709998074379606e-16
 <section class="tex2jax_ignore mathjax_ignore" id="constructing-the-q-j">
 <h1>Constructing the <span class="math notranslate nohighlight">\(Q_j\)</span><a class="headerlink" href="#constructing-the-q-j" title="Permalink to this headline">#</a></h1>
 <div class="math notranslate nohighlight">
-\[ \underbrace{Q_{n} \dotsb Q_1}_{Q^T} A = R \]</div>
+\[ \underbrace{Q_{n-1} \dotsb Q_0}_{Q^T} A = R \]</div>
 <p>Each of our <span class="math notranslate nohighlight">\(Q_j\)</span> will have the form
 <div class="math notranslate nohighlight">
-\[\begin{split}Q_j = \begin{bmatrix} I_i &amp; 0 \\ 0 &amp; F \end{bmatrix}\end{split}\]</div>
+\[\begin{split}Q_j = \begin{bmatrix} I_j &amp; 0 \\ 0 &amp; F \end{bmatrix}\end{split}\]</div>
 
 where <span class="math notranslate nohighlight">\(F\)</span> is a “reflection” that achieves
 <div class="math notranslate nohighlight">
@@ -1129,6 +1134,7 @@ This transformation is a reflection across a plane with normal <span class="math
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">A</span><span class="o">&#39;</span>
 <span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copy</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 <span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">normalize</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 <span class="n">F</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">I</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">v</span><span class="o">&#39;</span>
@@ -1137,11 +1143,14 @@ This transformation is a reflection across a plane with normal <span class="math
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(v) = 1.5150878829666978
+</pre></div>
+</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4×4 Matrix{Float64}:
-  2.1741       1.25714    0.99767    1.18672
- -6.55398e-16  0.118113   0.765884   1.28508
- -2.96172e-16  1.05277   -0.0743418  0.52617
- -8.46837e-16  0.985914   0.0179292  0.779973
+  1.51509       2.04675    1.75095   2.39334
+ -9.65471e-17  -0.250822   1.09094   0.265314
+ -1.30186e-16   0.814701  -0.466689  0.0483294
+ -3.66785e-16  -0.54403   -0.321032  0.117114
 </pre></div>
 </div>
 </div>
@@ -1158,10 +1167,10 @@ This transformation is a reflection across a plane with normal <span class="math
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4×4 Matrix{Float64}:
-  2.1741       1.25714      0.99767   1.18672
- -6.55398e-16  1.44717      0.020642  1.01903
- -2.96172e-16  0.0          0.515979  0.736919
- -8.46837e-16  1.11022e-16  0.570759  0.977337
+ 2.06121      1.3429        0.884413   1.77335
+ 6.16825e-16  1.63652       0.573858   0.413217
+ 1.68045e-17  1.66533e-16   0.521891  -0.729616
+ 2.10866e-16  0.0          -1.44438   -0.663734
 </pre></div>
 </div>
 </div>
@@ -1318,6 +1327,7 @@ norm(Q * R - A) = 7.562760794606217e-15
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1e-10</span>
+<span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span>
 <span class="n">V</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qr_householder</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 <span class="n">tau</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">^</span><span class="mi">2</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">V</span><span class="p">]</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">tau</span>
@@ -1328,13 +1338,13 @@ norm(Q * R - A) = 7.562760794606217e-15
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tau = [1.894427190999916, 2.0]
-V1 = [[1.0, -0.2360679774997897], [1.0]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tau = [2.0, 2.0]
+V1 = [[1.0, 0.0], [1.0]]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 Matrix{Float64}:
- -2.23607e-10   1.78885e-10
- -1.29247e-26  -1.34164e-10
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 Matrix{Int64}:
+ -1   0
+  0  -1
 </pre></div>
 </div>
 </div>
@@ -1370,9 +1380,9 @@ norm(Q * R - A) = 1.2090264267288813e-14
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LinearAlgebra.QRCompactWY{Float64, Matrix{Float64}}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LinearAlgebra.QRCompactWY{Float64, Matrix{Float64}, Matrix{Float64}}
 Q factor:
-2×2 LinearAlgebra.QRCompactWYQ{Float64, Matrix{Float64}}:
+2×2 LinearAlgebra.QRCompactWYQ{Float64, Matrix{Float64}, Matrix{Float64}}:
  1.0  0.0
  0.0  1.0
 R factor:

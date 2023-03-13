@@ -122,6 +122,11 @@ const thebe_selector_output = ".output, .cell_output"
    Syllabus
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips.html">
+   Tips
+  </a>
+ </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../slides.html">
    Slides
@@ -928,7 +933,7 @@ We’ll use the same loss function
 
 where</p>
 <div class="amsmath math notranslate nohighlight" id="equation-16037d51-d8f5-4385-800e-a3fa1d871641">
-<span class="eqno">(26)<a class="headerlink" href="#equation-16037d51-d8f5-4385-800e-a3fa1d871641" title="Permalink to this equation">#</a></span>\[\begin{align}
+<span class="eqno">(28)<a class="headerlink" href="#equation-16037d51-d8f5-4385-800e-a3fa1d871641" title="Permalink to this equation">#</a></span>\[\begin{align}
 \frac{\partial f(x,c)}{\partial c_1} &amp;= -(c_1 + c_2 x + c_3 x^2)^{-2} = - f(x,c)^2 \\
 \frac{\partial f(x,c)}{\partial c_2} &amp;= -(c_1 + c_2 x + c_3 x^2)^{-2} x = - f(x,c)^2 x \\
 \frac{\partial f(x,c)}{\partial c_3} &amp;= -(c_1 + c_2 x + c_3 x^2)^{-2} x^2 = - f(x,c)^2 x^2 .
@@ -1146,7 +1151,7 @@ where</p>
 <h1>We can go the other way<a class="headerlink" href="#we-can-go-the-other-way" title="Permalink to this headline">#</a></h1>
 <p>We can differentiate a composition <span class="math notranslate nohighlight">\(h(g(f(x)))\)</span> as</p>
 <div class="amsmath math notranslate nohighlight" id="equation-3f220a03-514c-48dc-be6c-286c0cd88d51">
-<span class="eqno">(27)<a class="headerlink" href="#equation-3f220a03-514c-48dc-be6c-286c0cd88d51" title="Permalink to this equation">#</a></span>\[\begin{align}
+<span class="eqno">(29)<a class="headerlink" href="#equation-3f220a03-514c-48dc-be6c-286c0cd88d51" title="Permalink to this equation">#</a></span>\[\begin{align}
   \operatorname{d} h &amp;= h' \operatorname{d} g \\
   \operatorname{d} g &amp;= g' \operatorname{d} f \\
   \operatorname{d} f &amp;= f' \operatorname{d} x.

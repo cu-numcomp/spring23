@@ -122,6 +122,11 @@ const thebe_selector_output = ".output, .cell_output"
    Syllabus
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips.html">
+   Tips
+  </a>
+ </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../slides.html">
    Slides
@@ -757,11 +762,13 @@ title="Print to PDF"
 <span class="w">    </span><span class="k">end</span>
 <span class="w">    </span><span class="n">A</span>
 <span class="k">end</span>
+
+<span class="n">CosRange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="nb">pi</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>vander_newton (generic function with 2 methods)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CosRange (generic function with 1 method)
 </pre></div>
 </div>
 </div>
@@ -838,7 +845,7 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">ourvander</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vander</span><span class="w"> </span><span class="c"># try vander_legendre</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">ourvander</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vander_legendre</span><span class="w"> </span><span class="c"># try vander_legendre</span>
 <span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ourvander</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">\</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
 <span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
 <span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
@@ -858,26 +865,26 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20-element Vector{Float64}:
- 2.8563807370832386
- 2.8414668608799665
- 2.820236386669219
- 2.782971972923078
- 2.7474280450780073
- 2.6846513464349435
- 2.636781366475956
- 2.5450839711927005
- 2.4861340570427797
- 2.361948553397567
- 2.2916184165218936
- 2.1320708818702765
- 2.046030538978952
- 1.8547347712993345
- 1.7347507488475864
- 1.550199469564506
- 1.3481998182777473
- 1.2519073526805764
- 0.9462546371427725
- 0.9419175178335085
+ 2.8563807370813312
+ 2.8414668608815545
+ 2.8202363866684848
+ 2.782971972925489
+ 2.7474280450222013
+ 2.6846513464302877
+ 2.6367813664121758
+ 2.545083971162912
+ 2.486134057068077
+ 2.3619485533713127
+ 2.291618416490511
+ 2.1320708818800695
+ 2.046030538935147
+ 1.8547347714535942
+ 1.734750748839897
+ 1.5501994693431667
+ 1.3481998183116581
+ 1.251907352767407
+ 0.946254637146537
+ 0.9419175178348705
 </pre></div>
 </div>
 </div>
@@ -889,7 +896,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.423193944465891e6
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.502660254099553
 </pre></div>
 </div>
 </div>
@@ -960,7 +967,7 @@ T_{n+1}(x) &amp;= 2 x T_n(x) - T_{n-1}(x)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">)</span><span class="w"> </span>
 <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">),</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Chebyshev polynomials&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -994,7 +1001,7 @@ T_{n+1}(x) &amp;= 2 x T_n(x) - T_{n-1}(x)
 <p>Let’s re-examine the Lagrange polynomials as we vary the points.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CosRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">)</span><span class="w"> </span><span class="c"># CosRange?</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CosRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">11</span><span class="p">)</span><span class="w"> </span><span class="c"># CosRange?</span>
 <span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
 <span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">/</span>
 <span class="w">    </span><span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -1006,6 +1013,16 @@ T_{n+1}(x) &amp;= 2 x T_n(x) - T_{n-1}(x)
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/2023-03-10-interpolation2_19_0.svg" src="../_images/2023-03-10-interpolation2_19_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">abs</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">abs</span><span class="o">.</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2023-03-10-interpolation2_20_0.svg" src="../_images/2023-03-10-interpolation2_20_0.svg" /></div>
 </div>
 <ul class="simple">
 <li><p>Are there artifacts?</p></li>
@@ -1053,20 +1070,20 @@ T_{n+1}(x) &amp;= 2 x T_n(x) - T_{n-1}(x)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-03-10-interpolation2_23_0.svg" src="../_images/2023-03-10-interpolation2_23_0.svg" /></div>
+<img alt="../_images/2023-03-10-interpolation2_24_0.svg" src="../_images/2023-03-10-interpolation2_24_0.svg" /></div>
 </div>
 <section id="i-don-t-see-any-visual-artifacts">
 <h2>I don’t see any visual artifacts<a class="headerlink" href="#i-don-t-see-any-visual-artifacts" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">)</span>
 <span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">interp_nearest</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">)</span>
 <span class="n">cond</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.414213562373095
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.224744871391589
 </pre></div>
 </div>
 </div>
@@ -1080,7 +1097,7 @@ T_{n+1}(x) &amp;= 2 x T_n(x) - T_{n-1}(x)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-03-10-interpolation2_26_0.svg" src="../_images/2023-03-10-interpolation2_26_0.svg" /></div>
+<img alt="../_images/2023-03-10-interpolation2_27_0.svg" src="../_images/2023-03-10-interpolation2_27_0.svg" /></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1114,7 +1131,7 @@ T_{n+1}(x) &amp;= 2 x T_n(x) - T_{n-1}(x)
 <span class="w">        </span><span class="n">xscale</span><span class="o">=</span><span class="n">xscale</span><span class="p">,</span>
 <span class="w">        </span><span class="n">yscale</span><span class="o">=</span><span class="n">yscale</span><span class="p">,</span>
 <span class="w">        </span><span class="n">legend</span><span class="o">=</span><span class="ss">:bottomleft</span><span class="p">,</span>
-<span class="w">        </span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1200</span><span class="p">,</span><span class="w"> </span><span class="mi">800</span><span class="p">))</span>
+<span class="w">        </span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="w"> </span><span class="mi">700</span><span class="p">))</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">ieval</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">ievals</span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">ptspace</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">ptspaces</span>
 <span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">[</span><span class="n">runge</span><span class="p">]</span>
@@ -1149,7 +1166,7 @@ T_{n+1}(x) &amp;= 2 x T_n(x) - T_{n-1}(x)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-03-10-interpolation2_29_0.svg" src="../_images/2023-03-10-interpolation2_29_0.svg" /></div>
+<img alt="../_images/2023-03-10-interpolation2_30_0.svg" src="../_images/2023-03-10-interpolation2_30_0.svg" /></div>
 </div>
 </section>
 

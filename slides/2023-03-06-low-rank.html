@@ -122,6 +122,11 @@ const thebe_selector_output = ".output, .cell_output"
    Syllabus
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips.html">
+   Tips
+  </a>
+ </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../slides.html">
    Slides
@@ -569,6 +574,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#example-autonomous-vehicles">
    Example: autonomous vehicles
   </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#factors">
+     Factors
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#best-low-rank-approximation">
@@ -671,6 +683,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#example-autonomous-vehicles">
    Example: autonomous vehicles
   </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#factors">
+     Factors
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#best-low-rank-approximation">
@@ -850,8 +869,8 @@ title="Print to PDF"
 <h1>Condition number via SVD<a class="headerlink" href="#condition-number-via-svd" title="Permalink to this headline">#</a></h1>
 <div class="math notranslate nohighlight">
 \[\begin{split} U \overbrace{\begin{bmatrix} \sigma_{\max} &amp;&amp; \\ &amp; \ddots &amp; \\ &amp;&amp; \sigma_{\min} \end{bmatrix}}^{\Sigma} V^T = A \end{split}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-e97fd189-835a-47db-a88a-8fd42c51c6a8">
-<span class="eqno">(16)<a class="headerlink" href="#equation-e97fd189-835a-47db-a88a-8fd42c51c6a8" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-cedc99a2-3c5b-4031-999b-4cc7704fb3b4">
+<span class="eqno">(16)<a class="headerlink" href="#equation-cedc99a2-3c5b-4031-999b-4cc7704fb3b4" title="Permalink to this equation">#</a></span>\[\begin{align}
 \lVert A \rVert &amp;= \sigma_{\max} &amp;
 \kappa(A) &amp;= \frac{\sigma_{\max}}{\sigma_{\min}} = \texttt{cond}(A)
 \end{align}\]</div>
@@ -864,8 +883,8 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2×2 Matrix{Float64}:
-  1.13519   -0.257307
- -0.257307   0.753558
+  0.533196  -0.634645
+ -0.634645  -3.24534
 </pre></div>
 </div>
 </div>
@@ -880,8 +899,8 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>svdvals(A) = [1.2647127088905932, 0.624033667117622]
-norm(U - U&#39;) = 7.850462293418876e-17
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>svdvals(A) = [3.349088030301591, 0.63694216378792]
+norm(U - U&#39;) = 4.710277376051325e-16
 </pre></div>
 </div>
 <img alt="../_images/2023-03-06-low-rank_4_1.svg" src="../_images/2023-03-06-low-rank_4_1.svg" /></div>
@@ -895,6 +914,16 @@ norm(U - U&#39;) = 7.850462293418876e-17
 <li><p>What algorithm to choose?</p></li>
 <li><p>What precision to use?</p></li>
 </ul>
+<section id="factors">
+<h2>Factors<a class="headerlink" href="#factors" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>How many objects?</p></li>
+<li><p>Speed (of robot and objects)</p></li>
+<li><p>Aerial, wheeled, walking</p></li>
+<li><p>Fog, light – longer memory?</p></li>
+<li><p>Tolerences (how accurate does the solution need to be?)</p></li>
+<li><p>Consequences of being wrong, who bears those consequences?</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">)</span>
@@ -907,10 +936,10 @@ norm(U - U&#39;) = 7.850462293418876e-17
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cond(A) = 56.62895367363473
-  0.401766 seconds (7 allocations: 19.348 MiB)
-  0.267054 seconds (10 allocations: 22.888 MiB)
-  0.262063 seconds (7 allocations: 9.674 MiB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cond(A) = 56.21621342703861
+  0.067741 seconds (7 allocations: 19.348 MiB)
+  0.037107 seconds (8 allocations: 22.888 MiB)
+  0.045914 seconds (7 allocations: 9.674 MiB)
 </pre></div>
 </div>
 </div>
@@ -918,6 +947,7 @@ norm(U - U&#39;) = 7.850462293418876e-17
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vander</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">))</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">cond</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
 <span class="n">Q</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qr</span><span class="p">(</span><span class="kt">Float32</span><span class="o">.</span><span class="p">(</span><span class="n">V</span><span class="p">))</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">Q</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Q</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">I</span><span class="p">)</span>
 <span class="n">Q</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qr_chol</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
@@ -926,15 +956,17 @@ norm(U - U&#39;) = 7.850462293418876e-17
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(Q&#39; * Q - I) = 1.422574f-6
-norm(Q&#39; * Q - I) = 0.7929497451834747
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cond(V) = 2.7224082312417406e8
+norm(Q&#39; * Q - I) = 1.6641898f-6
+norm(Q&#39; * Q - I) = 0.1749736012761826
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.7929497451834747
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.1749736012761826
 </pre></div>
 </div>
 </div>
 </div>
+</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="best-low-rank-approximation">
 <h1>Best low rank approximation<a class="headerlink" href="#best-low-rank-approximation" title="Permalink to this headline">#</a></h1>
@@ -964,8 +996,8 @@ norm(Q&#39; * Q - I) = 0.7929497451834747
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>S[1:k + 1] = [1.5595652883771995, 0.8263763919470137]
-norm(Ahat) = 1.559565288377199
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>S[1:k + 1] = [2.142482775050614, 0.7866894479177035]
+norm(Ahat) = 2.142482775050614
 </pre></div>
 </div>
 <img alt="../_images/2023-03-06-low-rank_11_1.svg" src="../_images/2023-03-06-low-rank_11_1.svg" /></div>
@@ -1014,33 +1046,33 @@ where <span class="math notranslate nohighlight">\(m_1\)</span> and <span class=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>300×200 Matrix{Float64}:
-  0.00774771    0.00742588    0.00885278   …   0.00827471    0.00612012
- -0.000555126  -1.41668e-5   -0.00128975      -0.000192375  -0.000424015
- -0.000815177  -0.000124244  -0.00141273      -0.000347141   0.000162658
-  0.00877027    0.00786987    0.0106905        0.00894689    0.00660422
-  0.000877896   0.00132149    0.00040886       0.00139203    0.00053646
- -4.48706e-6    0.000703741  -0.000513661  …   0.000618362   0.000826044
-  0.00971415    0.0083071     0.012377         0.00955195    0.00707152
-  0.00204436    0.00232325    0.00191547       0.00261379    0.0012409
-  0.000790051   0.00145803    0.000472912      0.00151998    0.00145083
-  0.00947463    0.00836521    0.0117358        0.00957543    0.0069844
-  0.00108515    0.00154438    0.000601652  …   0.00165472    0.00065026
-  0.000308721   0.00104587   -0.00016147       0.00101583    0.00110748
-  0.00995128    0.00880498    0.0123169        0.0101064     0.00727068
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>300×100 Matrix{Float64}:
+  0.00957861    0.0160052     0.00903842   …   0.0175968     0.00907843
+  0.00041256    0.000760967  -0.000356393      0.00191593    0.0018601
+ -0.000847752   0.00114359    0.000877223     -6.05134e-5   -0.00201754
+  0.00749971    0.0115206     0.00693755       0.0127296     0.00749341
+ -0.000154054  -0.000373843  -0.000637198      0.000201199   0.000895957
+ -0.000353709   0.00114185    0.000802696  …   0.000472475  -0.0012234
+  0.0111437     0.0199477     0.0103831        0.0226252     0.0109335
+ -0.00104928   -0.00267252   -0.00186976      -0.00170139    0.000860172
+ -0.00160558    0.000354605   0.000624766     -0.0015889    -0.0032019
+  0.00710227    0.0119115     0.00731593       0.0124992     0.00676589
+ -0.001024     -0.00226415   -0.00158559   …  -0.00181528    1.00586e-5
+ -0.00234288   -0.00294483   -0.00109365      -0.00413747   -0.00312664
+  0.00698416    0.0109464     0.00662522       0.0120304     0.00712998
   ⋮                                        ⋱                
-  0.00842946    0.00769163    0.00990472       0.00868048    0.00616175
- -0.00089865   -0.000249396  -0.00186198      -0.000491765  -0.000615135
-  0.000907699   0.00148484    0.000705833  …   0.0015553     0.00134826
-  0.00624127    0.00578017    0.00727109       0.00642333    0.00488913
-  7.97508e-5    0.000418597  -0.000329543      0.000368067   2.90026e-5
-  5.37733e-5    0.000486054  -0.000216821      0.000429595   0.000562206
-  0.00950141    0.00888005    0.0112827        0.0100565     0.00743525
-  0.000626147   0.00122891   -3.52537e-5   …   0.00124206    0.000376343
- -0.00137201   -0.000397072  -0.00236665      -0.000751152   4.19668e-5
-  0.00780408    0.0072665     0.00921643       0.00814798    0.00620523
-  0.000726216   0.00114782    0.000311379      0.00118684    0.000470496
- -0.000918796  -0.000204389  -0.0016015       -0.000441785   0.000102482
+  0.00618539    0.00862599    0.00545132       0.00971521    0.00666401
+ -0.000803591  -0.00142335   -0.00105287      -0.00123311   -2.81192e-5
+  0.000294728   0.00173048    0.00106595   …   0.00144731   -0.000375876
+  0.00804425    0.0116672     0.00707982       0.0131326     0.00817483
+  0.00027507    0.000418693  -0.000291634      0.00117878    0.00148362
+  0.000593198   0.0030157     0.00169696       0.0026354    -0.000355248
+  0.00643968    0.0095833     0.00595092       0.0105867     0.00663593
+ -0.00067542   -0.00129392   -0.00101008   …  -0.00100465    0.000157104
+ -0.000397485   0.000666828   0.000542368      0.000122128  -0.00113122
+  0.00973855    0.0161491     0.00883127       0.0184812     0.0100008
+ -0.00133833   -0.00301557   -0.00191268      -0.00251571    0.000221424
+ -0.000921822   0.00109826    0.000839169     -0.000172058  -0.0023163
 </pre></div>
 </div>
 </div>
@@ -1064,7 +1096,7 @@ where <span class="math notranslate nohighlight">\(m_1\)</span> and <span class=
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
 <span class="n">Uhat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">U</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="o">:</span><span class="n">k</span><span class="p">]</span>
 <span class="n">Shat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="n">k</span><span class="p">]</span>
 <span class="n">Vhat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">V</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">1</span><span class="o">:</span><span class="n">k</span><span class="p">]</span>
@@ -1076,11 +1108,11 @@ where <span class="math notranslate nohighlight">\(m_1\)</span> and <span class=
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(F) = 2.5194440056980536
-norm(F - Fhat) = 6.79544216333678e-5
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(F) = 74.35638936337672
+norm(F - Fhat) = 31.382227066596844
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(600, 300)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1500, 500)
 </pre></div>
 </div>
 </div>
@@ -1130,7 +1162,7 @@ norm(F - Fhat) = 6.79544216333678e-5
 <span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">\</span><span class="w"> </span><span class="n">y</span>
-
+<span class="w"> </span>
 <span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
 <span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">sin</span><span class="o">.</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="n">vander</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">p</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="p">])</span>
@@ -1144,13 +1176,13 @@ norm(F - Fhat) = 6.79544216333678e-5
 <h2>Vandermonde matrices can be ill-conditioned<a class="headerlink" href="#vandermonde-matrices-can-be-ill-conditioned" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vander</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">))</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vander</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">))</span>
 <span class="n">cond</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.838577055392608e13
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.7224082312417406e8
 </pre></div>
 </div>
 </div>

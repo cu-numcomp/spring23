@@ -122,6 +122,11 @@ const thebe_selector_output = ".output, .cell_output"
    Syllabus
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips.html">
+   Tips
+  </a>
+ </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../slides.html">
    Slides
@@ -898,10 +903,6 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌ Info: Precompiling Plots [91a5bcdd-55d7-5caf-9e0b-520d859cae80]
-└ @ Base loading.jl:1423
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>qr_chol2 (generic function with 1 method)
 </pre></div>
 </div>
@@ -1056,7 +1057,7 @@ Solving with the SVD involves</p></li>
 <p>Perhaps the simplest transformation is a scalar multiple of the identity.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Aplot</span><span class="p">([</span><span class="mi">2</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="p">])</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Aplot</span><span class="p">([</span><span class="mf">.4</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">1.1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1088,7 +1089,7 @@ Solving with the SVD involves</p></li>
 <span class="w">    </span><span class="p">[</span><span class="n">c</span><span class="w"> </span><span class="o">-</span><span class="n">s</span><span class="p">;</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="n">c</span><span class="p">]</span>
 <span class="k">end</span>
 
-<span class="n">G</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">givens</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">G</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">givens</span><span class="p">(</span><span class="nb">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">Aplot</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1131,14 +1132,14 @@ Solving with the SVD involves</p></li>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
-<span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">A</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="c">#A += A&#39; # make symmetric</span>
+<span class="n">A</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">A</span><span class="o">&#39;</span><span class="w"> </span><span class="c"># make symmetric</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">det</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="c"># Positive means orientation is preserved</span>
 <span class="n">Aplot</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>det(A) = 0.1399560771029573
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>det(A) = -0.6568187081280155
 </pre></div>
 </div>
 <img alt="../_images/2023-03-03-svd-geometry_23_1.svg" src="../_images/2023-03-03-svd-geometry_23_1.svg" /></div>
@@ -1146,13 +1147,17 @@ Solving with the SVD involves</p></li>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">U</span><span class="p">,</span><span class="w"> </span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">S</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">U</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">diagm</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">V</span><span class="o">&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">A</span><span class="p">)</span><span class="w"> </span><span class="c"># Should be zero</span>
-<span class="n">Aplot</span><span class="p">(</span><span class="n">V</span><span class="o">&#39;</span><span class="p">)</span><span class="w"> </span><span class="c"># Rotate/reflect in preparation for scaling</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">det</span><span class="p">(</span><span class="n">U</span><span class="p">),</span><span class="w"> </span><span class="n">det</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
+<span class="n">Aplot</span><span class="p">(</span><span class="n">V</span><span class="o">&#39;</span><span class="p">)</span><span class="w"> </span><span class="c"># Rotate/reflect in preparation for scaling]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(U * diagm(S) * V&#39; - A) = 2.5133742693021536e-16
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>S = [2.5075313675803934, 0.26193838155723803]
+norm(U * diagm(S) * V&#39; - A) = 9.992007221626409e-16
+(det(U), det(V)) = (-1.0000000000000002, 0.9999999999999998)
 </pre></div>
 </div>
 <img alt="../_images/2023-03-03-svd-geometry_24_1.svg" src="../_images/2023-03-03-svd-geometry_24_1.svg" /></div>
@@ -1238,30 +1243,30 @@ Solving with the SVD involves</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cond(A) = 7.206778417359946e6
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cond(A) = 7.206778416853811e6
 </pre></div>
 </div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20-element Vector{Float64}:
  11.510601491136654
-  8.993572449917359
-  5.907360126610744
-  3.602915483194609
-  1.9769729310318829
-  1.0983103765769855
-  0.5392322016751732
-  0.2820042230178556
-  0.12425066006852739
-  0.06183086124622073
-  0.02424292914634914
-  0.011556331531623497
-  0.003964435582121709
-  0.0018189836735690204
-  0.0005298822985646023
-  0.0002348766098794304
-  5.487089394455714e-5
-  2.3566694052672652e-5
-  3.828636525152325e-6
-  1.5971909811198725e-6
+  8.993572449917352
+  5.907360126610745
+  3.6029154831946064
+  1.9769729310318853
+  1.098310376576986
+  0.5392322016751737
+  0.2820042230178553
+  0.12425066006852684
+  0.06183086124622112
+  0.024242929146349384
+  0.011556331531623212
+  0.003964435582121844
+  0.0018189836735690052
+  0.0005298822985647027
+  0.00023487660987952337
+  5.4870893944525604e-5
+  2.3566694052620285e-5
+  3.8286365250847765e-6
+  1.597190981232044e-6
 </pre></div>
 </div>
 </div>
@@ -1272,7 +1277,7 @@ Solving with the SVD involves</p></li>
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mf">.5</span><span class="p">]</span>
 <span class="n">Q</span><span class="p">,</span><span class="w"> </span><span class="n">_R</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qr</span><span class="p">(</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
-<span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Q</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Q</span><span class="o">&#39;</span>
+<span class="n">B</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Q</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Q</span><span class="o">&#39;</span><span class="p">[]</span>
 <span class="n">U</span><span class="p">,</span><span class="w"> </span><span class="n">S</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">svd</span><span class="p">(</span><span class="n">randn</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">S</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">S</span><span class="p">[</span><span class="k">end</span><span class="p">]</span>
@@ -1281,8 +1286,8 @@ Solving with the SVD involves</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>S = [0.5180264838912266, 0.3200666128955899]
-S[1] / S[end] = 1.6184958474885163
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>S = [1.4468451790283559, 0.6640030556875769]
+S[1] / S[end] = 2.1789736758517533
 </pre></div>
 </div>
 <img alt="../_images/2023-03-03-svd-geometry_36_1.svg" src="../_images/2023-03-03-svd-geometry_36_1.svg" /></div>

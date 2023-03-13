@@ -122,6 +122,11 @@ const thebe_selector_output = ".output, .cell_output"
    Syllabus
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips.html">
+   Tips
+  </a>
+ </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../slides.html">
    Slides
@@ -861,7 +866,7 @@ title="Print to PDF"
 
 using a more linear algebraic approach to write the same expression is</p>
 <div class="amsmath math notranslate nohighlight" id="equation-318452c4-a988-490f-9b15-9e5e38df1fc1">
-<span class="eqno">(22)<a class="headerlink" href="#equation-318452c4-a988-490f-9b15-9e5e38df1fc1" title="Permalink to this equation">#</a></span>\[\begin{align} \nabla_c L(c; x,y) &amp;= \big( f(x,c) - y \big)^T V(x) \\
+<span class="eqno">(24)<a class="headerlink" href="#equation-318452c4-a988-490f-9b15-9e5e38df1fc1" title="Permalink to this equation">#</a></span>\[\begin{align} \nabla_c L(c; x,y) &amp;= \big( f(x,c) - y \big)^T V(x) \\
 &amp;= \big(V(x) c - y \big)^T V(x) \\
 &amp;= V(x)^T \big( V(x) c - y \big) .
 \end{align}\]</div>
@@ -1015,7 +1020,7 @@ We’ll use the same loss function
 
 where</p>
 <div class="amsmath math notranslate nohighlight" id="equation-588914c3-e61b-4a59-86c6-8482a1644c9f">
-<span class="eqno">(23)<a class="headerlink" href="#equation-588914c3-e61b-4a59-86c6-8482a1644c9f" title="Permalink to this equation">#</a></span>\[\begin{align}
+<span class="eqno">(25)<a class="headerlink" href="#equation-588914c3-e61b-4a59-86c6-8482a1644c9f" title="Permalink to this equation">#</a></span>\[\begin{align}
 \frac{\partial f(x,c)}{\partial c_1} &amp;= -(c_1 + c_2 x + c_3 x^2)^{-2} = - f(x,c)^2 \\
 \frac{\partial f(x,c)}{\partial c_2} &amp;= -(c_1 + c_2 x + c_3 x^2)^{-2} x = - f(x,c)^2 x \\
 \frac{\partial f(x,c)}{\partial c_3} &amp;= -(c_1 + c_2 x + c_3 x^2)^{-2} x^2 = - f(x,c)^2 x^2 .
