@@ -1164,19 +1164,20 @@ which reduces to
 <div class="math notranslate nohighlight">
 \[ \delta_i c_i + 2(\delta_i + \delta_{i+1}) c_{i+1} + \delta_{i+1} c_{i+2} = 3\left(\frac{\Delta_{i+1}}{\delta_{i+1}} - \frac{\Delta_i}{\delta_i}\right) . \]</div>
 
-To impose boundary conditions, we add a dummy interval on the right end (the actual value of <span class="math notranslate nohighlight">\(x_{n+1}&gt;x_n\)</span> cancels out) so that the equation above is valid for <span class="math notranslate nohighlight">\(i = 0,\dotsc,n-2\)</span> and the right boundary condition <span class="math notranslate nohighlight">\(s_{n-1}''(x_n) = s_n''(x_n)\)</span> becomes <span class="math notranslate nohighlight">\(c_n = 0\)</span>. The left boundary condition <span class="math notranslate nohighlight">\(s_0''(x_0) = 0\)</span> yields <span class="math notranslate nohighlight">\(c_0 = 0\)</span>, so we must solve
-$$\begin{bmatrix}
-1 &amp; &amp; &amp; &amp; &amp; &amp; \
-\delta_0 &amp; 2(\delta_0+\delta_1) &amp; \delta_1 &amp; &amp; &amp; &amp; \
-&amp; \delta_1 &amp; 2(\delta_1+\delta_2) &amp; \delta_2 &amp; &amp; &amp; \
-&amp; &amp; \ddots &amp; \ddots &amp; \ddots &amp; &amp; \
-&amp; &amp; &amp; &amp; \delta_{n-2} &amp; 2(\delta_{n-2}+\delta_{n-1}) &amp; \delta_{n-1} \
-&amp; &amp; &amp; &amp; &amp; &amp; 1 \
-\end{bmatrix}</p>
-<div class="amsmath math notranslate nohighlight" id="equation-565f7bda-6281-4632-93da-ca4378500d7a">
-<span class="eqno">(17)<a class="headerlink" href="#equation-565f7bda-6281-4632-93da-ca4378500d7a" title="Permalink to this equation">#</a></span>\[\begin{bmatrix} c_0 \\ c_1 \\ \vdots \\ \\ c_{n-1} \\ c_n \end{bmatrix}\]</div>
-<div class="amsmath math notranslate nohighlight" id="equation-814e5905-1160-44ab-9bac-d43a422b9d2d">
-<span class="eqno">(18)<a class="headerlink" href="#equation-814e5905-1160-44ab-9bac-d43a422b9d2d" title="Permalink to this equation">#</a></span>\[\begin{bmatrix} 0 \\ 3\left(\frac{\Delta_1}{\delta_1} - \frac{\Delta_0}{\delta_0} \right) \\ \vdots \\ 3\left(\frac{\Delta_{n-1}}{\delta_{n-1}} - \frac{\Delta_{n-2}}{\delta_{n-2}}\right) \\ 0 \end{bmatrix}\]</div>
+To impose boundary conditions, we add a dummy interval on the right end (the actual value of <span class="math notranslate nohighlight">\(x_{n+1}&gt;x_n\)</span> cancels out) so that the equation above is valid for <span class="math notranslate nohighlight">\(i = 0,\dotsc,n-2\)</span> and the right boundary condition <span class="math notranslate nohighlight">\(s_{n-1}''(x_n) = s_n''(x_n)\)</span> becomes <span class="math notranslate nohighlight">\(c_n = 0\)</span>. The left boundary condition <span class="math notranslate nohighlight">\(s_0''(x_0) = 0\)</span> yields <span class="math notranslate nohighlight">\(c_0 = 0\)</span>, so we must solve</p>
+<div class="amsmath math notranslate nohighlight" id="equation-8828a39b-ef6c-49aa-b7fd-e426241adfaa">
+<span class="eqno">(17)<a class="headerlink" href="#equation-8828a39b-ef6c-49aa-b7fd-e426241adfaa" title="Permalink to this equation">#</a></span>\[\begin{equation}
+\begin{bmatrix}
+1 &amp; &amp; &amp; &amp; &amp; &amp; \\
+\delta_0 &amp; 2(\delta_0+\delta_1) &amp; \delta_1 &amp; &amp; &amp; &amp; \\
+&amp; \delta_1 &amp; 2(\delta_1+\delta_2) &amp; \delta_2 &amp; &amp; &amp; \\
+&amp; &amp; \ddots &amp; \ddots &amp; \ddots &amp; &amp; \\
+&amp; &amp; &amp; &amp; \delta_{n-2} &amp; 2(\delta_{n-2}+\delta_{n-1}) &amp; \delta_{n-1} \\
+&amp; &amp; &amp; &amp; &amp; &amp; 1 \\
+\end{bmatrix}
+\begin{bmatrix} c_0 \\ c_1 \\ \vdots \\ \\ c_{n-1} \\ c_n \end{bmatrix} = 
+\begin{bmatrix} 0 \\ 3\left(\frac{\Delta_1}{\delta_1} - \frac{\Delta_0}{\delta_0} \right) \\ \vdots \\ 3\left(\frac{\Delta_{n-1}}{\delta_{n-1}} - \frac{\Delta_{n-2}}{\delta_{n-2}}\right) \\ 0 \end{bmatrix} .
+\end{equation}\]</div>
 <p>After solving this equation for <span class="math notranslate nohighlight">\(c_i\)</span>, we will recover <span class="math notranslate nohighlight">\(b_i\)</span> and <span class="math notranslate nohighlight">\(d_i\)</span>, and then can evaluate the spline at arbitrary points.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
