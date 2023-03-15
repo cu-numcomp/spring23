@@ -122,6 +122,11 @@ const thebe_selector_output = ".output, .cell_output"
    Syllabus
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips.html">
+   Tips
+  </a>
+ </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../slides.html">
    Slides
@@ -891,7 +896,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.5075717485062632
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.5075717485062636
 </pre></div>
 </div>
 </div>
@@ -1057,11 +1062,11 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CosRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CosRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span>
 <span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">dT</span><span class="p">,</span><span class="w"> </span><span class="n">ddT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chebdiff</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="o">\</span><span class="w"> </span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="mi">3</span><span class="n">x</span><span class="p">)</span>
 <span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">dT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="p">)</span>
-<span class="n">plot!</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">-</span><span class="mi">3</span><span class="n">sin</span><span class="p">(</span><span class="mi">3</span><span class="n">x</span><span class="p">))</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">-</span><span class="mi">3</span><span class="n">sin</span><span class="p">(</span><span class="mi">3</span><span class="n">s</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1105,7 +1110,7 @@ subject to <strong>boundary conditions</strong> <span class="math notranslate no
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">manufactured</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tanh</span><span class="p">(</span><span class="mi">2</span><span class="n">x</span><span class="p">)</span>
 <span class="n">d_manufactured</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="o">*</span><span class="n">cosh</span><span class="p">(</span><span class="mi">2</span><span class="n">x</span><span class="p">)</span><span class="o">^-</span><span class="mi">2</span>
 <span class="n">mdd_manufactured</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">tanh</span><span class="p">(</span><span class="mi">2</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">cosh</span><span class="p">(</span><span class="mi">2</span><span class="n">x</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span>
-<span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">rhs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">poisson_cheb</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="n">mdd_manufactured</span><span class="p">,</span>
+<span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">rhs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">poisson_cheb</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">mdd_manufactured</span><span class="p">,</span>
 <span class="w">    </span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">manufactured</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">d_manufactured</span><span class="p">))</span>
 <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">\</span><span class="w"> </span><span class="n">rhs</span><span class="p">,</span><span class="w"> </span><span class="n">marker</span><span class="o">=</span><span class="ss">:auto</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">(</span><span class="n">manufactured</span><span class="p">,</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="ss">:bottomright</span><span class="p">)</span>
@@ -1185,8 +1190,8 @@ subject to <strong>boundary conditions</strong> <span class="math notranslate no
 <section class="tex2jax_ignore mathjax_ignore" id="partial-differential-equations">
 <h1>Partial differential equations<a class="headerlink" href="#partial-differential-equations" title="Permalink to this headline">#</a></h1>
 <p>Boundary value problems in multiple dimensions.</p>
-<video src="../img/schwarz-6x6x6.ogv" width="80%" controls /><p>Nonlinear (Newton), exploiting structure in linear algebra (matrix-free p-multigrid).</p>
-<img src="../img/p-refinement.svg" /></section>
+<video src="../img/schwarz-q2-5x5x5-t20-l2-r2.webm" width="80%" autoplay loop /><p>Nonlinear (Newton), exploiting structure in linear algebra (matrix-free p-multigrid).</p>
+<img src="../img/accuracy_study_annotated.svg" width="100%" /></section>
 <section class="tex2jax_ignore mathjax_ignore" id="lower-degree-polynomials-to-fit-noise-free-data">
 <h1>Lower-degree polynomials to fit noise-free data<a class="headerlink" href="#lower-degree-polynomials-to-fit-noise-free-data" title="Permalink to this headline">#</a></h1>
 <p>We can fit <span class="math notranslate nohighlight">\(m\)</span> data points using an <span class="math notranslate nohighlight">\(n &lt; m\)</span> dimensional space of functions. This involves solving a least squares problem for the coefficients
@@ -1208,7 +1213,7 @@ subject to <strong>boundary conditions</strong> <span class="math notranslate no
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cond(V) = 30.08350663794034
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cond(V) = 30.083506637940346
 </pre></div>
 </div>
 <img alt="../_images/2023-03-15-higher-dimensions_33_1.svg" src="../_images/2023-03-15-higher-dimensions_33_1.svg" /></div>
