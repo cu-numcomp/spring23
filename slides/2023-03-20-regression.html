@@ -122,6 +122,11 @@ const thebe_selector_output = ".output, .cell_output"
    Syllabus
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips.html">
+   Tips
+  </a>
+ </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../slides.html">
    Slides
@@ -810,7 +815,7 @@ More complex models are more capable of expressing the underlying function <span
 <span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">sigma</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">randn</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sigma</span>
 
 <span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">)</span>
-<span class="n">ytrain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ytrain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">)</span>
 <span class="n">yfit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chebyshev_regress_eval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">ytrain</span>
 <span class="n">size</span><span class="p">(</span><span class="n">ytrain</span><span class="p">),</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">yfit</span><span class="p">)</span>
 </pre></div>
@@ -824,7 +829,7 @@ More complex models are more capable of expressing the underlying function <span
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;runge(x)&quot;</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;runge(x)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="ss">:black</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">yfit</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;yfit&quot;</span><span class="p">)</span>
 <span class="n">scatter!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">ytrain</span><span class="p">,</span><span class="w"> </span><span class="n">markersize</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
@@ -835,15 +840,15 @@ More complex models are more capable of expressing the underlying function <span
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">ytest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">ytest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">)</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">yfit</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ytrain</span><span class="p">)</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">yfit</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ytest</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(yfit - ytrain) = 10.497626817777828
-norm(yfit - ytest) = 10.757708066534367
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(yfit - ytrain) = 6.69109368140431
+norm(yfit - ytest) = 6.934284053448626
 </pre></div>
 </div>
 </div>
@@ -853,7 +858,7 @@ norm(yfit - ytest) = 10.757708066534367
 <h1>What happens as we increase polynomial degree?<a class="headerlink" href="#what-happens-as-we-increase-polynomial-degree" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">ks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="o">:</span><span class="mi">2</span><span class="o">:</span><span class="mi">20</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">ks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="o">:</span><span class="mi">2</span><span class="o">:</span><span class="mi">50</span>
 <span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plot</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="ss">:none</span><span class="p">)</span>
 <span class="k">function</span><span class="w"> </span><span class="n">residuals</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
 <span class="w">    </span><span class="c"># Fit polynomial of degree k to ytrain.</span>
@@ -878,11 +883,12 @@ norm(yfit - ytest) = 10.757708066534367
 <span class="n">plot!</span><span class="p">(</span><span class="n">ks</span><span class="p">,</span><span class="w"> </span><span class="n">res</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;test&quot;</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">(</span><span class="n">ks</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">ytrain</span><span class="p">),</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;perfect train&quot;</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">(</span><span class="n">ks</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">ytest</span><span class="p">),</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;perfect test&quot;</span><span class="p">)</span>
+<span class="c">#plot!(ylim=(6, 7.5))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>size(res) = (10, 2)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>size(res) = (25, 2)
 </pre></div>
 </div>
 <img alt="../_images/2023-03-20-regression_9_1.svg" src="../_images/2023-03-20-regression_9_1.svg" /></div>
@@ -923,10 +929,10 @@ Please discuss online (Zulip or with a friend).</p>
 <h1>Stacking many realizations<a class="headerlink" href="#stacking-many-realizations" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">degree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">degree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
 <span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
 <span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">50</span>
-<span class="w">    </span><span class="n">yi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mf">0.25</span><span class="p">)</span>
+<span class="w">    </span><span class="n">yi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mf">0.2</span><span class="p">)</span>
 <span class="w">    </span><span class="n">push!</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">chebyshev_regress_eval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">degree</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">yi</span><span class="p">)</span>
 <span class="k">end</span>
 
@@ -960,6 +966,7 @@ Please discuss online (Zulip or with a friend).</p>
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Ymean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">dims</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
 <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">Ymean</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\$</span><span class="s"> E[</span><span class="se">\\</span><span class="s">hat{f}(x)] </span><span class="se">\$</span><span class="s">&quot;</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\$</span><span class="s"> f(x) </span><span class="se">\$</span><span class="s">&quot;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">Ymean</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">runge</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">.^</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

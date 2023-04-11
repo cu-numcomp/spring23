@@ -933,7 +933,7 @@ title="Print to PDF"
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">)</span>
 <span class="n">sigma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="p">;</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span>
 <span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">sigma</span><span class="p">)</span>
-<span class="n">V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="n">V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vander</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="c"># or vander_chebyshev</span>
 <span class="k">function</span><span class="w"> </span><span class="n">loss</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 <span class="w">    </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">y</span>
 <span class="w">    </span><span class="mf">.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">r</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">r</span>
@@ -950,14 +950,14 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8-element Vector{Float64}:
-  0.8677467205692958
-  0.3792490927453809
- -2.250020235459981
- -0.609824417536345
-  0.9368814190340152
- -0.31798585950121505
-  0.7342746792588999
-  0.6971032905286769
+  0.874660924654058
+ -0.12842683730993662
+ -2.0798930881443
+  1.017859789565291
+  0.9494221843839521
+ -0.29122263995838943
+  0.5595095146898109
+ -0.7532270031764107
 </pre></div>
 </div>
 </div>
@@ -966,17 +966,22 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="o">\</span><span class="w"> </span><span class="n">y</span>
 <span class="n">l0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">V</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">cond</span><span class="p">(</span><span class="n">V</span><span class="p">)</span>
 <span class="nd">@show</span><span class="w"> </span><span class="n">cond</span><span class="p">(</span><span class="n">V</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">V</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">lhist</span><span class="p">,</span><span class="w"> </span><span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">lhist</span><span class="p">,</span><span class="w"> </span><span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">))</span>
 <span class="n">plot!</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">l0</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="ss">:black</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cond(V&#39; * V) = 52902.52994792632
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>cond(V) = 230.00549982014527
+cond(V&#39; * V) = 
 </pre></div>
 </div>
-<img alt="../_images/2023-04-03-nonlinear-regression_9_1.svg" src="../_images/2023-04-03-nonlinear-regression_9_1.svg" /></div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>52902.52994792632
+</pre></div>
+</div>
+<img alt="../_images/2023-04-03-nonlinear-regression_9_2.svg" src="../_images/2023-04-03-nonlinear-regression_9_2.svg" /></div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="why-use-qr-vs-gradient-based-optimization">
@@ -1001,8 +1006,8 @@ We’ll use the same loss function
 \[ \nabla_c L(c; x,y) = \big( f(x,c) - y \big)^T \nabla_c f(x,c) \]</div>
 
 where</p>
-<div class="amsmath math notranslate nohighlight" id="equation-8710be13-9e32-4d0f-902e-d3c9827463d5">
-<span class="eqno">(25)<a class="headerlink" href="#equation-8710be13-9e32-4d0f-902e-d3c9827463d5" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-3147e235-c917-4373-bc27-466e278f36aa">
+<span class="eqno">(25)<a class="headerlink" href="#equation-3147e235-c917-4373-bc27-466e278f36aa" title="Permalink to this equation">#</a></span>\[\begin{align}
 \frac{\partial f(x,c)}{\partial c_1} &amp;= -(c_1 + c_2 x + c_3 x^2)^{-2} = - f(x,c)^2 \\
 \frac{\partial f(x,c)}{\partial c_2} &amp;= -(c_1 + c_2 x + c_3 x^2)^{-2} x = - f(x,c)^2 x \\
 \frac{\partial f(x,c)}{\partial c_3} &amp;= -(c_1 + c_2 x + c_3 x^2)^{-2} x^2 = - f(x,c)^2 x^2 .
@@ -1036,13 +1041,18 @@ where</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">lhist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grad_descent</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span><span class="w"> </span><span class="n">gradient</span><span class="p">,</span><span class="w"> </span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="w"> </span><span class="n">gamma</span><span class="o">=</span><span class="mf">8e-2</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">lhist</span><span class="p">,</span><span class="w"> </span><span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">lhist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">grad_descent</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span><span class="w"> </span><span class="n">gradient</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+<span class="w">  </span><span class="n">gamma</span><span class="o">=</span><span class="mf">5e-2</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">lhist</span><span class="p">,</span><span class="w"> </span><span class="n">yscale</span><span class="o">=</span><span class="ss">:linear</span><span class="p">,</span><span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="p">),</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;Loss </span><span class="si">$</span><span class="p">(</span><span class="n">lhist</span><span class="p">[</span><span class="k">end</span><span class="p">])</span><span class="s">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2023-04-03-nonlinear-regression_14_0.svg" src="../_images/2023-04-03-nonlinear-regression_14_0.svg" /></div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>┌ Warning: scale linear is unsupported with Plots.GRBackend().  Choose from: [:identity, :log10]
+└ @ Plots /home/jed/.julia/packages/Plots/4UTBj/src/args.jl:1662
+</pre></div>
+</div>
+<img alt="../_images/2023-04-03-nonlinear-regression_14_1.svg" src="../_images/2023-04-03-nonlinear-regression_14_1.svg" /></div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="compare-fits-on-noisy-data">
@@ -1050,7 +1060,7 @@ where</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span>
-<span class="n">V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">)</span>
+<span class="n">V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">runge</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="ss">:black</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;Runge&quot;</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">V</span><span class="w"> </span><span class="o">\</span><span class="w"> </span><span class="n">y</span><span class="p">),</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;Chebyshev fit&quot;</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">),</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;Rational fit&quot;</span><span class="p">)</span>
@@ -1124,9 +1134,9 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">diff</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="n">h</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">h</span>
 
-<span class="k">function</span><span class="w"> </span><span class="n">diff_wp</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="n">eps</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">)</span>
+<span class="k">function</span><span class="w"> </span><span class="n">diff_wp</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="n">h</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">)</span>
 <span class="w">    </span><span class="s">&quot;&quot;&quot;Diff using Walker and Pernice (1998) choice of step&quot;&quot;&quot;</span>
-<span class="w">    </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">eps</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="w">    </span><span class="n">h</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 <span class="w">    </span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">h</span>
 <span class="k">end</span>
 
@@ -1158,9 +1168,10 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\begin{equation}
-\frac{dsin(x)}{dx}
-\end{equation}\]</div>
+\[ \begin{equation}
+\frac{\mathrm{d} \sin\left( x \right)}{\mathrm{d}x}
+\end{equation}
+ \]</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1171,9 +1182,10 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\begin{equation}
+\[ \begin{equation}
 \cos\left( x \right)
-\end{equation}\]</div>
+\end{equation}
+ \]</div>
 </div>
 </div>
 </section>
@@ -1182,7 +1194,7 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span>
-<span class="k">for</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">1</span>
+<span class="k">for</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span>
 <span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">y</span><span class="o">^</span><span class="nb">pi</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">log</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 <span class="k">end</span>
 <span class="n">expand_derivatives</span><span class="p">(</span><span class="n">Dx</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
@@ -1191,9 +1203,10 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\begin{equation}
-\frac{\cos\left( x^{\pi} \right)}{x} - 3.141592653589793 x^{2.141592653589793} \log\left( x \right) \sin\left( x^{\pi} \right)
-\end{equation}\]</div>
+\[ \begin{equation}
+\frac{\left( \frac{\cos\left( x^{\pi} \right)}{x} - 3.141592653589793 x^{2.141592653589793} \log\left( x \right) \sin\left( x^{\pi} \right) \right) \cos\left( \cos^{3.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.141592653589793} \right)}{\cos\left( x^{\pi} \right) \log\left( x \right)} - \left( \frac{3.141592653589793 \cos^{3.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{2.141592653589793}}{x} - 9.869604401089358 \cos^{2.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.141592653589793} x^{2.141592653589793} \sin\left( x^{\pi} \right) \right) \sin\left( \cos^{3.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.141592653589793} \right) \log\left( \log\left( x \right) \cos\left( x^{\pi} \right) \right)
+\end{equation}
+ \]</div>
 </div>
 </div>
 <ul class="simple">
@@ -1235,8 +1248,12 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span>
 <span class="w">        </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="nb">pi</span>
 <span class="w">        </span><span class="n">da</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="o">^</span><span class="p">(</span><span class="nb">pi</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dy</span>
-
-<span class="w">        </span>
+<span class="w">        </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="w">        </span><span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">da</span>
+<span class="w">        </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">log</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="w">        </span><span class="n">dc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dy</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">y</span>
+<span class="w">        </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span>
+<span class="w">        </span><span class="n">dy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dc</span>
 <span class="w">    </span><span class="k">end</span>
 <span class="w">    </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">dy</span>
 <span class="k">end</span>
@@ -1246,7 +1263,7 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-1.5346823414986814, -34.03241959914048)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-1.5346823414986814, -34.032419599140475)
 </pre></div>
 </div>
 </div>
@@ -1255,8 +1272,8 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 <section class="tex2jax_ignore mathjax_ignore" id="we-can-go-the-other-way">
 <h1>We can go the other way<a class="headerlink" href="#we-can-go-the-other-way" title="Permalink to this headline">#</a></h1>
 <p>We can differentiate a composition <span class="math notranslate nohighlight">\(h(g(f(x)))\)</span> as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-75095e2e-0ed3-46cd-b169-68170fd6f350">
-<span class="eqno">(26)<a class="headerlink" href="#equation-75095e2e-0ed3-46cd-b169-68170fd6f350" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d0b9011c-d4d5-4a34-99ca-4b840cc084b1">
+<span class="eqno">(26)<a class="headerlink" href="#equation-d0b9011c-d4d5-4a34-99ca-4b840cc084b1" title="Permalink to this equation">#</a></span>\[\begin{align}
   \operatorname{d} h &amp;= h' \operatorname{d} g \\
   \operatorname{d} g &amp;= g' \operatorname{d} f \\
   \operatorname{d} f &amp;= f' \operatorname{d} x.
@@ -1272,12 +1289,7 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 <h1>Automatic differentiation<a class="headerlink" href="#automatic-differentiation" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">Zygote</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: using Zygote.gradient in module Main conflicts with an existing identifier.
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="w"> </span><span class="n">Zygote</span>
 </pre></div>
 </div>
 </div>
@@ -1290,6 +1302,48 @@ This error becomes large (relative to <span class="math notranslate nohighlight"
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-34.03241959914049,)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="o">^</span><span class="mi">2</span>
+<span class="nd">@code_llvm</span><span class="w"> </span><span class="n">Zygote</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="mf">1.9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ /home/jed/.julia/packages/Zygote/dABKa/src/compiler/interface.jl:95 within `gradient`
+define <span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> @julia_gradient_12688<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+top:
+;  @ /home/jed/.julia/packages/Zygote/dABKa/src/compiler/interface.jl:96 within `gradient`
+; ┌ @ /home/jed/.julia/packages/Zygote/dABKa/src/compiler/interface.jl:42 within `pullback` @ /home/jed/.julia/packages/Zygote/dABKa/src/compiler/interface.jl:44
+; │┌ @ In[18]:1 within `_pullback` @ /home/jed/.julia/packages/Zygote/dABKa/src/compiler/interface2.jl:9
+; ││┌ @ /home/jed/.julia/packages/Zygote/dABKa/src/compiler/interface2.jl within `macro expansion`
+; │││┌ @ /home/jed/.julia/packages/Zygote/dABKa/src/compiler/chainrules.jl:218 within `chain_rrule`
+; ││││┌ @ /home/jed/.julia/packages/ChainRulesCore/C73ay/src/rules.jl:134 within `rrule` @ /home/jed/.julia/packages/ChainRules/hVHC4/src/rulesets/Base/fastmath_able.jl:56
+       %1 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>= <span class=" -Color -Color-Bold">call</span> <span class=" -Color -Color-Cyan">double</span> @j_exp_12690<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0
+; └└└└└
+;  @ /home/jed/.julia/packages/Zygote/dABKa/src/compiler/interface.jl:97 within `gradient`
+; ┌ @ /home/jed/.julia/packages/Zygote/dABKa/src/compiler/interface.jl:45 within `#60`
+; │┌ @ In[18]:1 within `Pullback`
+; ││┌ @ /home/jed/.julia/packages/Zygote/dABKa/src/compiler/chainrules.jl:206 within `ZBack`
+; │││┌ @ /home/jed/.julia/packages/Zygote/dABKa/src/lib/number.jl:12 within `literal_pow_pullback`
+; ││││┌ @ promotion.jl:389 within `*` @ float.jl:385
+       %2 = <span class=" -Color -Color-Bold">fmul</span> <span class=" -Color -Color-Cyan">double</span> %0, <span class=" -Color -Color-Yellow">2.000000e+00</span>
+; │└└└└
+; │┌ @ /home/jed/.julia/packages/Zygote/dABKa/src/lib/lib.jl:17 within `accum`
+; ││┌ @ float.jl:383 within `+`
+     %3 = <span class=" -Color -Color-Bold">fadd</span> <span class=" -Color -Color-Cyan">double</span> %2, %1
+; └└└
+;  @ /home/jed/.julia/packages/Zygote/dABKa/src/compiler/interface.jl:98 within `gradient`
+  %.fca.0.insert = <span class=" -Color -Color-Bold">insertvalue</span> <span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> zeroinitializer, <span class=" -Color -Color-Cyan">double</span> %3, <span class=" -Color -Color-Yellow">0</span>
+  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> %.fca.0.insert
+<span class=" -Color -Color-Yellow">}</span>
 </pre></div>
 </div>
 </div>

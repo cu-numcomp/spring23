@@ -621,8 +621,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#team-project-workshopping">
-   Team project workshopping
+  <a class="reference internal nav-link" href="#group-project-workshopping">
+   Group project workshopping
   </a>
  </li>
 </ul>
@@ -717,8 +717,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#team-project-workshopping">
-   Team project workshopping
+  <a class="reference internal nav-link" href="#group-project-workshopping">
+   Group project workshopping
   </a>
  </li>
 </ul>
@@ -882,8 +882,8 @@ title="Print to PDF"
 <section class="tex2jax_ignore mathjax_ignore" id="we-can-go-the-other-way">
 <h1>We can go the other way<a class="headerlink" href="#we-can-go-the-other-way" title="Permalink to this headline">#</a></h1>
 <p>We can differentiate a composition <span class="math notranslate nohighlight">\(h(g(f(x)))\)</span> as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d07a7846-c86d-4c0b-b130-97b86e5ff1dc">
-<span class="eqno">(29)<a class="headerlink" href="#equation-d07a7846-c86d-4c0b-b130-97b86e5ff1dc" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-fb5e19ad-6d85-4a3a-b2cb-93ba5943823f">
+<span class="eqno">(29)<a class="headerlink" href="#equation-fb5e19ad-6d85-4a3a-b2cb-93ba5943823f" title="Permalink to this equation">#</a></span>\[\begin{align}
   \operatorname{d} h &amp;= h' \operatorname{d} g \\
   \operatorname{d} g &amp;= g' \operatorname{d} f \\
   \operatorname{d} f &amp;= f' \operatorname{d} x.
@@ -972,23 +972,24 @@ title="Print to PDF"
 <h1>How does Zygote work?<a class="headerlink" href="#how-does-zygote-work" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">square</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="o">^</span><span class="mi">2</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">square</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="o">^</span><span class="mi">3</span>
 <span class="nd">@code_llvm</span><span class="w"> </span><span class="n">square</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[8]:1 within `square`
-define <span class=" -Color -Color-Cyan">double</span> @julia_square_5413<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+define <span class=" -Color -Color-Cyan">double</span> @julia_square_5409<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
 top:
-; ┌ @ intfuncs.jl:321 within `literal_pow`
-; │┌ @ float.jl:385 within `*`
+; ┌ @ intfuncs.jl:322 within `literal_pow`
+; │┌ @ operators.jl:591 within `*` @ float.jl:385
     %1 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>= <span class=" -Color -Color-Bold">fmul</span> <span class=" -Color -Color-Cyan">double</span> %0, %0
+    %2 = <span class=" -Color -Color-Bold">fmul</span> <span class=" -Color -Color-Cyan">double</span> %1, %0
 ; └└
-  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Cyan">double</span> %1
+  <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Cyan">double</span> %2
 <span class=" -Color -Color-Yellow">}</span>
 </pre></div>
 </div>
@@ -1002,18 +1003,22 @@ top:
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ /home/jed/.julia/packages/Zygote/dABKa/src/compiler/interface.jl:95 within `gradient`
-define <span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> @julia_gradient_5530<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+define <span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> @julia_gradient_5526<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
 top:
 ;  @ /home/jed/.julia/packages/Zygote/dABKa/src/compiler/interface.jl:97 within `gradient`
 ; ┌ @ /home/jed/.julia/packages/Zygote/dABKa/src/compiler/interface.jl:45 within `#60`
 ; │┌ @ In[8]:1 within `Pullback`
 ; ││┌ @ /home/jed/.julia/packages/Zygote/dABKa/src/compiler/chainrules.jl:206 within `ZBack`
 ; │││┌ @ /home/jed/.julia/packages/Zygote/dABKa/src/lib/number.jl:12 within `literal_pow_pullback`
+; ││││┌ @ intfuncs.jl:321 within `literal_pow`
+; │││││┌ @ float.jl:385 within `*`
+        %1 = <span class=" -Color -Color-Bold">fmul</span> <span class=" -Color -Color-Cyan">double</span> %0, %0
+; ││││└└
 ; ││││┌ @ promotion.jl:389 within `*` @ float.jl:385
-       %1 = <span class=" -Color -Color-Bold">fmul</span> <span class=" -Color -Color-Cyan">double</span> %0, <span class=" -Color -Color-Yellow">2.000000e+00</span>
+       %2 = <span class=" -Color -Color-Bold">fmul</span> <span class=" -Color -Color-Cyan">double</span> %1, <span class=" -Color -Color-Yellow">3.000000e+00</span>
 ; └└└└└
 ;  @ /home/jed/.julia/packages/Zygote/dABKa/src/compiler/interface.jl:98 within `gradient`
-  %.fca.0.insert = <span class=" -Color -Color-Bold">insertvalue</span> <span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> zeroinitializer, <span class=" -Color -Color-Cyan">double</span> %1, <span class=" -Color -Color-Yellow">0</span>
+  %.fca.0.insert = <span class=" -Color -Color-Bold">insertvalue</span> <span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> zeroinitializer, <span class=" -Color -Color-Cyan">double</span> %2, <span class=" -Color -Color-Yellow">0</span>
   <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> %.fca.0.insert
 <span class=" -Color -Color-Yellow">}</span>
 </pre></div>
@@ -1116,8 +1121,8 @@ top:
 <li><p><a class="reference external" href="https://distill.pub/2017/momentum/">Why momentum really works</a></p></li>
 </ul>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="team-project-workshopping">
-<h1>Team project workshopping<a class="headerlink" href="#team-project-workshopping" title="Permalink to this headline">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="group-project-workshopping">
+<h1>Group project workshopping<a class="headerlink" href="#group-project-workshopping" title="Permalink to this headline">#</a></h1>
 <ol class="simple">
 <li><p>Identify one or more software packages and execution environments that will be used.</p></li>
 <li><p>Identify one or more stakeholders in this problem space.</p></li>
@@ -1130,7 +1135,7 @@ top:
 <li><p>Make a contribution to improve the software or community (diagnostics, decumentation, efficiency). (Please share your ideas with me before choosing this.)</p></li>
 </ul>
 <ol class="simple">
-<li><p>Create a thread in <code class="docutils literal notranslate"><span class="pre">#projects</span></code> summarizing the above and naming your group members.</p></li>
+<li><p>Create a thread in <code class="docutils literal notranslate"><span class="pre">#groups</span></code> summarizing the above and naming your group members.</p></li>
 </ol>
 </section>
 

@@ -882,11 +882,11 @@ More complex models are more capable of expressing the underlying function <span
 <h1>Stacking many realizations<a class="headerlink" href="#stacking-many-realizations" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">degree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">degree</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span>
 <span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">)</span>
 <span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
-<span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">100</span>
-<span class="w">    </span><span class="n">yi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mf">0.25</span><span class="p">)</span>
+<span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">20</span>
+<span class="w">    </span><span class="n">yi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">runge_noisy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mf">0.3</span><span class="p">)</span>
 <span class="w">    </span><span class="n">push!</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">chebyshev_regress_eval</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">degree</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">yi</span><span class="p">)</span>
 <span class="k">end</span>
 
@@ -898,7 +898,7 @@ More complex models are more capable of expressing the underlying function <span
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>size(Y) = (500, 100)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>size(Y) = (500, 20)
 </pre></div>
 </div>
 <img alt="../_images/2023-03-22-beyond-linear-models_4_1.svg" src="../_images/2023-03-22-beyond-linear-models_4_1.svg" /></div>
@@ -982,8 +982,8 @@ More complex models are more capable of expressing the underlying function <span
 
 which turns out to have a statistical interpretation when the noise is normally distributed.
 It is natural to define the error over the entire data set as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-0ead25fd-5dc1-41f4-a470-d429bffdac83">
-<span class="eqno">(18)<a class="headerlink" href="#equation-0ead25fd-5dc1-41f4-a470-d429bffdac83" title="Permalink to this equation">#</a></span>\[\begin{align} L(c; x, y) &amp;= \sum_i \frac 1 2 \big( f(x_i, c) - y_i \big)^2 \\
+<div class="amsmath math notranslate nohighlight" id="equation-5a24ad3e-2623-49b8-8d00-d139792c41e5">
+<span class="eqno">(18)<a class="headerlink" href="#equation-5a24ad3e-2623-49b8-8d00-d139792c41e5" title="Permalink to this equation">#</a></span>\[\begin{align} L(c; x, y) &amp;= \sum_i \frac 1 2 \big( f(x_i, c) - y_i \big)^2 \\
 &amp;= \frac 1 2 \lVert f(x, c) - y \rVert^2
 \end{align}\]</div>
 <p>where I’ve used the notation <span class="math notranslate nohighlight">\(f(x,c)\)</span> to mean the vector resulting from gathering all of the outputs <span class="math notranslate nohighlight">\(f(x_i, c)\)</span>.
@@ -995,8 +995,8 @@ The function <span class="math notranslate nohighlight">\(L\)</span> is called t
 <div class="math notranslate nohighlight">
 \[ f(\boldsymbol x) = x_1^2 + \sin(x_2) e^{3x_3} . \]</div>
 <p>We can evaluate the <strong>partial derivative</strong> by differentiating with respect to each component <span class="math notranslate nohighlight">\(x_i\)</span> separately (holding the others constant), and collect the result in a vector,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-726d0071-c531-4a0c-9186-80f0fe1d6378">
-<span class="eqno">(19)<a class="headerlink" href="#equation-726d0071-c531-4a0c-9186-80f0fe1d6378" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-44083142-c36e-41f8-8692-73e542788893">
+<span class="eqno">(19)<a class="headerlink" href="#equation-44083142-c36e-41f8-8692-73e542788893" title="Permalink to this equation">#</a></span>\[\begin{align}
 \frac{\partial f}{\partial \boldsymbol x} &amp;= \begin{bmatrix} \frac{\partial f}{\partial x_1} &amp; \frac{\partial f}{\partial x_2} &amp; \frac{\partial f}{\partial x_3} \end{bmatrix} \\
 &amp;= \begin{bmatrix} 2 x_1 &amp; \cos(x_2) e^{3 x_3} &amp; 3 \sin(x_2) e^{3 x_3} \end{bmatrix}.
 \end{align}\]</div>
@@ -1007,8 +1007,8 @@ The function <span class="math notranslate nohighlight">\(L\)</span> is called t
 <div class="math notranslate nohighlight">
 \[\begin{split} \boldsymbol f(\boldsymbol x) = \begin{bmatrix} x_1^2 + \sin(x_2) e^{3x_3} \\ x_1 x_2^2 / x_3 \end{bmatrix} . \end{split}\]</div>
 <p>and write the derivative as a matrix,</p>
-<div class="amsmath math notranslate nohighlight" id="equation-ecf24860-da4f-4b50-aacb-f6eeb420e220">
-<span class="eqno">(20)<a class="headerlink" href="#equation-ecf24860-da4f-4b50-aacb-f6eeb420e220" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-89139e84-07b2-4d2d-9d5c-5480693cd66d">
+<span class="eqno">(20)<a class="headerlink" href="#equation-89139e84-07b2-4d2d-9d5c-5480693cd66d" title="Permalink to this equation">#</a></span>\[\begin{align}
 \frac{\partial \boldsymbol f}{\partial \boldsymbol x} &amp;=
 \begin{bmatrix} \frac{\partial f_1}{\partial x_1} &amp; \frac{\partial f_1}{\partial x_2} &amp; \frac{\partial f_1}{\partial x_3} \\
 \frac{\partial f_2}{\partial x_1} &amp; \frac{\partial f_2}{\partial x_2} &amp; \frac{\partial f_2}{\partial x_3} \\
@@ -1020,7 +1020,7 @@ x_2^2 / x_3 &amp; 2 x_1 x_2 / x_3 &amp; -x_1 x_2^2 / x_3^2
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="geometry-of-partial-derivatives">
 <h1>Geometry of partial derivatives<a class="headerlink" href="#geometry-of-partial-derivatives" title="Permalink to this headline">#</a></h1>
-<img src="https://explained.ai/matrix-calculus/images/latex-6793E76E433509E38529D4B70EB4D956.svg" width="40%" />
+<img src="https://explained.ai/matrix-calculus/images/latex-FEFCAA3AA3D0B051E4960CE52D92A7C0.svg" width="40%" />
 <ul class="simple">
 <li><p>Handy resource on partial derivatives for matrices and vectors: <a class="reference external" href="https://explained.ai/matrix-calculus/index.html#sec3">https://explained.ai/matrix-calculus/index.html#sec3</a></p></li>
 </ul>
@@ -1029,7 +1029,7 @@ x_2^2 / x_3 &amp; 2 x_1 x_2 / x_3 &amp; -x_1 x_2^2 / x_3^2
 <h1>Derivative of a dot product<a class="headerlink" href="#derivative-of-a-dot-product" title="Permalink to this headline">#</a></h1>
 <p>Let <span class="math notranslate nohighlight">\(f(\boldsymbol x) = \boldsymbol y^T \boldsymbol x = \sum_i y_i x_i\)</span> and compute the derivative</p>
 <div class="math notranslate nohighlight">
-\[ \frac{\partial f}{\partial \boldsymbol x} = \begin{bmatrix} y_0 &amp; y_1 &amp; \dotsb \end{bmatrix} = \boldsymbol y^T . \]</div>
+\[ \frac{\partial f}{\partial \boldsymbol x} = \begin{bmatrix} y_1 &amp; y_2 &amp; \dotsb \end{bmatrix} = \boldsymbol y^T . \]</div>
 <p>Note that <span class="math notranslate nohighlight">\(\boldsymbol y^T \boldsymbol x = \boldsymbol x^T \boldsymbol y\)</span> and we have the product rule,</p>
 <div class="math notranslate nohighlight">
 \[ \frac{\partial \lVert \boldsymbol x \rVert^2}{\partial \boldsymbol x} = \frac{\partial \boldsymbol x^T \boldsymbol x}{\partial \boldsymbol x} = 2 \boldsymbol x^T . \]</div>
@@ -1081,8 +1081,8 @@ x_2^2 / x_3 &amp; 2 x_1 x_2 / x_3 &amp; -x_1 x_2^2 / x_3^2
 \[ L(c; x, y) = \frac 1 2 \lVert f(x, c) - y \rVert^2 = \frac 1 2 \sum_i (f(x_i,c) - y_i)^2 \]</div>
 
 term-by-term as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1b1693e1-e337-44d0-9e6f-325a02b4bdb8">
-<span class="eqno">(21)<a class="headerlink" href="#equation-1b1693e1-e337-44d0-9e6f-325a02b4bdb8" title="Permalink to this equation">#</a></span>\[\begin{align} \nabla_c L(c; x,y) = \frac{\partial L(c; x,y)}{\partial c} &amp;= \sum_i \big( f(x_i, c) - y_i \big) \frac{\partial f(x_i, c)}{\partial c} \\
+<div class="amsmath math notranslate nohighlight" id="equation-f77740e9-8f6b-4d45-9b2d-58853fee42cd">
+<span class="eqno">(21)<a class="headerlink" href="#equation-f77740e9-8f6b-4d45-9b2d-58853fee42cd" title="Permalink to this equation">#</a></span>\[\begin{align} \nabla_c L(c; x,y) = \frac{\partial L(c; x,y)}{\partial c} &amp;= \sum_i \big( f(x_i, c) - y_i \big) \frac{\partial f(x_i, c)}{\partial c} \\
 &amp;= \sum_i \big( f(x_i, c) - y_i \big) V(x_i)
 \end{align}\]</div>
 <p>where <span class="math notranslate nohighlight">\(V(x_i)\)</span> is the <span class="math notranslate nohighlight">\(i\)</span>th row of <span class="math notranslate nohighlight">\(V(x)\)</span>.</p>
@@ -1090,8 +1090,8 @@ term-by-term as</p>
 <section class="tex2jax_ignore mathjax_ignore" id="alternative-derivative">
 <h1>Alternative derivative<a class="headerlink" href="#alternative-derivative" title="Permalink to this headline">#</a></h1>
 <p>Alternatively, we can take a more linear algebraic approach to write the same expression is</p>
-<div class="amsmath math notranslate nohighlight" id="equation-88c87983-a6c9-49c2-b096-8aac74548935">
-<span class="eqno">(22)<a class="headerlink" href="#equation-88c87983-a6c9-49c2-b096-8aac74548935" title="Permalink to this equation">#</a></span>\[\begin{align} \nabla_c L(c; x,y) &amp;= \big( f(x,c) - y \big)^T V(x) \\
+<div class="amsmath math notranslate nohighlight" id="equation-b42582a2-5949-4fef-940f-8276d25e8c20">
+<span class="eqno">(22)<a class="headerlink" href="#equation-b42582a2-5949-4fef-940f-8276d25e8c20" title="Permalink to this equation">#</a></span>\[\begin{align} \nabla_c L(c; x,y) &amp;= \big( f(x,c) - y \big)^T V(x) \\
 &amp;= \big(V(x) c - y \big)^T V(x) \\
 &amp;= V(x)^T \big( V(x) c - y \big) .
 \end{align}\]</div>

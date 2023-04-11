@@ -822,7 +822,7 @@ title="Print to PDF"
 <section id="today">
 <h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p>Project feedback</p></li>
+<li><p>Project sharing in groups</p></li>
 <li><p>Computing derivatives in maintainable code</p></li>
 <li><p>Forward and reverse</p></li>
 <li><p>Algorithmic (automatic) differentiation</p></li>
@@ -897,7 +897,7 @@ title="Print to PDF"
 <section class="tex2jax_ignore mathjax_ignore" id="constructive-project-feedback-questions">
 <h1>Constructive project feedback/questions<a class="headerlink" href="#constructive-project-feedback-questions" title="Permalink to this headline">#</a></h1>
 <ul class="simple">
-<li><p>You can start now: look at a few projects in <code class="docutils literal notranslate"><span class="pre">#sharing</span></code> on Zulip</p></li>
+<li><p>You can start now: look at a few projects in <code class="docutils literal notranslate"><span class="pre">#projects</span></code> on Zulip</p></li>
 </ul>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">#</a></h2>
@@ -932,8 +932,8 @@ We’ll use the same loss function
 \[ \nabla_c L(c; x,y) = \big( f(x,c) - y \big)^T \nabla_c f(x,c) \]</div>
 
 where</p>
-<div class="amsmath math notranslate nohighlight" id="equation-16037d51-d8f5-4385-800e-a3fa1d871641">
-<span class="eqno">(27)<a class="headerlink" href="#equation-16037d51-d8f5-4385-800e-a3fa1d871641" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-07fee0cf-360c-4b1b-94a7-ec62b9c24b7c">
+<span class="eqno">(27)<a class="headerlink" href="#equation-07fee0cf-360c-4b1b-94a7-ec62b9c24b7c" title="Permalink to this equation">#</a></span>\[\begin{align}
 \frac{\partial f(x,c)}{\partial c_1} &amp;= -(c_1 + c_2 x + c_3 x^2)^{-2} = - f(x,c)^2 \\
 \frac{\partial f(x,c)}{\partial c_2} &amp;= -(c_1 + c_2 x + c_3 x^2)^{-2} x = - f(x,c)^2 x \\
 \frac{\partial f(x,c)}{\partial c_3} &amp;= -(c_1 + c_2 x + c_3 x^2)^{-2} x^2 = - f(x,c)^2 x^2 .
@@ -977,7 +977,7 @@ where</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c = [1.0577450826384476, 0.22035329209217985, 9.689575039933658]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c = [0.9114095056721961, 0.008071686190744132, 9.700373675187228]
 </pre></div>
 </div>
 <img alt="../_images/2023-04-05-differentiation_6_1.svg" src="../_images/2023-04-05-differentiation_6_1.svg" /></div>
@@ -1053,9 +1053,10 @@ where</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\begin{equation}
-\frac{dsin(x)}{dx}
-\end{equation}\]</div>
+\[ \begin{equation}
+\frac{\mathrm{d} \sin\left( x \right)}{\mathrm{d}x}
+\end{equation}
+ \]</div>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1066,9 +1067,10 @@ where</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\begin{equation}
+\[ \begin{equation}
 \cos\left( x \right)
-\end{equation}\]</div>
+\end{equation}
+ \]</div>
 </div>
 </div>
 </section>
@@ -1086,9 +1088,10 @@ where</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_latex math notranslate nohighlight">
-\[\begin{equation}
+\[ \begin{equation}
 \frac{\left( \frac{\cos\left( x^{\pi} \right)}{x} - 3.141592653589793 x^{2.141592653589793} \log\left( x \right) \sin\left( x^{\pi} \right) \right) \cos\left( \cos^{3.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.141592653589793} \right)}{\cos\left( x^{\pi} \right) \log\left( x \right)} - \left( \frac{3.141592653589793 \cos^{3.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{2.141592653589793}}{x} - 9.869604401089358 \cos^{2.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.141592653589793} x^{2.141592653589793} \sin\left( x^{\pi} \right) \right) \sin\left( \cos^{3.141592653589793}\left( x^{\pi} \right) \left( \log\left( x \right) \right)^{3.141592653589793} \right) \log\left( \log\left( x \right) \cos\left( x^{\pi} \right) \right)
-\end{equation}\]</div>
+\end{equation}
+ \]</div>
 </div>
 </div>
 <ul class="simple">
@@ -1130,8 +1133,12 @@ where</p>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">2</span>
 <span class="w">        </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="nb">pi</span>
 <span class="w">        </span><span class="n">da</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span><span class="o">^</span><span class="p">(</span><span class="nb">pi</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dy</span>
-
-<span class="w">        </span>
+<span class="w">        </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="w">        </span><span class="n">db</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">da</span>
+<span class="w">        </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">log</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="w">        </span><span class="n">dc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dy</span><span class="o">/</span><span class="n">y</span>
+<span class="w">        </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span>
+<span class="w">        </span><span class="n">dy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dc</span>
 <span class="w">    </span><span class="k">end</span>
 <span class="w">    </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">dy</span>
 <span class="k">end</span>
@@ -1141,7 +1148,7 @@ where</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1.9, 1)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-1.5346823414986814, -34.032419599140475)
 </pre></div>
 </div>
 </div>
@@ -1150,8 +1157,8 @@ where</p>
 <section class="tex2jax_ignore mathjax_ignore" id="we-can-go-the-other-way">
 <h1>We can go the other way<a class="headerlink" href="#we-can-go-the-other-way" title="Permalink to this headline">#</a></h1>
 <p>We can differentiate a composition <span class="math notranslate nohighlight">\(h(g(f(x)))\)</span> as</p>
-<div class="amsmath math notranslate nohighlight" id="equation-3f220a03-514c-48dc-be6c-286c0cd88d51">
-<span class="eqno">(28)<a class="headerlink" href="#equation-3f220a03-514c-48dc-be6c-286c0cd88d51" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-55cc4f4f-805d-49a9-aa04-9e21c12448ab">
+<span class="eqno">(28)<a class="headerlink" href="#equation-55cc4f4f-805d-49a9-aa04-9e21c12448ab" title="Permalink to this equation">#</a></span>\[\begin{align}
   \operatorname{d} h &amp;= h' \operatorname{d} g \\
   \operatorname{d} g &amp;= g' \operatorname{d} f \\
   \operatorname{d} f &amp;= f' \operatorname{d} x.
@@ -1251,12 +1258,15 @@ where</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[26]:1 within `square`
-define <span class=" -Color -Color-Cyan">double</span> @julia_square_11120<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ In[15]:1 within `square`
+define <span class=" -Color -Color-Cyan">double</span> @julia_square_11670<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
 top:
-; ┌ @ intfuncs.jl:312 within `literal_pow`
-; │┌ @ float.jl:405 within `*`
-    %1 = <span class=" -Color -Color-Bold">fmul</span> <span class=" -Color -Color-Cyan">double</span> %0, %0
+; ┌ @ intfuncs.jl:321 within `literal_pow`
+; │┌ @ float.jl:385 within `*`
+    %1 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>= <span class=" -Color -Color-Bold">fmul</span> <span class=" -Color -Color-Cyan">double</span> %0, %0
 ; └└
   <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Cyan">double</span> %1
 <span class=" -Color -Color-Yellow">}</span>
@@ -1271,18 +1281,18 @@ top:
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ /home/jed/.julia/packages/Zygote/H6vD3/src/compiler/interface.jl:74 within `gradient`
-define <span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> @julia_gradient_11254<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>;  @ /home/jed/.julia/packages/Zygote/dABKa/src/compiler/interface.jl:95 within `gradient`
+define <span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> @julia_gradient_11787<span class=" -Color -Color-Yellow">(</span><span class=" -Color -Color-Cyan">double</span> %0<span class=" -Color -Color-Yellow">)</span> #0 <span class=" -Color -Color-Yellow">{</span>
 top:
-;  @ /home/jed/.julia/packages/Zygote/H6vD3/src/compiler/interface.jl:76 within `gradient`
-; ┌ @ /home/jed/.julia/packages/Zygote/H6vD3/src/compiler/interface.jl:41 within `#56`
-; │┌ @ In[26]:1 within `Pullback`
-; ││┌ @ /home/jed/.julia/packages/ZygoteRules/AIbCs/src/adjoint.jl:67 within `#1822#back`
-; │││┌ @ /home/jed/.julia/packages/Zygote/H6vD3/src/lib/number.jl:6 within `#254`
-; ││││┌ @ promotion.jl:380 within `*` @ float.jl:405
+;  @ /home/jed/.julia/packages/Zygote/dABKa/src/compiler/interface.jl:97 within `gradient`
+; ┌ @ /home/jed/.julia/packages/Zygote/dABKa/src/compiler/interface.jl:45 within `#60`
+; │┌ @ In[15]:1 within `Pullback`
+; ││┌ @ /home/jed/.julia/packages/Zygote/dABKa/src/compiler/chainrules.jl:206 within `ZBack`
+; │││┌ @ /home/jed/.julia/packages/Zygote/dABKa/src/lib/number.jl:12 within `literal_pow_pullback`
+; ││││┌ @ promotion.jl:389 within `*` @ float.jl:385
        %1 = <span class=" -Color -Color-Bold">fmul</span> <span class=" -Color -Color-Cyan">double</span> %0, <span class=" -Color -Color-Yellow">2.000000e+00</span>
 ; └└└└└
-;  @ /home/jed/.julia/packages/Zygote/H6vD3/src/compiler/interface.jl:77 within `gradient`
+;  @ /home/jed/.julia/packages/Zygote/dABKa/src/compiler/interface.jl:98 within `gradient`
   %.fca.0.insert = <span class=" -Color -Color-Bold">insertvalue</span> <span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> zeroinitializer, <span class=" -Color -Color-Cyan">double</span> %1, <span class=" -Color -Color-Yellow">0</span>
   <span class=" -Color -Color-Bold">ret</span> <span class=" -Color -Color-Yellow">[1</span> x <span class=" -Color -Color-Cyan">double</span><span class=" -Color -Color-Yellow">]</span> %.fca.0.insert
 <span class=" -Color -Color-Yellow">}</span>
