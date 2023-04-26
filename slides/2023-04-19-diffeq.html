@@ -122,6 +122,11 @@ const thebe_selector_output = ".output, .cell_output"
    Syllabus
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips.html">
+   Tips
+  </a>
+ </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../slides.html">
    Slides
@@ -315,6 +320,11 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="2023-04-24-adaptivity.html">
      2023-04-24 Adaptivity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-26-careers.html">
+     Careers in numerical computation
     </a>
    </li>
   </ul>
@@ -956,7 +966,7 @@ title="Print to PDF"
 <p>Taylor series!</p>
 <div class="math notranslate nohighlight">
 \[ e^A = 1 + A + \frac{A^2}{2} + \frac{A^3}{3!} + \dotsb \]</div>
-<p>and there are many <a class="reference external" href="http://www.cs.cornell.edu/cv/ResearchPDF/19ways+.pdf">practical ways to compute it</a>.</p>
+<p>and there are many <a class="reference external" href="https://bpb-us-e1.wpmucdn.com/blogs.cornell.edu/dist/c/9924/files/2021/10/19ways.pdf">practical ways to compute it</a>.</p>
 </section>
 </section>
 <section id="question">
@@ -1009,9 +1019,9 @@ where <span class="math notranslate nohighlight">\(k\)</span> is a parameter con
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f1</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">k</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f1</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">k</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
 
-<span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">yhist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ode_euler</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">1.</span><span class="p">],</span><span class="w"> </span><span class="n">tfinal</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="o">=</span><span class="mf">.1</span><span class="p">)</span>
+<span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">yhist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ode_euler</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">1.</span><span class="p">],</span><span class="w"> </span><span class="n">tfinal</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="o">=</span><span class="mf">.25</span><span class="p">)</span>
 <span class="n">scatter</span><span class="p">(</span><span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">yhist</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">:</span><span class="p">])</span>
 <span class="n">plot!</span><span class="p">(</span><span class="n">cos</span><span class="p">)</span>
 </pre></div>
@@ -1029,7 +1039,7 @@ where <span class="math notranslate nohighlight">\(k\)</span> is a parameter con
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f2</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span>
 
-<span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">yhist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ode_euler</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">h</span><span class="o">=</span><span class="mf">.05</span><span class="p">,</span><span class="w"> </span><span class="n">tfinal</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">yhist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ode_euler</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">h</span><span class="o">=</span><span class="mf">.02</span><span class="p">,</span><span class="w"> </span><span class="n">tfinal</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">scatter</span><span class="p">(</span><span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">yhist</span><span class="o">&#39;</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">([</span><span class="n">cos</span><span class="p">,</span><span class="w"> </span><span class="n">sin</span><span class="p">])</span>
 </pre></div>
@@ -1063,7 +1073,7 @@ vectors:
 <h1>Runge-Kutta 4<a class="headerlink" href="#runge-kutta-4" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">yhist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ode_rk_explicit</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">h</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="n">tfinal</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">yhist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ode_rk_explicit</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">h</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">tfinal</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">scatter</span><span class="p">(</span><span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">yhist</span><span class="o">&#39;</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">([</span><span class="n">cos</span><span class="p">,</span><span class="w"> </span><span class="n">sin</span><span class="p">],</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">))</span>
 </pre></div>
@@ -1105,7 +1115,7 @@ When does this map cause solutions to “blow up” and when is it stable?</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>plot_stability (generic function with 2 methods)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>plot_stability (generic function with 1 method)
 </pre></div>
 </div>
 </div>

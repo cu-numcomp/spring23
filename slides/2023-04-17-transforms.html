@@ -122,6 +122,11 @@ const thebe_selector_output = ".output, .cell_output"
    Syllabus
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips.html">
+   Tips
+  </a>
+ </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../slides.html">
    Slides
@@ -315,6 +320,11 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="2023-04-24-adaptivity.html">
      2023-04-24 Adaptivity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-26-careers.html">
+     Careers in numerical computation
     </a>
    </li>
   </ul>
@@ -581,8 +591,23 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#multi-dimensional-integration">
-   Multi-dimensional integration
+  <a class="reference internal nav-link" href="#finite-element-methods">
+   Finite Element methods
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions-that-are-rough-in-the-interior">
+   Functions that are rough in the interior
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adaptive-integration">
+   Adaptive integration
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quadrature-cubature-for-multi-dimensional-integration">
+   Quadrature/cubature for multi-dimensional integration
   </a>
  </li>
 </ul>
@@ -642,8 +667,23 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#multi-dimensional-integration">
-   Multi-dimensional integration
+  <a class="reference internal nav-link" href="#finite-element-methods">
+   Finite Element methods
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#functions-that-are-rough-in-the-interior">
+   Functions that are rough in the interior
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adaptive-integration">
+   Adaptive integration
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quadrature-cubature-for-multi-dimensional-integration">
+   Quadrature/cubature for multi-dimensional integration
   </a>
  </li>
 </ul>
@@ -670,6 +710,7 @@ title="Print to PDF"
 <ul class="simple">
 <li><p>Singular integrals and Tanh-Sinh quadrature</p></li>
 <li><p>Finite element integration and mapped elements</p></li>
+<li><p>Adaptive integration</p></li>
 <li><p>Integration in multiple dimensions</p></li>
 </ul>
 <div class="cell docutils container">
@@ -736,7 +777,7 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">FastGaussQuadrature</span>
 
-<span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span>
+<span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span>
 <span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gausslegendre</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;Gauss-Legendre&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylabel</span><span class="o">=</span><span class="s">&quot;weight&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span>
 <span class="n">scatter!</span><span class="p">(</span><span class="n">gausslobatto</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">...</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;Gauss-Lobatto&quot;</span><span class="p">)</span>
@@ -749,12 +790,12 @@ title="Print to PDF"
 <p><a class="reference external" href="https://people.maths.ox.ac.uk/trefethen/mythspaper.pdf">Trefethen, <em>Six Myths of Polynomial Interpolation and Quadrature</em></a></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="n">gausslegendre</span><span class="p">(</span><span class="mi">1000000</span><span class="p">);</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@time</span><span class="w"> </span><span class="n">gausslegendre</span><span class="p">(</span><span class="mi">10000000</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.029118 seconds (10 allocations: 22.888 MiB, 31.66% gc time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.182398 seconds (10 allocations: 228.882 MiB, 24.45% gc time)
 </pre></div>
 </div>
 </div>
@@ -790,9 +831,9 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="mi">2</span><span class="o">:</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="mi">3</span><span class="o">:</span><span class="mi">4</span><span class="o">:</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">abs</span><span class="p">(</span><span class="n">fint_gauss</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mf">.5</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="p">(</span><span class="o">-</span><span class="mf">.5</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span>
-<span class="w">    </span><span class="n">marker</span><span class="o">=</span><span class="ss">:auto</span><span class="p">,</span><span class="w"> </span><span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">)</span>
+<span class="w">    </span><span class="n">marker</span><span class="o">=</span><span class="ss">:auto</span><span class="p">,</span><span class="w"> </span><span class="n">yscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">,</span><span class="w"> </span><span class="n">xscale</span><span class="o">=</span><span class="ss">:log10</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="o">/</span><span class="n">n</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -820,7 +861,7 @@ The tanh-sinh method uses a transformation such that <span class="math notransla
 <span class="w">    </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">tanh</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">dt</span>
 <span class="k">end</span>
 
-<span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plot</span><span class="p">(</span><span class="n">tanhsinh</span><span class="p">,</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="ss">:black</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;tanhsinh(s)&quot;</span><span class="p">,</span>
+<span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plot</span><span class="p">([</span><span class="n">tanhsinh</span><span class="p">],</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="ss">:black</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;tanhsinh(s)&quot;</span><span class="p">,</span>
 <span class="w">    </span><span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">),</span>
 <span class="w">    </span><span class="n">xlabel</span><span class="o">=</span><span class="s">&quot;s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;tanh-sinh function and integrands&quot;</span><span class="p">)</span>
 <span class="k">for</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">integrands</span>
@@ -861,6 +902,7 @@ The tanh-sinh method uses a transformation such that <span class="math notransla
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot_accuracy</span><span class="p">(</span><span class="n">fint_tanhsinh</span><span class="p">,</span><span class="w"> </span><span class="n">tests</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="o">:</span><span class="mi">4</span><span class="o">:</span><span class="mi">60</span><span class="p">,</span><span class="w"> </span><span class="n">ref</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">xscale</span><span class="o">=</span><span class="ss">:identity</span><span class="p">,)</span>
 </pre></div>
 </div>
 </div>
@@ -876,14 +918,130 @@ The tanh-sinh method uses a transformation such that <span class="math notransla
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tests pass
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>DomainError with -0.9999999999999508:
+log will only return a complex result if called with a complex argument. Try log(Complex(x)).
+
+Stacktrace:
+  [1] throw_complex_domainerror(f::Symbol, x::Float64)
+    @ Base.Math ./math.jl:33
+  [2] _log(x::Float64, base::Val{:ℯ}, func::Symbol)
+    @ Base.Math ./special/log.jl:301
+  [3] log
+    @ ./special/log.jl:267 [inlined]
+  [4] _broadcast_getindex_evalf
+    @ ./broadcast.jl:670 [inlined]
+  [5] _broadcast_getindex
+    @ ./broadcast.jl:643 [inlined]
+  [6] getindex
+    @ ./broadcast.jl:597 [inlined]
+  [7] macro expansion
+    @ ./broadcast.jl:961 [inlined]
+  [8] macro expansion
+    @ ./simdloop.jl:77 [inlined]
+  [9] copyto!
+    @ ./broadcast.jl:960 [inlined]
+ [10] copyto!
+    @ ./broadcast.jl:913 [inlined]
+ [11] copy
+    @ ./broadcast.jl:885 [inlined]
+ [12] materialize(bc::Base.Broadcast.Broadcasted{Base.Broadcast.DefaultArrayStyle{1}, Nothing, typeof(log), Tuple{Vector{Float64}}})
+    @ Base.Broadcast ./broadcast.jl:860
+ [13] fint_tanhsinh(f::Function, a::Int64, b::Int64; n::Int64)
+    @ Main ./In[8]:8
+ [14] top-level scope
+    @ In[10]:2
+ [15] eval
+    @ ./boot.jl:368 [inlined]
+ [16] include_string(mapexpr::typeof(REPL.softscope), mod::Module, code::String, filename::String)
+    @ Base ./loading.jl:1428
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="multi-dimensional-integration">
-<h1>Multi-dimensional integration<a class="headerlink" href="#multi-dimensional-integration" title="Permalink to this headline">#</a></h1>
+<section class="tex2jax_ignore mathjax_ignore" id="finite-element-methods">
+<h1>Finite Element methods<a class="headerlink" href="#finite-element-methods" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>Need to integrate the product of basis functions over every element</p></li>
+<li><p>Choose a quadrature (e.g., Gauss) to minimize number of points for sufficient accuracy</p></li>
+<li><p>Bad effects if insufficient points</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="functions-that-are-rough-in-the-interior">
+<h1>Functions that are rough in the interior<a class="headerlink" href="#functions-that-are-rough-in-the-interior" title="Permalink to this headline">#</a></h1>
+<p>If a function has rough or singular behavior in the interior of the domain, we’ll get low accuracy results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">SpecialFunctions</span>
+<span class="n">f_heaviside</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="n">F_heaviside</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="n">f_mollify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">sigma</span><span class="o">=</span><span class="mf">.02</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">sigma</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="nb">π</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">.5</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">sigma</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">F_mollify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">sigma</span><span class="o">=</span><span class="mf">.02</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">.5</span><span class="o">*</span><span class="n">erf</span><span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="p">(</span><span class="n">sigma</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
+<span class="n">rough_tests</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[(</span><span class="n">f_heaviside</span><span class="p">,</span><span class="w"> </span><span class="n">F_heaviside</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">f_mollify</span><span class="p">,</span><span class="w"> </span><span class="n">F_mollify</span><span class="p">)]</span>
+<span class="n">plot</span><span class="p">([</span><span class="n">f_heaviside</span><span class="p">,</span><span class="w"> </span><span class="n">f_mollify</span><span class="p">],</span><span class="w"> </span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2023-04-17-transforms_20_0.svg" src="../_images/2023-04-17-transforms_20_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot_accuracy</span><span class="p">(</span><span class="n">fint_tanhsinh</span><span class="p">,</span><span class="w"> </span><span class="n">rough_tests</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="o">:</span><span class="mi">4</span><span class="o">:</span><span class="mi">800</span><span class="p">,</span><span class="w"> </span><span class="n">ref</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]);</span><span class="w"> </span><span class="n">plot!</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="ss">:bottomleft</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2023-04-17-transforms_21_0.svg" src="../_images/2023-04-17-transforms_21_0.svg" /></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="adaptive-integration">
+<h1>Adaptive integration<a class="headerlink" href="#adaptive-integration" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">HCubature</span>
+
+<span class="nd">@show</span><span class="w"> </span><span class="n">F_heaviside</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">.3</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">F_heaviside</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">.3</span><span class="p">)</span>
+<span class="n">hquadrature</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">f_heaviside</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">0.3</span><span class="p">),</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">maxevals</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>F_heaviside(1 - 0.3) - F_heaviside(-1 - 0.3) = 0.7
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.700000008169331, 9.264907000048497e-9)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">hquadrature</span><span class="p">(</span><span class="n">f_mollify</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">maxevals</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1.0000000000000004, 6.773758245292121e-10)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">F_mollify</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">F_mollify</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="quadrature-cubature-for-multi-dimensional-integration">
+<h1>Quadrature/cubature for multi-dimensional integration<a class="headerlink" href="#quadrature-cubature-for-multi-dimensional-integration" title="Permalink to this headline">#</a></h1>
 <p><a class="reference external" href="https://pypi.org/project/quadpy/">https://pypi.org/project/quadpy/</a></p>
 </section>
 

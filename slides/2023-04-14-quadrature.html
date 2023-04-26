@@ -122,6 +122,11 @@ const thebe_selector_output = ".output, .cell_output"
    Syllabus
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips.html">
+   Tips
+  </a>
+ </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../slides.html">
    Slides
@@ -315,6 +320,11 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="2023-04-24-adaptivity.html">
      2023-04-24 Adaptivity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-26-careers.html">
+     Careers in numerical computation
     </a>
    </li>
   </ul>
@@ -848,7 +858,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>fint_trapezoid (generic function with 1 method)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>plot_accuracy_h (generic function with 1 method)
 </pre></div>
 </div>
 </div>
@@ -988,7 +998,7 @@ This is called <strong>Richardson extrapolation</strong>.</p>
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
 <span class="n">P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vander_legendre</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">P</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">P</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="k">end</span><span class="p">],</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="ss">:none</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1043,7 +1053,8 @@ This is called <strong>Richardson extrapolation</strong>.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plot_accuracy</span><span class="p">(</span><span class="n">fint_legendre</span><span class="p">,</span><span class="w"> </span><span class="n">tests</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="o">:</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="n">ref</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plot_accuracy</span><span class="p">(</span><span class="n">fint_legendre</span><span class="p">,</span><span class="w"> </span><span class="n">tests</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="o">:</span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="n">ref</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">xscale</span><span class="o">=</span><span class="ss">:linear</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1078,7 +1089,7 @@ This is called <strong>Richardson extrapolation</strong>.</p>
 <li><p>Use duality of polynomial roots and matrix eigenvalues.</p></li>
 </ol>
 <ul class="simple">
-<li><p>A fascinating mathematical voyage, and something you might see more in a graduate linear algebra class.</p></li>
+<li><p>A fascinating mathematical voyage; something you might see more in a graduate linear algebra class.</p></li>
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1103,7 +1114,8 @@ This is called <strong>Richardson extrapolation</strong>.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot_accuracy</span><span class="p">(</span><span class="n">fint_gauss</span><span class="p">,</span><span class="w"> </span><span class="n">tests</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">:</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="n">ref</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">4</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot_accuracy</span><span class="p">(</span><span class="n">fint_gauss</span><span class="p">,</span><span class="w"> </span><span class="n">tests</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="o">:</span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="n">ref</span><span class="o">=</span><span class="mi">1</span><span class="o">:</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">xscale</span><span class="o">=</span><span class="ss">:linear</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1114,7 +1126,7 @@ This is called <strong>Richardson extrapolation</strong>.</p>
 <h2><span class="math notranslate nohighlight">\(n\)</span>-point Gauss exactly integrates polynomials of degree <span class="math notranslate nohighlight">\(2n-1\)</span><a class="headerlink" href="#n-point-gauss-exactly-integrates-polynomials-of-degree-2n-1" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot_accuracy</span><span class="p">(</span><span class="n">fint_gauss</span><span class="p">,</span><span class="w"> </span><span class="p">[(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">11</span><span class="n">x</span><span class="o">^</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">-&gt;</span><span class="n">x</span><span class="o">^</span><span class="mi">11</span><span class="p">)],</span><span class="w"> </span><span class="mi">3</span><span class="o">:</span><span class="mi">12</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">plot_accuracy</span><span class="p">(</span><span class="n">fint_gauss</span><span class="p">,</span><span class="w"> </span><span class="p">[(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">12</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">.2</span><span class="p">)</span><span class="o">^</span><span class="mi">11</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">-&gt;</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mf">.2</span><span class="p">)</span><span class="o">^</span><span class="mi">12</span><span class="p">)],</span><span class="w"> </span><span class="mi">3</span><span class="o">:</span><span class="mi">12</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">(</span><span class="n">xscale</span><span class="o">=</span><span class="ss">:linear</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1140,8 +1152,8 @@ This is called <strong>Richardson extrapolation</strong>.</p>
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">FastGaussQuadrature</span>
 
-<span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span>
-<span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gausslegendre</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">gausslegendre</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;Gauss-Legendre&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ylabel</span><span class="o">=</span><span class="s">&quot;weight&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">xlims</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span>
 <span class="n">scatter!</span><span class="p">(</span><span class="n">gausslobatto</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">...</span><span class="p">,</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="s">&quot;Gauss-Lobatto&quot;</span><span class="p">)</span>
 </pre></div>

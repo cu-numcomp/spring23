@@ -122,6 +122,11 @@ const thebe_selector_output = ".output, .cell_output"
    Syllabus
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips.html">
+   Tips
+  </a>
+ </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../slides.html">
    Slides
@@ -315,6 +320,11 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="2023-04-24-adaptivity.html">
      2023-04-24 Adaptivity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-26-careers.html">
+     Careers in numerical computation
     </a>
    </li>
   </ul>
@@ -1011,7 +1021,7 @@ title="Print to PDF"
 <p>Taylor series!</p>
 <div class="math notranslate nohighlight">
 \[ e^A = 1 + A + \frac{A^2}{2} + \frac{A^3}{3!} + \dotsb \]</div>
-<p>and there are many <a class="reference external" href="http://www.cs.cornell.edu/cv/ResearchPDF/19ways+.pdf">practical ways to compute it</a>.</p>
+<p>and there are many <a class="reference external" href="https://www.cs.cornell.edu/cv/files/2021/10/19ways.pdf">practical ways to compute it</a>.</p>
 </section>
 </section>
 <section id="question">
@@ -1064,10 +1074,10 @@ where <span class="math notranslate nohighlight">\(k\)</span> is a parameter con
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f1</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">k</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f1</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">k</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
 
-<span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">yhist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ode_euler</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">1.</span><span class="p">],</span><span class="w"> </span><span class="n">tfinal</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="o">=</span><span class="mf">.2</span><span class="p">)</span>
-<span class="n">scatter</span><span class="p">(</span><span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">yhist</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">:</span><span class="p">])</span>
+<span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">yhist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ode_euler</span><span class="p">(</span><span class="n">f1</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">1.</span><span class="p">],</span><span class="w"> </span><span class="n">tfinal</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="o">=</span><span class="mf">.2</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">yhist</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">:</span><span class="p">],</span><span class="w"> </span><span class="n">marker</span><span class="o">=</span><span class="ss">:circle</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">(</span><span class="n">cos</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1084,7 +1094,7 @@ where <span class="math notranslate nohighlight">\(k\)</span> is a parameter con
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">f2</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">y</span>
 
-<span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">yhist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ode_euler</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">h</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="n">tfinal</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">yhist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ode_euler</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">h</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span><span class="w"> </span><span class="n">tfinal</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
 <span class="n">scatter</span><span class="p">(</span><span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">yhist</span><span class="o">&#39;</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">([</span><span class="n">cos</span><span class="p">,</span><span class="w"> </span><span class="n">sin</span><span class="p">])</span>
 </pre></div>
@@ -1112,7 +1122,7 @@ where <span class="math notranslate nohighlight">\(k\)</span> is a parameter con
 <h1>Runge-Kutta 4<a class="headerlink" href="#runge-kutta-4" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">yhist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ode_rk_explicit</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">h</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="n">tfinal</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">yhist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ode_rk_explicit</span><span class="p">(</span><span class="n">f2</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">h</span><span class="o">=</span><span class="mf">2.9</span><span class="p">,</span><span class="w"> </span><span class="n">tfinal</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 <span class="n">scatter</span><span class="p">(</span><span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">yhist</span><span class="o">&#39;</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">([</span><span class="n">cos</span><span class="p">,</span><span class="w"> </span><span class="n">sin</span><span class="p">],</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">))</span>
 </pre></div>
@@ -1256,7 +1266,7 @@ The stability function is
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">Rz_theta</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">theta</span><span class="p">)</span><span class="o">*</span><span class="n">z</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">theta</span><span class="o">*</span><span class="n">z</span><span class="p">)</span>
-<span class="n">theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">.6</span>
+<span class="n">theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">.5</span>
 <span class="n">plot_stability</span><span class="p">(</span><span class="n">z</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">Rz_theta</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\$\\</span><span class="s">theta=</span><span class="si">$theta</span><span class="se">\$</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span>
 <span class="w">    </span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
@@ -1299,8 +1309,8 @@ The stability function is
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># Test on oscillator</span>
 <span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"> </span><span class="mi">0</span><span class="p">]</span>
-<span class="n">theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
-<span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">uhist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ode_theta_linear</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">h</span><span class="o">=</span><span class="mf">.2</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span><span class="w"> </span><span class="n">tfinal</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">.5</span>
+<span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">uhist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ode_theta_linear</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">0.</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"> </span><span class="n">h</span><span class="o">=</span><span class="mf">.6</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span><span class="w"> </span><span class="n">tfinal</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 <span class="n">scatter</span><span class="p">(</span><span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">uhist</span><span class="o">&#39;</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">([</span><span class="n">cos</span><span class="p">,</span><span class="w"> </span><span class="n">sin</span><span class="p">])</span>
 </pre></div>
@@ -1314,9 +1324,9 @@ The stability function is
 <h1><span class="math notranslate nohighlight">\(\theta\)</span> method for the cosine decay<a class="headerlink" href="#theta-method-for-the-cosine-decay" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span>
-<span class="n">theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">.5</span>
-<span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">uhist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ode_theta_linear</span><span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">.2</span><span class="p">],</span><span class="w"> </span><span class="n">forcing</span><span class="o">=</span><span class="n">t</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">k</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="w"> </span><span class="n">tfinal</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">)</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">500000</span>
+<span class="n">theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">.7</span>
+<span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">uhist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ode_theta_linear</span><span class="p">(</span><span class="o">-</span><span class="n">k</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">.2</span><span class="p">],</span><span class="w"> </span><span class="n">forcing</span><span class="o">=</span><span class="n">t</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">k</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="w"> </span><span class="n">tfinal</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">)</span>
 <span class="n">scatter</span><span class="p">(</span><span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">uhist</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">:</span><span class="p">],</span><span class="w"> </span><span class="n">title</span><span class="o">=</span><span class="s">&quot;</span><span class="se">\$\\</span><span class="s">theta = </span><span class="si">$theta</span><span class="se">\$</span><span class="s">&quot;</span><span class="p">)</span>
 <span class="n">plot!</span><span class="p">(</span><span class="n">cos</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">800</span><span class="p">,</span><span class="w"> </span><span class="mi">500</span><span class="p">))</span>
 </pre></div>
@@ -1396,14 +1406,14 @@ Evidently only <span class="math notranslate nohighlight">\(\theta=1\)</span> is
 <span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">heat_matrix</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 <span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">u0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exp</span><span class="o">.</span><span class="p">(</span><span class="o">-</span><span class="mi">200</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">.^</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
-<span class="nd">@time</span><span class="w"> </span><span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">uhist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ode_theta_linear</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">u0</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">tfinal</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+<span class="nd">@time</span><span class="w"> </span><span class="n">thist</span><span class="p">,</span><span class="w"> </span><span class="n">uhist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ode_theta_linear</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">u0</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="o">=</span><span class="mf">.5</span><span class="p">,</span><span class="w"> </span><span class="n">tfinal</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
 <span class="n">nsteps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">size</span><span class="p">(</span><span class="n">uhist</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
 <span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">uhist</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="mi">5</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  1.398294 seconds (4.36 M allocations: 229.282 MiB, 5.36% gc time, 99.92% compilation time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.001373 seconds (846 allocations: 1.483 MiB)
 </pre></div>
 </div>
 <img alt="../_images/2023-04-21-stiffness_43_1.svg" src="../_images/2023-04-21-stiffness_43_1.svg" /></div>
@@ -1459,7 +1469,7 @@ Evidently only <span class="math notranslate nohighlight">\(\theta=1\)</span> is
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.127159 seconds (179.07 k allocations: 11.513 MiB, 13.49% gc time, 83.18% compilation time)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  0.075686 seconds (154.41 k allocations: 9.739 MiB, 97.59% compilation time)
 </pre></div>
 </div>
 <img alt="../_images/2023-04-21-stiffness_46_1.svg" src="../_images/2023-04-21-stiffness_46_1.svg" /></div>

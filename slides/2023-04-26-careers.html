@@ -1,0 +1,957 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Careers in numerical computation &#8212; Numerical Computation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Bonus: Waves and sparse linear algebra" href="extra-factorization.html" />
+    <link rel="prev" title="2023-04-24 Adaptivity" href="2023-04-24-adaptivity.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/cu-numcomp.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Numerical Computation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips.html">
+   Tips
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../slides.html">
+   Slides
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-01-20-first-day.html">
+     2023-01-20 First Day
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-01-23-functions.html">
+     2023-01-23 Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-01-25-function-errors.html">
+     2023-01-25 Function errors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-01-27-conditioning.html">
+     2023-01-27 Conditioning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-01-30-rootfinding.html">
+     2023-01-30 Rootfinding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-01-convergence-classes.html">
+     2023-02-01 Convergence classes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-03-newton.html">
+     2022-02-03 Newton methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-06-more-newton.html">
+     2023-02-06 More Newton
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-08-formulation.html">
+     2023-02-08 Formulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-10-stability.html">
+     2023-02-10 Stability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-13-linear-algebra.html">
+     2023-02-13 Linear Algebra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-15-projections.html">
+     2023-02-15 Projections, rotations, and reflections
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-17-gram-schmidt.html">
+     2023-02-17 Gram-Schmidt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-20-qr-factorization.html">
+     2023-02-20 QR Factorization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-22-qr-stability.html">
+     2023-02-22 QR Stability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-24-householder.html">
+     2023-02-24 Householder QR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-27-qr-retrospective.html">
+     2023-02-27 QR Retrospective
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-01-svd.html">
+     2023-03-01 Singular Value Decomposition
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-03-svd-geometry.html">
+     2023-03-03 SVD Geometry
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-06-low-rank.html">
+     2023-03-06 Low Rank
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-08-interpolation.html">
+     2023-03-08 Polynomial Interpolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-10-interpolation2.html">
+     2023-03-10 Global and Piecewise Interpolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-13-splines.html">
+     2023-03-13 Spline interpolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-15-higher-dimensions.html">
+     2023-03-15 Higher dimensions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-17-noisy-data.html">
+     2023-03-17 Noisy data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-20-regression.html">
+     2023-03-20 Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-22-beyond-linear-models.html">
+     2023-03-22 Beyond Linear Models
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-24-gradient-descent.html">
+     2023-03-24 Gradient Descent
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-03-nonlinear-regression.html">
+     2023-04-03 Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-05-differentiation.html">
+     2023-04-05 Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-07-optimization.html">
+     2023-04-07 Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-12-integration.html">
+     2023-04-12 Integration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-14-quadrature.html">
+     2023-04-14 Quadrature
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-17-transforms.html">
+     2023-04-17 Transformed Quadrature
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-19-diffeq.html">
+     2023-04-19 Differential Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-21-stiffness.html">
+     2023-04-21 Stiff equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-24-adaptivity.html">
+     2023-04-24 Adaptivity
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Careers in numerical computation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="extra-factorization.html">
+     Bonus: Waves and sparse linear algebra
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/cu-numcomp/spring23/main?urlpath=tree/slides/2023-04-26-careers.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/cu-numcomp/spring23"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/cu-numcomp/spring23/issues/new?title=Issue%20on%20page%20%2Fslides/2023-04-26-careers.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/slides/2023-04-26-careers.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Careers in numerical computation
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#today">
+     Today
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#friday">
+     Friday
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#national-labs">
+   National Labs
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples-of-lab-agency-led-software">
+   Examples of lab/agency-led software
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#industrial-r-d">
+   Industrial R&amp;D
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#academia">
+   Academia
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#independence-transparency-and-security">
+   Independence, transparency, and security
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#production">
+   Production
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-does-technical-leadership-look-like">
+   What does technical leadership look like?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#projects">
+   Projects
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Careers in numerical computation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Careers in numerical computation
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#today">
+     Today
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#friday">
+     Friday
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#national-labs">
+   National Labs
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#examples-of-lab-agency-led-software">
+   Examples of lab/agency-led software
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#industrial-r-d">
+   Industrial R&amp;D
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#academia">
+   Academia
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#independence-transparency-and-security">
+   Independence, transparency, and security
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#production">
+   Production
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-does-technical-leadership-look-like">
+   What does technical leadership look like?
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#projects">
+   Projects
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="careers-in-numerical-computation">
+<h1>Careers in numerical computation<a class="headerlink" href="#careers-in-numerical-computation" title="Permalink to this headline">#</a></h1>
+<section id="today">
+<h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Research</p>
+<ul>
+<li><p>National Labs</p></li>
+<li><p>Industrial R&amp;D</p></li>
+<li><p>Academia</p></li>
+</ul>
+</li>
+<li><p>Production</p>
+<ul>
+<li><p>Cloud and hardware</p></li>
+<li><p>Independent Software Vendors (ISV)</p></li>
+<li><p>Open source/services companies</p></li>
+<li><p>Engineering companies</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="friday">
+<h2>Friday<a class="headerlink" href="#friday" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Fast Fourier Transform</p></li>
+<li><p>Monte Carlo integration</p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="national-labs">
+<h1>National Labs<a class="headerlink" href="#national-labs" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>Department of Energy</p>
+<ul>
+<li><p>Office of Science (Berkeley, Argonne, Pacific Northwest, …)</p></li>
+<li><p>National Nuclear Security Administration (Livermore, Los Alamos, Sandia)</p></li>
+<li><p>Office of Renewable Energy (NREL)</p></li>
+</ul>
+</li>
+<li><p>National Oceanic and Atmospheric Administration (NOAA)</p>
+<ul>
+<li><p>Weather and climate, operational numerical weather prediction and research</p></li>
+</ul>
+</li>
+<li><p>National Center for Atmospheric Research (NCAR)</p>
+<ul>
+<li><p>Comprehensive climate focus (includes ocean, sea ice, land ice, land)</p></li>
+</ul>
+</li>
+<li><p>National Institute of Standards and Technology</p>
+<ul>
+<li><p>Fundamental materials (e.g., gas equations of state), metrology</p></li>
+</ul>
+</li>
+<li><p>National Aeronautics and Space Administration (NASA)</p>
+<ul>
+<li><p>Earth research, especially remote sensing (satellite and aerial)</p></li>
+<li><p>Fluid and structural mechanics for safe, reliable, efficient flight (includes partnerships with FAA)</p></li>
+<li><p>Materials science and engineering (overlapping scope with industry)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="examples-of-lab-agency-led-software">
+<h1>Examples of lab/agency-led software<a class="headerlink" href="#examples-of-lab-agency-led-software" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>HPC Middleware (MPI implementations, resource managers)</p></li>
+<li><p>Numerical Libraries (PETSc, hypre, Sundials, Trilinos, MFEM)</p></li>
+<li><p>Open source simulation applications (MOOSE library, LAMMPS, Nek, Albany)</p></li>
+<li><p>Internal/export controlled simulation (BLAST, FUN3D, Sierra, MCNP, MOOSE apps)</p>
+<ul>
+<li><p>Nuclear reactor safety, stockpile stewardship, proprietary designs</p></li>
+<li><p><a class="reference external" href="https://newsreleases.sandia.gov/goodyear-sandia/">Goodyear-Sandia partnership on tire simulation</a></p></li>
+</ul>
+</li>
+<li><p>Community Earth System Model (NCAR), Energy Exascale Earth System Model (E3SM)</p></li>
+<li><p>Some orgs publicly embrace open source <a class="reference external" href="https://software.llnl.gov/">LLNL Open Source</a></p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="industrial-r-d">
+<h1>Industrial R&amp;D<a class="headerlink" href="#industrial-r-d" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>Hardware vendors and cloud providers: CUDA, HIP, SYCL, OpenMP, MPI</p>
+<ul>
+<li><p>“Science/engineering should use our programming models/run fast on our hardware”</p></li>
+<li><p>“Data science” (statistical computing) should also be fast</p></li>
+</ul>
+</li>
+<li><p>High-stakes methods development</p>
+<ul>
+<li><p>Example: <a class="reference external" href="https://hiliftpw.larc.nasa.gov/">High-Lift Prediction Workshop</a> (<a class="reference external" href="https://hiliftpw.larc.nasa.gov/Workshop3/participantlist.html">participants</a>)</p></li>
+</ul>
+</li>
+<li><p>Research papers in specific venues are valuable</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="academia">
+<h1>Academia<a class="headerlink" href="#academia" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>Tenure-track</p>
+<ul>
+<li><p>Teaching</p></li>
+<li><p>External funding is mainly to support students and research staff</p></li>
+<li><p>Eternally swimming in hats</p></li>
+</ul>
+</li>
+<li><p>Research faculty/research software engineer</p>
+<ul>
+<li><p>Usually reliant on external grants, often a “center”</p></li>
+<li><p>There are some “research software engineering” facility/service groups (e.g., <a class="reference external" href="https://researchcomputing.princeton.edu/news/2022/princeton-bets-big-research-software-engineering">Princeton</a>)</p></li>
+<li><p><a class="reference external" href="https://www.colorado.edu/research/research-institutes">CU Institutes</a> (CIRES, INSTAAR, LASP, JILA, BioFrontiers, …)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="independence-transparency-and-security">
+<h1>Independence, transparency, and security<a class="headerlink" href="#independence-transparency-and-security" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>Competitive government funding</p>
+<ul>
+<li><p>Grant review panel, process to avoid conflicts of interest</p></li>
+<li><p>Applicants receive reviews with positive and negative</p></li>
+<li><p>Often low funding rate (e.g., 10% of proposals get funded)</p></li>
+<li><p>Acadamics can apply to any agency, DOE labs only eligible for DOE funding</p></li>
+</ul>
+</li>
+<li><p>Block government funding</p>
+<ul>
+<li><p>NNSA funding for classified work; mission-oriented work at other agencies</p></li>
+<li><p>Internal review process, may be formal (“LDRD”) but likely doesn’t avoid CoI (reviewed by your management chain)</p></li>
+</ul>
+</li>
+<li><p>Industry</p>
+<ul>
+<li><p>Often informal process to influence management decisions</p></li>
+<li><p>Depends more on personal trust, likely more dependent on individual managers (can change rapidly with reorg)</p></li>
+<li><p>Since no formal process or external review, minimal feedback</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="production">
+<h1>Production<a class="headerlink" href="#production" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>Cloud and hardware vendors</p>
+<ul>
+<li><p>build or contribute to numerical libraries</p></li>
+<li><p>use numerical computing to design silicon, optimize fabrication process</p></li>
+<li><p>use numerical computing to design and optimize data centers, analyze workloads</p></li>
+</ul>
+</li>
+<li><p>Independent Software Vendors</p>
+<ul>
+<li><p>Geometric modeling/CAD, simulation (ANSYS, Abaqus, etc.)</p></li>
+<li><p>Matlab, Mathematica, etc.</p></li>
+</ul>
+</li>
+<li><p>Open source/services</p>
+<ul>
+<li><p>Distribution/integration: Posit (aka. RStudio), Enthought, Continuum, QuanSight</p></li>
+<li><p>Training/consulting/support: OpenFOAM</p></li>
+<li><p>Various large tech companies have people doing open source numerical library development</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Engineering companies</p>
+<ul>
+<li><p>Growing in-house simulation tools</p></li>
+<li><p>Larger companies can afford to make these tools</p></li>
+</ul>
+</li>
+</ul>
+<p><img alt="image.png" src="slides/attachment:image.png" /></p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="what-does-technical-leadership-look-like">
+<h1>What does technical leadership look like?<a class="headerlink" href="#what-does-technical-leadership-look-like" title="Permalink to this headline">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="projects">
+<h1>Projects<a class="headerlink" href="#projects" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>Motivation</p></li>
+<li><p>What you did and how</p></li>
+<li><p>Results and interpretation</p></li>
+<li><p>Examples of positive and negative impacts/risks</p></li>
+</ul>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cu-numcomp/spring23",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.8"
+        },
+        kernelOptions: {
+            kernelName: "julia-1.8",
+            path: "./slides"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.8'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="2023-04-24-adaptivity.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">2023-04-24 Adaptivity</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="extra-factorization.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Bonus: Waves and sparse linear algebra</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jed Brown<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
