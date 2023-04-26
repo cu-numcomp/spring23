@@ -45,3 +45,5 @@ chapters:
   - file: slides/2023-04-19-diffeq.ipynb
   - file: slides/2023-04-21-stiffness.ipynb
   - file: slides/2023-04-24-adaptivity.ipynb
+  - file: slides/2023-04-26-careers.ipynb
+  - file: slides/extra-factorization.ipynb
