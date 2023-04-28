@@ -50,9 +50,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Bonus: Waves and sparse linear algebra" href="extra-factorization.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -112,7 +115,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="../syllabus.html">
    Syllabus
@@ -123,16 +126,16 @@ const thebe_selector_output = ".output, .cell_output"
    Tips
   </a>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="../slides.html">
    Slides
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="2023-01-20-first-day.html">
      2023-01-20 First Day
@@ -321,6 +324,16 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="2023-04-26-careers.html">
      Careers in numerical computation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="extra-factorization.html">
+     Bonus: Waves and sparse linear algebra
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Fast transforms
     </a>
    </li>
   </ul>
@@ -527,12 +540,172 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Fast transforms
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#last-time">
+     Last time
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#today">
+     Today
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#project-presentations">
+   Project presentations
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#suggested-structure">
+     Suggested Structure
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#portfolio-meetings">
+   Portfolio meetings
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#structure">
+     Structure
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discrete-signals">
+   Discrete signals
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#approximation-by-fourier-basis">
+   Approximation by Fourier basis
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#continuous-theta-infinite-domain">
+     Continuous
+     <span class="math notranslate nohighlight">
+      \(\theta\)
+     </span>
+     : infinite domain
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computing-hat-f-theta">
+   Computing
+   <span class="math notranslate nohighlight">
+    \(\hat f(\theta)\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mathcal-f-as-a-matrix">
+   <span class="math notranslate nohighlight">
+    \(\mathcal F\)
+   </span>
+   as a matrix
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-does-this-mean-for-cost">
+     What does this mean for cost?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#faster">
+   Faster!
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#periodicity">
+   Periodicity
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualize">
+   Visualize
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transform-a-gaussian-bump-e-x-2">
+   Transform a Gaussian bump
+   <span class="math notranslate nohighlight">
+    \(e^{-x^2}\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compute-derivatives-using-the-fourier-transform">
+   Compute derivatives using the Fourier transform
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generalizations">
+     Generalizations
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applications">
+     Applications
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parallel-implications-bisection-bandwidth-of-the-network">
+     Parallel implications: Bisection bandwidth of the network
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#derivative-of-a-function-on-the-cosrange-points">
+   Derivative of a function on the
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     CosRange
+    </span>
+   </code>
+   points
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -544,6 +717,155 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Fast transforms
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#last-time">
+     Last time
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#today">
+     Today
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#project-presentations">
+   Project presentations
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#suggested-structure">
+     Suggested Structure
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#portfolio-meetings">
+   Portfolio meetings
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#structure">
+     Structure
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discrete-signals">
+   Discrete signals
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#approximation-by-fourier-basis">
+   Approximation by Fourier basis
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#continuous-theta-infinite-domain">
+     Continuous
+     <span class="math notranslate nohighlight">
+      \(\theta\)
+     </span>
+     : infinite domain
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#computing-hat-f-theta">
+   Computing
+   <span class="math notranslate nohighlight">
+    \(\hat f(\theta)\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mathcal-f-as-a-matrix">
+   <span class="math notranslate nohighlight">
+    \(\mathcal F\)
+   </span>
+   as a matrix
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#what-does-this-mean-for-cost">
+     What does this mean for cost?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#faster">
+   Faster!
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#periodicity">
+   Periodicity
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualize">
+   Visualize
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#transform-a-gaussian-bump-e-x-2">
+   Transform a Gaussian bump
+   <span class="math notranslate nohighlight">
+    \(e^{-x^2}\)
+   </span>
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compute-derivatives-using-the-fourier-transform">
+   Compute derivatives using the Fourier transform
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#generalizations">
+     Generalizations
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#applications">
+     Applications
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parallel-implications-bisection-bandwidth-of-the-network">
+     Parallel implications: Bisection bandwidth of the network
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#derivative-of-a-function-on-the-cosrange-points">
+   Derivative of a function on the
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     CosRange
+    </span>
+   </code>
+   points
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -553,10 +875,403 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="fast-transforms">
 <h1>Fast transforms<a class="headerlink" href="#fast-transforms" title="Permalink to this headline">#</a></h1>
+<section id="last-time">
+<h2>Last time<a class="headerlink" href="#last-time" title="Permalink to this headline">#</a></h2>
 <ul class="simple">
-<li><p>Fast Fourier Transform</p></li>
-<li><p>Monte Carlo integration</p></li>
+<li><p>Careers in/around numerical computing</p></li>
+<li><p>The autonomy-security spectrum</p></li>
 </ul>
+</section>
+<section id="today">
+<h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Presentation guidelines, portfolio meetings</p></li>
+<li><p>Fast Fourier Transform</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">LinearAlgebra</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Plots</span>
+<span class="n">default</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">legendfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="n">xtickfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="n">ytickfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="project-presentations">
+<h1>Project presentations<a class="headerlink" href="#project-presentations" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>Remember to sign up (link is on Zulip)!</p></li>
+<li><p>We’ll have about 8 presentations/day, so plan on 5 minutes plus questions/transition</p></li>
+<li><p>Let me know if you’ll be producing a video for me to play instead of presenting live</p></li>
+<li><p>Link your repository and presentation in the sign-up sheet at least an hour before class</p></li>
+</ul>
+<section id="suggested-structure">
+<h2>Suggested Structure<a class="headerlink" href="#suggested-structure" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Motivation (why did you create what you did?)</p></li>
+<li><p>What and How (what did you create and how did you coordinate as a team)</p></li>
+<li><p>Metrics/Quality (how do you assess that what you did is correct, and how do you compare with related work)?</p>
+<ul>
+<li><p>Concepts from class are likely to appear here (conditioning, stability, accuracy-vs-cost diagrams)</p></li>
+</ul>
+</li>
+<li><p>Impacts</p>
+<ul>
+<li><p>Who does what you created (or the software you evaluated) benefit and how?</p></li>
+<li><p>What negative impacts can you envision and who might be impacted?</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="portfolio-meetings">
+<h1>Portfolio meetings<a class="headerlink" href="#portfolio-meetings" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>Please choose a slot on Canvas, any time <em>after</em> your group presents.</p></li>
+<li><p>May be in-person or on Zoom</p></li>
+</ul>
+<section id="structure">
+<h2>Structure<a class="headerlink" href="#structure" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>What goals did you set for yourself and how did they evolve?</p>
+<ul>
+<li><p>You may point to examples/explanations in your journal.</p></li>
+</ul>
+</li>
+<li><p>What are you most proud of this semester?</p>
+<ul>
+<li><p>Please share examples from your portfolio or other work you did for the class.</p></li>
+</ul>
+</li>
+<li><p>What are your career goals and how do you see numerical computation fitting in?</p></li>
+<li><p>If you could go back to January, what advice would you give your former self?</p></li>
+<li><p>What advice would you give me to make the class better meet your needs?</p></li>
+<li><p>What letter grade would you say accurately reflects your growth and quality of work this semester?</p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="discrete-signals">
+<h1>Discrete signals<a class="headerlink" href="#discrete-signals" title="Permalink to this headline">#</a></h1>
+<p>Consider a function <span class="math notranslate nohighlight">\(f(x)\)</span> defined on an integer grid <span class="math notranslate nohighlight">\(x \in \mathbb Z\)</span>.</p>
+<p>We also consider the Fourier modes
+<div class="math notranslate nohighlight">
+\[ \phi(x, \theta) = e^{i\theta x} \]</div>
+
+for continuous <span class="math notranslate nohighlight">\(\theta\)</span>.
+Is it possible to distinguish <span class="math notranslate nohighlight">\(e^{i\theta x}\)</span> from <span class="math notranslate nohighlight">\(e^{i(\theta+2\pi)x}\)</span>?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">phi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="nb">im</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">theta</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+<span class="n">rphi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">real</span><span class="p">(</span><span class="n">phi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="p">))</span><span class="w"> </span><span class="c"># real part</span>
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">4</span><span class="o">:</span><span class="mi">4</span>
+<span class="n">theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">rphi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">rphi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="o">+</span><span class="mi">2</span><span class="nb">π</span><span class="p">),</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">rphi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="o">-</span><span class="mi">2</span><span class="nb">π</span><span class="p">)])</span>
+<span class="n">scatter!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">rphi</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="ss">:black</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/extra-transforms_5_0.svg" src="../_images/extra-transforms_5_0.svg" /></div>
+</div>
+<p>We say <span class="math notranslate nohighlight">\(\theta = \pm \pi\)</span> is the <a class="reference external" href="https://en.wikipedia.org/wiki/Nyquist_frequency">Nyquist Frequency</a> for the integer grid.</p>
+<ul class="simple">
+<li><p>It corresponds to “two points per wavelength”</p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="approximation-by-fourier-basis">
+<h1>Approximation by Fourier basis<a class="headerlink" href="#approximation-by-fourier-basis" title="Permalink to this headline">#</a></h1>
+<p>Just like we can approximate functions using linear combinations of polynomials, we can approximate <em>periodic</em> functions using a linear combination of Fourier modes.</p>
+<div class="math notranslate nohighlight">
+\[ f(x) \approx \sum_{k=1}^n \underbrace{\hat f(\theta_k)}_{\hat f_k} e^{i\theta_k x} . \]</div>
+<p>This is reminiscent of linear algebra</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1dfd648a-66e4-4cad-8db6-033a3feb3ae3">
+<span class="eqno">(39)<a class="headerlink" href="#equation-1dfd648a-66e4-4cad-8db6-033a3feb3ae3" title="Permalink to this equation">#</a></span>\[\begin{align} \Bigg[ f(x) \Bigg] &amp;= \Bigg[ e^{i\theta_1 x} \Bigg| e^{i\theta_2 x} \Bigg| \dotsm \Bigg] \begin{bmatrix} \hat f_1 \\ \hat f_2 \\ \vdots \end{bmatrix} \\
+&amp;= \Bigg[ e^{i\theta_1 x} \Bigg] \hat f_1 + \Bigg[ e^{i\theta_2 x} \Bigg] \hat f_2 + \dotsb .
+\end{align}\]</div>
+<section id="continuous-theta-infinite-domain">
+<h2>Continuous  <span class="math notranslate nohighlight">\(\theta\)</span>: infinite domain<a class="headerlink" href="#continuous-theta-infinite-domain" title="Permalink to this headline">#</a></h2>
+<p>If we take <span class="math notranslate nohighlight">\(\theta \in (-\pi, \pi]\)</span> as a continuous quantity (instead of a discrete set of modes), the sum becomes and integral and we get equality (for “nice enough” <span class="math notranslate nohighlight">\(f(x)\)</span>),</p>
+<div class="math notranslate nohighlight">
+\[ f(x) = \int_{-\pi}^\pi \hat f(\theta) e^{i\theta x} d\theta, \]</div>
+<p>in which <span class="math notranslate nohighlight">\(\hat f(\theta)\)</span> is the Fourier transform (specifically, the <a class="reference external" href="https://en.wikipedia.org/wiki/Discrete-time_Fourier_transform">discrete time transform</a>) of <span class="math notranslate nohighlight">\(f(x)\)</span>.  This representation is valuable for analyzing convergence of multigrid methods, among other applications.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="computing-hat-f-theta">
+<h1>Computing <span class="math notranslate nohighlight">\(\hat f(\theta)\)</span><a class="headerlink" href="#computing-hat-f-theta" title="Permalink to this headline">#</a></h1>
+<p>If we select a finite number of points <span class="math notranslate nohighlight">\(x\)</span> and compute the square Vandermonde matrix</p>
+<div class="math notranslate nohighlight">
+\[ \mathcal F = \Bigg[ e^{i\theta_1 x} \Bigg| e^{i\theta_2 x} \Bigg| \dotsm \Bigg] \]</div>
+<p>then, knowing the vector <span class="math notranslate nohighlight">\(f\)</span>, we could solve</p>
+<div class="math notranslate nohighlight">
+\[ \mathcal F \hat f = f \]</div>
+<p>for <span class="math notranslate nohighlight">\(\hat f\)</span>.  This would require <span class="math notranslate nohighlight">\(O(n^3)\)</span> where <span class="math notranslate nohighlight">\(n\)</span> is the number of points.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">vander_fourier</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">=</span><span class="nb">nothing</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">isnothing</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">        </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="nb">pi</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="nb">pi</span><span class="o">/</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="nb">pi</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="n">F</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exp</span><span class="o">.</span><span class="p">(</span><span class="mi">1</span><span class="nb">im</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">theta</span><span class="o">&#39;</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">41</span><span class="p">)</span>
+<span class="n">F</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vander_fourier</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">imag</span><span class="o">.</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">19</span><span class="o">:</span><span class="mi">25</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/extra-transforms_12_0.svg" src="../_images/extra-transforms_12_0.svg" /></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="mathcal-f-as-a-matrix">
+<h1><span class="math notranslate nohighlight">\(\mathcal F\)</span> as a matrix<a class="headerlink" href="#mathcal-f-as-a-matrix" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<span class="n">F</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vander_fourier</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">F</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">F</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">I</span><span class="p">)</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">F</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">F</span><span class="o">&#39;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">I</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(F&#39; * F - I) = 4.0067422874877247e-16
+norm(F * F&#39; - I) = 4.594822717058422e-16
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>Every <span class="math notranslate nohighlight">\(\mathcal F\)</span> (suitably normalized) is a unitary matrix</p>
+<ul>
+<li><p>a unitary matrix is the complex-valued generalization of “orthogonal matrix”</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathcal F^H \mathcal F = \mathcal F \mathcal F^H = I\)</span></p></li>
+</ul>
+</li>
+<li><p>Typical notation is <span class="math notranslate nohighlight">\(\mathcal F^*\)</span> or <span class="math notranslate nohighlight">\(\mathcal F^H\)</span> representing “Hermitian transpose” or conjugate transpose</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="c"># The &#39; in Julia is the Hermitian adjoint</span>
+<span class="n">vander_fourier</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span><span class="o">&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3×3 adjoint(::Matrix{ComplexF64}) with eltype ComplexF64:
+  0.5-0.866025im     1.0+0.0im   0.5+0.866025im
+  0.5+0.866025im     1.0-0.0im   0.5-0.866025im
+ -1.0+1.22465e-16im  1.0-0.0im  -1.0-1.22465e-16im
+</pre></div>
+</div>
+</div>
+</div>
+<section id="what-does-this-mean-for-cost">
+<h2>What does this mean for cost?<a class="headerlink" href="#what-does-this-mean-for-cost" title="Permalink to this headline">#</a></h2>
+<p>Fitting a discrete signal in the Fourier basis requires solving</p>
+<div class="math notranslate nohighlight">
+\[\mathcal F \hat y = y\]</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="faster">
+<h1>Faster!<a class="headerlink" href="#faster" title="Permalink to this headline">#</a></h1>
+<p>In this discrete context, the transform we need to evaluate is</p>
+<div class="math notranslate nohighlight">
+\[ \hat f_k = \sum_\ell e^{-i\theta_k x_\ell} f_\ell \]</div>
+<p>where <span class="math notranslate nohighlight">\(f_\ell\)</span> are samples <span class="math notranslate nohighlight">\(f(x_\ell)\)</span> at integers <span class="math notranslate nohighlight">\(x_\ell = \ell\)</span> and <span class="math notranslate nohighlight">\(\theta_k\)</span> are the frequencies <span class="math notranslate nohighlight">\(2 \pi k/n\)</span> (because the branch <span class="math notranslate nohighlight">\(\theta \in (-\pi, \pi]\)</span> is arbitrary).</p>
+<div class="amsmath math notranslate nohighlight" id="equation-1c21a885-4a63-4bb2-8528-a719100d170c">
+<span class="eqno">(40)<a class="headerlink" href="#equation-1c21a885-4a63-4bb2-8528-a719100d170c" title="Permalink to this equation">#</a></span>\[\begin{align}
+\hat f_k &amp;= \sum_{\ell=0}^{n-1} e^{-2\pi i \frac{k \ell}{n}} f_\ell \\
+ &amp;= \underbrace{\sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{k (2\ell)}{n}} f_{2\ell}}_{\text{even}} +
+ \underbrace{\sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{k (2\ell+1)}{n}} f_{2\ell+1}}_{\text{odd}} \\
+ &amp;= \underbrace{\sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{k \ell}{n/2}} f_{2\ell}}_{\text{transform of even data}} + e^{-2\pi i \frac k n} \underbrace{\sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{k \ell}{n/2}} f_{2\ell+1}}_{\text{transform of odd data}}
+\end{align}\]</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="periodicity">
+<h1>Periodicity<a class="headerlink" href="#periodicity" title="Permalink to this headline">#</a></h1>
+<p>When the original signal <span class="math notranslate nohighlight">\(f\)</span> is periodic, <span class="math notranslate nohighlight">\(f_{\ell} = f_{(\ell + n) \bmod n}\)</span>, then</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d003c6fd-439c-47bf-bdd6-6d78d8f51ca5">
+<span class="eqno">(41)<a class="headerlink" href="#equation-d003c6fd-439c-47bf-bdd6-6d78d8f51ca5" title="Permalink to this equation">#</a></span>\[\begin{align}
+\hat f_{k+n/2} &amp;= \sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{(k+n/2) \ell}{n/2}} f_{2\ell} + e^{-2\pi i \frac{(k+n/2)}{n}} \sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{(k+n/2) \ell}{n/2}} f_{2\ell+1} \\
+&amp;= \sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{k \ell}{n/2}} f_{2\ell} + e^{-2\pi i \frac{k}{n}} e^{-\pi i} \sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{k\ell}{n/2}} f_{2\ell+1} \\
+&amp;= \sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{k \ell}{n/2}} f_{2\ell} - e^{-2\pi i \frac{k}{n}} \sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{k \ell}{n/2}} f_{2\ell+1}
+\end{align}\]</div>
+<p>where we have used that
+<div class="math notranslate nohighlight">
+\[ e^{-2\pi i \ell} = \Big( e^{-2\pi i} \Big)^\ell = 1^\ell = 1 .\]</div>
+</p>
+<p>We’ve reduced a Fourier transform of length <span class="math notranslate nohighlight">\(n\)</span> (at a cost of <span class="math notranslate nohighlight">\(n^2\)</span>) to two transforms of length <span class="math notranslate nohighlight">\(n/2\)</span> (at a cost of <span class="math notranslate nohighlight">\(2 n^2/4 = n^2/2\)</span>).
+Repeating this recursively yields a complexity of <span class="math notranslate nohighlight">\(O(n\log n)\)</span>.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="visualize">
+<h1>Visualize<a class="headerlink" href="#visualize" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">FastTransforms</span>
+
+<span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="p">;</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="o">:</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exp</span><span class="o">.</span><span class="p">(</span><span class="mi">2</span><span class="nb">im</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">real</span><span class="o">.</span><span class="p">(</span><span class="n">f</span><span class="p">),</span><span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1.1</span><span class="p">,</span><span class="w"> </span><span class="mf">1.1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/extra-transforms_25_0.svg" src="../_images/extra-transforms_25_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">fhat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fft</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">scatter</span><span class="p">([</span><span class="n">abs</span><span class="o">.</span><span class="p">(</span><span class="n">fhat</span><span class="p">),</span><span class="w"> </span><span class="n">abs</span><span class="o">.</span><span class="p">(</span><span class="n">fftshift</span><span class="p">(</span><span class="n">fhat</span><span class="p">))])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/extra-transforms_26_0.svg" src="../_images/extra-transforms_26_0.svg" /></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="transform-a-gaussian-bump-e-x-2">
+<h1>Transform a Gaussian bump <span class="math notranslate nohighlight">\(e^{-x^2}\)</span><a class="headerlink" href="#transform-a-gaussian-bump-e-x-2" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="p">;</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">15</span>
+<span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="o">:</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exp</span><span class="o">.</span><span class="p">(</span><span class="o">-</span><span class="p">((</span><span class="n">x</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">w</span><span class="p">)</span><span class="w"> </span><span class="o">.^</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">real</span><span class="o">.</span><span class="p">(</span><span class="n">f</span><span class="p">),</span><span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1.1</span><span class="p">,</span><span class="w"> </span><span class="mf">1.1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/extra-transforms_28_0.svg" src="../_images/extra-transforms_28_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">fhat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fft</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="n">scatter</span><span class="p">([</span><span class="n">abs</span><span class="o">.</span><span class="p">(</span><span class="n">fhat</span><span class="p">),</span><span class="w"> </span><span class="n">abs</span><span class="o">.</span><span class="p">(</span><span class="n">fftshift</span><span class="p">(</span><span class="n">fhat</span><span class="p">))])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/extra-transforms_29_0.svg" src="../_images/extra-transforms_29_0.svg" /></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="compute-derivatives-using-the-fourier-transform">
+<h1>Compute derivatives using the Fourier transform<a class="headerlink" href="#compute-derivatives-using-the-fourier-transform" title="Permalink to this headline">#</a></h1>
+<p>How do we differentiate this?</p>
+<div class="math notranslate nohighlight">
+\[f(x) = \sum_k e^{i\theta_k x} \hat f_k\]</div>
+<ul class="simple">
+<li><p>Evidently, we need only compute
+<div class="math notranslate nohighlight">
+\[f'(x) = \mathcal F^{-1} (i \theta_k \hat f_k)\]</div>
+</p></li>
+</ul>
+<section id="generalizations">
+<h2>Generalizations<a class="headerlink" href="#generalizations" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Non-power of 2</p></li>
+<li><p>Non-uniform grids</p></li>
+<li><p>Multiple dimensions</p></li>
+<li><p>Butterfly algorithms for integral operators
+<div class="math notranslate nohighlight">
+\[ (\mathcal K f)(x) = \int_{Y} K(x,y) f(y) dy \]</div>
+
+See <a class="reference external" href="https://math.mit.edu/icg/papers/butterfly-parallel.pdf">Poulson et al., A parallel butterfly algorithm</a></p></li>
+</ul>
+</section>
+<section id="applications">
+<h2>Applications<a class="headerlink" href="#applications" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Everywhere in signal processing</p></li>
+<li><p>ECMWF global climate and weather model</p></li>
+<li><p>Particle-Mesh Ewald for long-range forces in molecular dynamics</p></li>
+<li><p>Turbulence simulation</p></li>
+</ul>
+</section>
+<section id="parallel-implications-bisection-bandwidth-of-the-network">
+<h2>Parallel implications: Bisection bandwidth of the network<a class="headerlink" href="#parallel-implications-bisection-bandwidth-of-the-network" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">vander_chebyshev</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">=</span><span class="nb">nothing</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">isnothing</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">        </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="c"># Square by default</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="w">    </span><span class="n">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ones</span><span class="p">(</span><span class="n">m</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">        </span><span class="n">T</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">3</span><span class="o">:</span><span class="n">n</span>
+<span class="w">        </span><span class="c">#T[:, k] = x .* T[:, k-1]</span>
+<span class="w">        </span><span class="n">T</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">T</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">T</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="n">k</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">T</span>
+<span class="k">end</span>
+
+<span class="n">CosRange</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">cos</span><span class="o">.</span><span class="p">(</span><span class="kt">LinRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">π</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CosRange (generic function with 1 method)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="derivative-of-a-function-on-the-cosrange-points">
+<h1>Derivative of a function on the <code class="docutils literal notranslate"><span class="pre">CosRange</span></code> points<a class="headerlink" href="#derivative-of-a-function-on-the-cosrange-points" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="n">chebfft</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="w">    </span><span class="c"># Adapted from Trefethen&#39;s Spectral Methods in Matlab</span>
+<span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CosRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="n">Y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">y</span><span class="p">;</span><span class="w"> </span><span class="n">reverse</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="n">n</span><span class="p">])]</span>
+<span class="w">    </span><span class="n">ii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="o">:</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span>
+<span class="w">    </span><span class="n">U</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">real</span><span class="o">.</span><span class="p">(</span><span class="n">fft</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
+<span class="w">    </span><span class="n">W</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">real</span><span class="o">.</span><span class="p">(</span><span class="n">ifft</span><span class="p">(</span><span class="mi">1</span><span class="nb">im</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">[</span><span class="n">ii</span><span class="p">;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="mi">1</span><span class="o">-</span><span class="n">n</span><span class="o">:-</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">U</span><span class="p">))</span>
+<span class="w">    </span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">    </span><span class="n">w</span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">W</span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="o">./</span><span class="w"> </span><span class="n">sqrt</span><span class="o">.</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="o">.^</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">ii</span><span class="w"> </span><span class="o">.^</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">U</span><span class="p">[</span><span class="n">ii</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">U</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="w">    </span><span class="n">w</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">.^</span><span class="w"> </span><span class="p">(</span><span class="n">ii</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">ii</span><span class="w"> </span><span class="o">.^</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">.*</span><span class="w"> </span><span class="n">U</span><span class="p">[</span><span class="n">ii</span><span class="w"> </span><span class="o">.+</span><span class="w"> </span><span class="mi">1</span><span class="p">])</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">^</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">U</span><span class="p">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+<span class="w">    </span><span class="n">w</span>
+<span class="k">end</span>
+
+<span class="n">chebfft</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4-element Vector{Float64}:
+  -6.333333333333334
+   1.3333333333333333
+  -1.333333333333333
+ -11.666666666666666
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CosRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">40</span><span class="p">)</span>
+<span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cos</span><span class="p">(</span><span class="mi">3</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="n">dg</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sin</span><span class="p">(</span><span class="mi">3</span><span class="n">x</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c"># for verification</span>
+<span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">g</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">dy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">chebfft</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">dy</span><span class="p">,</span><span class="w"> </span><span class="n">marker</span><span class="o">=</span><span class="ss">:circle</span><span class="p">)</span>
+<span class="n">plot!</span><span class="p">(</span><span class="n">dg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/extra-transforms_38_0.svg" src="../_images/extra-transforms_38_0.svg" /></div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -586,6 +1301,13 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="extra-factorization.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Bonus: Waves and sparse linear algebra</p>
+        </div>
+    </a>
 </div>
             </footer>
         </div>
