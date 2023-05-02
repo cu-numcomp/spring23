@@ -48,3 +48,4 @@ chapters:
   - file: slides/2023-04-26-careers.ipynb
   - file: slides/extra-factorization.ipynb
   - file: slides/extra-transforms.ipynb
+  - file: slides/extra-inference.ipynb
