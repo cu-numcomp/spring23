@@ -55,6 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Model-based Inference" href="extra-inference.html" />
     <link rel="prev" title="Bonus: Waves and sparse linear algebra" href="extra-factorization.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -334,6 +335,11 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Fast transforms
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="extra-inference.html">
+     Model-based Inference
     </a>
    </li>
   </ul>
@@ -903,7 +909,9 @@ title="Print to PDF"
 <h1>Project presentations<a class="headerlink" href="#project-presentations" title="Permalink to this headline">#</a></h1>
 <ul class="simple">
 <li><p>Remember to sign up (link is on Zulip)!</p></li>
-<li><p>We’ll have about 8 presentations/day, so plan on 5 minutes plus questions/transition</p></li>
+</ul>
+<!-- * We'll have about 8 presentations/day, so plan on 5 minutes plus questions/transition -->
+<ul class="simple">
 <li><p>Let me know if you’ll be producing a video for me to play instead of presenting live</p></li>
 <li><p>Link your repository and presentation in the sign-up sheet at least an hour before class</p></li>
 </ul>
@@ -966,7 +974,7 @@ Is it possible to distinguish <span class="math notranslate nohighlight">\(e^{i\
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">phi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="nb">im</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">theta</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
 <span class="n">rphi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">real</span><span class="p">(</span><span class="n">phi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="p">))</span><span class="w"> </span><span class="c"># real part</span>
 <span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">4</span><span class="o">:</span><span class="mi">4</span>
-<span class="n">theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="n">theta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.14</span>
 <span class="n">plot</span><span class="p">([</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">rphi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">rphi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="o">+</span><span class="mi">2</span><span class="nb">π</span><span class="p">),</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">rphi</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="o">-</span><span class="mi">2</span><span class="nb">π</span><span class="p">)])</span>
 <span class="n">scatter!</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">rphi</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">theta</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="o">=</span><span class="ss">:black</span><span class="p">)</span>
 </pre></div>
@@ -986,8 +994,8 @@ Is it possible to distinguish <span class="math notranslate nohighlight">\(e^{i\
 <div class="math notranslate nohighlight">
 \[ f(x) \approx \sum_{k=1}^n \underbrace{\hat f(\theta_k)}_{\hat f_k} e^{i\theta_k x} . \]</div>
 <p>This is reminiscent of linear algebra</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1dfd648a-66e4-4cad-8db6-033a3feb3ae3">
-<span class="eqno">(39)<a class="headerlink" href="#equation-1dfd648a-66e4-4cad-8db6-033a3feb3ae3" title="Permalink to this equation">#</a></span>\[\begin{align} \Bigg[ f(x) \Bigg] &amp;= \Bigg[ e^{i\theta_1 x} \Bigg| e^{i\theta_2 x} \Bigg| \dotsm \Bigg] \begin{bmatrix} \hat f_1 \\ \hat f_2 \\ \vdots \end{bmatrix} \\
+<div class="amsmath math notranslate nohighlight" id="equation-304ad332-0521-4a6a-b829-0913bc27f92e">
+<span class="eqno">(39)<a class="headerlink" href="#equation-304ad332-0521-4a6a-b829-0913bc27f92e" title="Permalink to this equation">#</a></span>\[\begin{align} \Bigg[ f(x) \Bigg] &amp;= \Bigg[ e^{i\theta_1 x} \Bigg| e^{i\theta_2 x} \Bigg| \dotsm \Bigg] \begin{bmatrix} \hat f_1 \\ \hat f_2 \\ \vdots \end{bmatrix} \\
 &amp;= \Bigg[ e^{i\theta_1 x} \Bigg] \hat f_1 + \Bigg[ e^{i\theta_2 x} \Bigg] \hat f_2 + \dotsb .
 \end{align}\]</div>
 <section id="continuous-theta-infinite-domain">
@@ -1019,7 +1027,7 @@ Is it possible to distinguish <span class="math notranslate nohighlight">\(e^{i\
 
 <span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">41</span><span class="p">)</span>
 <span class="n">F</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vander_fourier</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">imag</span><span class="o">.</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">19</span><span class="o">:</span><span class="mi">25</span><span class="p">]))</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">imag</span><span class="o">.</span><span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="o">:</span><span class="p">,</span><span class="w"> </span><span class="mi">19</span><span class="o">:</span><span class="mi">22</span><span class="p">]))</span>
 </pre></div>
 </div>
 </div>
@@ -1083,8 +1091,8 @@ norm(F * F&#39; - I) = 4.594822717058422e-16
 <div class="math notranslate nohighlight">
 \[ \hat f_k = \sum_\ell e^{-i\theta_k x_\ell} f_\ell \]</div>
 <p>where <span class="math notranslate nohighlight">\(f_\ell\)</span> are samples <span class="math notranslate nohighlight">\(f(x_\ell)\)</span> at integers <span class="math notranslate nohighlight">\(x_\ell = \ell\)</span> and <span class="math notranslate nohighlight">\(\theta_k\)</span> are the frequencies <span class="math notranslate nohighlight">\(2 \pi k/n\)</span> (because the branch <span class="math notranslate nohighlight">\(\theta \in (-\pi, \pi]\)</span> is arbitrary).</p>
-<div class="amsmath math notranslate nohighlight" id="equation-1c21a885-4a63-4bb2-8528-a719100d170c">
-<span class="eqno">(40)<a class="headerlink" href="#equation-1c21a885-4a63-4bb2-8528-a719100d170c" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-d5132a30-b342-4df0-b598-6c02a0549b52">
+<span class="eqno">(40)<a class="headerlink" href="#equation-d5132a30-b342-4df0-b598-6c02a0549b52" title="Permalink to this equation">#</a></span>\[\begin{align}
 \hat f_k &amp;= \sum_{\ell=0}^{n-1} e^{-2\pi i \frac{k \ell}{n}} f_\ell \\
  &amp;= \underbrace{\sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{k (2\ell)}{n}} f_{2\ell}}_{\text{even}} +
  \underbrace{\sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{k (2\ell+1)}{n}} f_{2\ell+1}}_{\text{odd}} \\
@@ -1094,8 +1102,8 @@ norm(F * F&#39; - I) = 4.594822717058422e-16
 <section class="tex2jax_ignore mathjax_ignore" id="periodicity">
 <h1>Periodicity<a class="headerlink" href="#periodicity" title="Permalink to this headline">#</a></h1>
 <p>When the original signal <span class="math notranslate nohighlight">\(f\)</span> is periodic, <span class="math notranslate nohighlight">\(f_{\ell} = f_{(\ell + n) \bmod n}\)</span>, then</p>
-<div class="amsmath math notranslate nohighlight" id="equation-d003c6fd-439c-47bf-bdd6-6d78d8f51ca5">
-<span class="eqno">(41)<a class="headerlink" href="#equation-d003c6fd-439c-47bf-bdd6-6d78d8f51ca5" title="Permalink to this equation">#</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-6a095b51-43b0-4eb4-b634-0c54242097d8">
+<span class="eqno">(41)<a class="headerlink" href="#equation-6a095b51-43b0-4eb4-b634-0c54242097d8" title="Permalink to this equation">#</a></span>\[\begin{align}
 \hat f_{k+n/2} &amp;= \sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{(k+n/2) \ell}{n/2}} f_{2\ell} + e^{-2\pi i \frac{(k+n/2)}{n}} \sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{(k+n/2) \ell}{n/2}} f_{2\ell+1} \\
 &amp;= \sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{k \ell}{n/2}} f_{2\ell} + e^{-2\pi i \frac{k}{n}} e^{-\pi i} \sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{k\ell}{n/2}} f_{2\ell+1} \\
 &amp;= \sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{k \ell}{n/2}} f_{2\ell} - e^{-2\pi i \frac{k}{n}} \sum_{\ell=0}^{n/2-1} e^{-2\pi i \frac{k \ell}{n/2}} f_{2\ell+1}
@@ -1113,10 +1121,10 @@ Repeating this recursively yields a complexity of <span class="math notranslate 
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">FastTransforms</span>
 
-<span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="p">;</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="p">;</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">62</span>
 <span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="o">:</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span>
 <span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exp</span><span class="o">.</span><span class="p">(</span><span class="mi">2</span><span class="nb">im</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n</span><span class="p">)</span>
-<span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">real</span><span class="o">.</span><span class="p">(</span><span class="n">f</span><span class="p">),</span><span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1.1</span><span class="p">,</span><span class="w"> </span><span class="mf">1.1</span><span class="p">))</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">real</span><span class="o">.</span><span class="p">(</span><span class="n">f</span><span class="p">),</span><span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1.1</span><span class="p">,</span><span class="w"> </span><span class="mf">1.1</span><span class="p">),</span><span class="w"> </span><span class="n">marker</span><span class="o">=</span><span class="ss">:circle</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1126,7 +1134,7 @@ Repeating this recursively yields a complexity of <span class="math notranslate 
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">fhat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fft</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<span class="n">scatter</span><span class="p">([</span><span class="n">abs</span><span class="o">.</span><span class="p">(</span><span class="n">fhat</span><span class="p">),</span><span class="w"> </span><span class="n">abs</span><span class="o">.</span><span class="p">(</span><span class="n">fftshift</span><span class="p">(</span><span class="n">fhat</span><span class="p">))])</span>
+<span class="n">scatter</span><span class="p">([</span><span class="n">abs</span><span class="o">.</span><span class="p">(</span><span class="n">fhat</span><span class="p">),</span><span class="w"> </span><span class="n">abs</span><span class="o">.</span><span class="p">(</span><span class="n">fftshift</span><span class="p">(</span><span class="n">fhat</span><span class="p">))],</span><span class="w"> </span><span class="n">marker</span><span class="o">=</span><span class="p">[</span><span class="ss">:square</span><span class="w"> </span><span class="ss">:circle</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -1138,7 +1146,7 @@ Repeating this recursively yields a complexity of <span class="math notranslate 
 <h1>Transform a Gaussian bump <span class="math notranslate nohighlight">\(e^{-x^2}\)</span><a class="headerlink" href="#transform-a-gaussian-bump-e-x-2" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="p">;</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">15</span>
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="p">;</span><span class="w"> </span><span class="n">w</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
 <span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="o">:</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span>
 <span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exp</span><span class="o">.</span><span class="p">(</span><span class="o">-</span><span class="p">((</span><span class="n">x</span><span class="w"> </span><span class="o">.-</span><span class="w"> </span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">w</span><span class="p">)</span><span class="w"> </span><span class="o">.^</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
 <span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">real</span><span class="o">.</span><span class="p">(</span><span class="n">f</span><span class="p">),</span><span class="w"> </span><span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1.1</span><span class="p">,</span><span class="w"> </span><span class="mf">1.1</span><span class="p">))</span>
@@ -1307,6 +1315,13 @@ See <a class="reference external" href="https://math.mit.edu/icg/papers/butterfl
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title">Bonus: Waves and sparse linear algebra</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="extra-inference.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Model-based Inference</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>

@@ -1,0 +1,1338 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Model-based Inference &#8212; Numerical Computation</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="shortcut icon" href="../_static/cu-numcomp-square.svg"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Fast transforms" href="extra-transforms.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/cu-numcomp.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Numerical Computation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Welcome
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../syllabus.html">
+   Syllabus
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../tips.html">
+   Tips
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../slides.html">
+   Slides
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-01-20-first-day.html">
+     2023-01-20 First Day
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-01-23-functions.html">
+     2023-01-23 Functions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-01-25-function-errors.html">
+     2023-01-25 Function errors
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-01-27-conditioning.html">
+     2023-01-27 Conditioning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-01-30-rootfinding.html">
+     2023-01-30 Rootfinding
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-01-convergence-classes.html">
+     2023-02-01 Convergence classes
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-03-newton.html">
+     2022-02-03 Newton methods
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-06-more-newton.html">
+     2023-02-06 More Newton
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-08-formulation.html">
+     2023-02-08 Formulation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-10-stability.html">
+     2023-02-10 Stability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-13-linear-algebra.html">
+     2023-02-13 Linear Algebra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-15-projections.html">
+     2023-02-15 Projections, rotations, and reflections
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-17-gram-schmidt.html">
+     2023-02-17 Gram-Schmidt
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-20-qr-factorization.html">
+     2023-02-20 QR Factorization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-22-qr-stability.html">
+     2023-02-22 QR Stability
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-24-householder.html">
+     2023-02-24 Householder QR
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-02-27-qr-retrospective.html">
+     2023-02-27 QR Retrospective
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-01-svd.html">
+     2023-03-01 Singular Value Decomposition
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-03-svd-geometry.html">
+     2023-03-03 SVD Geometry
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-06-low-rank.html">
+     2023-03-06 Low Rank
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-08-interpolation.html">
+     2023-03-08 Polynomial Interpolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-10-interpolation2.html">
+     2023-03-10 Global and Piecewise Interpolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-13-splines.html">
+     2023-03-13 Spline interpolation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-15-higher-dimensions.html">
+     2023-03-15 Higher dimensions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-17-noisy-data.html">
+     2023-03-17 Noisy data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-20-regression.html">
+     2023-03-20 Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-22-beyond-linear-models.html">
+     2023-03-22 Beyond Linear Models
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-03-24-gradient-descent.html">
+     2023-03-24 Gradient Descent
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-03-nonlinear-regression.html">
+     2023-04-03 Nonlinear Regression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-05-differentiation.html">
+     2023-04-05 Differentiation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-07-optimization.html">
+     2023-04-07 Optimization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-12-integration.html">
+     2023-04-12 Integration
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-14-quadrature.html">
+     2023-04-14 Quadrature
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-17-transforms.html">
+     2023-04-17 Transformed Quadrature
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-19-diffeq.html">
+     2023-04-19 Differential Equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-21-stiffness.html">
+     2023-04-21 Stiff equations
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-24-adaptivity.html">
+     2023-04-24 Adaptivity
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="2023-04-26-careers.html">
+     Careers in numerical computation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="extra-factorization.html">
+     Bonus: Waves and sparse linear algebra
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="extra-transforms.html">
+     Fast transforms
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Model-based Inference
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/cu-numcomp/spring23/main?urlpath=tree/slides/extra-inference.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="initThebeSBT()"
+  class="headerbtn headerbtn-launch-thebe"
+  data-toggle="tooltip"
+data-placement="left"
+title="Launch Thebe"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="headerbtn__text-container">Live Code</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/cu-numcomp/spring23"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/cu-numcomp/spring23/issues/new?title=Issue%20on%20page%20%2Fslides/extra-inference.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/slides/extra-inference.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Model-based Inference
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#last-time">
+     Last time
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#today">
+     Today
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gaussian-models">
+   Gaussian models
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#one-variable">
+     One variable
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multivariate">
+     Multivariate
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#precision-matrix">
+     Precision matrix
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#constrained-optimization">
+   Constrained optimization
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lagrange-multipliers">
+     Lagrange multipliers
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quadratic-objective-with-linear-constraints">
+   Quadratic objective with linear constraints
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interpretation">
+     Interpretation
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solution">
+     Solution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayesian-interpretation">
+   Bayesian interpretation
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#maximum-a-posteriori-map-point">
+     Maximum a Posteriori (MAP) point
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#beyond-gaussian-models">
+   Beyond Gaussian models
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variational-inference">
+     Variational Inference
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bayesian-inference">
+     Bayesian Inference
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayesian-sampling">
+   Bayesian sampling
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#naive-idea">
+     Naive Idea
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem">
+     Problem
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#markov-chain-monte-carlo">
+     Markov Chain Monte Carlo
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#notes">
+       Notes
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variational-versus-sampling">
+   Variational versus sampling
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-advection">
+   Example: advection
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#forward-model">
+     Forward model
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#continuous-adjoint-model">
+     Continuous adjoint model
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Interpretation
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#discrete-in-space-adjoint">
+     Discrete (in space) adjoint
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#demo">
+   Demo
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#non-uniform-grid">
+   Non-uniform grid
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discretization-does-not-commute-with-differentiation">
+   Discretization does not commute with differentiation!?!
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Model-based Inference</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Model-based Inference
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#last-time">
+     Last time
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#today">
+     Today
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gaussian-models">
+   Gaussian models
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#one-variable">
+     One variable
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multivariate">
+     Multivariate
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#precision-matrix">
+     Precision matrix
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#constrained-optimization">
+   Constrained optimization
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lagrange-multipliers">
+     Lagrange multipliers
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#quadratic-objective-with-linear-constraints">
+   Quadratic objective with linear constraints
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interpretation">
+     Interpretation
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#solution">
+     Solution
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayesian-interpretation">
+   Bayesian interpretation
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#maximum-a-posteriori-map-point">
+     Maximum a Posteriori (MAP) point
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#beyond-gaussian-models">
+   Beyond Gaussian models
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#variational-inference">
+     Variational Inference
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#bayesian-inference">
+     Bayesian Inference
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bayesian-sampling">
+   Bayesian sampling
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#naive-idea">
+     Naive Idea
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#problem">
+     Problem
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#markov-chain-monte-carlo">
+     Markov Chain Monte Carlo
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#notes">
+       Notes
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#variational-versus-sampling">
+   Variational versus sampling
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-advection">
+   Example: advection
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#forward-model">
+     Forward model
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#continuous-adjoint-model">
+     Continuous adjoint model
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Interpretation
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#discrete-in-space-adjoint">
+     Discrete (in space) adjoint
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#demo">
+   Demo
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#non-uniform-grid">
+   Non-uniform grid
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#discretization-does-not-commute-with-differentiation">
+   Discretization does not commute with differentiation!?!
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="model-based-inference">
+<h1>Model-based Inference<a class="headerlink" href="#model-based-inference" title="Permalink to this headline">#</a></h1>
+<section id="last-time">
+<h2>Last time<a class="headerlink" href="#last-time" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Presentation guidelines, portfolio meetings</p></li>
+<li><p>Fast Fourier Transform</p></li>
+</ul>
+</section>
+<section id="today">
+<h2>Today<a class="headerlink" href="#today" title="Permalink to this headline">#</a></h2>
+<ul class="simple">
+<li><p>Multi-variate probabilistic models</p></li>
+<li><p>Adjoint-based methods</p></li>
+<li><p>MCMC for Bayesian inference</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="k">using</span><span class="w"> </span><span class="n">LinearAlgebra</span>
+<span class="k">using</span><span class="w"> </span><span class="n">Plots</span>
+<span class="k">using</span><span class="w"> </span><span class="n">SparseArrays</span>
+<span class="n">default</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">legendfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="n">xtickfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="w"> </span><span class="n">ytickfontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="gaussian-models">
+<h1>Gaussian models<a class="headerlink" href="#gaussian-models" title="Permalink to this headline">#</a></h1>
+<section id="one-variable">
+<h2>One variable<a class="headerlink" href="#one-variable" title="Permalink to this headline">#</a></h2>
+<p>Probability density</p>
+<div class="math notranslate nohighlight">
+\[ p(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac 1 2 (x-\mu) \sigma^{-2} (x - \mu)}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mu\)</span> is the mean and <span class="math notranslate nohighlight">\(\sigma^2\)</span> is the variance.</p>
+</section>
+<section id="multivariate">
+<h2>Multivariate<a class="headerlink" href="#multivariate" title="Permalink to this headline">#</a></h2>
+<p>Probability density</p>
+<div class="math notranslate nohighlight">
+\[p(\mathbf x) = \lvert 2\pi \Sigma \rvert^{-1/2} \exp\Big(-\frac 1 2 (\mathbf x - \boldsymbol \mu)^T \Sigma^{-1} (\mathbf x - \boldsymbol \mu) \Big)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol\mu\)</span> is the mean and <span class="math notranslate nohighlight">\(\Sigma\)</span> is the covariance matrix.</p>
+</section>
+<section id="precision-matrix">
+<h2><a class="reference external" href="https://en.wikipedia.org/wiki/Precision_(statistics)">Precision matrix</a><a class="headerlink" href="#precision-matrix" title="Permalink to this headline">#</a></h2>
+<p>The covariance <span class="math notranslate nohighlight">\(\Sigma\)</span> is rarely used directly in computation and is usually dense, while the <strong>precision matrix</strong> <span class="math notranslate nohighlight">\(P = \Sigma^{-1}\)</span> is often sparse, representing <strong>conditional independence</strong>.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="constrained-optimization">
+<h1>Constrained optimization<a class="headerlink" href="#constrained-optimization" title="Permalink to this headline">#</a></h1>
+<p>Suppose we want to minimize an objective function over some design variables <span class="math notranslate nohighlight">\(d\)</span></p>
+<div class="math notranslate nohighlight">
+\[\min_d J(u,d)\]</div>
+<p>subject to <span class="math notranslate nohighlight">\(f(u; d) = 0\)</span>.</p>
+<p>Evidently it is possible to compute <span class="math notranslate nohighlight">\(u(d)\)</span> by solving this constraint. That might mean solving a differential equation. An optimization algorithm will typically need the total derivative of <span class="math notranslate nohighlight">\(J\)</span> with respect to the design variable <span class="math notranslate nohighlight">\(d\)</span>, which will involve differentiating <span class="math notranslate nohighlight">\(\partial u/\partial d\)</span>.</p>
+<section id="lagrange-multipliers">
+<h2>Lagrange multipliers<a class="headerlink" href="#lagrange-multipliers" title="Permalink to this headline">#</a></h2>
+<p>We can instead seek stationary points of the Lagrangian
+<div class="math notranslate nohighlight">
+\[\mathcal L(u, \lambda, d) = J(u, d) + \lambda^T f(u; d)\]</div>
+
+which yields</p>
+<div class="amsmath math notranslate nohighlight" id="equation-9f2da052-8254-40aa-8871-1e7803a84d8d">
+<span class="eqno">(42)<a class="headerlink" href="#equation-9f2da052-8254-40aa-8871-1e7803a84d8d" title="Permalink to this equation">#</a></span>\[\begin{align}
+\nabla_u \mathcal L &amp;= \nabla_u J + \lambda^T \nabla_u f(u; d) = 0 \\
+\nabla_\lambda \mathcal L &amp;= f(u; d) = 0 \\
+\nabla_d \mathcal L &amp;= \nabla_d J + \lambda^T \nabla_d f(u; d) = 0.
+\end{align}\]</div>
+<p>The algorithm is that given <span class="math notranslate nohighlight">\(d\)</span>, we solve the second equation to get <span class="math notranslate nohighlight">\(u\)</span>, then solve the first equation to get <span class="math notranslate nohighlight">\(\lambda\)</span>, at which point the last equation delivers the gradient.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="quadratic-objective-with-linear-constraints">
+<h1>Quadratic objective with linear constraints<a class="headerlink" href="#quadratic-objective-with-linear-constraints" title="Permalink to this headline">#</a></h1>
+<p>Consider minimizing
+<div class="math notranslate nohighlight">
+\[J(u,d) = \frac 1 2 (u - m)^T A (u - m) + \frac 1 2 d^T C d\]</div>
+
+(where <span class="math notranslate nohighlight">\(A\)</span> is SPD and <span class="math notranslate nohighlight">\(C\)</span> is symmetric positive semidefinite) subject to <span class="math notranslate nohighlight">\(f(u;d) = Bu - d = 0\)</span>.</p>
+<section id="interpretation">
+<h2>Interpretation<a class="headerlink" href="#interpretation" title="Permalink to this headline">#</a></h2>
+<p>We might want to match (noisy) measurements <span class="math notranslate nohighlight">\(m\)</span> where <span class="math notranslate nohighlight">\(A\)</span> is an assumed precision matrix for the measurements and the design variables have a cost described by <span class="math notranslate nohighlight">\(C\)</span>.</p>
+</section>
+<section id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">#</a></h2>
+<p>The Lagrangian is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-3948d761-22c5-4323-9b97-8ff1478d0a7c">
+<span class="eqno">(43)<a class="headerlink" href="#equation-3948d761-22c5-4323-9b97-8ff1478d0a7c" title="Permalink to this equation">#</a></span>\[\begin{align}\mathcal L(u, \lambda, d) &amp;= \frac 1 2 (u-m)^T A (u - m) + \frac 1 2 d^T C d \\
+&amp;+ \lambda^T (Bu - d)
+\end{align}\]</div>
+<p>which has first order optimality conditions
+$$\begin{bmatrix}
+A &amp; B^T &amp; 0 \
+B &amp; 0 &amp; -I \
+0 &amp; -I &amp; C
+\end{bmatrix}</p>
+<div class="amsmath math notranslate nohighlight" id="equation-9624e2ea-c63b-4655-9f2c-322eab2c5243">
+<span class="eqno">(44)<a class="headerlink" href="#equation-9624e2ea-c63b-4655-9f2c-322eab2c5243" title="Permalink to this equation">#</a></span>\[\begin{bmatrix} u \\ \lambda \\ d \end{bmatrix}\]</div>
+<p>Evidently the optimal design <span class="math notranslate nohighlight">\(d\)</span> can be computed by solving this linear system.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="bayesian-interpretation">
+<h1>Bayesian interpretation<a class="headerlink" href="#bayesian-interpretation" title="Permalink to this headline">#</a></h1>
+<p>Before collecting the measurements <span class="math notranslate nohighlight">\(m\)</span>, we have a prior probability
+<div class="math notranslate nohighlight">
+\[p(d) \sim \exp\Big( -\frac 1 2 d^T C d \Big),\]</div>
+ which can also be written as <span class="math notranslate nohighlight">\(d\)</span> is normally distributed with mean 0 and covariance <span class="math notranslate nohighlight">\(C^{-1}\)</span>,
+<div class="math notranslate nohighlight">
+\[ d \sim \mathcal N(0, C^{-1}).\]</div>
+</p>
+<p>After taking measurements <span class="math notranslate nohighlight">\(m\)</span>, we can describe the joint distibution</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{bmatrix} u \\ d \end{bmatrix} \sim \mathcal N \Big( \begin{bmatrix} m \\ 0  \end{bmatrix}, \begin{bmatrix} A &amp; D^T \\ D &amp; C \end{bmatrix}^{-1} \Big)\end{split}\]</div>
+<p>for some coupling matrix <span class="math notranslate nohighlight">\(D\)</span> that describes satisfying the constraints.</p>
+<p>We can produce a new <strong>posterior</strong> distribution for the design <span class="math notranslate nohighlight">\(d\)</span> conditioned on the measurements <span class="math notranslate nohighlight">\(m\)</span> using Bayes’ Theorem,</p>
+<div class="math notranslate nohighlight">
+\[p(d | m) \sim p(m | d) p(d)\]</div>
+<p>where for our model,</p>
+<div class="math notranslate nohighlight">
+\[p(m | d) \sim \exp\Big( -\frac 1 2 \big( u(d) - m \big)^T A \big(u(d) - m\big)\Big).\]</div>
+<section id="maximum-a-posteriori-map-point">
+<h2>Maximum a Posteriori (MAP) point<a class="headerlink" href="#maximum-a-posteriori-map-point" title="Permalink to this headline">#</a></h2>
+<p>One might ask for <span class="math notranslate nohighlight">\(d\)</span> that maximizes <span class="math notranslate nohighlight">\(p(d|m)\)</span>, or equivalently, <span class="math notranslate nohighlight">\(d\)</span> that minimizes the negative log posterior:</p>
+<div class="math notranslate nohighlight">
+\[-\log p(d|m) = \frac 1 2 \big(u(d) - m\big)^T A \big(u(d) - m\big) + \frac 1 2 d^T C d.\]</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="beyond-gaussian-models">
+<h1>Beyond Gaussian models<a class="headerlink" href="#beyond-gaussian-models" title="Permalink to this headline">#</a></h1>
+<p>The math on the previous slide requires that</p>
+<ul class="simple">
+<li><p>the prior <span class="math notranslate nohighlight">\(p(d)\)</span> is Gaussian and</p></li>
+<li><p>the model <span class="math notranslate nohighlight">\(u(d)\)</span> is linear, i.e., <span class="math notranslate nohighlight">\(Bu = d\)</span>.
+If either is not true, then <span class="math notranslate nohighlight">\(p(d|m)\)</span> is no longer a Gaussian distribution.</p></li>
+</ul>
+<section id="variational-inference">
+<h2>Variational Inference<a class="headerlink" href="#variational-inference" title="Permalink to this headline">#</a></h2>
+<p>Assume a Gaussian posterior anyway and solve the nonlinear least squares problems to find the MAP point. The covariance of <span class="math notranslate nohighlight">\(p(d|m)\)</span> is represented by the Hessian of the negative log posterior.</p>
+</section>
+<section id="bayesian-inference">
+<h2>Bayesian Inference<a class="headerlink" href="#bayesian-inference" title="Permalink to this headline">#</a></h2>
+<p>We want to describe the non-Gaussian <strong>distribution</strong>, which generally has no closed form. This must be done by sampling.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="bayesian-sampling">
+<h1>Bayesian sampling<a class="headerlink" href="#bayesian-sampling" title="Permalink to this headline">#</a></h1>
+<section id="naive-idea">
+<h2>Naive Idea<a class="headerlink" href="#naive-idea" title="Permalink to this headline">#</a></h2>
+<p>Draw sample designs from the prior <span class="math notranslate nohighlight">\(p(d)\)</span>, solve the state equation to produce <span class="math notranslate nohighlight">\(u(d)\)</span>. Use the observational noise model to compute <span class="math notranslate nohighlight">\(p(m | u(d))\)</span>. Use Bayes’ theorem to define posterior <span class="math notranslate nohighlight">\(p(d|m)\)</span>.</p>
+</section>
+<section id="problem">
+<h2>Problem<a class="headerlink" href="#problem" title="Permalink to this headline">#</a></h2>
+<p>It is very slow to explore the designs that are consistent with measurements. It’s also unclear how to use the weighted posterior samples.</p>
+</section>
+<section id="markov-chain-monte-carlo">
+<h2>Markov Chain Monte Carlo<a class="headerlink" href="#markov-chain-monte-carlo" title="Permalink to this headline">#</a></h2>
+<p>As before, but</p>
+<ol class="simple">
+<li><p>Take a random walk in design space (steps drawn from some distribution) to produce candidates <span class="math notranslate nohighlight">\(d'\)</span> nearby to the most recently accepted <span class="math notranslate nohighlight">\(d_k\)</span>.</p></li>
+<li><p>Define acceptance ratio <span class="math notranslate nohighlight">\(\alpha = p(d'|m) / p(d_k|m)\)</span>.</p></li>
+<li><p>Draw a uniform random number from <span class="math notranslate nohighlight">\([0,1]\)</span> and if less than <span class="math notranslate nohighlight">\(\alpha\)</span>, accept the step by setting <span class="math notranslate nohighlight">\(d_{k+1} = d'\)</span>.</p></li>
+</ol>
+<section id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Some initial samples must be discarded (“burn in”).</p></li>
+<li><p>We don’t need a normalized posterior (which is good because normalization is expensive).</p></li>
+<li><p>The “chains” after burn-in are samples from the posterior.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="variational-versus-sampling">
+<h1>Variational versus sampling<a class="headerlink" href="#variational-versus-sampling" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>Variational methods can be used in high dimensions (millions or billions of design variables).</p>
+<ul>
+<li><p>At least to find the MAP point (deterministic nonlinear optimization)</p></li>
+<li><p>Use low-rank methods to approximate the most parts of the Hessian (i.e., subspace in which data is most informative).</p></li>
+<li><p>Cannot capture non-Gaussian posterior effects</p></li>
+<li><p>Gradient-based optimization requires gradients (adjoints)</p></li>
+</ul>
+</li>
+<li><p>Sampling is much more expensive, especially in high dimensions</p>
+<ul>
+<li><p>Captures the full distribution (with enough samples)</p></li>
+<li><p>High order statistics of the posterior are mostly intractable in high dimensions</p></li>
+<li><p>Hamiltonian Monte Carlo uses gradient/Hessian information to sample more efficiently.</p></li>
+<li><p><a class="reference external" href="https://turinglang.org/dev/docs/using-turing/get-started">Turing.jl</a> is a nice Julia package</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="example-advection">
+<h1>Example: advection<a class="headerlink" href="#example-advection" title="Permalink to this headline">#</a></h1>
+<section id="forward-model">
+<h2>Forward model<a class="headerlink" href="#forward-model" title="Permalink to this headline">#</a></h2>
+<p>Consider the state variable <span class="math notranslate nohighlight">\(u(t,x)\)</span> solving the advection equation
+<div class="math notranslate nohighlight">
+\[u_t + u_x = 0\]</div>
+
+with an objective defined in terms of <span class="math notranslate nohighlight">\(u(T, \cdot)\)</span>.</p>
+</section>
+<section id="continuous-adjoint-model">
+<h2>Continuous adjoint model<a class="headerlink" href="#continuous-adjoint-model" title="Permalink to this headline">#</a></h2>
+<p>Multiply by <span class="math notranslate nohighlight">\(\lambda\)</span> and integrate by parts</p>
+<div class="amsmath math notranslate nohighlight" id="equation-72e7fadf-fc3f-4850-adbd-7aac5e3be113">
+<span class="eqno">(45)<a class="headerlink" href="#equation-72e7fadf-fc3f-4850-adbd-7aac5e3be113" title="Permalink to this equation">#</a></span>\[\begin{align}
+\lambda(u_t + u_x) &amp;= u(-\lambda_t - \lambda_x)
+\end{align}\]</div>
+<p>Differentiating this product with respect to <span class="math notranslate nohighlight">\(u\)</span> leaves the adjoint equation
+<div class="math notranslate nohighlight">
+\[-\lambda_t - \lambda_x = 0\]</div>
+
+which runs <strong>backward in time</strong>.</p>
+</section>
+<section id="id1">
+<h2>Interpretation<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<p>The forward model is advection to the right.</p>
+<p>The adjoint model (evolving backward in time) is advection to the left.</p>
+</section>
+<section id="discrete-in-space-adjoint">
+<h2>Discrete (in space) adjoint<a class="headerlink" href="#discrete-in-space-adjoint" title="Permalink to this headline">#</a></h2>
+<p>Forward model as <span class="math notranslate nohighlight">\(u_t = Au\)</span>.</p>
+<p>Adjoint model is <span class="math notranslate nohighlight">\(\lambda_t = -A^T \lambda\)</span>, backward in time.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="demo">
+<h1>Demo<a class="headerlink" href="#demo" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
+<span class="k">function</span><span class="w"> </span><span class="n">advect_matrix</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="c"># upwinded</span>
+<span class="w">    </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">.5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="o">:</span><span class="k">end</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="o">:</span><span class="k">end</span><span class="p">])</span>
+<span class="w">    </span><span class="n">L</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="k">end</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="w">    </span><span class="n">dx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">diff</span><span class="p">([</span><span class="n">c</span><span class="p">[</span><span class="k">end</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">L</span><span class="p">;</span><span class="w"> </span><span class="n">c</span><span class="p">;</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">L</span><span class="p">])</span>
+<span class="w">    </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">length</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="w">    </span><span class="n">rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Int</span><span class="p">[]</span>
+<span class="w">    </span><span class="n">cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Int</span><span class="p">[]</span>
+<span class="w">    </span><span class="n">vals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Float64</span><span class="p">[]</span>
+<span class="w">    </span><span class="n">wrap</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">1</span><span class="o">:</span><span class="n">n</span>
+<span class="w">        </span><span class="n">append!</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">])</span>
+<span class="w">        </span><span class="n">append!</span><span class="p">(</span><span class="n">cols</span><span class="p">,</span><span class="w"> </span><span class="n">wrap</span><span class="o">.</span><span class="p">([</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">]))</span>
+<span class="w">        </span><span class="n">append!</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">./</span><span class="w"> </span><span class="n">dx</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="w">    </span><span class="k">end</span>
+<span class="w">    </span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">sparse</span><span class="p">(</span><span class="n">rows</span><span class="p">,</span><span class="w"> </span><span class="n">cols</span><span class="p">,</span><span class="w"> </span><span class="n">vals</span><span class="p">)</span>
+<span class="k">end</span>
+<span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">advect_matrix</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Matrix</span><span class="p">(</span><span class="n">A</span><span class="p">);</span><span class="w"> </span><span class="c"># dense to use exp</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">u0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@.</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">c</span><span class="o">/</span><span class="mf">.4</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.2</span>
+<span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="n">A</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">u0</span>
+<span class="n">lam</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="n">A</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">u0</span>
+<span class="n">scatter</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">u0</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="n">lam</span><span class="p">],</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;u0&quot;</span><span class="w"> </span><span class="s">&quot;forward&quot;</span><span class="w"> </span><span class="s">&quot;adjoint&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/extra-inference_27_0.svg" src="../_images/extra-inference_27_0.svg" /></div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="non-uniform-grid">
+<h1>Non-uniform grid<a class="headerlink" href="#non-uniform-grid" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">warp</span><span class="p">(</span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.3</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="o">*</span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">s</span><span class="p">)</span><span class="o">*</span><span class="n">x</span><span class="o">^</span><span class="mi">3</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">warp</span><span class="p">,</span><span class="w"> </span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="n">legend</span><span class="o">=</span><span class="ss">:none</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/extra-inference_29_0.svg" src="../_images/extra-inference_29_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">LinRange</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">warp</span><span class="o">.</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">advect_matrix</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<span class="n">A</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">Matrix</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">u0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nd">@.</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">c</span><span class="o">/</span><span class="mf">.4</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.2</span>
+<span class="n">u</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="n">A</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">u0</span>
+<span class="n">lam</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">exp</span><span class="p">(</span><span class="n">A</span><span class="o">&#39;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">T</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">u0</span>
+<span class="n">scatter</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">u0</span><span class="w"> </span><span class="n">u</span><span class="w"> </span><span class="n">lam</span><span class="p">],</span><span class="w"> </span><span class="n">label</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;u0&quot;</span><span class="w"> </span><span class="s">&quot;forward&quot;</span><span class="w"> </span><span class="s">&quot;adjoint&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/extra-inference_30_0.svg" src="../_images/extra-inference_30_0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-julia notranslate"><div class="highlight"><pre><span></span><span class="nd">@show</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="w"> </span><span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span><span class="w"> </span><span class="c"># row sums</span>
+<span class="nd">@show</span><span class="w"> </span><span class="n">norm</span><span class="p">(</span><span class="n">sum</span><span class="p">(</span><span class="n">A</span><span class="o">&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">dims</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">]));</span><span class="w"> </span><span class="c"># row sums of adjoint operator </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>norm(sum(A, dims = [2])) = 0.0
+norm(sum(A&#39;, dims = [2])) = 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>33.55967467376903
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>33.55967467376903
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="discretization-does-not-commute-with-differentiation">
+<h1>Discretization does not commute with differentiation!?!<a class="headerlink" href="#discretization-does-not-commute-with-differentiation" title="Permalink to this headline">#</a></h1>
+<ul class="simple">
+<li><p>This is a big problem.</p>
+<ul>
+<li><p>One hopes that the gradient computed by the adjoint method is a descent direction for an optimizer.</p></li>
+<li><p>But the gradient of the discrete problem is physically nonsense, often leading to local minima.</p></li>
+<li><p>The discretization of the continuous adjoint equation may not be a descent direction, but is probably conceptually more what you want.</p></li>
+</ul>
+</li>
+<li><p>Some discretizations, such as  pure Galerkin methods, do commute.</p></li>
+<li><p>Such methods are insufficiently stable for most transport-dominated problems.</p></li>
+<li><p>Discretization methods like limiters for finite volume methods make this worse.</p></li>
+</ul>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cu-numcomp/spring23",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "julia-1.8"
+        },
+        kernelOptions: {
+            kernelName: "julia-1.8",
+            path: "./slides"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'julia-1.8'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="extra-transforms.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Fast transforms</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Jed Brown<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
