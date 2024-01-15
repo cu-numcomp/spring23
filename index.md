@@ -25,6 +25,8 @@ Welcome to **Numerical Computation**, CSCI-3656 and CSCI-5606
     * used for this course in other semesters.
   * [Boyd and Vandenberghe (2018), **Introduction to Applied Linear Algebra**](https://web.stanford.edu/~boyd/vmls/)
     * practical introduction to linear algebra for computer scientists; free PDF
+  * [3Blue1Brown, **Linear Algebra**](https://www.3blue1brown.com/topics/linear-algebra)
+    * collection of beautiful videos visualizing linear algebra
   * [Trefethen and Bau (1997), **Numerical Linear Algebra**](http://bookstore.siam.org/ot50/) ([PDF via library](http://libraries.colorado.edu/record=b8207383~S3))
     * fantastic, but limited to numerical linear algebra and covers more advanced topics; free PDF via library
   * [Myers, Van de Geijn, and Van de Geijn (2020), **Linear Algebra: Foundations to Frontiers**](http://www.ulaff.net/downloads.html)
